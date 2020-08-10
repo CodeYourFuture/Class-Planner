@@ -1,1 +1,1 @@
-# cyf-finial-project-group-3
+# Class Planner project
