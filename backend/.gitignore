@@ -2,4 +2,4 @@
 
 # dependencies
 /node_modules
-/config/config.env
+backend/config/config.env
