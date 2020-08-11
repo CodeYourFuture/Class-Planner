@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server"
+    "server": "nodemon server",
+    "client":"cd ../frontend && npm start",
+    "dev": "concurrently -n 'Server,Client' -c 'red,green' \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +26,7 @@
     "passport-google": "^0.3.0"
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "nodemon": "^2.0.4"
   }
 }
