@@ -5,6 +5,6 @@
 - `cd backend`
 - Add your mongodb connection string on `./backend/config/config.env` 
 - `npm install`
-- `npm run dev`
+- `npm run server`
  
  Server will be running on `http://localhost:5000`
