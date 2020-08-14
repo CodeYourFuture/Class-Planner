@@ -29,3 +29,13 @@ exports.deleteClass = async (req, res, next) => {
         message:"DELETE CLASS"
     })
 }
+
+// @desc    Update class
+// @route   Update /api/v1/classes/:id
+// @access  Public
+exports.updateClass = async (req, res, next) => {
+    res.json({
+        status:"success",
+        message:"UPDATE CLASS"
+    })
+}

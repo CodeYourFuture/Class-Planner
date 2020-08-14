@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getClasses,addClass,deleteClass } = require('../controllers/classes');
+const { getClasses,addClass,deleteClass,updateClass} = require('../controllers/classes');
 
 router
   .route('/')
@@ -9,6 +9,7 @@ router
 
 router
   .route("/:id")
-  .delete(deleteClass);
+  .delete(deleteClass)
+  .put(updateClass);
 
 module.exports = router;
