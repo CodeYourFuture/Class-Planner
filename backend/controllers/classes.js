@@ -99,7 +99,7 @@ exports.updateClass = async (req, res, next) => {
     }
     return res.status(200).json({
       success: true,
-      data: classToBeUpdated,
+      data: classData,
     });
   } catch (err) {
     console.error(err);
