@@ -9,6 +9,8 @@ connectDB();
 const app = express();
 app.use(express.json());
 
+app.use('/api/v1/classes', require('./routes/classes'));
+
 app.get("/",  (request, response)=>{
     response.json({
         status:"success",
