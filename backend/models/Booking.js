@@ -1,28 +1,27 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const BookingSchema = new mongoose.Schema({
-  fullName: {
+  className: {
     type: String,
-    required: [true, 'Please add Full name']
-  },
-  email: {
-    type: string,
-    required: [true, 'Please add email']
   },
   roleName: {
-    type: string,
-    required: [true, 'Please add role']
+    type: String,
+  },
+  fullName: {
+    type: String,
+    required: [true, "Please add Full name"],
+  },
+  email: {
+    type: String,
+    required: [true, "Please add email"],
   },
   bookingDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   bookingTime: {
-    type: string
+    type: String,
   },
-  classId: {
-    type: string
-  }
 });
 
-module.exports = mongoose.model('Booking', BookingSchema);
+module.exports = mongoose.model("Booking", BookingSchema);
