@@ -1,26 +1,26 @@
 const mongoose = require("mongoose");
 
 const ClassSchema = new mongoose.Schema({
+  courseCalendar_Id: {
+    type: String,
+  },
+  module_Id: {
+    type: String,
+  },
   className: {
     type: String,
   },
-  bookingDate: {
+  date: {
     type: Date,
     default: Date.now,
-  },
-  moduleName: {
-    type: String,
   },
   status: {
     type: Boolean,
   },
-  statusMessage: {
-    type: String,
-  },
   syllabusUrl: {
     type: String,
   },
-  schedule: {
+  scheduleType: {
     type: String,
   },
 });
