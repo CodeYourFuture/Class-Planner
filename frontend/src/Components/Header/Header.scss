@@ -1,0 +1,73 @@
+.Header {
+  position: fixed;
+  height: 160px;
+  width: 100%;
+  top: 0px;
+  background-color: white;
+  z-index: 1000;
+}
+.Header_FirtChild,
+.Header_SecondChild {
+  height: 90px;
+  width: 100%;
+  display: flex;
+}
+.Header_SecondChild {
+  height: 70px;
+  background-color: #efefef;
+}
+.Header_Logo {
+  font-family: "Alfa Slab One", cursive;
+  font-size: larger;
+  margin-top: 27px;
+  margin-left: 15%;
+  height: 60px;
+  width: fit-content;
+  text-align: right;
+  color: #3f3f3f;
+  margin-right: 20px;
+  transition: 200ms;
+}
+.Header_Logo:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.Header_Logo div {
+  height: 15px;
+  display: flex;
+  align-items: center;
+}
+.Header_Logo div P:nth-child(2) {
+  font-size: 20px;
+  color: #D12F2F;
+}
+.Header_Nav {
+  color: #3f3f3f;
+  margin-top: 15px;
+  margin-left: 17%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  transition: 200ms;
+  text-decoration: none;
+}
+.Header_Nav:hover {
+  color: #D12F2F;
+  cursor: pointer;
+}
+.Header_Nav p:nth-child(2) {
+  margin-left: 10px;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+}
+.Header_Nav:nth-child(2),
+.Header_Nav:nth-child(3) {
+  margin-left: 50px;
+}
+.Header_Selected{
+  color: #10ac84;
+  cursor: default;
+}

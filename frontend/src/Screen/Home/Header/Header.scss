@@ -1,0 +1,55 @@
+.Home_Header_Main{
+    height: 90px;
+    width: 100%;
+    background-color: #F8F9FA;
+    display: flex;
+    animation: FadeIn 500ms;
+}
+.Home_Header_Logo {
+    font-family: "Alfa Slab One", cursive;
+    font-size: larger;
+    margin-top: 27px;
+    margin-left: 15%;
+    height: 60px;
+    width: fit-content;
+    text-align: right;
+    color: #3f3f3f;
+    margin-right: 20px;
+    transition: 200ms;
+  }
+  .Home_Header_Logo:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+  
+  .Home_Header_Logo div {
+    height: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .Home_Header_Logo div P:nth-child(2) {
+    font-size: 20px;
+    color: #e84118;
+  }
+
+.Home_Header_User_Div{
+    height: 90px;
+    display: flex;
+    align-items: center;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+}
+.Home_Header_User_Div p{
+    padding: 10px;
+    margin-left: 20px;
+    transition: 200ms;
+    color: #3f3f3f;
+}
+.Home_Header_User_Div p:hover{
+    color: #4aae60;
+    cursor: pointer;
+}
+
+.Home_Link{
+    text-decoration: none;
+}

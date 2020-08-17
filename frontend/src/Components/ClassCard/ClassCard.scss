@@ -1,0 +1,120 @@
+.ClassCard_Body {
+    height: calc(100vh - 240px);
+    margin-top: 220px;
+    animation: FadeIn 500ms;
+  }
+  .ClassCard_Main {
+    width: 66%;
+    height: 270px;
+    margin: 0px 17%;
+    top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #79D582;
+  }
+  .ClassCard_Class {
+    width: 100%;
+    border: 1px solid #f1f1f1;
+    margin-top: 15px;
+    height: 270px;
+    display: flex;
+  }
+  .ClassCard_Date {
+    width: 250px;
+    height: 245px;
+    background-color: #f8f8f8;
+    margin: 10px 25px 10px 10px;
+    border-bottom: 5px solid #d12f2f;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  .ClassCard_Date div {
+    color: #3f3f3f;
+    margin-top: 35px;
+  }
+  .ClassCard_Date div p:first-child {
+    font-size: 80px;
+    font-weight: 400;
+  }
+  .ClassCard_Date div p:nth-child(2) {
+    font-size: 30px;
+    font-weight: 900;
+  }
+  .ClassCard_info {
+    width: 75%;
+    height: 270px;
+    color: #3f3f3f;
+  }
+  .ClassCard_info_1,
+  .ClassCard_info_2 {
+    height: 135px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ClassCard_info_1 div {
+    width: 50%;
+  }
+  .ClassCard_info_1 div:nth-child(1) p:nth-child(1) {
+    font-size: 40px;
+    margin-top: 10px;
+  }
+  .ClassCard_info_1 div:nth-child(1) p:nth-child(2) {
+    color: #aeaeae;
+    font-size: 15px;
+    margin-top: 10px;
+  }
+  .ClassCard_info_1 div:nth-child(1) p:nth-child(3) {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  .ClassCard_info_1 div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    transition: 200ms;
+    width: 133px;
+    height: 50px;
+    margin-top: 15px;
+  }
+  .ClassCard_info_1 div:nth-child(2):hover {
+    cursor: pointer;
+    color: #03A9F4;
+  }
+  .ClassCard_info_1 div:nth-child(2) p {
+    font-size: 16px;
+    margin: 15px 0px 25px 0px;
+  }
+  .ClassCard_info_1 div:nth-child(2) i {
+    margin: 15px 0px 30px 10px;
+  }
+  .ClassCard_info_2{
+      height: 80px;
+      margin-top:55px;
+      align-items: center;
+  }
+  .ClassCard_info_2 p:first-child{
+      letter-spacing: 0px;
+      font-size: 20px;
+      font-weight: 400;
+      color: #79D582;
+  }
+  
+  .ClassCard_info_2 p:nth-child(2){
+      padding: 10px 60px;
+      font-size: 20px;
+      font-weight: 400;
+      margin: 15px;
+      color: white;
+      background-color: #03A9F4;
+      border-radius: 4px;
+      transition: 200ms;
+  }
+  .ClassCard_info_2 p:nth-child(2):hover{
+      background-color: #43c4ff;
+      cursor: pointer;
+  }
