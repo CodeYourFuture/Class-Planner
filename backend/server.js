@@ -10,6 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/v1/classes', require('./routes/classes'));
+app.use('/api/v1/bookings', require('./routes/bookings')); 
 
 app.get("/",  (request, response)=>{
     response.json({
@@ -17,6 +18,7 @@ app.get("/",  (request, response)=>{
         message:"keep Calm! Class Planner server is Okay"
     });
   });
+  
   
 
 const PORT = process.env.PORT || 5000;
