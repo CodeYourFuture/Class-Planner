@@ -14,6 +14,9 @@ const ClassSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  time: {
+    type: String,
+  },
   status: {
     type: Boolean,
   },

@@ -9,40 +9,37 @@ const ClassCard = ({ Classes }) => {
       {Classes.data && Classes.data.length > 0
         ? [
             Classes.data
-              .sort((a, b) =>
-                dayjs(a.bookingDate).isAfter(dayjs(b.bookingDate)) ? 1 : -1
-              )
+              .sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
               .find(
-                (Class) =>
-                  Class.status && dayjs(Class.bookingDate) > dayjs(new Date())
+                (Class) => Class.status && dayjs(Class.date) > dayjs(new Date())
               ),
-          ].map((Class) => (
-            <div className="ClassCard_Body">
+          ].map((Class, index) => (
+            <div className="ClassCard_Body" key={index}>
               <div className="ClassCard_Main">
                 <p>Next upcoming Class:</p>
                 <div className="ClassCard_Class">
                   <div className="ClassCard_Date">
                     <div>
-                      <p>{new Date(Class.bookingDate).getDate().toString()}</p>
+                      <p>{new Date(Class.date).getDate().toString()}</p>
                       <p>
-                        {
-                          MonthNames[
-                            new Date(Class.bookingDate).getMonth().toString()
-                          ]
-                        }
+                        {MonthNames[new Date(Class.date).getMonth().toString()]}
                       </p>
                     </div>
                   </div>
                   <div className="ClassCard_info">
                     <div className="ClassCard_info_1">
                       <div>
-                        <p>{Class.className}</p>
-                        <p>{Class.schedule}</p>
-                        <p>Education Lead Class</p>
+                        <p className="ClassCard_ClassName">{Class.className}</p>
+                        <p>{Class.scheduleType}</p>
+                        <p>{Class.time}</p>
                       </div>
                       <div>
-                        <p>Syllabus</p>
-                        <i className="fas fa-book-open"></i>
+                        <a href={Class.syllabusUrl} target="_blank" rel="noopener noreferrer">
+                          <div className="ClassCard_Syllabus">
+                            <p className="ClassCard_Syllabus_P">Syllabus</p>
+                            <i className="fas fa-book-open"></i>
+                          </div>
+                        </a>
                       </div>
                     </div>
                     <div className="ClassCard_info_2">
