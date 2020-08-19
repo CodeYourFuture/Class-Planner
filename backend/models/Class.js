@@ -4,7 +4,7 @@ const ClassSchema = new mongoose.Schema({
   courseCalendar_Id: {
     type: String,
   },
-  module_Id: {
+  moduleName: {
     type: String,
   },
   className: {
@@ -14,13 +14,16 @@ const ClassSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  time: {
+  startTime: {
+    type: String,
+  },
+  endTime: {
     type: String,
   },
   status: {
     type: Boolean,
   },
-  syllabusUrl: {
+  syllabusURL: {
     type: String,
   },
   scheduleType: {
