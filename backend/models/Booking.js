@@ -9,11 +9,9 @@ const BookingSchema = new mongoose.Schema({
   },
   fullName: {
     type: String,
-    required: [true, "Please add Full name"],
   },
   email: {
     type: String,
-    required: [true, "Please add email"],
   },
   bookingDate: {
     type: Date,
