@@ -9,25 +9,31 @@ const ClassSchema = new mongoose.Schema({
   },
   className: {
     type: String,
+    required: true,
   },
   date: {
     type: Date,
     default: Date.now,
+    required: true,
   },
   startTime: {
     type: String,
+    required: true,
   },
   endTime: {
     type: String,
+    required: true,
   },
   status: {
     type: Boolean,
   },
   syllabusURL: {
     type: String,
+    required: true,
   },
   scheduleType: {
     type: String,
+    required: true,
   },
 });
 
