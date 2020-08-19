@@ -1,0 +1,20 @@
+@import "../../scss/variables";
+
+.newbooking-container {
+  margin: 0 auto;
+  width: 60%;
+}
+// input {
+//   display: block;
+//   border: 1px solid #cccccc;
+//   height: 40px;
+//   width: 100%;
+// }
+
+label {
+  font-family: $default-font-family;
+}
+
+select {
+  border: 1px solid #cccccc;
+}
