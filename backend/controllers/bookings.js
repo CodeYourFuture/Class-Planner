@@ -1,4 +1,5 @@
 const Booking = require("../models/Booking");
+const validateBookingInput = require("../validation/booking");
 
 // @desc    Get all bookings
 // @route   GET /api/v1/bookings
@@ -42,8 +43,12 @@ exports.getBooking = async (req, res, next) => {
 // @route   POST /api/v1/bookings
 exports.addBooking = async (req, res, next) => {
   try {
+    const { errors, isValid } = validateBookingInput(req.body);
+    if (!isValid) {
+      return res.status(400).json({ success: false, error: errors });
+    }
     const {
-      class_Id,
+      className,
       roleName,
       fullName,
       email,
@@ -106,6 +111,10 @@ exports.deleteBooking = async (req, res, next) => {
 exports.updateBooking = async (req, res, next) => {
   try {
     const bookingData = req.body;
+    const { errors, isValid } = validateBookingInput(bookingData);
+    if (!isValid) {
+      return res.status(400).json({ success: false, error: errors });
+    }
     const query = { _id: req.params.id };
     const booking = await Class.findOneAndUpdate(query, bookingData);
     if (!booking) {

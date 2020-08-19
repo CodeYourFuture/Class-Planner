@@ -1,4 +1,5 @@
 const Class = require("../models/Class");
+const validateClassInput = require("../validation/class");
 
 // @desc    Get all classes
 // @route   GET /api/v1/classes
@@ -25,14 +26,18 @@ exports.getClasses = async (req, res, next) => {
 // @access  Public
 exports.addClass = async (req, res, next) => {
   try {
+    const { errors, isValid } = validateClassInput(req.body);
+    if (!isValid) {
+      return res.status(400).json({ success: false, error: errors });
+    }
     const {
-      className,
-      bookingDate,
-      moduleName,
+      date,
       status,
-      statusMessage,
-      syllabusUrl,
-      schedule,
+      className,
+      startTime,
+      endTime,
+      scheduleType,
+      syllabusURL,
     } = req.body;
 
     const newClass = await Class.create(req.body);
@@ -92,6 +97,10 @@ exports.deleteClass = async (req, res, next) => {
 exports.updateClass = async (req, res, next) => {
   try {
     const classData = req.body;
+    const { errors, isValid } = validateClassInput(classData);
+    if (!isValid) {
+      return res.status(400).json({ success: false, error: errors });
+    }
     const query = { _id: req.params.id };
     const classToBeUpdated = await Class.findOneAndUpdate(query, classData);
     if (!classToBeUpdated) {
@@ -104,8 +113,8 @@ exports.updateClass = async (req, res, next) => {
   } catch (err) {
     console.error(err);
     return res.status(400).json({
-        success: false,
-        error: "Could not update classToBeUpdated",
-      });
+      success: false,
+      error: "Could not update classToBeUpdated",
+    });
   }
 };
