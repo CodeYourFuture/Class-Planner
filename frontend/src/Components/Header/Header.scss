@@ -1,10 +1,9 @@
 .Header {
-  position: fixed;
+  position: sticky;
   height: 160px;
   width: 100%;
-  top: 0px;
   background-color: white;
-  z-index: 1000;
+  margin-bottom: 30px;
 }
 .Header_FirtChild,
 .Header_SecondChild {
@@ -40,7 +39,7 @@
 }
 .Header_Logo div P:nth-child(2) {
   font-size: 20px;
-  color: #D12F2F;
+  color: #d12f2f;
 }
 .Header_Nav {
   color: #3f3f3f;
@@ -54,7 +53,7 @@
   text-decoration: none;
 }
 .Header_Nav:hover {
-  color: #D12F2F;
+  color: #d12f2f;
   cursor: pointer;
 }
 .Header_Nav p:nth-child(2) {
@@ -67,7 +66,7 @@
 .Header_Nav:nth-child(3) {
   margin-left: 50px;
 }
-.Header_Selected{
-  color: #10ac84;
+.Header_Selected {
+  color: #d12f2f;
   cursor: default;
 }
