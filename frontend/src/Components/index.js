@@ -1,2 +1,2 @@
-export { default as NewBooking } from "./NewBooking";
+export { default as NewBookingForm } from "./NewBookingForm";
 export { default as ClassCard } from "./ClassCard";
