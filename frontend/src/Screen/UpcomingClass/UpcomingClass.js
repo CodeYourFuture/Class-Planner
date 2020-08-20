@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Get_Classes } from "../../Redux/Actions";
 import Header from "../../Components/Header/Header";
-import ClassCard from "../../Components/ClassCard/ClassCard";
+import ClassCard from "../../Components/ClassCard";
 import Footer from "../../Components/Footer/Footer";
 
 const mapStateToProps = (state) => {
