@@ -18,11 +18,11 @@ export default connect(mapStateToProps, { Get_Classes })(
     }, [Get_Classes]);
 
     return (
-      <div>
-        <Header parm={params} NavState="upcoming class" />
-        <ClassCard Classes={classes} />
+      <React.Fragment>
+        <Header parm={params} NavState="new booking" />
+        <ClassCard Classes={classes} Child="newbooking" />
         <Footer />
-      </div>
+      </React.Fragment>
     );
   }
 );
