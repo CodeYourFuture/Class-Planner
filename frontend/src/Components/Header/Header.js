@@ -4,9 +4,9 @@ import "./Header.scss";
 
 const Header = ({ parm, NavState }) => {
   return (
-    <div className="Header">
-      <div className="Header_FirtChild">
-        <Link className="Home_Link Header_Logo" to="/">
+    <div className="header">
+      <div className="header-firtchild">
+        <Link className="home-link header-logo" to="/">
           <div>
             <p> &lt;</p>
             <p>CODE</p>
@@ -17,12 +17,12 @@ const Header = ({ parm, NavState }) => {
           <p>FUTURE</p>
         </Link>
       </div>
-      <div className="Header_SecondChild">
+      <div className="header-secondchild">
         <Link
           className={
             NavState === "upcoming class"
-              ? "Header_Nav Header_Selected"
-              : "Header_Nav"
+              ? "header-nav header-selected"
+              : "header-nav"
           }
           to="/upcomingclass/admin"
         >
@@ -32,8 +32,8 @@ const Header = ({ parm, NavState }) => {
         <Link
           className={
             NavState === "course calendar"
-              ? "Header_Nav Header_Selected"
-              : "Header_Nav"
+              ? "header-nav header-selected"
+              : "header-nav"
           }
           to="/"
         >
@@ -44,8 +44,8 @@ const Header = ({ parm, NavState }) => {
           <Link
             className={
               NavState === "new class"
-                ? "Header_Nav Header_Selected"
-                : "Header_Nav"
+                ? "header-nav header-selected"
+                : "header-nav"
             }
             to="/"
           >
