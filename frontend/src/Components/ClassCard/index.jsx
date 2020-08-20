@@ -1,5 +1,7 @@
 import React from "react";
 import { MonthNames } from "../../Utils/MonthNames";
+import { Link } from "react-router-dom";
+import NewBookingForm from "../NewBookingForm";
 import dayjs from "dayjs";
 import "./ClassCard.scss";
 
