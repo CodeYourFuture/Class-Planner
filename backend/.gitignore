@@ -3,4 +3,3 @@
 # dependencies
 /node_modules
 backend/config/config.env
-config/config.env

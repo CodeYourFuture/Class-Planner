@@ -1,12 +1,14 @@
 import React from "react";
 import "./Footer.scss";
 
-const Header = () => {
+const Footer = () => {
   return (
-    <div className="Footer">
-      <p>© Code Your Future, All rights reserved | Registered charity 1174929</p>
-    </div>
+    <footer>
+      <p>
+        © Code Your Future, All rights reserved | Registered charity 1174929
+      </p>
+    </footer>
   );
 };
 
-export default Header;
+export default Footer;

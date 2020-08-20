@@ -1,13 +1,13 @@
-.Footer {
-  position: fixed;
+@import "./../../scss/variables";
+
+footer {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 80px;
   width: 100%;
-  top: calc(100vh - 80px);
-  background-color: #3f3f3f;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 400;
-  color: whitesmoke;
+  background-color: $footer-bg;
+  font-family: $default-font-family;
+  font-weight: 300;
+  color: $footer-text-color;
 }
