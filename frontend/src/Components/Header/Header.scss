@@ -1,22 +1,23 @@
-.Header {
-  position: fixed;
+@import "./../../scss/variables";
+
+.header {
+  position: sticky;
   height: 160px;
   width: 100%;
-  top: 0px;
-  background-color: white;
-  z-index: 1000;
+  background-color: #fff;
+  margin-bottom: 30px;
 }
-.Header_FirtChild,
-.Header_SecondChild {
+.header-firtchild,
+.header-secondchild {
   height: 90px;
   width: 100%;
   display: flex;
 }
-.Header_SecondChild {
+.header-secondchild {
   height: 70px;
   background-color: #efefef;
 }
-.Header_Logo {
+.header-logo {
   font-family: "Alfa Slab One", cursive;
   font-size: larger;
   margin-top: 27px;
@@ -24,25 +25,26 @@
   height: 60px;
   width: fit-content;
   text-align: right;
-  color: #3f3f3f;
+  color: $logo-dark-color;
   margin-right: 20px;
   transition: 200ms;
+  text-decoration: none;
 }
-.Header_Logo:hover {
+.header-logo:hover {
   transform: scale(1.02);
   cursor: pointer;
 }
 
-.Header_Logo div {
+.header-logo div {
   height: 15px;
   display: flex;
   align-items: center;
 }
-.Header_Logo div P:nth-child(2) {
+.header-logo div P:nth-child(2) {
   font-size: 20px;
-  color: #D12F2F;
+  color: $logo-light-color;
 }
-.Header_Nav {
+.header-nav {
   color: #3f3f3f;
   margin-top: 15px;
   margin-left: 17%;
@@ -53,21 +55,21 @@
   transition: 200ms;
   text-decoration: none;
 }
-.Header_Nav:hover {
-  color: #D12F2F;
+.header-nav:hover {
+  color: $header-nav-text-hover;
   cursor: pointer;
 }
-.Header_Nav p:nth-child(2) {
+.header-nav p:nth-child(2) {
   margin-left: 10px;
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
+  font-family: $default-font-family;
   font-weight: 600;
 }
-.Header_Nav:nth-child(2),
-.Header_Nav:nth-child(3) {
+.header-nav:nth-child(2),
+.header-nav:nth-child(3) {
   margin-left: 50px;
 }
-.Header_Selected{
-  color: #10ac84;
+.header-selected {
+  color: $header-nav-text-selected;
   cursor: default;
 }

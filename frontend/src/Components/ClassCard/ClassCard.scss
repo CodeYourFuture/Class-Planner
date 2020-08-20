@@ -1,127 +1,159 @@
-.ClassCard_Body {
-  height: calc(100vh - 240px);
-  margin-top: 220px;
+@import "../../scss/variables";
+
+.classcard-body {
+  min-height: calc(100vh - 270px);
   animation: FadeIn 500ms;
 }
-.ClassCard_Main {
+.classcard-main {
   width: 66%;
-  height: 270px;
-  margin: 0px 17%;
-  top: 30px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 600;
+  font-family: $default-font-family;
+  font-weight: 400;
   font-size: 25px;
   letter-spacing: 1px;
-  color: #79d582;
-}
-.ClassCard_Class {
-  width: 100%;
-  border: 1px solid #f1f1f1;
-  margin-top: 15px;
-  height: 270px;
-  display: flex;
-}
-.ClassCard_Date {
-  width: 250px;
-  height: 245px;
-  background-color: #f8f8f8;
-  margin: 10px 25px 10px 10px;
-  border-bottom: 5px solid #d12f2f;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-.ClassCard_Date div {
-  color: #3f3f3f;
-  margin-top: 35px;
-}
-.ClassCard_Date div p:first-child {
-  font-size: 80px;
-  font-weight: 400;
-}
-.ClassCard_Date div p:nth-child(2) {
-  font-size: 30px;
-  font-weight: 900;
-}
-.ClassCard_info {
-  width: 75%;
-  height: 270px;
-  color: #3f3f3f;
-}
-.ClassCard_info_1,
-.ClassCard_info_2 {
-  height: 135px;
-  display: flex;
-  justify-content: space-between;
-}
-.ClassCard_info_1 div {
-  width: 50%;
-}
-.ClassCard_ClassName {
-  font-size: 40px;
-  margin-top: 10px;
-}
-.ClassCard_info_1 div:nth-child(1) p:nth-child(2) {
-  color: #aeaeae;
-  font-size: 15px;
-  margin-top: 10px;
-}
-.ClassCard_info_1 div:nth-child(1) p:nth-child(3) {
-  font-size: 18px;
-  margin-top: 10px;
+  > p {
+    color: $forms-title-color;
+  }
 }
 
-.ClassCard_info_1 div:nth-child(2),
-.ClassCard_Syllabus {
+.classcard-border {
+  border: 1px solid #f1f1f1;
+  margin-top: 15px;
+  width: 100%;
+}
+.classcard-container {
+  display: flex;
+  padding: 10px;
+}
+
+.classcard-date {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  min-width: 200px;
+  min-height: 200px;
+  background-color: #f8f8f8;
+  margin: 0 10px 0 0;
+  border-bottom: 8px solid #d12f2f;
+  color: #3f3f3f;
+
+  p:first-child {
+    font-size: 3em;
+    font-weight: 300;
+    margin: 0 auto;
+  }
+
+  p:nth-child(2) {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0 auto;
+  }
+}
+
+.classcard-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  color: $text-dark-color;
+}
+
+.classcard-top,
+.classcard-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.classcard-top {
+  align-items: flex-start;
+}
+.classcard-bottom {
+  align-items: center;
+}
+
+.classcard-title {
+  font-size: 1.5em;
+
+  margin-bottom: 2px;
+}
+.classcard-top div:nth-child(1) p:nth-child(2) {
+  color: #aeaeae;
+  font-size: 15px;
+}
+
+.classcard-top div:nth-child(1) p:nth-child(3) {
+  font-size: 18px;
+}
+
+.classcard-syllabus {
   display: flex;
   justify-content: center;
   transition: 200ms;
-  width: 133px;
+  font-family: $default-font-family;
+  font-weight: 300;
+  width: 180px;
   height: 50px;
-  margin-top: 15px;
+  border-radius: 4px;
+  border: 1px solid $btn-syllabus-border;
+
+  p {
+    display: inline;
+    margin: auto 5px;
+  }
+
+  :nth-child(2) {
+    margin: auto 5px;
+  }
+
+  &:hover {
+    background-color: $btn-syllabus-bg-hover;
+  }
 }
-.ClassCard_Syllabus:hover {
-  cursor: pointer;
-  color: #03a9f4;
-}
-.ClassCard_Syllabus_P {  
-  font-size: 18px;
-  margin: 0px 0px 25px 0px;
-}
-.ClassCard_info_1 div:nth-child(2) a {
+
+.classcard-top div:nth-child(2) a {
   font-size: 16px;
   text-decoration: none;
   color: #3f3f3f;
 }
-.ClassCard_info_1 div:nth-child(2) i {
-  font-size: 16px;
-  margin: 6px -30px 30px 5px;
-}
-.ClassCard_info_2 {
-  height: 80px;
-  margin-top: 55px;
-  align-items: center;
-}
-.ClassCard_info_2 p:first-child {
+
+.classcard-bottom p:first-child {
   letter-spacing: 0px;
-  font-size: 20px;
-  font-weight: 400;
-  color: #79d582;
+  font-size: 0.75em;
+  font-weight: 300;
+  color: $text-link-color;
+
+  &:hover {
+    cursor: pointer;
+    color: $text-link-hover-color;
+  }
 }
 
-.ClassCard_info_2 p:nth-child(2) {
-  padding: 10px 60px;
-  font-size: 20px;
-  font-weight: 400;
-  margin: 15px;
+.classcard-bottom :nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 50px;
+  font-size: 0.75em;
+  font-family: $default-font-family;
+  font-weight: 300;
   color: white;
   background-color: #03a9f4;
   border-radius: 4px;
+  border: 1px solid #43c4ff;
   transition: 200ms;
+  text-decoration: none;
+  &:hover {
+    background-color: #43c4ff;
+    cursor: pointer;
+  }
 }
-.ClassCard_info_2 p:nth-child(2):hover {
-  background-color: #43c4ff;
-  cursor: pointer;
+
+.classcard-separator {
+  border-top: 1px solid $classcard-border;
+  width: 80%;
+  margin: 40px auto 40px auto;
 }
