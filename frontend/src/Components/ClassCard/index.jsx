@@ -1,5 +1,5 @@
 import React from "react";
-import { MonthNames } from "../../Utils/MonthNames";
+import { MonthNames } from "../../utils/MonthNames";
 import { Link } from "react-router-dom";
 import NewBookingForm from "../NewBookingForm";
 import dayjs from "dayjs";

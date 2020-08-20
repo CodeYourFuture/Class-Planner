@@ -3,8 +3,8 @@ import {
   ACTION_STARTED,
   ACTION_SUCCESS,
   ACTION_ERROR,
-} from "./Types";
-import httpClient from "../../Common/httpClient";
+} from "./types";
+import httpClient from "../../common/httpClient";
 
 export const Get_Classes = () => {
   return async (dispatch) => {

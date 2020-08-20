@@ -1,4 +1,4 @@
-import { GET_CLASSES } from "../Actions/Types";
+import { GET_CLASSES } from "../actions/types";
 
 const INITIAL_STATE = {
   classes: [],
