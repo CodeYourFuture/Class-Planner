@@ -4,27 +4,36 @@ const ClassSchema = new mongoose.Schema({
   courseCalendar_Id: {
     type: String,
   },
-  module_Id: {
+  moduleName: {
     type: String,
   },
   className: {
     type: String,
+    required: true,
   },
   date: {
     type: Date,
     default: Date.now,
+    required: true,
   },
-  time: {
+  startTime: {
     type: String,
+    required: true,
+  },
+  endTime: {
+    type: String,
+    required: true,
   },
   status: {
     type: Boolean,
   },
-  syllabusUrl: {
+  syllabusURL: {
     type: String,
+    required: true,
   },
   scheduleType: {
     type: String,
+    required: true,
   },
 });
 
