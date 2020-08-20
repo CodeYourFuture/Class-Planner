@@ -1,7 +1,7 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
-module.exports = function validateLoginInput(data) {
+module.exports = function validateClassInput(data) {
   let errors = {};
 
   data.date = !isEmpty(data.date) ? data.date : "";
