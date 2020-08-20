@@ -53,7 +53,7 @@ const ClassCard = ({ Title, Child, Classes }) => {
                       </div>
                     </div>
                   </div>
-                  {Child != null && <hr className="booking-separator"></hr>}
+                  {Child != null && <hr className="classcard-separator"></hr>}
                   {Child === "newbooking" && <NewBookingForm></NewBookingForm>}
                   {Child === "volunteerslist" && (
                     <h3>list of volunteers appear here</h3>
