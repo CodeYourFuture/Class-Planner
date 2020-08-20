@@ -48,7 +48,7 @@ const ClassCard = ({ Title, Child, Classes }) => {
                         </div>
                       </div>
                       <div className="classcard-bottom">
-                        <p>0 voluntieers signed up</p>
+                        <p>0 volunteers signed up</p>
                         {Child == null && <Link to="/newbooking/">Attend</Link>}
                       </div>
                     </div>
