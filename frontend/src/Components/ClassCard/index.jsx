@@ -3,9 +3,9 @@ import { MonthNames } from "../../Utils/MonthNames";
 import dayjs from "dayjs";
 import "./ClassCard.scss";
 
-const ClassCard = ({ Classes }) => {
+const ClassCard = ({ Title, Child, Classes }) => {
   return (
-    <div>
+    <React.Fragment>
       {Classes.data && Classes.data.length > 0
         ? [
             Classes.data
@@ -16,7 +16,7 @@ const ClassCard = ({ Classes }) => {
           ].map((Class, index) => (
             <div className="classcard-body" key={index}>
               <div className="classcard-main">
-                <p>Next upcoming Class:</p>
+                {Title !== "" && <p>{Title}</p>}
                 <div className="classcard-border">
                   <div className="classcard-container">
                     <div className="classcard-date">
@@ -47,16 +47,21 @@ const ClassCard = ({ Classes }) => {
                       </div>
                       <div className="classcard-bottom">
                         <p>0 voluntieers signed up</p>
-                        <a>Book</a>
+                        {Child == null && <Link to="/newbooking/">Attend</Link>}
                       </div>
                     </div>
                   </div>
+                  {Child != null && <hr className="booking-separator"></hr>}
+                  {Child === "newbooking" && <NewBookingForm></NewBookingForm>}
+                  {Child === "volunteerslist" && (
+                    <h3>list of volunteers appear here</h3>
+                  )}
                 </div>
               </div>
             </div>
           ))
         : null}
-    </div>
+    </React.Fragment>
   );
 };
 
