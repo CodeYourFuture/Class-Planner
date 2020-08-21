@@ -1,4 +1,4 @@
-import { GET_CLASSES } from "../actions/Types.js";
+import { GET_CLASSES } from "../actions/types";
 
 const INITIAL_STATE = {
   classes: [],
@@ -9,7 +9,7 @@ export default (state = INITIAL_STATE, action) => {
     case GET_CLASSES:
       return {
         ...state,
-        classes: action.classes,
+        classes: action.classes
       };
     default:
       return state;
