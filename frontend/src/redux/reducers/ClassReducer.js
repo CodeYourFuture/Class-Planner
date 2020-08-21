@@ -1,4 +1,4 @@
-import { GET_CLASSES } from "../actions/types";
+import { GET_CLASSES,CREATE_CLASS } from "../actions/types";
 
 const INITIAL_STATE = {
   classes: [],
@@ -7,6 +7,11 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_CLASSES:
+      return {
+        ...state,
+        classes: action.classes
+      };
+      case CREATE_CLASS:
       return {
         ...state,
         classes: action.classes

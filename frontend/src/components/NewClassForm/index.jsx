@@ -1,10 +1,35 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { createClass } from "../../redux/actions";
 import "./NewClassForm.scss";
 
-const NewClassForm = ({ parm }) => {
-  const [weekState, setWeekState] = useState("Class");
- 
+const mapStateToProps = (state) => {
+  return { classes: state.ClassReducer.classes };
+};
 
+const NewClassForm = ({ classes, createClass }) => {
+  const [showMessage, setShowMessage] = useState("");
+  const [weekState, setWeekState] = useState("Class");
+  const [values, setValues] = useState({
+    date: "",
+    status: "true",
+    className: "",
+    startTime: "",
+    endTime: "",
+    scheduleType: "",
+    syllabusURL: "",
+  });
+
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createClass(values);
+  };
   return (
     <div className="NewClass_Body">
       <p className="NewClass_Title"> New Class</p>
@@ -13,13 +38,15 @@ const NewClassForm = ({ parm }) => {
         <table className="NewClass_Table">
           <tbody>
             <tr>
-              <td>Data:</td>
+              <td>Date:</td>
               <td>
                 <input
                   id="Date"
+                  name="date"
                   type="Date"
                   className="NewClass_Input_Date"
-                  onChange={(e) => (e.target.style.animation = "none")}
+                  value={values.date}
+                  onChange={handleChange}
                 ></input>
               </td>
             </tr>
@@ -34,7 +61,6 @@ const NewClassForm = ({ parm }) => {
                   }
                   onClick={() => {
                     setWeekState("Class");
-                    _Deactive_Error();
                   }}
                 >
                   Class
@@ -47,7 +73,6 @@ const NewClassForm = ({ parm }) => {
                   }
                   onClick={() => {
                     setWeekState("Holiday");
-                    _Deactive_Error();
                   }}
                 >
                   Holiday
@@ -61,9 +86,11 @@ const NewClassForm = ({ parm }) => {
                   <td>
                     <input
                       id="ClassName"
+                      name="className"
+                      value={values.className}
+                      onChange={handleChange}
                       type="text"
                       placeholder="Class Name"
-                      onChange={(e) => (e.target.style.animation = "none")}
                     ></input>
                   </td>
                 </tr>
@@ -72,8 +99,10 @@ const NewClassForm = ({ parm }) => {
                   <td>
                     <input
                       id="StartTime"
+                      name="startTime"
+                      value={values.startTime}
+                      onChange={handleChange}
                       type="time"
-                      onChange={(e) => (e.target.style.animation = "none")}
                     ></input>
                   </td>
                 </tr>
@@ -82,8 +111,10 @@ const NewClassForm = ({ parm }) => {
                   <td>
                     <input
                       id="EndTime"
+                      name="endTime"
+                      value={values.endTime}
+                      onChange={handleChange}
                       type="time"
-                      onChange={(e) => (e.target.style.animation = "none")}
                     ></input>
                   </td>
                 </tr>
@@ -92,9 +123,11 @@ const NewClassForm = ({ parm }) => {
                   <td>
                     <input
                       id="Schedule"
+                      name="scheduleType"
+                      value={values.scheduleType}
+                      onChange={handleChange}
                       type="text"
                       placeholder="Schedule"
-                      onChange={(e) => (e.target.style.animation = "none")}
                     ></input>
                   </td>
                 </tr>
@@ -103,10 +136,12 @@ const NewClassForm = ({ parm }) => {
                   <td>
                     <input
                       id="Syllabus"
+                      name="syllabusURL"
+                      value={values.syllabusURL}
+                      onChange={handleChange}
                       className="Syllabus"
                       type="text"
                       placeholder="https:// . . ."
-                      onChange={(e) => (e.target.style.animation = "none")}
                     ></input>
                   </td>
                 </tr>
@@ -118,9 +153,11 @@ const NewClassForm = ({ parm }) => {
                   <td>
                     <input
                       id="Reason"
+                      name="scheduleType"
+                      value={values.scheduleType}
+                      onChange={handleChange}
                       type="text"
                       placeholder="Reason"
-                      onChange={(e) => (e.target.style.animation = "none")}
                     ></input>
                   </td>
                 </tr>
@@ -129,11 +166,13 @@ const NewClassForm = ({ parm }) => {
           </tbody>
         </table>
         <div className="NewClass_CreateButton_Div">
-          <p onClick={() => createClass()}>Create</p>
+          <button type="submit" onClick={handleSubmit}>
+            Save
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default NewClassForm;
+export default connect(mapStateToProps, { createClass })(NewClassForm);

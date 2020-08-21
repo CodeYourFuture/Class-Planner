@@ -22,7 +22,7 @@ This project's aim is to streamline and automate the process that we use to sign
 - `npm install`
 - `npm start`
 
-Client will be running on `http://localhost:3000`
+Client will be running on `http://localhost:4000`
 
 
 #### [Installation and run both frontend and backend concurrently](./README.md)

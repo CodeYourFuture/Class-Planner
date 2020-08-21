@@ -5,4 +5,4 @@
 - `npm install`
 - `npm start`
 
-App will be running on `http://localhost:3000`
+Client will be running on `http://localhost:4000`
