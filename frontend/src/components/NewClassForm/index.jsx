@@ -3,7 +3,6 @@ import "./NewClassForm.scss";
 
 const NewClassForm = ({ parm }) => {
   const [weekState, setWeekState] = useState("Class");
- 
 
   return (
     <div className="NewClass_Body">
@@ -34,7 +33,6 @@ const NewClassForm = ({ parm }) => {
                   }
                   onClick={() => {
                     setWeekState("Class");
-                    _Deactive_Error();
                   }}
                 >
                   Class
@@ -47,7 +45,6 @@ const NewClassForm = ({ parm }) => {
                   }
                   onClick={() => {
                     setWeekState("Holiday");
-                    _Deactive_Error();
                   }}
                 >
                   Holiday
@@ -129,7 +126,7 @@ const NewClassForm = ({ parm }) => {
           </tbody>
         </table>
         <div className="NewClass_CreateButton_Div">
-          <p onClick={() => createClass()}>Create</p>
+          <p>Create</p>
         </div>
       </div>
     </div>
