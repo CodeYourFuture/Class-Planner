@@ -3,7 +3,7 @@ import {
   ACTION_STARTED,
   ACTION_SUCCESS,
   ACTION_ERROR,
-} from "./types";
+} from "./Types.js";
 import httpClient from "../../common/httpClient";
 
 export const Get_Classes = () => {
