@@ -1,0 +1,29 @@
+@import "mixins";
+@import "variables";
+
+.alert-success {
+  @include alert;
+  background-color: $alert-success-bg-color;
+  border-color: $alert-success-border-color;
+  color: $alert-success-text-color;
+}
+
+.alert-danger {
+  @include alert;
+  background-color: $alert-danger-bg-color;
+  border-color: $alert-danger-border-color;
+  color: $alert-danger-text-color;
+}
+.alert-info {
+  @include alert;
+  background-color: $alert-info-bg-color;
+  border-color: $alert-info-border-color;
+  color: $alert-info-text-color;
+}
+
+.alert-light {
+  @include alert;
+  background-color: $alert-light-bg-color;
+  border-color: $alert-light-border-color;
+  color: $alert-light-text-color;
+}
