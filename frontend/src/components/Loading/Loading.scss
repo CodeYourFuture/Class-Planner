@@ -1,0 +1,10 @@
+@import "../../scss/variables";
+.loaading-container{
+    min-height: calc(100vh - 270px);
+    animation: FadeIn 500ms;
+    color: $text-link-hover-color;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

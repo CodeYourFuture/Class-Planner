@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./NewBookingForm.scss";
 
 const NewBookingForm = () => {
@@ -7,7 +7,7 @@ const NewBookingForm = () => {
     <div className="newbooking-container">
       <form method="post" className="newbooking-form">
         <div className="form-group">
-          <label for="fullName">Full name:</label>
+          <label htmlFor="fullName">Full name:</label>
           <input
             id="fullName"
             type="text"
@@ -17,7 +17,7 @@ const NewBookingForm = () => {
         </div>
 
         <div className="form-group">
-          <label for="email">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             id="email"
             type="email"
@@ -27,7 +27,7 @@ const NewBookingForm = () => {
         </div>
 
         <div className="form-group">
-          <label for="role">Role:</label>
+          <label htmlFor="role">Role:</label>
           <select id="role" className="form-control">
             <option value="0">Select your preferred role</option>
             <option value="1">Coordinator</option>

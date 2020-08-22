@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
 };
 
 const NewClassForm = ({ classes, createClass }) => {
-  const [showMessage, setShowMessage] = useState("");
+  // const [showMessage, setShowMessage] = useState("");
   const [weekState, setWeekState] = useState("Class");
   const [values, setValues] = useState({
     date: "",
@@ -28,6 +28,7 @@ const NewClassForm = ({ classes, createClass }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     createClass(values);
   };
   return (

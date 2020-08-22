@@ -10,7 +10,8 @@
     }
   }
   .NewClass_Body {
-    margin: 200px auto;
+    min-height: calc(100vh - 270px);
+    margin: auto;
     width: 50%;
     animation: FadeIn 500ms;
   }
@@ -23,7 +24,6 @@
   }
   .NewClass_Main {
     margin-top: 15px;
-    border-radius: 5px;
     border: 1px solid #eaeaea;
     font-family: "Open Sans", sans-serif;
     transition: 500ms;
