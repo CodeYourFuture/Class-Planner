@@ -1,5 +1,0 @@
-export const ACTION_STARTED = 'ACTION_STARTED';
-export const ACTION_ERROR = 'ACTION_ERROR';
-export const ACTION_SUCCESS = 'ACTION_SUCCESS';
-
-export const GET_CLASSES = "GET_CLASSES";
