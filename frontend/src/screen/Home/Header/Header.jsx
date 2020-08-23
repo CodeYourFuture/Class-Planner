@@ -19,8 +19,11 @@ const Header = () => {
         <NavLink className="Home_Link" to="/upcomingclass/admin">
           <p>Admin</p>
         </NavLink>
-        <NavLink className="Home_Link" to="/upcomingclass">
+        <NavLink className="Home_Link" to="/upcomingclass/volunteer">
           <p>Volunteer</p>
+        </NavLink>
+        <NavLink className="Home_Link" to="/upcomingclass/student">
+          <p>Student</p>
         </NavLink>
       </div>
     </div>

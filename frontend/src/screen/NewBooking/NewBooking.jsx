@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Get_Classes } from "../../redux/actions";
-import { Header, ClassCard, Footer } from "../../components";
+import Header from "../../components/Header/Header.jsx";
+import ClassCard from "../../components/ClassCard/ClassCard.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 
 const mapStateToProps = (state) => {
   return { classes: state.ClassReducer.classes };

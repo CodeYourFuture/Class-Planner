@@ -20,6 +20,23 @@ const Header = ({ param, NavState }) => {
       <div className="header-secondchild">
         <Link
           className={
+            NavState === "courseCalendar"
+              ? "header-nav header-selected"
+              : "header-nav"
+          }
+          to={
+            param.user === "admin"
+              ? "/upcomingclass/admin"
+              : param.user === "volunteer"
+              ? "/upcomingclass/volunteer"
+              : "/upcomingclass/student"
+          }
+        >
+          <i className="far fa-calendar-alt"></i>
+          <p>Course Calendar</p>
+        </Link>
+        <Link
+          className={
             NavState === "upcomingClass"
               ? "header-nav header-selected"
               : "header-nav"
@@ -27,22 +44,13 @@ const Header = ({ param, NavState }) => {
           to={
             param.user === "admin"
               ? "/upcomingclass/admin"
-              : "/upcomingclass/"
+              : param.user === "volunteer"
+              ? "/upcomingclass/volunteer"
+              : "/upcomingclass/student"
           }
         >
           <i className="far fa-calendar-check"></i>
           <p>Upcoming Class</p>
-        </Link>
-        <Link
-          className={
-            NavState === "courseCalendar"
-              ? "header-nav header-selected"
-              : "header-nav"
-          }
-          to="/"
-        >
-          <i className="far fa-calendar-alt"></i>
-          <p>Course Calendar</p>
         </Link>
         {param.user === "admin" ? (
           <Link
