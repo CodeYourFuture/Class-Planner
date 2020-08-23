@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.scss";
 
-const Header = ({ parm, NavState }) => {
+const Header = ({ param, NavState }) => {
   return (
     <div className="header">
       <div className="header-firtchild">
@@ -20,18 +20,22 @@ const Header = ({ parm, NavState }) => {
       <div className="header-secondchild">
         <Link
           className={
-            NavState === "upcoming class"
+            NavState === "upcomingClass"
               ? "header-nav header-selected"
               : "header-nav"
           }
-          to="/upcomingclass/admin"
+          to={
+            param.user === "admin"
+              ? "/upcomingclass/admin"
+              : "/upcomingclass/"
+          }
         >
           <i className="far fa-calendar-check"></i>
           <p>Upcoming Class</p>
         </Link>
         <Link
           className={
-            NavState === "course calendar"
+            NavState === "courseCalendar"
               ? "header-nav header-selected"
               : "header-nav"
           }
@@ -40,14 +44,14 @@ const Header = ({ parm, NavState }) => {
           <i className="far fa-calendar-alt"></i>
           <p>Course Calendar</p>
         </Link>
-        {parm.user === "admin" ? (
+        {param.user === "admin" ? (
           <Link
             className={
-              NavState === "new class"
+              NavState === "newClass"
                 ? "header-nav header-selected"
                 : "header-nav"
             }
-            to="/"
+            to="/newclass/admin"
           >
             <i className="far fa-calendar-plus"></i>
             <p>New Class</p>

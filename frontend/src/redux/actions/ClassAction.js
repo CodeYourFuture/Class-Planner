@@ -1,4 +1,5 @@
 import {
+  GET_UPCOMINGCLASS,
   GET_CLASSES,
   CREATE_CLASS,
   ACTION_STARTED,
@@ -6,6 +7,31 @@ import {
   ACTION_ERROR,
 } from "./types";
 import httpClient from "../../common/httpClient";
+
+export const Get_UpcomingClass = () => {
+  return async (dispatch) => {
+    try {
+      const classes = await httpClient.get(`/api/v1/classes`);
+      dispatch({
+        type: ACTION_STARTED,
+        actionType: GET_UPCOMINGCLASS,
+      });
+      dispatch({
+        type: GET_UPCOMINGCLASS,
+        classes: classes.data,
+      });
+      dispatch({
+        type: ACTION_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: ACTION_ERROR,
+        error: "Error: Something went wrong, please try again later.",
+        actionType: GET_UPCOMINGCLASS,
+      });
+    }
+  };
+};
 
 export const Get_Classes = () => {
   return async (dispatch) => {

@@ -1,27 +1,34 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Get_Classes } from "../../redux/actions";
-import Header from "../../components/Header";
-import ClassCard from "../../components/ClassCard";
-import Footer from "../../components/Footer";
+import { Get_UpcomingClass } from "../../redux/actions";
+import { Header, Loading, ClassCard, Footer } from "../../components/";
 
 const mapStateToProps = (state) => {
-  return { classes: state.ClassReducer.classes };
+  return { Class: state.ClassReducer.Class };
 };
 
-const UpcomingClass = ({ classes, Get_Classes, match }) => {
+const UpcomingClass = ({ Class, Get_UpcomingClass, match }) => {
   const { params } = match;
 
   useEffect(() => {
-    Get_Classes();
-  }, [Get_Classes]);
+    Get_UpcomingClass();
+  }, [Get_UpcomingClass]);
 
   return (
     <div>
-      <Header parm={params} NavState="upcoming class" />
-      <ClassCard Classes={classes} />
+      <Header param={params} NavState="upcomingClass" />
+      {Class ? (
+        <ClassCard
+          Title={"Upcoming Class"}
+          Child={null}
+          Class={Class}
+          param={params}
+        />
+      ) : (
+        <Loading />
+      )}
       <Footer />
     </div>
   );
 };
-export default connect(mapStateToProps, { Get_Classes })(UpcomingClass);
+export default connect(mapStateToProps, { Get_UpcomingClass })(UpcomingClass);
