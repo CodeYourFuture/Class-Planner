@@ -130,8 +130,11 @@
     color: $text-link-hover-color;
   }
 }
-
-.classcard-bottom :nth-child(2) {
+.classcard-bottom div{
+  display: flex;
+}
+.classcard-edit-bottom ,
+.classcard-attend-bottom{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -151,9 +154,47 @@
     cursor: pointer;
   }
 }
-
+.classcard-edit-bottom {
+  background-color: #ffffff;
+  border: 1px solid #F0AD4E;
+  align-self: flex-end;
+  margin-right: 10px;
+  color: #F0AD4E;
+  &:hover {
+    background-color: #F0AD4E;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
 .classcard-separator {
   border-top: 1px solid $classcard-border;
   width: 80%;
   margin: 40px auto 40px auto;
+}
+
+.weeknumber-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  min-width: 80px;
+  min-height: 200px;
+  margin: 0 0 0 10px;
+  border-radius: 2px;
+  background-color: $classcard-weeknumber-bg;
+  color: #ffffff;
+
+  p:first-child {
+    font-size: 0.7em;
+    font-weight: 300;
+    margin: 0 auto;
+  }
+
+  p:nth-child(2) {
+    font-size: 2em;
+    font-weight: 500;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 35px;
+  }
 }
