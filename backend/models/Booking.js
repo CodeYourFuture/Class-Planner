@@ -6,15 +6,12 @@ const BookingSchema = new mongoose.Schema({
   },
   roleName: {
     type: String,
-    required: true,
   },
   fullName: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
-    required: true,
   },
   bookingDate: {
     type: Date,
