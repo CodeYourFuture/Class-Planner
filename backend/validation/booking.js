@@ -9,7 +9,7 @@ module.exports = function validateBookingInput(data) {
   data.roleName = !isEmpty(data.roleName) ? data.roleName : "";
   data.classId = !isEmpty(data.classId) ? data.classId : "";
 
-  if (!Validator.isEmail(data.classId)) {
+  if (!Validator.isEmpty(data.classId)) {
     errors.classId = "Class Id is required";
   }
   if (!Validator.isEmail(data.email)) {
