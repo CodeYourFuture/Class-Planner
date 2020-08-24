@@ -39,7 +39,9 @@ const ClassCard = ({ Title, Child, Class, WeekNumber, param }) => {
                         {currentClass.className}
                       </p>
                       <p>{currentClass.scheduleType}</p>
-                      <p>{currentClass.time}</p>
+                      <p>
+                        {currentClass.startTime + " - " + currentClass.endTime}
+                      </p>
                     </div>
                     <div>
                       <a

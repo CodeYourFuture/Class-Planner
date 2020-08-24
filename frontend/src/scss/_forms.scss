@@ -7,14 +7,31 @@
   width: 100%;
   padding: 5px;
   flex-wrap: nowrap;
+  align-items: center;
   justify-content: flex-end;
   color: $text-dark-color;
-
+  div{
+    width: 35%;
+    height: 40px;
+    display: flex;
+    margin-right: 35%;
+    align-items: center;
+    justify-content: left;
+    label{
+      text-align: left;
+    }
+    input[type="radio"] {
+      text-align: left;
+      width: 25px;
+      height: 25px;
+      margin: 0px 0px 0px 15px;
+    }
+}
   label {
     width: 20%;
     margin: auto;
     font-family: $default-font-family;
-    font-size: 0.85em;
+    font-size: 0.75em;
     text-align: right;
     margin-right: 10px;
   }
@@ -30,13 +47,14 @@
     font-family: $default-font-family;
     font-weight: 300;
     color: $text-dark-color;
-    font-size: 0.85em;
+    font-size: 0.75em;
     width: 70%;
     height: 40px;
-    padding: 0 5px;
+    padding: 0 10px;
   }
-
+  
   input[type="submit"] {
+    margin-top: 20px;
     text-align: center;
     width: 200px;
     height: 50px;
@@ -55,10 +73,11 @@
   select {
     font-family: $default-font-family;
     font-weight: 300;
-    font-size: 0.85em;
+    font-size: 0.75em;
     width: 70%;
+    height: 40px;
     color: $text-dark-color;
-    padding: 0 5px;
+    padding: 0 10px;
   }
 }
 
@@ -72,4 +91,7 @@
     outline: 0;
     box-shadow: none;
   }
+}
+.error-animation{
+  animation: Error infinite 2s;
 }

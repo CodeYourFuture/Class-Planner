@@ -12,7 +12,6 @@ export const Get_UpcomingClass = () => {
   return async (dispatch) => {
     try {
       const classes = await httpClient.get(`/api/v1/classes`);
-      console.log(classes)
       dispatch({
         type: ACTION_STARTED,
         actionType: GET_UPCOMINGCLASS,
