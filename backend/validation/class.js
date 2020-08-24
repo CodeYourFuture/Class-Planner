@@ -41,8 +41,8 @@ module.exports = function validateClassInput(data) {
     data.endTime = !isEmpty(data.endTime) ? data.endTime : "";
     data.scheduleType = !isEmpty(data.scheduleType) ? data.scheduleType : "";
     data.syllabusURL = !isEmpty(data.syllabusURL) ? data.syllabusURL : "";
-    if (Validator.isEmpty(data.scheduleType)) {
-      errors.scheduleType = "Reason field is required";
+    if (Validator.isEmpty(data.className)) {
+      errors.className = "Reason field is required";
     }
   }
 
