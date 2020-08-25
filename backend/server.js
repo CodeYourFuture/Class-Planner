@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use("/api/v1/classes", require("./routes/classes"));
 app.use("/api/v1/bookings", require("./routes/bookings"));
-app.use("/api/v1/classes/bookings", require("./routes/classBookings"));
+app.use("/api/v1/class/bookings", require("./routes/classBookings"));
 
 app.get("/", (request, response) => {
   response.json({
