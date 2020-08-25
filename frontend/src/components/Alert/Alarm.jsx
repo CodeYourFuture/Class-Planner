@@ -1,14 +1,14 @@
 import React from "react";
 import "./Alert.scss";
 
-const Alert = (props) => {
+const Alert = ({ type, children }) => {
   let cssClass = "";
-  props.type === "danger" && (cssClass = "alert-danger");
-  props.type === "success" && (cssClass = "alert-success");
-  props.type === "info" && (cssClass = "alert-info");
-  props.type === "light" && (cssClass = "alert-light");
+  type === "danger" && (cssClass = "alert-danger");
+  type === "success" && (cssClass = "alert-success");
+  type === "info" && (cssClass = "alert-info");
+  type === "light" && (cssClass = "alert-light");
 
-  return <div className={cssClass}>{props.children}</div>;
+  return <div className={cssClass}>{children}</div>;
 };
 
 export default Alert;

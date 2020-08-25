@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { Get_UpcomingClass } from "../../redux/actions";
 
 const mapStateToProps = (state) => {
-  // console.log(state)
+
   return { Class: state.ClassReducer.Class };
 };
 

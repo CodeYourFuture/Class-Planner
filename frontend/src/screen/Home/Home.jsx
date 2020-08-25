@@ -21,13 +21,13 @@ const Home = () => {
             their tech skills, but lack learning opportunities.
           </p>
           <div>
-            <Link className="Home_Link" to="/upcomingclass/admin">
+            <Link className="Home_Link" to="/coursecalendar/admin">
               <p>Admin</p>
             </Link>
-            <Link className="Home_Link" to="/upcomingclass/Volunteer">
+            <Link className="Home_Link" to="/coursecalendar/Volunteer">
               <p>Volunteer</p>
             </Link>
-            <Link className="Home_Link" to="/upcomingclass/student">
+            <Link className="Home_Link" to="/coursecalendar/student">
               <p>Student</p>
             </Link>
           </div>

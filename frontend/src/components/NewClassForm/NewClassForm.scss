@@ -23,92 +23,9 @@
   color: #79d582;
 }
 .new-class-form {
-  margin-top: 15px;
+  margin: 15px auto 30px auto;
   border: 1px solid #eaeaea;
   font-family: "Open Sans", sans-serif;
   transition: 500ms;
-}
-
-.NewClass_CreateButton_Div {
-  width: 70%;
-  margin: 20px auto 20px auto;
-  display: flex;
-  justify-content: flex-end;
-}
-.NewClass_CreateButton_Div p {
-  padding: 8px 40px;
-  border-radius: 3px;
-  color: white;
-  background-color: #03a9f4;
-  transition: 200ms;
-}
-.NewClass_CreateButton_Div p:hover {
-  cursor: pointer;
-  background-color: #43c4ff;
-}
-.NewClass_Error,
-.NewClass_Success {
-  display: none;
-  align-items: center;
-  margin: -19px auto 0px auto;
-  width: 50%;
-  height: 35px;
-  color: #d12f2f;
-  border-radius: 5px;
-  border: 1px solid #ebcccc;
-  background-color: #f2dede;
-  text-indent: 15px;
-  font-size: 14px;
-  animation: FadeIn 500ms;
-}
-
-.NewClass_Success {
-  border: 1px solid #d0e9c6;
-  background-color: #dff0d8;
-  color: #3c763d;
-}
-
-.NewClass_Input_Date {
-  font-family: "Open Sans", sans-serif;
-  letter-spacing: 2px;
-}
-.NewClass_Status {
-  width: 90%;
-  display: flex;
-}
-.NewClass_Status p {
-  padding: 7px 0px;
-  width: 149px;
-  text-align: center;
-  transition: 200ms;
-}
-
-.NewClass_Status_Class {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border: 1px solid #eaeaea;
-  color: #3f3f3f;
-}
-.NewClass_Status_Holiday {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border: 1px solid #eaeaea;
-  color: #3f3f3f;
-}
-.NewClass_Status_Active {
-  border: 1px solid #03a9f4;
-  background-color: #e6f7ff;
-  color: #3f3f3f;
-}
-.NewClass_Status p:hover {
-  border: 1px solid #03a9f4;
-  background-color: #e6f7ff;
-  cursor: pointer;
-}
-tr {
-  animation: FadeIn 500ms;
-}
-tr td:nth-child(1)::after {
-  content: " *";
-  color: #d12f2f;
+  padding: 50px 20% 50px 10%;
 }

@@ -26,10 +26,10 @@ const Header = ({ param, NavState }) => {
           }
           to={
             param.user === "admin"
-              ? "/upcomingclass/admin"
+              ? "/coursecalendar/admin"
               : param.user === "volunteer"
-              ? "/upcomingclass/volunteer"
-              : "/upcomingclass/student"
+              ? "/coursecalendar/volunteer"
+              : "/coursecalendar/student"
           }
         >
           <i className="far fa-calendar-alt"></i>

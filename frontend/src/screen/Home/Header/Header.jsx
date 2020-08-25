@@ -16,13 +16,13 @@ const Header = () => {
             <p>FUTURE</p>
         </Link>
       <div className="Home_Header_User_Div">
-        <NavLink className="Home_Link" to="/upcomingclass/admin">
+        <NavLink className="Home_Link" to="/coursecalendar/admin">
           <p>Admin</p>
         </NavLink>
-        <NavLink className="Home_Link" to="/upcomingclass/volunteer">
+        <NavLink className="Home_Link" to="/coursecalendar/volunteer">
           <p>Volunteer</p>
         </NavLink>
-        <NavLink className="Home_Link" to="/upcomingclass/student">
+        <NavLink className="Home_Link" to="/coursecalendar/student">
           <p>Student</p>
         </NavLink>
       </div>

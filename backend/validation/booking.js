@@ -7,7 +7,11 @@ module.exports = function validateBookingInput(data) {
   data.fullName = !isEmpty(data.fullName) ? data.fullName : "";
   data.email = !isEmpty(data.email) ? data.email : "";
   data.roleName = !isEmpty(data.roleName) ? data.roleName : "";
-  
+  data.classId = !isEmpty(data.classId) ? data.classId : "";
+
+  if (!Validator.isEmpty(data.classId)) {
+    errors.classId = "Class Id is required";
+  }
   if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
   }
