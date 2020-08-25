@@ -102,7 +102,9 @@ const ClassCard = ({ Title, Child, Class, WeekNumber, param }) => {
                 )}
               </div>
               {Child !== null && <hr className="classcard-separator"></hr>}
-              {Child === "newBooking" && <NewBookingForm></NewBookingForm>}
+              {Child === "newBooking" && (
+                <NewBookingForm Class={currentClass}></NewBookingForm>
+              )}
               {Child === "volunteerslist" && (
                 <h3>list of volunteers appear here</h3>
               )}
