@@ -9,9 +9,6 @@ module.exports = function validateBookingInput(data) {
   data.roleName = !isEmpty(data.roleName) ? data.roleName : "";
   data.classId = !isEmpty(data.classId) ? data.classId : "";
 
-  if (!Validator.isEmpty(data.classId)) {
-    errors.classId = "Class Id is required";
-  }
   if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
   }
@@ -23,6 +20,9 @@ module.exports = function validateBookingInput(data) {
   }
   if (Validator.isEmpty(data.fullName)) {
     errors.fullName = "Full name field is required";
+  }
+  if (Validator.isEmpty(data.classId)) {
+    errors.classId = "Class Id is required";
   }
   return { errors, isValid: isEmpty(errors) };
 };
