@@ -1,7 +1,7 @@
 import React from "react";
 import "./CourseCalendarForm.scss"
 
-const CourseCalendar = () => {
+const CourseCalendarForm = () => {
   return (
     <div className="coursecalendarform-container">
       <h1>Course Calendar Form</h1>
@@ -9,4 +9,4 @@ const CourseCalendar = () => {
   );
 };
 
-export default CourseCalendar;
+export default CourseCalendarForm;

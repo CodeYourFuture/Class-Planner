@@ -24,7 +24,7 @@ const Home = () => {
             <Link className="Home_Link" to="/coursecalendar/admin">
               <p>Admin</p>
             </Link>
-            <Link className="Home_Link" to="/coursecalendar/Volunteer">
+            <Link className="Home_Link" to="/coursecalendar/volunteer">
               <p>Volunteer</p>
             </Link>
             <Link className="Home_Link" to="/coursecalendar/student">

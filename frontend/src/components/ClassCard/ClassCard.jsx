@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { MonthNames } from "../../utils/MonthNames";
 import { Link, useLocation } from "react-router-dom";
 import NewBookingForm from "../NewBookingForm/NewBookingForm.jsx";
+import ClassVolunteersList from "../ClassVolunteersList/ClassVolunteersList.jsx";
 import Loading from "../Loading/Loading.jsx";
 import "./ClassCard.scss";
 
-const ClassCard = ({ Title, Child, Class, WeekNumber, param }) => {
+const ClassCard = ({ Title, Child, Class, Bookings, WeekNumber, param }) => {
   const [currentClass, setCurrentClass] = useState(Class);
   const location = useLocation();
   useEffect(() => {
@@ -57,8 +58,23 @@ const ClassCard = ({ Title, Child, Class, WeekNumber, param }) => {
                     </div>
                   </div>
                   <div className="classcard-bottom">
-                    {(param.user === "admin" || param.user === "Volunteer") && (
-                      <p>0 volunteers signed up</p>
+                    {(param.user === "admin" || param.user === "volunteer") && (
+                      <Link
+                        className="classcard-edit-Link"
+                        to={
+                          param.user === "admin"
+                            ? {
+                                pathname: "/classvolunteers/admin",
+                                Class: currentClass,
+                              }
+                            : {
+                                pathname: "/classvolunteers/volunteer",
+                                Class: currentClass,
+                              }
+                        }
+                      >
+                        <p>0 volunteers signed up</p>
+                      </Link>
                     )}
                     {Child === null && (
                       <div>
@@ -74,7 +90,7 @@ const ClassCard = ({ Title, Child, Class, WeekNumber, param }) => {
                           </Link>
                         )}
                         {(param.user === "admin" ||
-                          param.user === "Volunteer") && (
+                          param.user === "volunteer") && (
                           <Link
                             className="classcard-attend-bottom"
                             to={
@@ -84,7 +100,7 @@ const ClassCard = ({ Title, Child, Class, WeekNumber, param }) => {
                                     Class: currentClass,
                                   }
                                 : {
-                                    pathname: "/newbooking/Volunteer",
+                                    pathname: "/newbooking/volunteer",
                                     Class: currentClass,
                                   }
                             }
@@ -99,14 +115,16 @@ const ClassCard = ({ Title, Child, Class, WeekNumber, param }) => {
                 {WeekNumber && (
                   <div className="weeknumber-container">
                     <p>Week</p>
-                    <p>1</p>
+                    <p>{WeekNumber}</p>
                   </div>
                 )}
               </div>
               {Child !== null && <hr className="classcard-separator"></hr>}
-              {Child === "newBooking" && <NewBookingForm></NewBookingForm>}
-              {Child === "volunteerslist" && (
-                <h3>list of volunteers appear here</h3>
+              {Child === "newBooking" && (
+                <NewBookingForm Class={currentClass} />
+              )}
+              {Child === "volunteersList" && (
+                <ClassVolunteersList Bookings={Bookings} />
               )}
             </div>
           </div>
