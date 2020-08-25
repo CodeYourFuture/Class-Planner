@@ -4,7 +4,7 @@ const validateClassInput = require("../validation/class");
 // @desc    Get all classes
 // @route   GET /api/v1/classes
 // @access  Public
-exports.getClasses = async (req, res, next) => {
+exports.getClasses = async (req, res) => {
   try {
     const classes = await Class.find();
 
@@ -24,7 +24,7 @@ exports.getClasses = async (req, res, next) => {
 // @desc    Add class
 // @route   POST /api/v1/classes
 // @access  Public
-exports.addClass = async (req, res, next) => {
+exports.addClass = async (req, res) => {
   try {
     const { errors, isValid } = validateClassInput(req.body);
     if (!isValid) {
@@ -66,7 +66,7 @@ exports.addClass = async (req, res, next) => {
 // @desc    Delete class
 // @route   DELETE /api/v1/classes/:id
 // @access  Public
-exports.deleteClass = async (req, res, next) => {
+exports.deleteClass = async (req, res) => {
   try {
     const classToBeDeleted = await Class.findById(req.params.id);
 
@@ -94,7 +94,7 @@ exports.deleteClass = async (req, res, next) => {
 // @desc    Update class
 // @route   Update /api/v1/classes/:id
 // @access  Public
-exports.updateClass = async (req, res, next) => {
+exports.updateClass = async (req, res) => {
   try {
     const classData = req.body;
     const { errors, isValid } = validateClassInput(classData);
