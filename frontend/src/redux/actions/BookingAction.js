@@ -1,5 +1,6 @@
 import {
   CREATE_BOOKING,
+  GET_BOOKING_BY_CLASSID,
   ACTION_STARTED,
   ACTION_SUCCESS,
   ACTION_ERROR,
@@ -28,6 +29,31 @@ export const createBooking = (newBookingData) => {
         type: ACTION_ERROR,
         error: "Error: Something went wrong, please try again later.",
         actionType: CREATE_BOOKING,
+      });
+    }
+  };
+};
+
+export const Get_BookingByClassId = (classId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: ACTION_STARTED,
+        actionType: GET_BOOKING_BY_CLASSID,
+      });
+      const bookings = await httpClient.get(`/api/v1/class/bookings/${classId}`);
+      dispatch({
+        type: GET_BOOKING_BY_CLASSID,
+        bookings: bookings.data,
+      });
+      dispatch({
+        type: ACTION_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: ACTION_ERROR,
+        error: "Error: Something went wrong, please try again later.",
+        actionType: GET_BOOKING_BY_CLASSID,
       });
     }
   };

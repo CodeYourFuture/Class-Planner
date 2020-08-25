@@ -1,10 +1,10 @@
 import React from "react";
-import "./ClassVolunteersList.scss"
+import "./ClassVolunteersList.scss";
 
-const ClassVolunteersList = () => {
+const ClassVolunteersList = ({ bookings }) => {
   return (
     <div className="classvolunteerslist-container">
-      <h1>Class Volunteers List</h1>
+      <h1>{bookings[0].fullName}</h1>
     </div>
   );
 };

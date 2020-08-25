@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { MonthNames } from "../../utils/MonthNames";
 import { Link, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { Get_BookingByClassId } from "../../redux/actions/BookingAction";
 import NewBookingForm from "../NewBookingForm/NewBookingForm.jsx";
 import ClassVolunteersList from "../ClassVolunteersList/ClassVolunteersList.jsx";
 import Loading from "../Loading/Loading.jsx";
 import "./ClassCard.scss";
 
-const ClassCard = ({ Title, Child, Class, Bookings, WeekNumber, param }) => {
+const mapStateToProps = (state) => {
+  return { bookings: state.BookingReducer.bookings };
+};
+
+const ClassCard = ({
+  Title,
+  Child,
+  Class,
+  WeekNumber,
+  param,
+  bookings,
+  Get_BookingByClassId,
+}) => {
   const [currentClass, setCurrentClass] = useState(Class);
   const location = useLocation();
   useEffect(() => {
+    Get_BookingByClassId(Class ? Class._id : location.Class._id);
     setCurrentClass(() => (Class ? Class : location.Class));
-  }, [Class, location.Class]);
+  }, [Class, location.Class, Get_BookingByClassId]);
 
   return (
     <React.Fragment>
@@ -46,7 +61,7 @@ const ClassCard = ({ Title, Child, Class, Bookings, WeekNumber, param }) => {
                     </div>
                     <div>
                       <a
-                        href={currentClass.syllabusUrl}
+                        href={currentClass.syllabusURL}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -73,7 +88,9 @@ const ClassCard = ({ Title, Child, Class, Bookings, WeekNumber, param }) => {
                               }
                         }
                       >
-                        <p>0 volunteers signed up</p>
+                        <p>
+                          {bookings && bookings.length} volunteers signed up
+                        </p>
                       </Link>
                     )}
                     {Child === null && (
@@ -124,7 +141,7 @@ const ClassCard = ({ Title, Child, Class, Bookings, WeekNumber, param }) => {
                 <NewBookingForm Class={currentClass} />
               )}
               {Child === "volunteersList" && (
-                <ClassVolunteersList Bookings={Bookings} />
+                <ClassVolunteersList bookings={bookings} />
               )}
             </div>
           </div>
@@ -134,4 +151,4 @@ const ClassCard = ({ Title, Child, Class, Bookings, WeekNumber, param }) => {
   );
 };
 
-export default ClassCard;
+export default connect(mapStateToProps, { Get_BookingByClassId })(ClassCard);
