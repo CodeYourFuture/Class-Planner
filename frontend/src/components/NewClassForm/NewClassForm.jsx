@@ -2,31 +2,35 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createClass } from "../../redux/actions";
 import { useForm } from "react-hook-form";
-// import Alert from "../../components/Alert/Alarm.jsx";
+import Alert from "../../components/Alert/Alarm.jsx";
 import "./NewClassForm.scss";
 
 const mapStateToProps = (state) => {
-  return { classes: state.ClassReducer.classes };
+  return { getErrors: state.getErrors };
 };
 
-const NewClassForm = ({ classes, createClass }) => {
+const NewClassForm = ({ getErrors, createClass }) => {
   const { register, handleSubmit, errors } = useForm();
   const [weekState, setWeekState] = useState({ status: "Class" });
-
+  const [submitted, setSubmitted] = useState(false);
   const onSubmit = (data, e) => {
-    console.log(data);
     data.courseCalendar_Id = "100";
-    data.status = weekState === "Class" ? true : false;
+    data.status = weekState.status === "Class" ? true : false;
     createClass(data);
     e.target.reset();
-    setWeekState({status: "Class"});
+    setWeekState({ status: "Class" });
+    setSubmitted(true);
   };
-
   return (
     <div className="new-class-container">
       <p className="new-class-title">New Class</p>
       <form className="new-class-form" onSubmit={handleSubmit(onSubmit)}>
-        {/* <Alert type={"Success"} children={"New Class Successfuly added!"} /> */}
+        {submitted && Object.keys(getErrors).length !== 0 && (
+          <Alert type={"danger"} children={getErrors.syllabusURL} />
+        )}
+        {submitted && Object.keys(getErrors).length === 0 && (
+          <Alert type={"success"} children={"New class successfully added!"} />
+        )}
 
         <div className="form-group">
           <label htmlFor="date">Date: </label>
@@ -77,7 +81,7 @@ const NewClassForm = ({ classes, createClass }) => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="maduleName">Madule Name:</label>
+              <label htmlFor="maduleName">Module Name:</label>
               <input
                 name="maduleName"
                 className={
@@ -155,12 +159,12 @@ const NewClassForm = ({ classes, createClass }) => {
           <div className="form-group">
             <label htmlFor="ClassName">Reason:</label>
             <input
-               name="className"
-               className={
-                 errors.className
-                   ? "form-control error-animation"
-                   : "form-control"
-               }
+              name="className"
+              className={
+                errors.className
+                  ? "form-control error-animation"
+                  : "form-control"
+              }
               type="text"
               placeholder="Reason . . ."
               ref={register({ required: true })}
