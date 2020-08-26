@@ -67,6 +67,14 @@ exports.addBooking = async (req, res) => {
     if (!isValid) {
       return res.status(400).json({ success: false, error: errors });
     }
+    const booking = Booking.findOne({ email: req.body.email });
+    if (booking) {
+      return res
+        .status(400)
+        .json(
+          "Email already exists, You have already booked for this class and thanks."
+        );
+    }
     const {
       className,
       roleName,
