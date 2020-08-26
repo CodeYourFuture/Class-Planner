@@ -17,6 +17,7 @@ const NewClassForm = ({ classes, createClass }) => {
     console.log(data);
     data.courseCalendar_Id = "100";
     data.status = weekState === "Class" ? true : false;
+    console.log(data.status)
     createClass(data);
     e.target.reset();
     setWeekState({status: "Class"});
