@@ -65,7 +65,7 @@ exports.addBooking = async (req, res) => {
   try {
     const { errors, isValid } = validateBookingInput(req.body);
     if (!isValid) {
-      return res.status(400).json({ success: false, error: errors });
+      return res.status(400).json(errors);
     }
     const booking = Booking.findOne({ email: req.body.email });
     if (booking) {
@@ -137,7 +137,7 @@ exports.updateBooking = async (req, res) => {
     const bookingData = req.body;
     const { errors, isValid } = validateBookingInput(bookingData);
     if (!isValid) {
-      return res.status(400).json({ success: false, error: errors });
+      return res.status(400).json(errors);
     }
     const query = { _id: req.params.id };
     const booking = await Class.findOneAndUpdate(query, bookingData);

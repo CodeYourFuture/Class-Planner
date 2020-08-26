@@ -87,7 +87,7 @@ exports.updateClass = async (req, res) => {
     const classData = req.body;
     const { errors, isValid } = validateClassInput(classData);
     if (!isValid) {
-      return res.status(400).json({ success: false, error: errors });
+      return res.status(400).json(errors);
     }
     const query = { _id: req.params.id };
     const classToBeUpdated = await Class.findOneAndUpdate(query, classData);
