@@ -1,9 +1,6 @@
 const Class = require("../models/Class");
 const validateClassInput = require("../validation/class");
 
-// @desc    Get all classes
-// @route   GET /api/v1/classes
-// @access  Public
 exports.getClasses = async (req, res) => {
   try {
     const classes = await Class.find();
@@ -21,14 +18,11 @@ exports.getClasses = async (req, res) => {
   }
 };
 
-// @desc    Add class
-// @route   POST /api/v1/classes
-// @access  Public
 exports.addClass = async (req, res) => {
   try {
     const { errors, isValid } = validateClassInput(req.body);
     if (!isValid) {
-      return res.status(400).json({ success: false, error: errors });
+      return res.status(400).json(errors);
     }
     const {
       date,
@@ -63,9 +57,6 @@ exports.addClass = async (req, res) => {
   }
 };
 
-// @desc    Delete class
-// @route   DELETE /api/v1/classes/:id
-// @access  Public
 exports.deleteClass = async (req, res) => {
   try {
     const classToBeDeleted = await Class.findById(req.params.id);
@@ -91,15 +82,12 @@ exports.deleteClass = async (req, res) => {
   }
 };
 
-// @desc    Update class
-// @route   Update /api/v1/classes/:id
-// @access  Public
 exports.updateClass = async (req, res) => {
   try {
     const classData = req.body;
     const { errors, isValid } = validateClassInput(classData);
     if (!isValid) {
-      return res.status(400).json({ success: false, error: errors });
+      return res.status(400).json(errors);
     }
     const query = { _id: req.params.id };
     const classToBeUpdated = await Class.findOneAndUpdate(query, classData);
