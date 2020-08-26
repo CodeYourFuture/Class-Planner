@@ -27,7 +27,7 @@ export const createBooking = (newBookingData) => {
     } catch (error) {
       dispatch({
         type: ACTION_ERROR,
-        error: "Error: Something went wrong, please try again later.",
+        payload: error.response.data,
         actionType: CREATE_BOOKING,
       });
     }
@@ -41,7 +41,9 @@ export const Get_BookingByClassId = (classId) => {
         type: ACTION_STARTED,
         actionType: GET_BOOKING_BY_CLASSID,
       });
-      const bookings = await httpClient.get(`/api/v1/class/bookings/${classId}`);
+      const bookings = await httpClient.get(
+        `/api/v1/class/bookings/${classId}`
+      );
       dispatch({
         type: GET_BOOKING_BY_CLASSID,
         bookings: bookings.data,
