@@ -2,8 +2,6 @@ const Booking = require("../models/Booking");
 const Class = require("../models/Class");
 const validateBookingInput = require("../validation/booking");
 
-// @desc    Get all bookings
-// @route   GET /api/v1/bookings
 exports.getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();
@@ -20,8 +18,6 @@ exports.getBookings = async (req, res) => {
   }
 };
 
-// @desc    Get one booking
-// @route   GET /api/v1/bookings/:id
 exports.getBooking = async (req, res) => {
   try {
     const { id } = req.params;
@@ -43,12 +39,16 @@ exports.getBooking = async (req, res) => {
   }
 };
 
-// @desc    Get Bookings By ClassId
-// @route   GET /api/v1/classes/bookings/:classId
 exports.getBookingsByClassId = async (req, res) => {
   try {
     const { classId } = req.params;
     const booking = await Booking.find({ classId });
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        error: "No booking found",
+      });
+    }
     return res.status(200).json({
       success: true,
       data: booking,
@@ -61,8 +61,6 @@ exports.getBookingsByClassId = async (req, res) => {
   }
 };
 
-// @desc    Add booking
-// @route   POST /api/v1/bookings
 exports.addBooking = async (req, res) => {
   try {
     const { errors, isValid } = validateBookingInput(req.body);
@@ -101,8 +99,6 @@ exports.addBooking = async (req, res) => {
   }
 };
 
-// @desc    Delete booking
-// @route   DELETE /api/v1/bookings/:id
 exports.deleteBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
@@ -128,8 +124,6 @@ exports.deleteBooking = async (req, res) => {
   }
 };
 
-// @desc    Update booking
-// @route   Update /api/v1/bookings/:id
 exports.updateBooking = async (req, res) => {
   try {
     const bookingData = req.body;
