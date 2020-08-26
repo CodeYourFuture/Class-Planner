@@ -16,6 +16,7 @@ const NewClassForm = ({ getErrors, createClass }) => {
   const onSubmit = (data, e) => {
     data.courseCalendar_Id = "100";
     data.status = weekState.status === "Class" ? true : false;
+
     createClass(data);
     e.target.reset();
     setWeekState({ status: "Class" });
