@@ -24,15 +24,6 @@ exports.addClass = async (req, res) => {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    const {
-      date,
-      status,
-      className,
-      startTime,
-      endTime,
-      scheduleType,
-      syllabusURL,
-    } = req.body;
 
     const newClass = await Class.create(req.body);
 
@@ -41,19 +32,10 @@ exports.addClass = async (req, res) => {
       data: newClass,
     });
   } catch (err) {
-    if (err.name === "ValidationError") {
-      const messages = Object.values(err.errors).map((val) => val.message);
-
-      return res.status(400).json({
-        success: false,
-        error: messages,
-      });
-    } else {
-      return res.status(500).json({
-        success: false,
-        error: "Server Error",
-      });
-    }
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
   }
 };
 
