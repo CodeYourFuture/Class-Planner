@@ -4,6 +4,9 @@ const isEmpty = require("./is-empty");
 module.exports = function validateClassInput(data) {
   let errors = {};
   if (data.status) {
+    data.courseCalendar_Id = !isEmpty(data.courseCalendar_Id)
+      ? data.courseCalendar_Id
+      : "";
     data.date = !isEmpty(data.date) ? data.date : "";
     data.className = !isEmpty(data.className) ? data.className : "";
     data.startTime = !isEmpty(data.startTime) ? data.startTime : "";
@@ -34,6 +37,9 @@ module.exports = function validateClassInput(data) {
     if (Validator.isEmpty(data.date)) {
       errors.date = "Date field is required";
     }
+    if (Validator.isEmpty(data.courseCalendar_Id)) {
+      errors.courseCalendar_Id = "Course Calendar field is required";
+    }
   } else {
     data.scheduleType = !isEmpty(data.scheduleType) ? data.scheduleType : "";
     data.className = !isEmpty(data.className) ? data.className : "";
@@ -41,6 +47,13 @@ module.exports = function validateClassInput(data) {
     data.endTime = !isEmpty(data.endTime) ? data.endTime : "";
     data.scheduleType = !isEmpty(data.scheduleType) ? data.scheduleType : "";
     data.syllabusURL = !isEmpty(data.syllabusURL) ? data.syllabusURL : "";
+    data.courseCalendar_Id = !isEmpty(data.courseCalendar_Id)
+      ? data.courseCalendar_Id
+      : "";
+
+    if (Validator.isEmpty(data.courseCalendar_Id)) {
+      errors.courseCalendar_Id = "Course Calendar field is required";
+    }
     if (Validator.isEmpty(data.className)) {
       errors.className = "Reason field is required";
     }

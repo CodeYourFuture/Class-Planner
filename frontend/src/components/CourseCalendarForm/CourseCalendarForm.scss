@@ -1,6 +1,53 @@
+@import "../../scss/variables";
 .coursecalendarform-container {
   min-height: calc(100vh - 270px);
   margin: auto;
-  width: 60%;
+  width: 66%;
   animation: FadeIn 500ms;
+  font-family: $default-font-family;
+  color: $forms-title-color;
+  font-size: 25px;
+  margin-bottom: 50px;
+}
+
+.filter-container {
+  border: 1px solid $classcard-border;
+  height: 100px;
+  margin: 15px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;  
+}
+.control-container {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-dark-color;
+  width: 300px;
+  select {
+    text-align: left;
+    font-family: $default-font-family;
+    font-weight: 500;
+    font-size: 0.85em;
+    width: 180px;
+    height: 40px;
+    border: 1px solid $form-border-color;
+    border-radius: 4px;
+    margin-left: 10px;
+    text-indent: 15px;
+    padding-right: 10px;
+    option{
+      text-indent: 15px;
+    }
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+  input{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
 }

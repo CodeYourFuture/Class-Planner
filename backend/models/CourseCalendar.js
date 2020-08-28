@@ -4,13 +4,14 @@ const CourseCalendarSchema = new mongoose.Schema({
   intakeName: {
     type: String,
   },
+  cityName: {
+    type: String,
+  },
   startDate: {
     type: Date,
-    default: Date.now,
   },
   endDate: {
     type: Date,
-    default: Date.now,
   },
 });
 

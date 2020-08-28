@@ -2,6 +2,7 @@ import React from "react";
 import "./ClassVolunteersList.scss";
 
 const ClassVolunteersList = ({ bookings }) => {
+  console.log(bookings);
   return (
     <div className="classvolunteerslist-container">
       <p className="volunteerslist-title">Volunteers list</p>
