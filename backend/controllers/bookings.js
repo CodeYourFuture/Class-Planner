@@ -22,7 +22,7 @@ exports.getBooking = async (req, res) => {
   try {
     const { id } = req.params;
     if (id) {
-      const booking = await Booking.findOneBy({ _id: id });
+      const booking = await Booking.findById({ _id: id });
       if (booking) {
         return res.status(200).json({
           success: true,
@@ -74,14 +74,6 @@ exports.addBooking = async (req, res) => {
         "Email already exists, You have already booked for this class and thanks.";
       return res.status(400).json(multipleBooking);
     }
-    const {
-      className,
-      roleName,
-      fullName,
-      email,
-      bookingDate,
-      bookingTime,
-    } = req.body;
 
     const newBooking = await Booking.create(req.body);
 
@@ -139,16 +131,18 @@ exports.updateBooking = async (req, res) => {
       return res.status(400).json(errors);
     }
     const query = { _id: req.params.id };
-    const booking = await Class.findOneAndUpdate(query, bookingData);
+    const booking = await Booking.findOneAndUpdate(query, bookingData);
     if (!booking) {
-      throw "booking not found!";
+      return res.status(400).json({
+        success: false,
+        error: "booking not found!",
+      });
     }
     return res.status(200).json({
       success: true,
       data: bookingData,
     });
   } catch (err) {
-    console.error(err);
     return res.status(400).json({
       success: false,
       error: "Could not update booking",

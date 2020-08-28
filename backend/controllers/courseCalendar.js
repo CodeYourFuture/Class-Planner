@@ -24,7 +24,6 @@ exports.addCourseCalendar = async (req, res) => {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    const { intakeName, startDate, endDate } = req.body;
 
     const newCourseCalendar = await CourseCalendar.create(req.body);
 
@@ -33,6 +32,7 @@ exports.addCourseCalendar = async (req, res) => {
       data: newCourseCalendar,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       success: false,
       error: "Server Error",
