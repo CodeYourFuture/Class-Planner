@@ -1,7 +1,11 @@
+import React from "react";
+import "./ClassVolunteersList.scss";
+
 const ClassVolunteersList = ({ bookings }) => {
   return (
     <div className="classvolunteerslist-container">
-      <table class="table">
+      <p className="volunteerslist-title">Volunteers list</p>
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">FullName</th>
@@ -11,6 +15,7 @@ const ClassVolunteersList = ({ bookings }) => {
           </tr>
         </thead>
         <tbody>
+<<<<<<< Updated upstream
           <tr>
             <td>{bookings[0].fullName}</td>
             <td>Coordinator</td>
@@ -19,6 +24,18 @@ const ClassVolunteersList = ({ bookings }) => {
               <button>Cancel</button>
             </td>
           </tr>
+=======
+          {bookings.map((volunteer) => (
+            <tr key={volunteer.fullName}>
+              <td>{volunteer.fullName}</td>
+              {/* {param.user === "admin" && <td>{volunteer.roleName}</td>} */}
+              <td>{volunteer.email}</td>
+              <td>
+                <button className="btn-cancel-volunteer">Cancel</button>
+              </td>
+            </tr>
+          ))}
+>>>>>>> Stashed changes
         </tbody>
       </table>
     </div>
@@ -26,3 +43,5 @@ const ClassVolunteersList = ({ bookings }) => {
 };
 
 export default ClassVolunteersList;
+
+

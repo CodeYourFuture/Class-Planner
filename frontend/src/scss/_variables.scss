@@ -47,13 +47,17 @@ $btn-submit-bg: #03a9f4;
 $btn-submit-bg-hover: #007bff;
 $btn-submit-border: #d0f0ff;
 
-$btn-danger-bg: #03a9f4;
-$btn-danger-bg-hover: #007bff;
-$btn-danger-border: #d0f0ff;
+$btn-danger-bg: #dc3545;
+$btn-danger-bg-hover: #c82333;
+$btn-danger-border: #bd2130;
 
-$btn-warning-bg: #03a9f4;
-$btn-warning-bg-hover: #007bff;
-$btn-warning-border: #d0f0ff;
+$btn-warning-bg: #ffc107;
+$btn-warning-bg-hover: #e0a800;
+$btn-warning-border: #ffc107;
+
+$btn-light-bg: #f8f9fa;
+$btn-light-bg-hover: #e2e6ea;
+$btn-light-border: #cccccc;
 
 // ========= ALERT COLORS =========
 $alert-light-border-color: #ececec;
@@ -73,3 +77,4 @@ $alert-info-bg-color: #d1ecf1;
 $alert-info-text-color: #0c5460;
 
 $table-border-color: #808080;
+$table-hover-color: #eaeaea;

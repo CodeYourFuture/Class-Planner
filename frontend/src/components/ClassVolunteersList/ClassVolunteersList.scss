@@ -1,10 +1,14 @@
 @import ".../../../../scss/variables";
+@import "../../scss/buttons";
 
 .classvolunteerslist-container {
   min-height: calc(100vh - 270px);
   margin: auto;
-  width: 60%;
+  width: 80%;
   animation: FadeIn 500ms;
+  font-family: $default-font-family;
+  font-size: 0.75em;
+  font-weight: 400;
 
   &:after {
     display: block;
@@ -13,24 +17,17 @@
   }
 }
 
-.table {
-  display: table;
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 1rem;
-  background-color: transparent;
-  border-collapse: collapse;
-  border-spacing: 2px;
-  border-color: $table-border-color;
-
-  td,
-  th {
-    padding: 0.75rem;
-    border-top: 1px solid $form-border-color;
-  }
+.volunteerslist-title {
+  font-family: $default-font-family;
+  font-weight: 300;
+  font-size: 1em;
+  margin-bottom: 15px;
 }
 
-th {
-  display: table-cell;
-  font-weight: 500;
+.btn-cancel-volunteer {
+  @extend %btn-outline-danger;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
 }

@@ -130,11 +130,11 @@
     color: $text-link-hover-color;
   }
 }
-.classcard-bottom div{
+.classcard-bottom div {
   display: flex;
 }
-.classcard-edit-bottom ,
-.classcard-attend-bottom{
+.classcard-edit-bottom,
+.classcard-attend-bottom {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,12 +156,12 @@
 }
 .classcard-edit-bottom {
   background-color: #ffffff;
-  border: 1px solid #F0AD4E;
+  border: 1px solid #f0ad4e;
   align-self: flex-end;
   margin-right: 10px;
-  color: #F0AD4E;
+  color: #f0ad4e;
   &:hover {
-    background-color: #F0AD4E;
+    background-color: #f0ad4e;
     color: #ffffff;
     cursor: pointer;
   }
@@ -171,7 +171,7 @@
   width: 80%;
   margin: 40px auto 40px auto;
 }
-.classcard-edit-Link{
+.classcard-edit-Link {
   text-decoration: none;
 }
 .weeknumber-container {
