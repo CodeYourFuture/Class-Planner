@@ -15,16 +15,6 @@ const ClassVolunteersList = ({ bookings }) => {
           </tr>
         </thead>
         <tbody>
-<<<<<<< Updated upstream
-          <tr>
-            <td>{bookings[0].fullName}</td>
-            <td>Coordinator</td>
-            <td>@mdo</td>
-            <td>
-              <button>Cancel</button>
-            </td>
-          </tr>
-=======
           {bookings.map((volunteer) => (
             <tr key={volunteer.fullName}>
               <td>{volunteer.fullName}</td>
@@ -35,7 +25,6 @@ const ClassVolunteersList = ({ bookings }) => {
               </td>
             </tr>
           ))}
->>>>>>> Stashed changes
         </tbody>
       </table>
     </div>
@@ -43,5 +32,3 @@ const ClassVolunteersList = ({ bookings }) => {
 };
 
 export default ClassVolunteersList;
-
-
