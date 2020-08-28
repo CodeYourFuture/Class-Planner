@@ -78,7 +78,7 @@ export const createClass = (newClassData) => {
     } catch (error) {
       dispatch({
         type: ACTION_ERROR,
-        error: "Error: Something went wrong, please try again later.",
+        payload: error.response.data,
         actionType: CREATE_CLASS,
       });
     }

@@ -1,19 +1,21 @@
-import React from "react";
-import dayjs from "dayjs";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createBooking } from "../../redux/actions";
 import { useForm } from "react-hook-form";
 import "./NewBookingForm.scss";
 import rolesData from "./../../data/roles.json";
+import Alert from "../../components/Alert/Alarm.jsx";
 
 const mapStateToProps = (state) => {
   return {
     bookings: state.BookingReducer.booking,
+    getErrors: state.getErrors,
   };
 };
 
-const NewBookingForm = ({ bookings, createBooking, Class }) => {
+const NewBookingForm = ({ bookings, getErrors, createBooking, Class }) => {
   const { register, handleSubmit, errors } = useForm();
+  const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = (data, e) => {
     data.classId = Class._id;
@@ -21,23 +23,31 @@ const NewBookingForm = ({ bookings, createBooking, Class }) => {
     data.bookingTime = dayjs(new Date()).format("h:mm");
 
     createBooking(data);
+    setSubmitted(true);
 
     e.target.reset();
   };
   return (
     <div className="newbooking-container">
-      <form
-        method="post"
-        className="newbooking-form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="newbooking-form" onSubmit={handleSubmit(onSubmit)}>
+        {submitted && Object.keys(getErrors).length !== 0 && (
+          <Alert type={"danger"} children={getErrors.email} />
+        )}
+        {submitted && Object.keys(getErrors).length === 0 && (
+          <Alert
+            type={"success"}
+            children={" Thanks, You have been booked successfully!"}
+          />
+        )}
         <div className="form-group">
-          <label htmlFor="fullName">Full name:</label>
+          <label htmlFor="fullName">Full Name:</label>
           <input
             id="fullName"
             type="text"
             name="fullName"
-            className="form-control"
+            className={
+              errors.fullName ? "form-control error-animation" : "form-control"
+            }
             ref={register({ required: true })}
           />
         </div>
@@ -48,7 +58,9 @@ const NewBookingForm = ({ bookings, createBooking, Class }) => {
             id="email"
             type="email"
             name="email"
-            className="form-control"
+            className={
+              errors.email ? "form-control error-animation" : "form-control"
+            }
             ref={register({
               required: true,
             })}
@@ -62,7 +74,7 @@ const NewBookingForm = ({ bookings, createBooking, Class }) => {
             id="role"
             name="roleName"
             className="form-control"
-            ref={register()}
+            ref={register({ required: true })}
           >
             {rolesData.map((role) => (
               <option key={role.id} value={role.roleName}>
