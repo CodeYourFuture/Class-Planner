@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { createBooking } from "../../redux/actions";
 import { useForm } from "react-hook-form";
 import "./NewBookingForm.scss";
+import rolesData from "./../../data/roles.json";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,15 +16,11 @@ const NewBookingForm = ({ bookings, createBooking, Class }) => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data, e) => {
-    data.className = Class._id;
-
+    data.classId = Class._id;
     data.bookingDate = dayjs(new Date()).format("MM/DD/YYYY");
     data.bookingTime = dayjs(new Date()).format("h:mm");
 
     createBooking(data);
-
-    console.log(bookings.data);
-    //  console.log(errors);
 
     e.target.reset();
   };
@@ -67,15 +64,11 @@ const NewBookingForm = ({ bookings, createBooking, Class }) => {
             className="form-control"
             ref={register()}
           >
-            <option value="Coordinator">Coordinator</option>
-            <option value="Lead Teacher">Lead Teacher</option>
-            <option value="Assistant Lead Teacher">
-              Assistant Lead Teacher
-            </option>
-            <option value="Teaching Assistant">Teaching Assistant</option>
-            <option value="Personal Development Rep">
-              Personal Development Rep
-            </option>
+            {rolesData.map((role) => (
+              <option key={role.id} value={role.roleName}>
+                {role.roleName}
+              </option>
+            ))}
           </select>
         </div>
         {/* {bookings.data ? <p>{bookings.data[0]._id} </p> : null} */}

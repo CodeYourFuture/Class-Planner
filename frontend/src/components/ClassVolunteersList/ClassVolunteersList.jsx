@@ -1,4 +1,5 @@
 const ClassVolunteersList = ({ bookings }) => {
+  console.log(bookings);
   return (
     <div className="classvolunteerslist-container">
       <table class="table">
@@ -11,14 +12,16 @@ const ClassVolunteersList = ({ bookings }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{bookings[0].fullName}</td>
-            <td>Coordinator</td>
-            <td>@mdo</td>
-            <td>
-              <button>Cancel</button>
-            </td>
-          </tr>
+          {bookings.map((volunteer) => (
+            <tr>
+              <td>{volunteer.fullName}</td>
+              <td>{volunteer.role}</td>
+              <td>{volunteer.email}</td>
+              <td>
+                <button className="btn-cancel-volunteer">Cancel</button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
