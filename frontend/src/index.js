@@ -8,11 +8,41 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+const loadState = () => {
+  try {
+    const serializedState = sessionStorage.getItem("state");
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (e) {
+    return undefined;
+  }
+};
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    sessionStorage.setItem("state", serializedState);
+  } catch (e) {
+    // Ignore write errors;
+  }
+};
+
+const persistedState = loadState();
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   reducers,
+  persistedState,
   composeEnhancers(applyMiddleware(ReduxThunk))
 );
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -1,8 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Send_PageData } from "../../redux/actions";
 import "./Header.scss";
 
-const Header = ({ param, NavState }) => {
+const mapStateToProps = (state) => {
+  return { pageData: state.PageReducer.pageData };
+};
+
+const Header = ({ pageData, Send_PageData }) => {
+  const passData = (title) => {
+    Send_PageData(pageData.user, title, pageData.city);
+  };
   return (
     <div className="header">
       <div className="header-firtchild">
@@ -18,56 +27,57 @@ const Header = ({ param, NavState }) => {
         </Link>
       </div>
       <div className="header-secondchild">
-        <Link
-          className={
-            NavState === "courseCalendar"
-              ? "header-nav header-selected"
-              : "header-nav"
-          }
-          to={
-            param.user === "admin"
-              ? "/coursecalendar/admin"
-              : param.user === "volunteer"
-              ? "/coursecalendar/volunteer"
-              : "/coursecalendar/student"
-          }
-        >
-          <i className="far fa-calendar-alt"></i>
-          <p>Course Calendar</p>
-        </Link>
-        <Link
-          className={
-            NavState === "upcomingClass"
-              ? "header-nav header-selected"
-              : "header-nav"
-          }
-          to={
-            param.user === "admin"
-              ? "/upcomingclass/admin"
-              : param.user === "volunteer"
-              ? "/upcomingclass/volunteer"
-              : "/upcomingclass/student"
-          }
-        >
-          <i className="far fa-calendar-check"></i>
-          <p>Upcoming Class</p>
-        </Link>
-        {param.user === "admin" ? (
-          <Link
-            className={
-              NavState === "newClass"
-                ? "header-nav header-selected"
-                : "header-nav"
-            }
-            to="/newclass/admin"
-          >
-            <i className="far fa-calendar-plus"></i>
-            <p>New Class</p>
-          </Link>
+        {pageData ? (
+          pageData.title === "Home" ? (
+            <div className="home-titel">
+              <img src="../files/calendar.svg" alt="Calendar"></img>
+              <p>Class Planner</p>
+            </div>
+          ) : (
+            <>
+              <Link
+                className={
+                  pageData.title === "Course Calendar"
+                    ? "header-nav header-selected"
+                    : "header-nav"
+                }
+                to={"/coursecalendar/"}
+                onClick={() => passData("Course Calendar")}
+              >
+                <i className="far fa-calendar-alt"></i>
+                <p>Course Calendar</p>
+              </Link>
+              <Link
+                className={
+                  pageData.title === "Upcoming Class"
+                    ? "header-nav header-selected"
+                    : "header-nav"
+                }
+                to={"/upcomingclass/"}
+                onClick={() => passData("Upcoming Class")}
+              >
+                <i className="far fa-calendar-check"></i>
+                <p>Upcoming Class</p>
+              </Link>
+              {pageData.user === "admin" ? (
+                <Link
+                  className={
+                    pageData.title === "New Class"
+                      ? "header-nav header-selected"
+                      : "header-nav"
+                  }
+                  to={"/newclass/"}
+                  onClick={() => passData("New Class")}
+                >
+                  <i className="far fa-calendar-plus"></i>
+                  <p>New Class</p>
+                </Link>
+              ) : null}
+            </>
+          )
         ) : null}
       </div>
     </div>
   );
 };
-
-export default Header;
+export default connect(mapStateToProps, { Send_PageData })(Header);

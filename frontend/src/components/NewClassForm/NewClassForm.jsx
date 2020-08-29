@@ -9,12 +9,12 @@ const mapStateToProps = (state) => {
   return { getErrors: state.getErrors };
 };
 
-const NewClassForm = ({ getErrors, createClass }) => {
+const NewClassForm = ({ getErrors, createClass, pageData }) => {
   const { register, handleSubmit, errors } = useForm();
   const [weekState, setWeekState] = useState({ status: "Class" });
   const [submitted, setSubmitted] = useState(false);
   const onSubmit = (data, e) => {
-    data.courseCalendar_Id = "100";
+    data.courseCalendar_Id = pageData.course_Id;
     data.status = weekState.status === "Class" ? true : false;
 
     createClass(data);
@@ -24,7 +24,12 @@ const NewClassForm = ({ getErrors, createClass }) => {
   };
   return (
     <div className="new-class-container">
-      <p className="new-class-title">New Class</p>
+      <p className="new-class-title">
+        {pageData.city}{" "}
+        <i class="fas fa-angle-right"></i>
+        {" "}
+        {pageData.title}
+      </p>
       <form className="new-class-form" onSubmit={handleSubmit(onSubmit)}>
         {submitted && Object.keys(getErrors).length !== 0 && (
           <Alert type={"danger"} children={getErrors.syllabusURL} />

@@ -4,19 +4,18 @@ import UpcomingClass from "../screen/UpcomingClass/UpcomingClass.jsx";
 import NewClass from "../screen/NewClass/NewClass.jsx";
 import NewBooking from "../screen/NewBooking/NewBooking.jsx";
 import CourseCalendar from "../screen/CourseCalendar/CourseCalendar.jsx";
-import ClassVolunteers from "../screen/ClassVolunteers/ClassVolunteers.jsx"
-
+import ClassVolunteers from "../screen/ClassVolunteers/ClassVolunteers.jsx";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 export default () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/coursecalendar/:user" component={CourseCalendar} />
-      <Route exact path="/classvolunteers/:user" component={ClassVolunteers} />
-      <Route exact path="/upcomingclass/:user" component={UpcomingClass} />
-      <Route exact path="/newclass/:user" component={NewClass} />
-      <Route exact path="/newbooking/:user" component={NewBooking} />      
+      <Route exact path="/coursecalendar/" component={CourseCalendar} />
+      <Route exact path="/classvolunteers/" component={ClassVolunteers} />
+      <Route exact path="/upcomingclass/" component={UpcomingClass} />
+      <Route exact path="/newclass/" component={NewClass} />
+      <Route exact path="/newbooking/" component={NewBooking} />
     </Switch>
   );
 };

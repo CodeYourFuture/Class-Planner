@@ -1,33 +1,29 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { Get_Classes } from "../../redux/actions";
+import React from "react";
 import Header from "../../components/Header/Header.jsx";
 import ClassCard from "../../components/ClassCard/ClassCard.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
+import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
-  return { classes: state.ClassReducer.classes };
+  return {
+    pageData: state.PageReducer.pageData,
+  };
 };
 
-const NewBooking = ({ classes, Get_Classes, match }) => {
-  const { params } = match;
-
-  useEffect(() => {
-    Get_Classes();
-  }, [Get_Classes]);
-
+const NewBooking = ({ pageData }) => {
   return (
     <React.Fragment>
-      <Header param={params} NavState="newBooking" />
-      <ClassCard
-        Class={params.Class}
-        Title={"New Booking"}
-        Child="newBooking"
-        param={params}
-      />
+      <Header />
+      <div className="upcoming-class-container">
+        <p className="upcoming-class-title">
+          {pageData.city} <i className="fas fa-angle-right"></i>{" "}
+          {pageData.title}
+        </p>
+        <ClassCard />
+      </div>
       <Footer />
     </React.Fragment>
   );
 };
 
-export default connect(mapStateToProps, { Get_Classes })(NewBooking);
+export default connect(mapStateToProps)(NewBooking);

@@ -1,48 +1,53 @@
-.Home_Body{
+@import "../../scss/variables";
+.home_container{
     animation: FadeIn 500ms;
 }
-.Home_Main{
+.home-main{
+    min-height: calc(100vh - 270px);
+}
+.home-main div{
     display: flex;
-    width: 100%;
-}
-.Home_Main div{
-    width: 50%;
-}
-.Home_Main div:nth-child(1){
-    text-align: right;
-}
-.Home_CYF_Img{
-    width: 60%;
-    border-radius: 5px;
-    margin: 25px 25px ;
-}
-.Home_Main div:nth-child(2) div{
-    display: flex;
-}
-.Home_Main div:nth-child(2) p{
-    font-family: "Open Sans", sans-serif;
-    font-weight: 300;
-    margin: 30px 25px;
-    width: 60%;
-}
-.Home_Main div:nth-child(2) div p{
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 12px 20px;
-    font-weight: 600;
-    color: #3f3f3f;
-    border: 2px solid #4aae60;
+    // min-width: 200px;  // for respnsive design
+    width: 60%;
+    margin: 0px 20% 35px 20%;
+    height: fit-content;
+    select{
+        width: 40%;
+    }
+}
+.home-image{
+    width: 470px;
+    height: 239px;
+    margin: 15px 0px 0px 0px;
+}
+.home-button {
+    display: flex;
+    justify-content: center;
     transition: 200ms;
-    margin-right: 65px;
-}
-.Home_Main div:nth-child(2) div p:hover{
-    background-color: #4aae60;
-    color: white;
-    cursor: pointer;
-}
-.Home_Link{
+    font-family: $default-font-family;
+    font-weight: 400;
+    width: 180px;
+    height: 50px;
+    border-radius: 4px;
+    border: 1px solid $btn-syllabus-border;
+    color: #3f3f3f;
     text-decoration: none;
-    list-style: none;
-}
+    margin: 0px 15px;
+    p {
+      display: inline;
+      margin: auto 15px;
+    }
+    p i{
+        margin-right: 10px;
+    }
+  
+    // :nth-child(2) {
+    //   margin: auto 5px;
+    // }
+  
+    &:hover {
+      background-color: $btn-syllabus-bg-hover;
+    }
+  }
+

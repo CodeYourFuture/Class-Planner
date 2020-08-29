@@ -25,12 +25,13 @@
   justify-content: center;
   color: $text-dark-color;
   width: 300px;
-  select {
+  select,
+  input {
     text-align: left;
     font-family: $default-font-family;
     font-weight: 500;
     font-size: 0.85em;
-    width: 180px;
+    width: 250px;
     height: 40px;
     border: 1px solid $form-border-color;
     border-radius: 4px;
@@ -45,7 +46,7 @@
       box-shadow: none;
     }
   }
-  input{
+  input[type="checkbox"]{
     width: 30px;
     height: 30px;
     margin-right: 10px;

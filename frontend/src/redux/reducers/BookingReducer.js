@@ -1,8 +1,12 @@
-import { CREATE_BOOKING, GET_BOOKING_BY_CLASSID } from "../actions/types";
+import {
+  CREATE_BOOKING,
+  GET_BOOKING_BY_CLASSID,
+} from "../actions/types";
 
 const INITIAL_STATE = {
   bookings: [],
   booking: [],
+  currentBooking: [],
 };
 
 export default (state = INITIAL_STATE, action) => {

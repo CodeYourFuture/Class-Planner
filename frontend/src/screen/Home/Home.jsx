@@ -1,36 +1,77 @@
-import React from "react";
-import Header from "./Header/Header.jsx";
-import Footer from "./Footer/Footer.jsx";
+import React, { useEffect } from "react";
+import Header from "../../components/Header/Header.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
+import { connect } from "react-redux";
+import { Send_PageData } from "../../redux/actions";
+import { Get_Courses } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "./Home.scss";
 
-const Home = () => {
+const mapStateToProps = (state) => {
+  return { courses: state.CourseReducer.courses };
+};
+
+const Home = ({ Send_PageData, courses, Get_Courses }) => {
+  useEffect(() => {
+    Send_PageData("None", "Home", "None");
+    Get_Courses();
+  }, [Send_PageData, Get_Courses]);
+  const passData = (user, title) => {
+    const city = document.getElementById("city").value;
+    Send_PageData(user, title, city);
+  };
   return (
-    <div className="Home_Body">
+    <div className="home_container">
       <Header />
-      <div className="Home_Main">
+      <div className="home-main">
         <div>
-          <img className="Home_CYF_Img" src="../files/Home.png" alt="CYF" />
+          <img className="home-image" src="../files/Home.png" alt="CYF" />
+        </div>
+        <div className="control-container">
+          <i className="fas fa-map-marker-alt"></i>
+          <select id="city">
+            {courses &&
+              courses.map((course, index) => {
+                return (
+                  <option
+                    value={`${course.cityName}`}
+                    key={index}
+                  >
+                    {" "}
+                    {course.cityName}
+                  </option>
+                );
+              })}
+          </select>
         </div>
         <div>
-          <p>
-            We are a non-profit organization supporting refugees and
-            disadvantaged individuals with the dream of becoming developers. In
-            their journey of interrupted lives, unfinished studies and
-            integration challenges, many of these individuals yearn to update
-            their tech skills, but lack learning opportunities.
-          </p>
-          <div>
-            <Link className="Home_Link" to="/coursecalendar/admin">
-              <p>Admin</p>
-            </Link>
-            <Link className="Home_Link" to="/coursecalendar/volunteer">
-              <p>Volunteer</p>
-            </Link>
-            <Link className="Home_Link" to="/coursecalendar/student">
-              <p>Student</p>
-            </Link>
-          </div>
+          <Link
+            onClick={() => passData("admin", "Course Calendar")}
+            className="home-button"
+            to="/coursecalendar/"
+          >
+            <p>
+              <i className="fas fa-user"></i>Admin
+            </p>
+          </Link>
+          <Link
+            className="home-button"
+            to="/coursecalendar/"
+            onClick={() => passData("volunteer", "Course Calendar")}
+          >
+            <p>
+              <i className="fas fa-user"></i>Volunteer
+            </p>
+          </Link>
+          <Link
+            className="home-button"
+            to="/coursecalendar/"
+            onClick={() => passData("student", "Course Calendar")}
+          >
+            <p>
+              <i className="fas fa-user"></i>Student
+            </p>
+          </Link>
         </div>
       </div>
       <Footer />
@@ -38,4 +79,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default connect(mapStateToProps, { Send_PageData, Get_Courses })(Home);
