@@ -44,7 +44,8 @@
   font-size: 20px;
   color: $logo-light-color;
 }
-.header-nav {
+.header-nav,
+.home-titel {
   color: #3f3f3f;
   margin-top: 15px;
   margin-left: 17%;
@@ -54,6 +55,16 @@
   font-size: 30px;
   transition: 200ms;
   text-decoration: none;
+}
+.home-titel{
+  font-size: 16px;
+  font-weight: 600;
+  font-family: $default-font-family;
+}
+.home-titel img {
+  margin-right: 10px;;
+  width: 32px;
+  height: 32px;
 }
 .header-nav:hover {
   color: $header-nav-text-hover;

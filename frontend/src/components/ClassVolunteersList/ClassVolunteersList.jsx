@@ -2,7 +2,6 @@ import React from "react";
 import "./ClassVolunteersList.scss";
 
 const ClassVolunteersList = ({ bookings }) => {
-  console.log(bookings);
   return (
     <div className="classvolunteerslist-container">
       <p className="volunteerslist-title">Volunteers list</p>
@@ -16,8 +15,8 @@ const ClassVolunteersList = ({ bookings }) => {
           </tr>
         </thead>
         <tbody>
-          {bookings.map((volunteer) => (
-            <tr key={volunteer.fullName}>
+          {bookings.map((volunteer, index) => (
+            <tr key={index}>
               <td>{volunteer.fullName}</td>
               {/* {param.user === "admin" && <td>{volunteer.roleName}</td>} */}
               <td>{volunteer.email}</td>

@@ -5,30 +5,38 @@ import ClassCard from "../../components/ClassCard/ClassCard.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { connect } from "react-redux";
 import { Get_UpcomingClass } from "../../redux/actions";
+import "./UpcomingClass.scss";
 
 const mapStateToProps = (state) => {
-  return { Class: state.ClassReducer.Class };
+  return {
+    Class: state.ClassReducer.Class,
+    pageData: state.PageReducer.pageData,
+  };
 };
 
-const UpcomingClass = ({ Class, Get_UpcomingClass, match }) => {
-  const { params } = match;
-
+const UpcomingClass = ({ Class, Get_UpcomingClass, pageData }) => {
   useEffect(() => {
-    Get_UpcomingClass();
-  }, [Get_UpcomingClass]);
+    Get_UpcomingClass(pageData.city);
+  }, [Get_UpcomingClass, pageData.city]);
   return (
     <div>
-      <Header param={params} NavState="upcomingClass" />
-      {Class ? (
-        <ClassCard
-          Title={"Upcoming Class"}
-          Child={null}
-          Class={Class}
-          param={params}
-        />
-      ) : (
-        <Loading />
-      )}
+      <Header />
+      <div className="upcoming-class-container">
+        <p className="upcoming-class-title">
+          {pageData.city} <i className="fas fa-angle-right"></i>{" "}
+          {pageData.title}
+        </p>
+        {Class ? (
+          <ClassCard
+            Title={"Upcoming Class"}
+            Child={null}
+            Class={Class}
+            pageData={pageData}
+          />
+        ) : (
+          <Loading />
+        )}
+      </div>
       <Footer />
     </div>
   );

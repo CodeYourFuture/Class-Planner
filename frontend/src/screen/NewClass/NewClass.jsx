@@ -2,15 +2,21 @@ import React from "react";
 import Header from "../../components/Header/Header.jsx";
 import NewClassForm from "../../components/NewClassForm/NewClassForm.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
+import { connect } from "react-redux";
 
-const NewClass = ({ match }) => {
-  const { params } = match;
+const mapStateToProps = (state) => {
+  return { pageData: state.PageReducer.pageData };
+};
+
+const NewClass = ({ pageData }) => {
   return (
     <div>
-      <Header param={params} NavState="newClass" />
-      {params.user === "admin" ? <NewClassForm /> : null}
+      <Header />
+      {pageData.user === "admin" ? (
+        <NewClassForm pageData={pageData} />
+      ) : null}
       <Footer />
     </div>
   );
 };
-export default NewClass;
+export default connect(mapStateToProps)(NewClass);
