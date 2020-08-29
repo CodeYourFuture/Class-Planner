@@ -1,8 +1,12 @@
+import React from "react";
+import "./ClassVolunteersList.scss";
+
 const ClassVolunteersList = ({ bookings }) => {
   console.log(bookings);
   return (
     <div className="classvolunteerslist-container">
-      <table class="table">
+      <p className="volunteerslist-title">Volunteers list</p>
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">FullName</th>
@@ -13,9 +17,9 @@ const ClassVolunteersList = ({ bookings }) => {
         </thead>
         <tbody>
           {bookings.map((volunteer) => (
-            <tr>
+            <tr key={volunteer.fullName}>
               <td>{volunteer.fullName}</td>
-              <td>{volunteer.role}</td>
+              {/* {param.user === "admin" && <td>{volunteer.roleName}</td>} */}
               <td>{volunteer.email}</td>
               <td>
                 <button className="btn-cancel-volunteer">Cancel</button>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "roleName": "Coordinator"
+  },
+  {
+    "id": 2,
+    "roleName": "Lead Teacher"
+  },
+  {
+    "id": 3,
+    "roleName": "Assistant Lead Teacher"
+  },
+  {
+    "id": 4,
+    "roleName": "Teaching Assistant"
+  },
+  {
+    "id": 5,
+    "roleName": "Personal Development Rep"
+  }
+]
