@@ -72,8 +72,8 @@ exports.addBooking = async (req, res) => {
 
     const booking = Booking.findOne(
       { email: req.body.email },
-      async (err, docs) => {
-        if (docs) {
+      async (err, result) => {
+        if (result) {
           const multipleBooking = {};
           multipleBooking.email =
             "Email already exists, You have already booked for this class and thanks.";
