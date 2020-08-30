@@ -26,6 +26,7 @@ exports.getBooking = async (req, res) => {
       if (booking) {
         return res.status(200).json({
           success: true,
+          count: booking.length,
           data: booking,
         });
       }
@@ -51,6 +52,7 @@ exports.getBookingsByClassId = async (req, res) => {
     }
     return res.status(200).json({
       success: true,
+      count: booking.length,
       data: booking,
     });
   } catch (err) {
@@ -67,34 +69,35 @@ exports.addBooking = async (req, res) => {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    const booking = Booking.findOne({ email: req.body.email });
-    if (booking.length > 0) {
-      const multipleBooking = {};
-      multipleBooking.email =
-        "Email already exists, You have already booked for this class and thanks.";
-      return res.status(400).json(multipleBooking);
-    }
 
-    const newBooking = await Booking.create(req.body);
+    const booking = Booking.findOne(
+      { email: req.body.email },
+      async (err, docs) => {
+        if (docs) {
+          const multipleBooking = {};
+          multipleBooking.email =
+            "Email already exists, You have already booked for this class and thanks.";
+          return res.status(400).json(multipleBooking);
+        } else if (err) {
+          return res.status(500).json({
+            success: false,
+            error: "Server Error",
+          });
+        } else {
+          const newBooking = await Booking.create(req.body);
 
-    return res.status(201).json({
-      success: true,
-      data: newBooking,
-    });
+          return res.status(201).json({
+            success: true,
+            data: newBooking,
+          });
+        }
+      }
+    );
   } catch (err) {
-    if (err.name === "ValidationError") {
-      const messages = Object.values(err.errors).map((val) => val.message);
-
-      return res.status(400).json({
-        success: false,
-        error: messages,
-      });
-    } else {
-      return res.status(500).json({
-        success: false,
-        error: "Server Error",
-      });
-    }
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
   }
 };
 
@@ -118,7 +121,7 @@ exports.deleteBooking = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: "Server Error",
+      error: "Server Error, could not delete booking",
     });
   }
 };
