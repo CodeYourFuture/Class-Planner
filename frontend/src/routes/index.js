@@ -16,6 +16,8 @@ export default () => {
       <Route exact path="/upcomingclass/" component={UpcomingClass} />
       <Route exact path="/newclass/" component={NewClass} />
       <Route exact path="/newbooking/" component={NewBooking} />
+      <Route exact path="/editclass/" component={NewClass} />
+
     </Switch>
   );
 };
