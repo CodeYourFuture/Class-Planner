@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import dayjs from "dayjs";
 import { createClass, updateClass } from "../../redux/actions";
-//import { useForm } from "react-hook-form";
+import { set_CurrentClass } from "../../redux/actions/ClassAction";
+import { Send_PageData } from "../../redux/actions";
 import Alert from "../../components/Alert/Alarm.jsx";
 import "./NewClassForm.scss";
 
@@ -21,6 +23,7 @@ const NewClassForm = ({
   CurrentClass,
   pageData,
 }) => {
+  const history = useHistory();
   const [weekState, setWeekState] = useState({ status: "Class" });
   const [submitted, setSubmitted] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -46,34 +49,39 @@ const NewClassForm = ({
     values.courseCalendar_Id = CurrentClass.courseCalendar_Id;
     values.status = weekState.status === "Class" ? true : false;
     if (edit) {
-      values.status = CurrentClass.status;
+      e.preventDefault();
       updateClass(CurrentClass._id, values);
+      setTimeout(() => {
+        history.goBack();
+      }, 2000);
+      set_CurrentClass(values);
+      Send_PageData(pageData.user, "Course Calendar", pageData.city);
       setEdit(false);
       setUpdated(true);
     } else {
+      e.preventDefault();
       createClass(values);
       setSubmitted(true);
     }
-
-    e.target.reset();
     setWeekState({ status: "Class" });
   };
   useEffect(() => {
     if (pageData.title === "Edit Class") {
       setValues({
-        status: CurrentClass.status,
-        date: dayjs(CurrentClass.date).format("YYYY-MM-DD"),
-        startTime: CurrentClass.startTime,
-        endTime: CurrentClass.endTime,
-        className: CurrentClass.className,
-        scheduleType: CurrentClass.scheduleType,
-        syllabusURL: CurrentClass.syllabusURL,
-        courseCalendar_Id: CurrentClass.courseCalendar_Id,
+        status: CurrentClass ? CurrentClass.status : null,
+        date: CurrentClass
+          ? dayjs(CurrentClass.date).format("YYYY-MM-DD")
+          : null,
+        startTime: CurrentClass ? CurrentClass.startTime : null,
+        endTime: CurrentClass ? CurrentClass.endTime : null,
+        className: CurrentClass ? CurrentClass.className : null,
+        scheduleType: CurrentClass ? CurrentClass.scheduleType : null,
+        syllabusURL: CurrentClass ? CurrentClass.syllabusURL : null,
+        courseCalendar_Id: CurrentClass ? CurrentClass.courseCalendar_Id : null,
       });
       setEdit(true);
     }
   }, [pageData, CurrentClass]);
- 
   return (
     <div className="new-class-container">
       <p className="new-class-title">
