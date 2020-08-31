@@ -1,41 +1,107 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { createClass } from "../../redux/actions";
-import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
+import dayjs from "dayjs";
+import { createClass, updateClass } from "../../redux/actions";
+import { set_CurrentClass } from "../../redux/actions/ClassAction";
+import { Send_PageData } from "../../redux/actions";
 import Alert from "../../components/Alert/Alarm.jsx";
 import "./NewClassForm.scss";
 
 const mapStateToProps = (state) => {
-  return { getErrors: state.getErrors };
+  return {
+    pageData: state.PageReducer.pageData,
+    CurrentClass: state.ClassReducer.currentClass,
+    getErrors: state.getErrors,
+  };
 };
 
-const NewClassForm = ({ getErrors, createClass, pageData }) => {
-  const { register, handleSubmit, errors } = useForm();
+const NewClassForm = ({
+  getErrors,
+  createClass,
+  updateClass,
+  CurrentClass,
+  pageData,
+}) => {
+  const history = useHistory();
   const [weekState, setWeekState] = useState({ status: "Class" });
   const [submitted, setSubmitted] = useState(false);
-  const onSubmit = (data, e) => {
-    data.courseCalendar_Id = pageData.course_Id;
-    data.status = weekState.status === "Class" ? true : false;
+  const [edit, setEdit] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
-    createClass(data);
-    e.target.reset();
-    setWeekState({ status: "Class" });
-    setSubmitted(true);
+  const [values, setValues] = useState({
+    date: "",
+    courseCalendar_Id: "",
+    status: "Class",
+    className: "",
+    startTime: "",
+    endTime: "",
+    syllabusURL: "",
+    scheduleType: "",
+  });
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
   };
+  const handleSubmit = (e) => {
+    values.courseCalendar_Id = CurrentClass.courseCalendar_Id;
+    values.status = weekState.status === "Class" ? true : false;
+    if (edit) {
+      e.preventDefault();
+      updateClass(CurrentClass._id, values);
+      setTimeout(() => {
+        history.goBack();
+      }, 2000);
+      set_CurrentClass(values);
+      Send_PageData(pageData.user, "Course Calendar", pageData.city);
+      setEdit(false);
+      setUpdated(true);
+    } else {
+      e.preventDefault();
+      createClass(values);
+      setSubmitted(true);
+    }
+    setWeekState({ status: "Class" });
+  };
+  useEffect(() => {
+    if (pageData.title === "Edit Class") {
+      setValues({
+        status: CurrentClass ? CurrentClass.status : null,
+        date: CurrentClass
+          ? dayjs(CurrentClass.date).format("YYYY-MM-DD")
+          : null,
+        startTime: CurrentClass ? CurrentClass.startTime : null,
+        endTime: CurrentClass ? CurrentClass.endTime : null,
+        className: CurrentClass ? CurrentClass.className : null,
+        scheduleType: CurrentClass ? CurrentClass.scheduleType : null,
+        syllabusURL: CurrentClass ? CurrentClass.syllabusURL : null,
+        courseCalendar_Id: CurrentClass ? CurrentClass.courseCalendar_Id : null,
+      });
+      setEdit(true);
+    }
+  }, [pageData, CurrentClass]);
   return (
     <div className="new-class-container">
       <p className="new-class-title">
-        {pageData.city}{" "}
-        <i class="fas fa-angle-right"></i>
-        {" "}
-        {pageData.title}
+        {pageData.city} <i className="fas fa-angle-right"></i> {pageData.title}
       </p>
-      <form className="new-class-form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="new-class-form" onSubmit={handleSubmit}>
         {submitted && Object.keys(getErrors).length !== 0 && (
           <Alert type={"danger"} children={getErrors.syllabusURL} />
         )}
         {submitted && Object.keys(getErrors).length === 0 && (
           <Alert type={"success"} children={"New class successfully added!"} />
+        )}
+        {updated && Object.keys(getErrors).length !== 0 && (
+          <Alert type={"danger"} children={getErrors.message} />
+        )}
+        {updated && Object.keys(getErrors).length === 0 && (
+          <Alert
+            type={"success"}
+            children={"New class successfully updated!"}
+          />
         )}
 
         <div className="form-group">
@@ -43,10 +109,9 @@ const NewClassForm = ({ getErrors, createClass, pageData }) => {
           <input
             name="date"
             type="Date"
-            className={
-              errors.date ? "form-control error-animation" : "form-control"
-            }
-            ref={register({ required: true })}
+            className="form-control"
+            value={values.date}
+            onChange={handleChange}
           ></input>
         </div>
 
@@ -75,29 +140,11 @@ const NewClassForm = ({ getErrors, createClass, pageData }) => {
               <label htmlFor="ClassName">Class Name:</label>
               <input
                 name="className"
-                className={
-                  errors.className
-                    ? "form-control error-animation"
-                    : "form-control"
-                }
+                className="form-control"
                 type="text"
                 placeholder="Class Name"
-                ref={register({ required: true })}
-              ></input>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="maduleName">Module Name:</label>
-              <input
-                name="maduleName"
-                className={
-                  errors.maduleName
-                    ? "form-control error-animation"
-                    : "form-control"
-                }
-                type="text"
-                placeholder="Madule Name"
-                ref={register({ required: true })}
+                value={values.className}
+                onChange={handleChange}
               ></input>
             </div>
 
@@ -105,13 +152,10 @@ const NewClassForm = ({ getErrors, createClass, pageData }) => {
               <label htmlFor="startTime">Start Time:</label>
               <input
                 name="startTime"
-                className={
-                  errors.startTime
-                    ? "form-control error-animation"
-                    : "form-control"
-                }
+                className="form-control"
                 type="time"
-                ref={register({ required: true })}
+                value={values.startTime}
+                onChange={handleChange}
               ></input>
             </div>
 
@@ -119,13 +163,10 @@ const NewClassForm = ({ getErrors, createClass, pageData }) => {
               <label htmlFor="endTime">End Time:</label>
               <input
                 name="endTime"
-                className={
-                  errors.endTime
-                    ? "form-control error-animation"
-                    : "form-control"
-                }
+                className="form-control"
                 type="time"
-                ref={register({ required: true })}
+                value={values.endTime}
+                onChange={handleChange}
               ></input>
             </div>
 
@@ -133,14 +174,11 @@ const NewClassForm = ({ getErrors, createClass, pageData }) => {
               <label htmlFor="syllabusURL">Syllabus URL:</label>
               <input
                 name="syllabusURL"
-                className={
-                  errors.syllabusURL
-                    ? "form-control error-animation"
-                    : "form-control"
-                }
+                className="form-control"
                 type="text"
                 placeholder="Syllabus URL"
-                ref={register({ required: true })}
+                value={values.syllabusURL}
+                onChange={handleChange}
               ></input>
             </div>
 
@@ -150,7 +188,8 @@ const NewClassForm = ({ getErrors, createClass, pageData }) => {
                 name="scheduleType"
                 className="form-control"
                 placeholder="Schedule"
-                ref={register({ required: true })}
+                value={values.scheduleType}
+                onChange={handleChange}
               >
                 <option value="Education Lead Class">
                   Education Lead Class
@@ -166,24 +205,34 @@ const NewClassForm = ({ getErrors, createClass, pageData }) => {
             <label htmlFor="ClassName">Reason:</label>
             <input
               name="className"
-              className={
-                errors.className
-                  ? "form-control error-animation"
-                  : "form-control"
-              }
+              className="form-control"
               type="text"
               placeholder="Reason . . ."
-              ref={register({ required: true })}
+              value={values.className}
+              onChange={handleChange}
             ></input>
           </div>
         )}
 
         <div className="form-group">
-          <input type="submit" onClick={handleSubmit}></input>
+          <input
+            type="submit"
+            disabled={
+              !values.date ||
+              !values.className ||
+              !values.syllabusURL ||
+              !values.scheduleType ||
+              !values.status ||
+              !values.startTime ||
+              !values.endTime
+            }
+          ></input>
         </div>
       </form>
     </div>
   );
 };
 
-export default connect(mapStateToProps, { createClass })(NewClassForm);
+export default connect(mapStateToProps, { createClass, updateClass })(
+  NewClassForm
+);

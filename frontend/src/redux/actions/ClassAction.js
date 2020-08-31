@@ -2,6 +2,7 @@ import {
   GET_UPCOMINGCLASS,
   GET_CLASSES,
   CREATE_CLASS,
+  UPDATE_CLASS,
   SET_CURRENTCLASS,
   ACTION_STARTED,
   ACTION_SUCCESS,
@@ -13,9 +14,9 @@ export const Get_UpcomingClass = (city) => {
   return async (dispatch) => {
     try {
       const courses = await httpClient.get(`/api/v1/courses/`);
-      const filtredCourses = courses.data.data.filter(
-        (course) => course.cityName === city
-      ).map(course=> course._id);
+      const filtredCourses = courses.data.data
+        .filter((course) => course.cityName === city)
+        .map((course) => course._id);
       const classes = await httpClient.get(`/api/v1/classes`);
       dispatch({
         type: ACTION_STARTED,
@@ -32,7 +33,8 @@ export const Get_UpcomingClass = (city) => {
     } catch (error) {
       dispatch({
         type: ACTION_ERROR,
-        payload: typeof error.response !== "undefined" ? error.response.data : "Error",
+        payload:
+          typeof error.response !== "undefined" ? error.response.data : "Error",
         actionType: GET_UPCOMINGCLASS,
       });
     }
@@ -57,7 +59,8 @@ export const Get_Classes = () => {
     } catch (error) {
       dispatch({
         type: ACTION_ERROR,
-        payload: typeof error.response !== "undefined" ? error.response.data : "Error",
+        payload:
+          typeof error.response !== "undefined" ? error.response.data : "Error",
         actionType: GET_CLASSES,
       });
     }
@@ -84,7 +87,8 @@ export const createClass = (newClassData) => {
     } catch (error) {
       dispatch({
         type: ACTION_ERROR,
-        payload: typeof error.response !== "undefined" ? error.response.data : "Error",
+        payload:
+          typeof error.response !== "undefined" ? error.response.data : "Error",
         actionType: CREATE_CLASS,
       });
     }
@@ -107,8 +111,36 @@ export const set_CurrentClass = (Class) => {
     } catch (error) {
       dispatch({
         type: ACTION_ERROR,
-        payload: typeof error.response !== "undefined" ? error.response.data : "Error",
+        payload:
+          typeof error.response !== "undefined" ? error.response.data : "Error",
         actionType: SET_CURRENTCLASS,
+      });
+    }
+  };
+};
+export const updateClass = (classId, updatedData) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: ACTION_STARTED,
+        actionType: UPDATE_CLASS,
+      });
+      const newClass = await httpClient.put(`/api/v1/classes/${classId}`, {
+        ...updatedData,
+      });
+      dispatch({
+        type: UPDATE_CLASS,
+        classes: newClass.data,
+      });
+      dispatch({
+        type: ACTION_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: ACTION_ERROR,
+        payload:
+          typeof error.response !== "undefined" ? error.response.data : "Error",
+        actionType: UPDATE_CLASS,
       });
     }
   };

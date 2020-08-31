@@ -120,12 +120,12 @@ const ClassCard = ({
                               set_CurrentClass(currentClass);
                               Send_PageData(
                                 pageData.user,
-                                "Edit Booking",
+                                "Edit Class",
                                 pageData.city
                               );
                             }}
                             className="classcard-edit-bottom"
-                            to="/newbooking/"
+                            to="/editclass/"
                           >
                             Edit
                           </Link>

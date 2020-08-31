@@ -2,6 +2,7 @@ import {
   GET_UPCOMINGCLASS,
   GET_CLASSES,
   CREATE_CLASS,
+  UPDATE_CLASS,  
   SET_CURRENTCLASS,
 } from "../actions/types";
 import dayjs from "dayjs";
@@ -40,6 +41,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state.currentClass,
         currentClass: action.currentClass,
+      };
+      case UPDATE_CLASS:
+      return {
+        ...state.classes,
+        classes: action.classes,
       };
     default:
       return state;
