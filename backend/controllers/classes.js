@@ -66,15 +66,17 @@ exports.deleteClass = async (req, res) => {
 
 exports.updateClass = async (req, res) => {
   try {
+    const error = {};
+    error.message = "Could not update class";
     const classData = req.body;
     const { errors, isValid } = validateClassInput(classData);
     if (!isValid) {
       return res.status(400).json(errors);
     }
     const query = { _id: req.params.id };
-    const classToBeUpdated = await Class.findOneAndUpdate(query, classData);
-    if (!classToBeUpdated) {
-      throw "classToBeUpdated not found!";
+    const newClass = await Class.findOneAndUpdate(query, classData);
+    if (!newClass) {
+      return res.status(400).json(error);
     }
     return res.status(200).json({
       success: true,
@@ -82,9 +84,6 @@ exports.updateClass = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(400).json({
-      success: false,
-      error: "Could not update classToBeUpdated",
-    });
+    return res.status(400).json(error);
   }
 };
