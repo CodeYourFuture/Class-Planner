@@ -49,8 +49,15 @@ const NewClassForm = ({
     values.courseCalendar_Id = CurrentClass.courseCalendar_Id;
     values.status = weekState.status === "Class" ? true : false;
     if (edit) {
+      if (!values.status) {
+        values.startTime = null;
+        values.scheduleType = null;
+        values.syllabusURL = null;
+        values.endTime = null;
+      }
       e.preventDefault();
       updateClass(CurrentClass._id, values);
+      console.log(values);
       setTimeout(() => {
         history.goBack();
       }, 2000);
