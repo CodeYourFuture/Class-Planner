@@ -1,6 +1,5 @@
 const CourseCalendar = require("../models/CourseCalendar");
 const validateCourseCalendarInput = require("../validation/courseCalendar");
-const isEmpty = require("../validation/is-empty");
 
 exports.getCoursesCalendar = async (req, res) => {
   try {
@@ -44,7 +43,6 @@ exports.addCourseCalendar = async (req, res) => {
 exports.deleteCourseCalendar = async (req, res) => {
   try {
     const courseId = req.params.id;
-    courseId = !isEmpty(courseId) ? courseId : "";
     const courseCalendar = await CourseCalendar.findById(courseId);
 
     if (!courseCalendar) {
@@ -75,7 +73,6 @@ exports.updateCourseCalendar = async (req, res) => {
       return res.status(400).json(errors);
     }
     const courseId = req.params.id;
-    courseId = !isEmpty(courseId) ? courseId : "";
     const query = { _id: courseId };
     const courseCalendar = await CourseCalendar.findOneAndUpdate(
       query,
