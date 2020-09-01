@@ -21,18 +21,66 @@
   background-color: $btn-warning-bg;
   border: 1px solid $btn-warning-border;
   color: white;
+  &:hover {
+    background-color: $btn-warning-bg-hover;
+  }
+}
+
+%btn-outline-warning {
+  background-color: white;
+  color: $btn-warning-border;
+  border: 1px solid $btn-warning-border;
+  &:hover {
+    background-color: $btn-warning-bg-hover;
+    color: white;
+  }
 }
 
 %btn-light {
   background-color: $btn-light-bg;
   border: 1px solid $btn-light-border;
   color: white;
+  &:hover {
+    background-color: $btn-light-bg-hover;
+  }
+}
+
+%btn-outline-light {
+  background-color: white;
+  color: $btn-light-border;
+  border: 1px solid $btn-light-border;
+  &:hover {
+    background-color: $btn-light-bg-hover;
+    color: white;
+  }
 }
 
 %btn-success {
-  background-color: $btn-danger-bg;
-  border: 1px solid $btn-danger-border;
+  background-color: $btn-success-bg;
+  border: 1px solid $btn-success-border;
   color: white;
+  &:hover {
+    background-color: $btn-success-bg-hover;
+  }
+}
+
+%btn-outline-success {
+  background-color: white;
+  color: $btn-success-border;
+  border: 1px solid $btn-success-border;
+  &:hover {
+    background-color: $btn-success-bg-hover;
+    color: white;
+  }
+}
+
+%btn-submit {
+  background-color: $btn-submit-bg;
+  border: 1px solid $btn-submit-border;
+  color: white;
+  &:hover {
+    background-color: $btn-submit-bg-hover;
+  }
 }
 
 %btn-no-bg {
