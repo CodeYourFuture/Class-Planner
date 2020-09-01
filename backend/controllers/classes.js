@@ -1,3 +1,4 @@
+const isEmpty = require("../validation/is-empty");
 const Class = require("../models/Class");
 const validateClassInput = require("../validation/class");
 
@@ -41,7 +42,9 @@ exports.addClass = async (req, res) => {
 
 exports.deleteClass = async (req, res) => {
   try {
-    const classToBeDeleted = await Class.findById(req.params.id);
+    const classId = req.params.id;
+    classId = !isEmpty(classId) ? classId : "";
+    const classToBeDeleted = await Class.findById(classId);
 
     if (!classToBeDeleted) {
       return res.status(404).json({
@@ -73,7 +76,9 @@ exports.updateClass = async (req, res) => {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    const query = { _id: req.params.id };
+    const classId = req.params.id;
+    classId = !isEmpty(classId) ? classId : "";
+    const query = { _id: classId };
     const newClass = await Class.findOneAndUpdate(query, classData);
     if (!newClass) {
       return res.status(400).json(error);
