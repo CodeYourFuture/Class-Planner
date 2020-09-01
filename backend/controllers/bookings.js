@@ -1,5 +1,4 @@
 const Booking = require("../models/Booking");
-const isEmpty = require("../validation/is-empty");
 const validateBookingInput = require("../validation/booking");
 
 exports.getBookings = async (req, res) => {
@@ -43,9 +42,7 @@ exports.getBooking = async (req, res) => {
 exports.getBookingsByClassId = async (req, res) => {
   try {
     const classId = req.params.classId;
-
-    classId = !isEmpty(classId) ? classId : "";
-    const booking = await Booking.find(classId);
+    const booking = await Booking.find({ classId });
     if (!booking) {
       return res.status(404).json({
         success: false,
@@ -107,8 +104,6 @@ exports.deleteBooking = async (req, res) => {
   try {
     const bookingId = req.params.id;
 
-    bookingId = !isEmpty(bookingId) ? bookingId : "";
-
     const booking = await Booking.findById(bookingId);
 
     if (!booking) {
@@ -140,7 +135,6 @@ exports.updateBooking = async (req, res) => {
       return res.status(400).json(errors);
     }
     const bookingId = req.params.id;
-    bookingId = !isEmpty(bookingId) ? bookingId : "";
     const query = { _id: bookingId };
     const booking = await Booking.findOneAndUpdate(query, bookingData);
     if (!booking) {
