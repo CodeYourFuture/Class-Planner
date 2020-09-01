@@ -9,17 +9,22 @@ import dayjs from "dayjs";
 
 const mapStateToProps = (state) => {
   return {
-    bookings: state.BookingReducer.booking,
+    CurrentClass: state.ClassReducer.currentClass,
     getErrors: state.getErrors,
   };
 };
 
-const NewBookingForm = ({ bookings, getErrors, createBooking, Class }) => {
+const NewBookingForm = ({
+  bookings,
+  getErrors,
+  createBooking,
+  CurrentClass,
+}) => {
   const { register, handleSubmit, errors } = useForm();
   const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = (data, e) => {
-    data.classId = Class._id;
+    data.classId = CurrentClass._id;
     data.bookingDate = dayjs(new Date()).format("MM/DD/YYYY");
     data.bookingTime = dayjs(new Date()).format("h:mm");
 
