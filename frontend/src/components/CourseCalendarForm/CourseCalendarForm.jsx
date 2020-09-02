@@ -59,9 +59,9 @@ const CourseCalendarForm = ({ pageData }) => {
   console.log("0");
   return (
     <div className="coursecalendarform-container">
-      <p className="new-class-title">
-        {pageData.city} <i className="fas fa-angle-right"></i>{" "}
-        <>{pageData.title}</>
+      <p className="upcoming-class-title">
+        <p>{pageData.city}</p> <i class="fas fa-chevron-right"></i>
+        <p>{pageData.title}</p>
       </p>
       <div className="filter-container">
         <div className="control-container">

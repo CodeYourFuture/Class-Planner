@@ -1,12 +1,12 @@
 @import "../../scss/variables";
 .course-card-container {
-  width: 66%;
-  min-height: calc(100vh - 270px);
-  margin: 25px auto 25px auto;
+  margin: 15px auto 25px auto;
   display: grid;
   grid-template-columns: auto auto auto auto;
   justify-items: center;
   align-items: flex-start;
+  border-top: 1px solid $classcard-border;
+  padding-top: 35px;
 }
 .course-card {
   background-color: #f5f5f5;

@@ -3,22 +3,14 @@ import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { connect } from "react-redux";
 import { Send_PageData } from "../../redux/actions";
-import { Get_Courses } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import "./Home.scss";
 
-const mapStateToProps = (state) => {
-  return { courses: state.CourseReducer.courses };
-};
-
-const Home = ({ Send_PageData, courses, Get_Courses }) => {
+const Home = ({ Send_PageData }) => {
   useEffect(() => {
     Send_PageData("None", "Home", "None");
-    Get_Courses();
-  }, [Send_PageData, Get_Courses]);
-  const passData = (user, title) => {
-    Send_PageData(user, title, "None");
-  };
+  }, [Send_PageData]);
+
   return (
     <div className="home_container">
       <Header />
@@ -26,23 +18,6 @@ const Home = ({ Send_PageData, courses, Get_Courses }) => {
         <div>
           <img className="home-image" src="../files/Home.png" alt="CYF" />
         </div>
-        {/* <div className="control-container">
-          <i className="fas fa-map-marker-alt"></i>
-          <select id="city">
-            {courses &&
-              courses.map((course, index) => {
-                return (
-                  <option
-                    value={`${course.cityName}`}
-                    key={index}
-                  >
-                    {" "}
-                    {course.cityName}
-                  </option>
-                );
-              })}
-          </select>
-        </div> */}
         <div>
           <Link
             onClick={() => Send_PageData("admin", "Cities", "None")}
@@ -78,4 +53,4 @@ const Home = ({ Send_PageData, courses, Get_Courses }) => {
   );
 };
 
-export default connect(mapStateToProps, { Send_PageData, Get_Courses })(Home);
+export default connect(null, { Send_PageData })(Home);

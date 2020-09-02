@@ -32,27 +32,30 @@ const Cities = ({ pageData, Send_PageData, courses, Get_Courses }) => {
   return (
     <div className="home_container">
       <Header />
-      <div className="course-card-container">
-        {allCities &&
-          allCities.map((city, index) => {
-            return (
-              <Link
-                className="course-card"
-                key={index}
-                to="/coursecalendar/"
-                onClick={() => {
-                  Send_PageData(pageData.user, "Course Calendar", city);
-                }}
-              >
-                <div>
-                  <i className="fas fa-map-marked-alt"></i>
-                </div>
-                <div>
-                  <p>{city}</p>
-                </div>
-              </Link>
-            );
-          })}
+      <div className="upcoming-class-container">
+        <p className="upcoming-class-title">{pageData.title}</p>
+        <div className="course-card-container">
+          {allCities &&
+            allCities.map((city, index) => {
+              return (
+                <Link
+                  className="course-card"
+                  key={index}
+                  to="/coursecalendar/"
+                  onClick={() => {
+                    Send_PageData(pageData.user, "Course Calendar", city);
+                  }}
+                >
+                  <div>
+                    <i className="fas fa-map-marked-alt"></i>
+                  </div>
+                  <div>
+                    <p>{city}</p>
+                  </div>
+                </Link>
+              );
+            })}
+        </div>
       </div>
       <Footer />
     </div>

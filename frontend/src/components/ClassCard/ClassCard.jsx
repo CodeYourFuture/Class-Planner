@@ -13,7 +13,6 @@ import "./ClassCard.scss";
 
 const mapStateToProps = (state) => {
   return {
-    // bookings: state.BookingReducer.bookings,
     pageData: state.PageReducer.pageData,
     CurrentClass: state.ClassReducer.currentClass,
   };
@@ -35,7 +34,7 @@ const ClassCard = ({
       const bookings = await httpClient.get(
         `/api/v1/class/bookings/${currentClass._id}`
       );
-      console.log(bookings.data.data)
+      console.log(bookings.data.data);
       setCurrentBooking(bookings.data.data);
     }
   }, [currentClass]);
@@ -81,18 +80,23 @@ const ClassCard = ({
                         {currentClass.startTime + " - " + currentClass.endTime}
                       </p>
                     </div>
-                    {["admin", "volunteer"].includes(pageData.user) && (currentClass.status) && (<div>
-                      <a
-                        href={currentClass.syllabusURL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <div className="classcard-syllabus">
-                          <p>Syllabus</p>
-                          <i className="fas fa-book-open"></i>
+                    {["admin", "volunteer", "student"].includes(
+                      pageData.user
+                    ) &&
+                      currentClass.status && (
+                        <div>
+                          <a
+                            href={currentClass.syllabusURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <div className="classcard-syllabus">
+                              <p>Syllabus</p>
+                              <i className="fas fa-book-open"></i>
+                            </div>
+                          </a>
                         </div>
-                      </a>
-                    </div>)}
+                      )}
                   </div>
                   <div className="classcard-bottom">
                     {["admin", "volunteer"].includes(pageData.user) &&
@@ -155,7 +159,13 @@ const ClassCard = ({
                   </div>
                 </div>
                 {WeekNumber && (
-                  <div className="weeknumber-container">
+                  <div
+                    className={
+                      currentClass.status
+                        ? "weeknumber-container"
+                        : "weeknumber-container holiday-week"
+                    }
+                  >
                     <p>Week</p>
                     <p>{WeekNumber}</p>
                   </div>

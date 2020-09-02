@@ -1,13 +1,23 @@
-.upcoming-class-container {
+
+@import "../../scss/variables";.upcoming-class-container {
   min-height: calc(100vh - 270px);
   margin: auto;
   width: 66%;
   animation: FadeIn 500ms;
 }
 .upcoming-class-title {
+  display: flex;
+  align-content: center;
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 25px;
   letter-spacing: 1px;
   color: #79d582;
+  margin-bottom: 15px;
+}
+.upcoming-class-title i{
+  margin: 7px;
+}
+.upcoming-class-title p:nth-child(3){
+  color: $text-dark-color;
 }
