@@ -12,15 +12,24 @@ const mapStateToProps = (state) => {
 
 const ClassVolunteersList = ({ pageData, bookings }) => {
   const [ConfirmationStatus, setConfirmationStatus] = useState(false);
-  const [fullName, setFullName] = useState(false);
+  const [alertStatus, setAlertStatus] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [bookingId, setBookingId] = useState("");
 
-  function cancelBookingHandler(fullName, index) {
-    if (pageData && pageData.user === "admin") setConfirmationStatus(true);
-    if (pageData && pageData.user === "volunteer") setConfirmationStatus(true);
+  function cancelBookingHandler(fullName, email, bookingId) {
+    if (
+      pageData &&
+      (pageData.user === "admin" || pageData.user === "volunteer")
+    )
+      setConfirmationStatus(true);
+
     setFullName(fullName);
+    setEmail(email);
+    setBookingId(bookingId);
   }
 
-  function closeAlert() {
+  function closeConfirmationAlert() {
     setConfirmationStatus(false);
   }
 
@@ -30,7 +39,9 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
         <CancelBookingAlert
           user={pageData && pageData.user}
           fullName={fullName}
-          closeHandler={closeAlert}
+          email={email}
+          _id={bookingId}
+          closeHandler={closeConfirmationAlert}
         />
       )}
       <p className="volunteerslist-title">Volunteers list</p>
@@ -53,13 +64,19 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
               <tr key={index}>
                 <td>{volunteer.fullName}</td>
                 <td>{volunteer.roleName}</td>
-                {pageData.user === "admin" && <td>{volunteer.email}</td>}
+                {pageData && pageData.user === "admin" && (
+                  <td>{volunteer.email}</td>
+                )}
 
                 <td>
                   <button
                     className="btn-cancel-volunteer"
-                    onClick={() => {
-                      cancelBookingHandler(volunteer.fullName, volunteer._id);
+                    onClick={(e) => {
+                      cancelBookingHandler(
+                        volunteer.fullName,
+                        volunteer.email,
+                        volunteer._id
+                      );
                     }}
                   >
                     Cancel

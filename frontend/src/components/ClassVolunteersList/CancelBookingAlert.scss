@@ -2,6 +2,7 @@
 @import "./../../scss/buttons";
 
 .cancelbooking-alert {
+  animation: FadeIn 500ms;
   border: 1px solid $alert-light-border-color;
   margin: 40px auto;
   padding: 20px;

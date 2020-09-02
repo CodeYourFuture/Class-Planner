@@ -8,7 +8,7 @@ const Alert = ({ type, children }) => {
   type === "info" && (cssClass = "alert-info");
   type === "light" && (cssClass = "alert-light");
 
-  return <div className={cssClass}>{children}</div>;
+  return <div className={`alert ${cssClass}`}>{children}</div>;
 };
 
 export default Alert;
