@@ -91,8 +91,9 @@ const NewClassForm = ({
   }, [pageData, CurrentClass]);
   return (
     <div className="new-class-container">
-      <p className="new-class-title">
-        {pageData.city} <i className="fas fa-angle-right"></i> {pageData.title}
+      <p className="upcoming-class-title">
+        <p>{pageData.city}</p> <i class="fas fa-chevron-right"></i>
+        <p>{pageData.title}</p>
       </p>
       <form className="new-class-form" onSubmit={handleSubmit}>
         {submitted && Object.keys(getErrors).length !== 0 && (
