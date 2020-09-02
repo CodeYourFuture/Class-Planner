@@ -1,11 +1,13 @@
 @import "../../scss/variables";
 
+.coursecalendar-class-size{
+  transform: scale(0.9);
+}
 .classcard-body {
-  min-height: calc(100vh - 270px);
   animation: FadeIn 500ms;
 }
 .classcard-main {
-  margin: 0 auto 50px auto;
+  margin: 0 auto 0px auto;
   display: flex;
   flex-wrap: wrap;
   font-family: $default-font-family;
@@ -14,12 +16,12 @@
   letter-spacing: 1px;
   > p {
     color: $forms-title-color;
-  }
+  }  
 }
 
 .classcard-border {
   border: 1px solid #f1f1f1;
-  margin-top: 15px;
+  margin-top: 0px;
   width: 100%;
 }
 .classcard-container {
