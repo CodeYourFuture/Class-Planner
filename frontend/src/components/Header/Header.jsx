@@ -33,8 +33,35 @@ const Header = ({ pageData, Send_PageData }) => {
               <img src="../files/calendar.svg" alt="Calendar"></img>
               <p>Class Planner</p>
             </div>
+          ) : ["Cities", "New Course Calendar"].includes(pageData.title) ? (
+            <React.Fragment>
+            <Link
+            className={
+              pageData.title === "Cities"
+                ? "header-nav header-selected"
+                : "header-nav"
+            }
+            to={"/cities/"}
+            onClick={() => passData("Cities")}
+          >
+            <i className="fas fa-map-marked-alt"></i>
+            <p>Cities</p>
+          </Link>
+            <Link
+            className={
+              pageData.title === "New Course Calendar"
+                ? "header-nav header-selected"
+                : "header-nav"
+            }
+            to={"/newcoursecalendar/"}
+            onClick={() => passData("New Course Calendar")}
+          >
+            <i className="far fa-calendar-alt"></i>
+            <p>New Course Calendar</p>
+          </Link>
+          </React.Fragment>
           ) : (
-            <>
+            <React.Fragment>
               <Link
                 className={
                   pageData.title === "Course Calendar"
@@ -73,7 +100,7 @@ const Header = ({ pageData, Send_PageData }) => {
                   <p>New Class</p>
                 </Link>
               ) : null}
-            </>
+            </React.Fragment>
           )
         ) : null}
       </div>
