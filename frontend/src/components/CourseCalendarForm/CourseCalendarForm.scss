@@ -16,7 +16,7 @@
   margin: 15px auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;  
+  justify-content: space-around;
 }
 .control-container {
   font-size: 18px;
@@ -38,7 +38,7 @@
     margin-left: 10px;
     text-indent: 15px;
     padding-right: 10px;
-    option{
+    option {
       text-indent: 15px;
     }
     &:focus {
@@ -46,9 +46,13 @@
       box-shadow: none;
     }
   }
-  input[type="checkbox"]{
+  input[type="checkbox"] {
     width: 30px;
     height: 30px;
     margin-right: 10px;
   }
+}
+
+.classes-list-container {
+  overflow-y: overlay;
 }

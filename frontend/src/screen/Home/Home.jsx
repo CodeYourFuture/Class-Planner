@@ -17,8 +17,7 @@ const Home = ({ Send_PageData, courses, Get_Courses }) => {
     Get_Courses();
   }, [Send_PageData, Get_Courses]);
   const passData = (user, title) => {
-    const city = document.getElementById("city").value;
-    Send_PageData(user, title, city);
+    Send_PageData(user, title, "None");
   };
   return (
     <div className="home_container">
@@ -27,7 +26,7 @@ const Home = ({ Send_PageData, courses, Get_Courses }) => {
         <div>
           <img className="home-image" src="../files/Home.png" alt="CYF" />
         </div>
-        <div className="control-container">
+        {/* <div className="control-container">
           <i className="fas fa-map-marker-alt"></i>
           <select id="city">
             {courses &&
@@ -43,12 +42,12 @@ const Home = ({ Send_PageData, courses, Get_Courses }) => {
                 );
               })}
           </select>
-        </div>
+        </div> */}
         <div>
           <Link
-            onClick={() => passData("admin", "Course Calendar")}
+            onClick={() => Send_PageData("admin", "Cities", "None")}
             className="home-button"
-            to="/coursecalendar/"
+            to="/Cities/"
           >
             <p>
               <i className="fas fa-user"></i>Admin
@@ -56,8 +55,8 @@ const Home = ({ Send_PageData, courses, Get_Courses }) => {
           </Link>
           <Link
             className="home-button"
-            to="/coursecalendar/"
-            onClick={() => passData("volunteer", "Course Calendar")}
+            to="/Cities/"
+            onClick={() => Send_PageData("volunteer", "Cities", "None")}
           >
             <p>
               <i className="fas fa-user"></i>Volunteer
@@ -65,8 +64,8 @@ const Home = ({ Send_PageData, courses, Get_Courses }) => {
           </Link>
           <Link
             className="home-button"
-            to="/coursecalendar/"
-            onClick={() => passData("student", "Course Calendar")}
+            to="/Cities/"
+            onClick={() => Send_PageData("student", "Cities", "None")}
           >
             <p>
               <i className="fas fa-user"></i>Student

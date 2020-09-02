@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
     case GET_CLASSES:
       return {
         ...state.classes,
-        classes: action.classes,
+        classes: action.classes.data,
       };
     case CREATE_CLASS:
       return {
