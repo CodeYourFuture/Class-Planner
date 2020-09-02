@@ -23,8 +23,8 @@ const UpcomingClass = ({ Class, Get_UpcomingClass, pageData }) => {
       <Header />
       <div className="upcoming-class-container">
         <p className="upcoming-class-title">
-          {pageData.city} <i className="fas fa-angle-right"></i>{" "}
-          {pageData.title}
+          <p>{pageData.city}</p> <i class="fas fa-chevron-right"></i>
+          <p>{pageData.title}</p>
         </p>
         {Class ? (
           <ClassCard
