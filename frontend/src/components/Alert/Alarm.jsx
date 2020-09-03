@@ -2,7 +2,7 @@ import React from "react";
 import "./Alert.scss";
 
 const Alert = ({ type, children }) => {
-  let cssClass = "";
+  let cssClass = "alert-light";
   type === "danger" && (cssClass = "alert-danger");
   type === "success" && (cssClass = "alert-success");
   type === "info" && (cssClass = "alert-info");

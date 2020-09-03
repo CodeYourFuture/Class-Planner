@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Alert from "../Alert/Alarm.jsx";
 import CancelBookingAlert from "./CancelBookingAlert.jsx";
 import { connect } from "react-redux";
 import "./ClassVolunteersList.scss";
@@ -13,6 +13,9 @@ const mapStateToProps = (state) => {
 const ClassVolunteersList = ({ pageData, bookings }) => {
   const [ConfirmationStatus, setConfirmationStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
+  const [alertType, setAlertType] = useState("");
+  const [alertMessage, setAlertMessage] = useState("message");
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [bookingId, setBookingId] = useState("");
@@ -33,6 +36,12 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
     setConfirmationStatus(false);
   }
 
+  function showAlert(type, message) {
+    setAlertStatus(true);
+    setAlertType(type);
+    setAlertMessage(message);
+  }
+
   return (
     <div className="classvolunteerslist-container">
       {ConfirmationStatus && (
@@ -42,19 +51,19 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
           email={email}
           _id={bookingId}
           closeHandler={closeConfirmationAlert}
+          showAlert={showAlert}
         />
       )}
+      {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
       <p className="volunteerslist-title">Volunteers list</p>
       <table className="table">
         <thead>
           <tr>
             <th scope="col">FullName</th>
             <th scope="col">Role</th>
-
             {pageData && pageData.user === "admin" && (
               <th scope="col">Email</th>
             )}
-
             <th scope="col"></th>
           </tr>
         </thead>
@@ -72,6 +81,7 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
                   <button
                     className="btn-cancel-volunteer"
                     onClick={(e) => {
+                      setAlertStatus(false);
                       cancelBookingHandler(
                         volunteer.fullName,
                         volunteer.email,
