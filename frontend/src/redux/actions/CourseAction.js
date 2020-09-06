@@ -4,7 +4,7 @@ import {
   ACTION_SUCCESS,
   ACTION_ERROR,
 } from "./types";
-import httpClient from "../../common/httpClient/httpClient.js";
+import axios from "axios";
 
 export const Get_Courses = () => {
   return async (dispatch) => {
@@ -13,7 +13,7 @@ export const Get_Courses = () => {
         type: ACTION_STARTED,
         actionType: GET_COURSES,
       });
-      const courses = await httpClient.get(`/api/v1/courses/`);
+      const courses = await axios.get(`/api/v1/courses/`);
 
       dispatch({
         type: GET_COURSES,
