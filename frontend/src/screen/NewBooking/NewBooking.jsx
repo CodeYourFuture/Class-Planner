@@ -15,10 +15,10 @@ const NewBooking = ({ pageData }) => {
     <React.Fragment>
       <Header />
       <div className="upcoming-class-container">
-        <p className="upcoming-class-title">
-          <p>{pageData.city}</p> <i class="fas fa-chevron-right"></i>
+        <div className="upcoming-class-title">
+          <p>{pageData.city}</p> <i className="fas fa-chevron-right"></i>
           <p>{pageData.title}</p>
-        </p>
+        </div>
         <ClassCard />
       </div>
       <Footer />
