@@ -11,7 +11,7 @@
 }
 .new-class-container {
   min-height: calc(100vh - 270px);
-  margin: auto;
+  margin: 0px auto 50px auto;
   width: 60%;
   animation: FadeIn 500ms;
 }
@@ -29,4 +29,8 @@
   font-family: "Open Sans", sans-serif;
   transition: 500ms;
   padding: 50px 20% 50px 10%;
+}
+
+.font-size{
+  font-size: 1.6rem;
 }
