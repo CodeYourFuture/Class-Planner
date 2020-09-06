@@ -7,7 +7,7 @@ import { Send_PageData } from "../../redux/actions/PageAction";
 import { set_CurrentClass } from "../../redux/actions/ClassAction";
 import NewBookingForm from "../NewBookingForm/NewBookingForm.jsx";
 import ClassVolunteersList from "../ClassVolunteersList/ClassVolunteersList.jsx";
-import httpClient from "../../common/httpClient/httpClient.js";
+import axios from "axios";
 import Loading from "../Loading/Loading.jsx";
 import "./ClassCard.scss";
 
@@ -31,7 +31,7 @@ const ClassCard = ({
 
   const get_booking = useCallback(async () => {
     if (currentClass) {
-      const bookings = await httpClient.get(
+      const bookings = await axios.get(
         `/api/v1/class/bookings/${currentClass._id}`
       );
       setCurrentBooking(bookings.data.data);
