@@ -12,9 +12,7 @@ const NewClass = ({ pageData }) => {
   return (
     <div>
       <Header />
-      {pageData.user === "admin" ? (
-        <NewClassForm pageData={pageData} />
-      ) : null}
+      {pageData.user === "admin" ? <NewClassForm pageData={pageData} /> : null}
       <Footer />
     </div>
   );
