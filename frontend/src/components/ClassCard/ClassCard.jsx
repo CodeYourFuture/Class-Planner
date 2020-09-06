@@ -34,7 +34,6 @@ const ClassCard = ({
       const bookings = await httpClient.get(
         `/api/v1/class/bookings/${currentClass._id}`
       );
-      console.log(bookings.data.data);
       setCurrentBooking(bookings.data.data);
     }
   }, [currentClass]);
