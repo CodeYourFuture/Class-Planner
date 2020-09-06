@@ -1,0 +1,40 @@
+@keyframes Error {
+  0% {
+    border: 1px solid #eaeaea;
+  }
+  50% {
+    border: 1px solid #e50303;
+  }
+  100% {
+    border: 1px solid #eaeaea;
+  }
+}
+
+.new-course-calendar-container {
+  animation: FadeIn 500ms;
+}
+.new-course-calendar-form {
+  border: 1px solid #eaeaea;
+  font-family: "Open Sans", sans-serif;
+  transition: 500ms;
+  padding: 50px 20% 50px 10%;
+  margin: 15px auto 30px auto;
+}
+.test {
+  margin-left: 37.4px;
+}
+.plus-style,
+.minus-style {
+  margin-left: 15px;
+  color: #79d582;
+  transition: 200ms;
+}
+.minus-style {
+  margin-left: 15px;
+  color: #e50303;
+}
+.plus-style:hover,
+.minus-style:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

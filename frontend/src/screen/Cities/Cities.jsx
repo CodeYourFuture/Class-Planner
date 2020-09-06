@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer.jsx";
 import { connect } from "react-redux";
 import { Send_PageData } from "../../redux/actions";
 import { Get_Courses } from "../../redux/actions";
+import Loading from "../../components/Loading/Loading.jsx";
 import { Link } from "react-router-dom";
 import "./Cities.scss";
 
@@ -30,12 +31,12 @@ const Cities = ({ pageData, Send_PageData, courses, Get_Courses }) => {
     showCities();
   }, [showCities]);
   return (
-    <div className="home_container">
+    <div>
       <Header />
       <div className="upcoming-class-container">
         <p className="upcoming-class-title">{pageData.title}</p>
         <div className="course-card-container">
-          {allCities &&
+          {allCities ? (
             allCities.map((city, index) => {
               return (
                 <Link
@@ -54,7 +55,10 @@ const Cities = ({ pageData, Send_PageData, courses, Get_Courses }) => {
                   </div>
                 </Link>
               );
-            })}
+            })
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
       <Footer />

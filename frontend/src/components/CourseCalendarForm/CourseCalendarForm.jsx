@@ -56,13 +56,12 @@ const CourseCalendarForm = ({ pageData }) => {
     get_Classes_OnLoading();
     get_Classes_OnLoaded();
   }, [get_Classes_OnLoading, get_Classes_OnLoaded]);
-  console.log("0");
   return (
     <div className="coursecalendarform-container">
-      <p className="upcoming-class-title">
-        <p>{pageData.city}</p> <i class="fas fa-chevron-right"></i>
+      <div className="upcoming-class-title">
+        <p>{pageData.city}</p> <i className="fas fa-chevron-right"></i>
         <p>{pageData.title}</p>
-      </p>
+      </div>
       <div className="filter-container">
         <div className="control-container">
           <label>Intake: </label>

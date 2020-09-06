@@ -3,6 +3,7 @@
   margin: 15px auto 25px auto;
   display: grid;
   grid-template-columns: auto auto auto auto;
+  row-gap: 50px;
   justify-items: center;
   align-items: flex-start;
   border-top: 1px solid $classcard-border;

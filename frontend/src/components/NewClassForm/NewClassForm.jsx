@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import dayjs from "dayjs";
 import { createClass, updateClass } from "../../redux/actions";
 import { set_CurrentClass } from "../../redux/actions/ClassAction";
 import { Send_PageData } from "../../redux/actions";
+import httpClient from "../../common/httpClient/httpClient.js";
 import Alert from "../../components/Alert/Alarm.jsx";
 import "./NewClassForm.scss";
 
@@ -21,6 +22,7 @@ const NewClassForm = ({
   createClass,
   updateClass,
   CurrentClass,
+  Send_PageData,
   pageData,
 }) => {
   const history = useHistory();
@@ -28,6 +30,7 @@ const NewClassForm = ({
   const [submitted, setSubmitted] = useState(false);
   const [edit, setEdit] = useState(false);
   const [updated, setUpdated] = useState(false);
+  const [courses, setCourses] = useState(null);
 
   const [values, setValues] = useState({
     date: "",
@@ -37,8 +40,28 @@ const NewClassForm = ({
     startTime: "",
     endTime: "",
     syllabusURL: "",
-    scheduleType: "",
+    scheduleType: "Education Lead Class",
   });
+  const get_Courses = useCallback(async () => {
+    let allCourses = await httpClient.get(`/api/v1/courses/`);
+    allCourses = allCourses.data.data.filter(
+      (course) => course.cityName === pageData.city
+    );
+    setValues({
+      date: "",
+      courseCalendar_Id: allCourses && allCourses[0]._id,
+      status: "Class",
+      className: "",
+      startTime: "",
+      endTime: "",
+      syllabusURL: "",
+      scheduleType: "Education Lead Class",
+    });
+    setCourses(allCourses);
+  }, [pageData]);
+  useEffect(() => {
+    get_Courses();
+  }, [get_Courses]);
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -46,7 +69,6 @@ const NewClassForm = ({
     });
   };
   const handleSubmit = (e) => {
-    values.courseCalendar_Id = CurrentClass.courseCalendar_Id;
     values.status = weekState.status === "Class" ? true : false;
     if (edit) {
       if (!values.status) {
@@ -57,18 +79,21 @@ const NewClassForm = ({
       }
       e.preventDefault();
       updateClass(CurrentClass._id, values);
-      console.log(values);
       setTimeout(() => {
-        history.goBack();
+        Send_PageData(pageData.user, "Course Calendar", pageData.city);
+        history.push("/coursecalendar/");
       }, 2000);
       set_CurrentClass(values);
-      Send_PageData(pageData.user, "Course Calendar", pageData.city);
       setEdit(false);
       setUpdated(true);
     } else {
-      e.preventDefault();
+      e.preventDefault();      
       createClass(values);
       setSubmitted(true);
+      setTimeout(() => {
+        Send_PageData(pageData.user, "Course Calendar", pageData.city);
+        history.push("/coursecalendar/");
+      }, 2000);
     }
     setWeekState({ status: "Class" });
   };
@@ -91,10 +116,10 @@ const NewClassForm = ({
   }, [pageData, CurrentClass]);
   return (
     <div className="new-class-container">
-      <p className="upcoming-class-title">
-        <p>{pageData.city}</p> <i class="fas fa-chevron-right"></i>
+      <div className="upcoming-class-title">
+        <p>{pageData.city}</p> <i className="fas fa-chevron-right"></i>
         <p>{pageData.title}</p>
-      </p>
+      </div>
       <form className="new-class-form" onSubmit={handleSubmit}>
         {submitted && Object.keys(getErrors).length !== 0 && (
           <Alert type={"danger"} children={getErrors.syllabusURL} />
@@ -111,8 +136,25 @@ const NewClassForm = ({
             children={"New class successfully updated!"}
           />
         )}
-
-        <div className="form-group">
+        <div className="form-group font-size">
+          <label>Intake: </label>
+          <select
+            name="courseCalendar_Id"
+            className="form-control"
+            value={values.date}
+            onChange={handleChange}
+          >
+            {courses &&
+              courses.map((course, index) => {
+                return (
+                  <option key={index} value={course._id}>
+                    {course.intakeName}
+                  </option>
+                );
+              })}
+          </select>
+        </div>
+        <div className="form-group font-size">
           <label htmlFor="date">Date: </label>
           <input
             name="date"
@@ -123,7 +165,7 @@ const NewClassForm = ({
           ></input>
         </div>
 
-        <div className="form-group">
+        <div className="form-group  font-size">
           <label>Status:</label>
           <div>
             <input
@@ -144,7 +186,7 @@ const NewClassForm = ({
         </div>
         {weekState.status === "Class" ? (
           <>
-            <div className="form-group">
+            <div className="form-group font-size">
               <label htmlFor="ClassName">Class Name:</label>
               <input
                 name="className"
@@ -156,7 +198,7 @@ const NewClassForm = ({
               ></input>
             </div>
 
-            <div className="form-group">
+            <div className="form-group font-size">
               <label htmlFor="startTime">Start Time:</label>
               <input
                 name="startTime"
@@ -167,7 +209,7 @@ const NewClassForm = ({
               ></input>
             </div>
 
-            <div className="form-group">
+            <div className="form-group font-size">
               <label htmlFor="endTime">End Time:</label>
               <input
                 name="endTime"
@@ -178,7 +220,7 @@ const NewClassForm = ({
               ></input>
             </div>
 
-            <div className="form-group">
+            <div className="form-group font-size">
               <label htmlFor="syllabusURL">Syllabus URL:</label>
               <input
                 name="syllabusURL"
@@ -190,7 +232,7 @@ const NewClassForm = ({
               ></input>
             </div>
 
-            <div className="form-group">
+            <div className="form-group font-size">
               <label htmlFor="role">Schedule:</label>
               <select
                 name="scheduleType"
@@ -209,7 +251,7 @@ const NewClassForm = ({
             </div>
           </>
         ) : (
-          <div className="form-group">
+          <div className="form-group font-size">
             <label htmlFor="ClassName">Reason:</label>
             <input
               name="className"
@@ -222,7 +264,7 @@ const NewClassForm = ({
           </div>
         )}
 
-        <div className="form-group">
+        <div className="form-group font-size">
           <input
             type="submit"
             disabled={
@@ -241,6 +283,6 @@ const NewClassForm = ({
   );
 };
 
-export default connect(mapStateToProps, { createClass, updateClass })(
+export default connect(mapStateToProps, { createClass, updateClass, Send_PageData })(
   NewClassForm
 );
