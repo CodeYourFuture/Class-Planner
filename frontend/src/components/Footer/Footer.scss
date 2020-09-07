@@ -4,10 +4,26 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80px;
-  width: 100%;
   background-color: $footer-bg;
   font-family: $default-font-family;
-  font-weight: 300;
   color: $footer-text-color;
+  font-weight: 300;
+  font-size: 0.85rem;
+  height: 80px;
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  footer {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
 }
