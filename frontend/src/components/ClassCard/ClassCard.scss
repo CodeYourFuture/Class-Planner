@@ -1,6 +1,7 @@
 @import "../../scss/variables";
+@import "../../scss/buttons";
 
-.coursecalendar-class-size{
+.coursecalendar-class-size {
   transform: scale(0.9);
 }
 .classcard-body {
@@ -16,17 +17,19 @@
   letter-spacing: 1px;
   > p {
     color: $forms-title-color;
-  }  
+  }
 }
 
 .classcard-border {
-  border: 1px solid #f1f1f1;
   margin-top: 0px;
   width: 100%;
+  border: 0px;
+  padding: 10px 40px 20px 40px;
 }
 .classcard-container {
   display: flex;
   padding: 10px;
+  flex-direction: column;
 }
 
 .classcard-date {
@@ -37,7 +40,10 @@
   min-width: 200px;
   min-height: 200px;
   background-color: #f8f8f8;
-  margin: 0 10px 0 0;
+
+  width: 300px;
+  margin: auto auto 50px auto;
+
   border-bottom: 8px solid #d12f2f;
   color: #3f3f3f;
 
@@ -72,21 +78,20 @@
   align-items: flex-start;
 }
 .classcard-bottom {
-  align-items: center;
+  align-items: flex-end;
 }
 
 .classcard-title {
-  font-size: 1.5em;
-
+  font-size: 1em;
   margin-bottom: 2px;
 }
 .classcard-top div:nth-child(1) p:nth-child(2) {
   color: #aeaeae;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .classcard-top div:nth-child(1) p:nth-child(3) {
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .classcard-syllabus {
@@ -95,11 +100,11 @@
   transition: 200ms;
   font-family: $default-font-family;
   font-weight: 300;
-  width: 180px;
+  width: 100px;
   height: 50px;
   border-radius: 4px;
   border: 1px solid $btn-syllabus-border;
-
+  font-size: 14px;
   p {
     display: inline;
     margin: auto 5px;
@@ -122,7 +127,7 @@
 
 .classcard-bottom p:first-child {
   letter-spacing: 0px;
-  font-size: 0.75em;
+  font-size: 16px;
   font-weight: 300;
   color: $text-link-color;
 
@@ -136,22 +141,20 @@
 }
 .classcard-edit-bottom,
 .classcard-attend-bottom {
+  @extend %btn-submit;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 180px;
+  width: 100px;
   height: 50px;
-  font-size: 0.75em;
+  font-size: 16px;
   font-family: $default-font-family;
   font-weight: 300;
   color: white;
-  background-color: #03a9f4;
   border-radius: 4px;
-  border: 1px solid #43c4ff;
   transition: 200ms;
   text-decoration: none;
   &:hover {
-    background-color: #43c4ff;
     cursor: pointer;
   }
 }
@@ -202,6 +205,84 @@
   }
 }
 
-.holiday-week{
+.holiday-week {
   background-color: $text-light-color;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .classcard-container {
+    flex-direction: row;
+  }
+
+  .classcard-date {
+    margin: 0 10px 0 0;
+
+    p:first-child {
+      font-size: 3em;
+      font-weight: 300;
+      margin: 0 auto;
+    }
+
+    p:nth-child(2) {
+      font-size: 1em;
+      font-weight: 500;
+      margin: 0 auto;
+    }
+  }
+
+  .classcard-border {
+    border: 1px solid #f1f1f1;
+    margin-top: 0px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .classcard-main {
+    margin: 0 10px 0px 10px;
+  }
+
+  .classcard-syllabus {
+    width: 180px;
+    font-size: 1rem;
+  }
+
+  .classcard-top div:nth-child(1) p:nth-child(2) {
+    color: #aeaeae;
+    font-size: 15px;
+  }
+
+  .classcard-top div:nth-child(1) p:nth-child(3) {
+    font-size: 20px;
+  }
+
+  .classcard-bottom p:first-child {
+    font-size: 18px;
+  }
+
+  .classcard-edit-bottom,
+  .classcard-attend-bottom {
+    width: 180px;
+    font-size: 1rem;
+  }
+
+  .classcard-title {
+    font-size: 1.25em;
+    margin-bottom: 2px;
+  }
+}
+
+@media (min-width: 992px) {
+  .classcard-main {
+    margin: 0 auto 0px auto;
+  }
+
+  .classcard-bottom p:first-child {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
 }
