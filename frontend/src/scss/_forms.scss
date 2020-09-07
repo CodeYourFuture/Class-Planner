@@ -10,14 +10,14 @@
   align-items: center;
   justify-content: flex-end;
   color: $text-dark-color;
-  div{
+  div {
     width: 35%;
     height: 40px;
     display: flex;
     margin-right: 35%;
     align-items: center;
     justify-content: left;
-    label{
+    label {
       text-align: left;
     }
     input[type="radio"] {
@@ -26,7 +26,7 @@
       height: 25px;
       margin: 0px 0px 0px 15px;
     }
-}
+  }
   label {
     width: 20%;
     margin: auto;
@@ -52,7 +52,7 @@
     height: 40px;
     padding: 0 10px;
   }
-  
+
   input[type="submit"] {
     margin-top: 20px;
     text-align: center;
@@ -92,6 +92,12 @@
     box-shadow: none;
   }
 }
-.error-animation{
+.error-animation {
   animation: Error infinite 2s;
+}
+.err-msg {
+  color: red;
+  text-align: left;
+  margin-left: 33%;
+  font-size: small;
 }
