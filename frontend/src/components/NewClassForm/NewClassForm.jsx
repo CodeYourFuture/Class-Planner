@@ -47,16 +47,18 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
     allCourses = allCourses.data.data.filter(
       (course) => course.cityName === pageData.city
     );
-    setValues({
-      date: "",
-      courseCalendar_Id: allCourses && allCourses[0]._id,
-      status: "Class",
-      className: "",
-      startTime: "",
-      endTime: "",
-      syllabusURL: "",
-      scheduleType: "Education Lead Class",
-    });
+    // if (edit) {
+    //   setValues({
+    //     date: "",
+    //     courseCalendar_Id: allCourses && allCourses[0]._id,
+    //     status: "Class",
+    //     className: "",
+    //     startTime: "",
+    //     endTime: "",
+    //     syllabusURL: "",
+    //     scheduleType: "Education Lead Class",
+    //   });
+    // }
 
     setCourses(allCourses);
   }, [pageData]);
@@ -85,7 +87,10 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
             endTime: "",
             syllabusURL: "",
           });
-          Send_PageData(pageData.user, "Course Calendar", pageData.city);
+          setTimeout(() => {
+            Send_PageData(pageData.user, "Course Calendar", pageData.city);
+            history.push("/coursecalendar/");
+          }, 2000);
         }
       })
       .catch((err) => {
@@ -118,6 +123,13 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
       })
       .catch((err) => {
         if (err.response.data.success === false) {
+          setErrors({
+            date: err.response.data.data.date,
+            className: err.response.data.data.className,
+            startTime: err.response.data.data.startTime,
+            endTime: err.response.data.data.endTime,
+            syllabusURL: err.response.data.data.syllabusURL,
+          });
         }
       });
   };
