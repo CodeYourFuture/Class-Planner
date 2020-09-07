@@ -2,10 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import ClassCard from "../../components/ClassCard/ClassCard.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 import { connect } from "react-redux";
-import httpClient from "../../common/httpClient/httpClient.js";
+import axios from "axios";
 import { MonthNames } from "../../utils/MonthNames";
 import dayjs from "dayjs";
 import "./CourseCalendarForm.scss";
+
 const mapStateToProps = (state) => {
   return {
     pageData: state.PageReducer.pageData,
@@ -18,14 +19,14 @@ const CourseCalendarForm = ({ pageData }) => {
   const [courses, setCourses] = useState(null);
   const [classes, setClasses] = useState(null);
   const get_Courses = useCallback(async () => {
-    let allCourses = await httpClient.get(`/api/v1/courses/`);
+    let allCourses = await axios.get(`/api/v1/courses/`);
     allCourses = allCourses.data.data.filter(
       (course) => course.cityName === pageData.city
     );
     setCourses(allCourses);
   }, [pageData]);
   const get_Classes = useCallback(async (course) => {
-    let allClasses = await httpClient.get(`/api/v1/classes/`);
+    let allClasses = await axios.get(`/api/v1/classes/`);
     let counter = 0;
     allClasses = allClasses.data.data.filter(
       (Class) => course && Class.courseCalendar_Id === course

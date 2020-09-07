@@ -5,7 +5,8 @@ import dayjs from "dayjs";
 import { createClass, updateClass } from "../../redux/actions";
 import { set_CurrentClass } from "../../redux/actions/ClassAction";
 import { Send_PageData } from "../../redux/actions";
-import httpClient from "../../common/httpClient/httpClient.js";
+import axios from "axios";
+
 import Alert from "../../components/Alert/Alarm.jsx";
 import "./NewClassForm.scss";
 
@@ -43,7 +44,7 @@ const NewClassForm = ({
     scheduleType: "Education Lead Class",
   });
   const get_Courses = useCallback(async () => {
-    let allCourses = await httpClient.get(`/api/v1/courses/`);
+    let allCourses = await axios.get(`/api/v1/courses/`);
     allCourses = allCourses.data.data.filter(
       (course) => course.cityName === pageData.city
     );
@@ -87,7 +88,7 @@ const NewClassForm = ({
       setEdit(false);
       setUpdated(true);
     } else {
-      e.preventDefault();      
+      e.preventDefault();
       createClass(values);
       setSubmitted(true);
       setTimeout(() => {
@@ -283,6 +284,8 @@ const NewClassForm = ({
   );
 };
 
-export default connect(mapStateToProps, { createClass, updateClass, Send_PageData })(
-  NewClassForm
-);
+export default connect(mapStateToProps, {
+  createClass,
+  updateClass,
+  Send_PageData,
+})(NewClassForm);

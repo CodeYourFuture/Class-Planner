@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { connect } from "react-redux";
 import { Get_Courses } from "../../redux/actions";
-import httpClient from "../../common/httpClient/httpClient.js";
+import axios from "axios";
 import { useHistory } from "react-router";
 import { Send_PageData } from "../../redux/actions";
 import Alert from "../../components/Alert/Alarm.jsx";
@@ -39,7 +39,7 @@ const NewCourseCalendarForm = ({ Send_PageData, pageData, courses }) => {
     }
   }, [courses]);
   const newCourseCalendar = async () => {
-    const newCourse = await httpClient.post(`/api/v1/courses`, {
+    const newCourse = await axios.post(`/api/v1/courses`, {
       ...values,
     });
     if (newCourse.data.success) {

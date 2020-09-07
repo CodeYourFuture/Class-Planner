@@ -8,16 +8,16 @@ import {
   ACTION_SUCCESS,
   ACTION_ERROR,
 } from "./types";
-import httpClient from "../../common/httpClient/httpClient.js";
+import axios from "axios";
 
 export const Get_UpcomingClass = (city) => {
   return async (dispatch) => {
     try {
-      const courses = await httpClient.get(`/api/v1/courses/`);
+      const courses = await axios.get(`/api/v1/courses/`);
       const filtredCourses = courses.data.data
         .filter((course) => course.cityName === city)
         .map((course) => course._id);
-      const classes = await httpClient.get(`/api/v1/classes`);
+      const classes = await axios.get(`/api/v1/classes`);
       dispatch({
         type: ACTION_STARTED,
         actionType: GET_UPCOMINGCLASS,
@@ -44,7 +44,7 @@ export const Get_UpcomingClass = (city) => {
 export const Get_Classes = () => {
   return async (dispatch) => {
     try {
-      const classes = await httpClient.get(`/api/v1/classes`);
+      const classes = await axios.get(`/api/v1/classes`);
       dispatch({
         type: ACTION_STARTED,
         actionType: GET_CLASSES,
@@ -74,7 +74,7 @@ export const createClass = (newClassData) => {
         type: ACTION_STARTED,
         actionType: CREATE_CLASS,
       });
-      const newClass = await httpClient.post(`/api/v1/classes`, {
+      const newClass = await axios.post(`/api/v1/classes`, {
         ...newClassData,
       });
       dispatch({
@@ -125,7 +125,7 @@ export const updateClass = (classId, updatedData) => {
         type: ACTION_STARTED,
         actionType: UPDATE_CLASS,
       });
-      const newClass = await httpClient.put(`/api/v1/classes/${classId}`, {
+      const newClass = await axios.put(`/api/v1/classes/${classId}`, {
         ...updatedData,
       });
       dispatch({

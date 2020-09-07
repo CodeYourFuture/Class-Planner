@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
-
+const path = require("path");
 dotenv.config({ path: "./config/config.env" });
 connectDB();
 
@@ -15,12 +15,13 @@ app.use("/api/v1/bookings", require("./routes/bookings"));
 app.use("/api/v1/courses", require("./routes/courseCalendar"));
 app.use("/api/v1/class/bookings", require("./routes/classBookings"));
 
-app.get("/", (request, response) => {
-  response.json({
-    status: "success",
-    message: "keep Calm! Class Planner server is Okay",
-  });
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+}
 
 const PORT = process.env.PORT || 5000;
 

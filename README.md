@@ -6,12 +6,15 @@ This project's aim is to streamline and automate the process that we use to sign
 `git clone https://github.com/AKaramifar/Class-Planner.git` or if you use SSH (recommended):`git clone git@github.com:AKaramifar/Class-Planner.git`
 
 
-#### [Installation and run backend](./backend/README.md)
+#### [Installation and run backend]
 
-- `cd backend`
-- Add your mongodb connection string on `./backend/config/config.env` 
+- `create config.env file in config directory`
+-  `ADD the following onto config.env you created before:
+NODE_ENV=development
+PORT=5000
+MONGO_URI=your mongodb connection string` 
 - `npm install`
-- `npm run dev`
+- `npm run server`
  
  Server will be running on `http://localhost:5000`
 
@@ -29,8 +32,7 @@ Client will be running on `http://localhost:4000`
 
 - `cd frontend`
 - `npm install`
-- `cd ..`
-- `cd backend`
+- `cd ..` 
 - `npm install`
 - `npm run dev`
 
