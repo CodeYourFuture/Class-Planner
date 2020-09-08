@@ -40,25 +40,27 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
     className: "",
     startTime: "",
     endTime: "",
+    courseCalendar_Id: "",
     syllabusURL: "",
+    message: "",
   });
   const get_Courses = useCallback(async () => {
     let allCourses = await axios.get(`/api/v1/courses/`);
     allCourses = allCourses.data.data.filter(
       (course) => course.cityName === pageData.city
     );
-    // if (edit) {
-    //   setValues({
-    //     date: "",
-    //     courseCalendar_Id: allCourses && allCourses[0]._id,
-    //     status: "Class",
-    //     className: "",
-    //     startTime: "",
-    //     endTime: "",
-    //     syllabusURL: "",
-    //     scheduleType: "Education Lead Class",
-    //   });
-    // }
+    if (edit) {
+      setValues({
+        date: "",
+        courseCalendar_Id: allCourses && allCourses[0]._id,
+        status: "Class",
+        className: "",
+        startTime: "",
+        endTime: "",
+        syllabusURL: "",
+        scheduleType: "Education Lead Class",
+      });
+    }
 
     setCourses(allCourses);
   }, [pageData]);
@@ -85,6 +87,7 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
             startTime: "",
             endTime: "",
             syllabusURL: "",
+            courseCalendar_Id: "",
             message: "",
           });
           setTimeout(() => {
@@ -101,6 +104,7 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
             startTime: err.response.data.data.startTime,
             endTime: err.response.data.data.endTime,
             syllabusURL: err.response.data.data.syllabusURL,
+            courseCalendar_Id: err.response.data.data.courseCalendar_Id,
           });
         }
       });
@@ -127,6 +131,7 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
             className: err.response.data.data.className,
             startTime: err.response.data.data.startTime,
             endTime: err.response.data.data.endTime,
+            courseCalendar_Id: err.response.data.data.courseCalendar_Id,
             syllabusURL: err.response.data.data.syllabusURL,
             message: err.response.data.data.message,
           });
@@ -169,7 +174,6 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
       setEdit(true);
     }
   }, [pageData, CurrentClass]);
-
   return (
     <div className="new-class-container">
       <div className="upcoming-class-title">
@@ -206,10 +210,13 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
           <label>Intake: </label>
           <select
             name="courseCalendar_Id"
-            className="form-control"
-            value={values.date}
+            className={
+              errors.date ? "form-control error-animation" : "form-control"
+            }
+            value={values.courseCalendar_Id}
             onChange={handleChange}
           >
+            <option>Select here</option>
             {courses &&
               courses.map((course, index) => {
                 return (
@@ -219,6 +226,9 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
                 );
               })}
           </select>
+        </div>
+        <div className="err-msg">
+          {errors.courseCalendar_Id && <p> {errors.courseCalendar_Id}</p>}
         </div>
         <div className="form-group font-size">
           <label htmlFor="date">Date: </label>
