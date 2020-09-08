@@ -28,6 +28,7 @@ const Home = ({ Send_PageData }) => {
               <i className="fas fa-user"></i>Admin
             </p>
           </Link>
+
           <Link
             className="home-button"
             to="/Cities/"
@@ -37,6 +38,7 @@ const Home = ({ Send_PageData }) => {
               <i className="fas fa-user"></i>Volunteer
             </p>
           </Link>
+
           <Link
             className="home-button"
             to="/Cities/"

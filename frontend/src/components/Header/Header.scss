@@ -17,11 +17,24 @@
   height: 70px;
   background-color: #efefef;
 }
+
+.header-nav-container {
+  display: flex;
+  width: 100%;
+  margin-left: 10px;
+  justify-content: flex-start;
+  a {
+    i {
+      font-size: 30px;
+    }
+  }
+}
+
 .header-logo {
   font-family: "Alfa Slab One", cursive;
   font-size: larger;
   margin-top: 27px;
-  margin-left: 15%;
+  margin-left: 10px;
   height: 60px;
   width: fit-content;
   text-align: right;
@@ -47,19 +60,18 @@
 .header-nav,
 .home-titel {
   color: #3f3f3f;
-  margin-top: 15px;
-  margin-left: 17%;
   height: 40px;
   display: flex;
   align-items: center;
-  font-size: 30px;
   transition: 200ms;
   text-decoration: none;
-}
-.home-titel{
-  font-size: 16px;
+  margin: 15px 10px;
   font-weight: 600;
   font-family: $default-font-family;
+  font-size: 16px;
+  p {
+    display: none;
+  }
 }
 .home-titel i {
   font-size: 30px;
@@ -67,7 +79,7 @@
   margin-top: -5px;
 }
 .home-titel img {
-  margin-right: 10px;;
+  margin-right: 10px;
   width: 32px;
   height: 32px;
 }
@@ -89,4 +101,54 @@
 .header-selected {
   color: $header-nav-text-selected;
   cursor: default;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .header-nav,
+  .home-titel {
+    p {
+      display: block;
+    }
+  }
+  .header-firtchild {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .header-nav-container {
+    width: 100%;
+    margin: 0 auto;
+    a {
+      i {
+        font-size: 25px;
+      }
+      p {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .header-firtchild {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .header-nav-container {
+    width: 80%;
+    margin: 0 auto;
+    a {
+      i {
+        font-size: 25px;
+      }
+      p {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
 }

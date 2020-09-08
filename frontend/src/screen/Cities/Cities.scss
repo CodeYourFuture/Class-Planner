@@ -1,41 +1,83 @@
 @import "../../scss/variables";
 .course-card-container {
-  margin: 15px auto 25px auto;
   display: grid;
   grid-template-columns: auto auto auto auto;
-  row-gap: 50px;
+  row-gap: 20px;
+  column-gap: 10px;
   justify-items: center;
   align-items: flex-start;
   border-top: 1px solid $classcard-border;
-  padding-top: 35px;
+  padding: 35px 10px;
+  margin: 15px auto 25px auto;
 }
 .course-card {
   background-color: #f5f5f5;
-  width: 160px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 5px;
   transition: 200ms;
-  color:black;
+  color: black;
   text-decoration: none;
 }
 .course-card:hover {
-    background-color: #03A9F4;
-    color:white;
-    cursor: pointer;
+  background-color: #03a9f4;
+  color: white;
+  cursor: pointer;
 }
-.course-card div{
+.course-card div {
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+.course-card div:nth-child(1) {
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 20px;
+}
+.course-card div:nth-child(2) {
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-family: $default-font-family;
+}
+
+@media (min-width: 576px) {
+  .course-card-container {
+    row-gap: 35px;
+  }
+  .course-card {
+    width: 120px;
+    height: 110px;
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  .course-card {
+    width: 130px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .course-card-container {
+    row-gap: 50px;
+  }
+  .course-card {
+    width: 160px;
+    height: 150px;
+  }
+
+  .course-card div {
     width: 100%;
     height: 75px;
-    display: flex;
-}
-.course-card div:nth-child(1){
-    justify-content: center;
-    align-items: flex-end;
+  }
+  .course-card div:nth-child(1) {
     font-size: 40px;
-}
-.course-card div:nth-child(2){
-    justify-content: center;
-    align-items: center;
+  }
+  .course-card div:nth-child(2) {
     font-size: 18px;
-    font-family: $default-font-family;
+  }
 }
