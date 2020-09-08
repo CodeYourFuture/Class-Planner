@@ -22,7 +22,10 @@ exports.addClass = async (req, res) => {
   try {
     const { errors, isValid } = validateClassInput(req.body);
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(400).json({
+        success: false,
+        data: errors,
+      });
     }
 
     const newClass = await Class.create(req.body);
@@ -72,7 +75,10 @@ exports.updateClass = async (req, res) => {
     const classData = req.body;
     const { errors, isValid } = validateClassInput(classData);
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(400).json({
+        success: false,
+        data: errors,
+      });
     }
     const classId = req.params.id;
     const query = { _id: classId };
@@ -86,6 +92,9 @@ exports.updateClass = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(400).json(error);
+    return res.status(400).json({
+      success: false,
+      data: error,
+    });
   }
 };
