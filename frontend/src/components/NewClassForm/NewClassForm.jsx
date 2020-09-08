@@ -79,13 +79,13 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
       .then((response) => {
         if (response.data.success === true) {
           history.push("/coursecalendar/");
-          setSubmitted(true);
           setErrors({
             date: "",
             className: "",
             startTime: "",
             endTime: "",
             syllabusURL: "",
+            message: "",
           });
           setTimeout(() => {
             Send_PageData(pageData.user, "Course Calendar", pageData.city);
@@ -118,7 +118,6 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
           }, 2000);
           set_CurrentClass(values);
           setEdit(false);
-          setUpdated(true);
         }
       })
       .catch((err) => {
@@ -129,6 +128,7 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
             startTime: err.response.data.data.startTime,
             endTime: err.response.data.data.endTime,
             syllabusURL: err.response.data.data.syllabusURL,
+            message: err.response.data.data.message,
           });
         }
       });
@@ -144,9 +144,11 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
         values.endTime = null;
       }
       updateClass(CurrentClass._id, values);
+      setUpdated(true);
     } else {
       e.preventDefault();
       createClass(values);
+      setSubmitted(true);
     }
     setWeekState({ status: "Class" });
   };
@@ -185,7 +187,14 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
           <Alert type={"success"} children={"New class successfully added!"} />
         )}
         {updated && Object.keys(errors).length !== 0 && (
-          <Alert type={"danger"} children={errors.message} />
+          <Alert
+            type={"danger"}
+            children={
+              errors.message
+                ? errors.message
+                : "Please, correct the errors displayed, Thanks!"
+            }
+          />
         )}
         {updated && Object.keys(errors).length === 0 && (
           <Alert
@@ -306,7 +315,9 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
               <input
                 name="syllabusURL"
                 className={
-                  errors.date ? "form-control error-animation" : "form-control"
+                  errors.syllabusURL
+                    ? "form-control error-animation"
+                    : "form-control"
                 }
                 type="text"
                 placeholder="Syllabus URL"
@@ -337,17 +348,26 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
             </div>
           </>
         ) : (
-          <div className="form-group font-size">
-            <label htmlFor="ClassName">Reason:</label>
-            <input
-              name="className"
-              className="form-control"
-              type="text"
-              placeholder="Reason . . ."
-              value={values.className}
-              onChange={handleChange}
-            />
-          </div>
+          <>
+            <div className="form-group font-size">
+              <label htmlFor="ClassName">Reason:</label>
+              <input
+                name="className"
+                className={
+                  errors.className
+                    ? "form-control error-animation"
+                    : "form-control"
+                }
+                type="text"
+                placeholder="Reason . . ."
+                value={values.className}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="err-msg">
+              {errors.className && <p>{errors.className}</p>}
+            </div>
+          </>
         )}
 
         <div className="form-group font-size">
