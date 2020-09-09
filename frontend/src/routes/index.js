@@ -3,9 +3,9 @@ import Home from "../screen/Home/Home.jsx";
 import UpcomingClass from "../screen/UpcomingClass/UpcomingClass.jsx";
 import NewClass from "../screen/NewClass/NewClass.jsx";
 import NewBooking from "../screen/NewBooking/NewBooking.jsx";
-import CourseCalendar from "../screen/CourseCalendar/CourseCalendar.jsx";
+import CourseCalendarPage from "../screen/CourseCalendar/CourseCalendarPage.jsx";
 import ClassVolunteers from "../screen/ClassVolunteers/ClassVolunteers.jsx";
-import NewCourseCalendar from "../screen/NewCourseCalendar/NewCourseCalendar.jsx";
+import NewCourseCalendarPage from "../screen/NewCourseCalendar/NewCourseCalendarPage.jsx";
 import Cities from "../screen/Cities/Cities.jsx";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
@@ -13,8 +13,8 @@ export default () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/coursecalendar/" component={CourseCalendar} />
-      <Route exact path="/newcoursecalendar/" component={NewCourseCalendar} />
+      <Route exact path="/coursecalendar/" component={CourseCalendarPage} />
+      <Route exact path="/newcoursecalendar/" component={NewCourseCalendarPage} />
       <Route exact path="/classvolunteers/" component={ClassVolunteers} />
       <Route exact path="/upcomingclass/" component={UpcomingClass} />
       <Route exact path="/newclass/" component={NewClass} />

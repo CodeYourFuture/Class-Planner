@@ -4,8 +4,8 @@ import { Get_Courses } from "../../redux/actions";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { Send_PageData } from "../../redux/actions";
-import Alert from "../../components/Alert/Alarm.jsx";
-import "./NewCourseCalendarForm.scss";
+import Alert from "../Alert/Alarm.jsx";
+import "./NewCourseCalendar.scss";
 
 const mapStateToProps = (state) => {
   return {
