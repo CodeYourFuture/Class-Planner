@@ -1,20 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { connect } from "react-redux";
-import { Get_Courses } from "../../redux/actions";
-import axios from "axios";
-import { useHistory } from "react-router";
-import { Send_PageData } from "../../redux/actions";
-import Alert from "../Alert/Alarm.jsx";
-import "./NewCourseCalendar.scss";
+import React from "react";
 
-const mapStateToProps = (state) => {
-  return {
-    pageData: state.PageReducer.pageData,
-    courses: state.CourseReducer.courses,
-  };
-};
+import "./CourseCalendarForm.scss";
 
-const NewCourseCalendarForm = ({ Send_PageData, pageData, courses }) => {
+const CourseCalendarForm = ({ intakeName, cityName, startDate, endDate }) => {
   const history = useHistory();
   const [allCities, setAllCities] = useState(null);
   const [cityNameVisible, setCityNameVisible] = useState(false);
@@ -164,6 +152,4 @@ const NewCourseCalendarForm = ({ Send_PageData, pageData, courses }) => {
   );
 };
 
-export default connect(mapStateToProps, { Get_Courses, Send_PageData })(
-  NewCourseCalendarForm
-);
+export default NewCourseCalendarForm;
