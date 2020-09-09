@@ -95,7 +95,9 @@
 }
 .header-nav:nth-child(2),
 .header-nav:nth-child(3),
-.header-nav:nth-child(4) {
+.header-nav:nth-child(4),
+.header-nav:nth-child(5),
+.header-nav:nth-child(6) {
   margin-left: 50px;
 }
 .header-selected {
@@ -151,4 +153,12 @@
 }
 
 @media (min-width: 1200px) {
+}
+
+
+.nav-svg{
+  margin-right: 5px;
+  width: 26px;
+  height: 26px;
+  color: aqua;
 }

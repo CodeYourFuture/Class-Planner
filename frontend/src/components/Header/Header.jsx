@@ -59,7 +59,7 @@ const Header = ({ pageData, Send_PageData }) => {
                     onClick={() => passData("New Course Calendar")}
                   >
                     <i className="far fa-calendar-alt"></i>
-                    <p>New Course Calendar</p>
+                    <p>New Course</p>
                   </Link>
                 ) : null}
               </React.Fragment>
@@ -101,6 +101,32 @@ const Header = ({ pageData, Send_PageData }) => {
                   <i className="far fa-calendar-check"></i>
                   <p>Upcoming Class</p>
                 </Link>
+                <Link
+                  className={
+                    pageData.title === "Courses"
+                      ? "header-nav header-selected"
+                      : "header-nav"
+                  }
+                  to={"/courses/"}
+                  onClick={() => passData("Courses")}
+                >                  
+                  <i className="far fa-list-alt"></i>
+                  <p>Courses</p>
+                </Link>
+                {pageData.user === "admin" ? (
+                  <Link
+                    className={
+                      pageData.title === "New Course Calendar"
+                        ? "header-nav header-selected"
+                        : "header-nav"
+                    }
+                    to={"/newcoursecalendar/"}
+                    onClick={() => passData("New Course Calendar")}
+                  >
+                    <i className="far fa-calendar-plus"></i>
+                    <p>New Course</p>
+                  </Link>
+                ) : null}
                 {pageData.user === "admin" ? (
                   <Link
                     className={
@@ -111,7 +137,7 @@ const Header = ({ pageData, Send_PageData }) => {
                     to={"/newclass/"}
                     onClick={() => passData("New Class")}
                   >
-                    <i className="far fa-calendar-plus"></i>
+                    <i className="fas fa-chalkboard-teacher"></i>
                     <p>New Class</p>
                   </Link>
                 ) : null}
