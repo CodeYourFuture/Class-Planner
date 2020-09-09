@@ -5,12 +5,18 @@
 .home-main {
   min-height: calc(100vh - 270px);
 }
-.home-main div {
+.home-main div:nth-child(1) {
   display: flex;
   justify-content: center;
   margin: 0px 20% 35px 20%;
   height: fit-content;
 }
+
+.home-main-buttons-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .home-image {
   width: 100%;
   height: auto;
@@ -21,12 +27,12 @@
   display: flex;
   justify-content: space-between;
   align-content: center;
-  width: 100%;
-  margin: auto 25px;
+  width: 200px;
+  margin: 10px auto;
   height: 50px;
   transition: 200ms;
   font-family: $default-font-family;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1rem;
 
   border-radius: 4px;
@@ -62,6 +68,14 @@
 }
 
 @media (min-width: 992px) {
+  .home-main-buttons-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    margin: 0 auto;
+  }
 }
 
 @media (min-width: 1200px) {

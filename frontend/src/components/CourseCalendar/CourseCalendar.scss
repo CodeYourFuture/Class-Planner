@@ -1,22 +1,18 @@
 @import "../../scss/variables";
 .coursecalendarform-container {
   min-height: calc(100vh - 270px);
-  margin: auto;
-  width: 66%;
   animation: FadeIn 500ms;
   font-family: $default-font-family;
-  color: $forms-title-color;
-  font-size: 25px;
-  margin-bottom: 50px;
+  margin: 0 auto;
 }
 
 .filter-container {
-  border: 1px solid $classcard-border;
-  height: 100px;
-  margin: 15px auto;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-around;
+  border: 1px solid $classcard-border;
+  margin: 15px 10px;
 }
 .control-container {
   font-size: 18px;
@@ -24,7 +20,10 @@
   align-items: center;
   justify-content: center;
   color: $text-dark-color;
-  width: 300px;
+  width: 80%;
+  //width: 300px;
+  margin: 10px auto;
+
   select,
   input {
     text-align: left;
@@ -55,4 +54,28 @@
 
 .classes-list-container {
   overflow-y: overlay;
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  .coursecalendarform-container {
+    font-size: 25px;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .filter-container {
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid $classcard-border;
+    height: 100px;
+    margin: 15px auto;
+  }
+}
+@media (min-width: 1200px) {
 }

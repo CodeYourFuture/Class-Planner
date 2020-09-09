@@ -1,83 +1,118 @@
 @import "../../scss/variables";
 .course-card-container {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  row-gap: 20px;
+  grid-template-columns: auto auto;
+  row-gap: 30px;
   column-gap: 10px;
   justify-items: center;
   align-items: flex-start;
   border-top: 1px solid $classcard-border;
-  padding: 35px 10px;
+  padding: 30px 0px;
   margin: 15px auto 25px auto;
 }
 .course-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  color: $text-dark-color;
   background-color: #f5f5f5;
-  width: 100px;
-  height: 100px;
   border-radius: 5px;
   transition: 200ms;
-  color: black;
   text-decoration: none;
+
+  div {
+    text-align: center;
+  }
+  div:nth-child(1) {
+    margin: 10px auto;
+    align-self: flex-end;
+    font-size: 30px;
+  }
+  div:nth-child(2) {
+    margin: 0 auto;
+    font-size: 16px;
+    font-family: $default-font-family;
+  }
 }
 .course-card:hover {
-  background-color: #03a9f4;
+  background-color: $btn-submit-bg-hover;
   color: white;
   cursor: pointer;
-}
-.course-card div {
-  width: 100%;
-  height: 50px;
-  display: flex;
-}
-.course-card div:nth-child(1) {
-  justify-content: center;
-  align-items: flex-end;
-  font-size: 20px;
-}
-.course-card div:nth-child(2) {
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-family: $default-font-family;
 }
 
 @media (min-width: 576px) {
   .course-card-container {
+    grid-template-columns: auto auto;
+    row-gap: 40px;
+    column-gap: 10px;
     row-gap: 35px;
   }
   .course-card {
-    width: 120px;
-    height: 110px;
+    width: 200px;
+    height: 200px;
+    div:nth-child(1) {
+      margin: 10px auto;
+      align-self: flex-end;
+      font-size: 50px;
+    }
+    div:nth-child(2) {
+      margin: 0 auto;
+      font-size: 20px;
+      font-family: $default-font-family;
+    }
   }
 }
 
 @media (min-width: 768px) {
+  .course-card-container {
+    grid-template-columns: auto auto auto;
+    row-gap: 30px;
+    column-gap: 0;
+  }
 }
 
 @media (min-width: 992px) {
+  .course-card-container {
+    grid-template-columns: auto auto auto auto;
+    row-gap: 30px;
+    column-gap: 20px;
+  }
   .course-card {
-    width: 130px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
+    div:nth-child(1) {
+      margin: 10px auto;
+      align-self: flex-end;
+      font-size: 50px;
+    }
+    div:nth-child(2) {
+      margin: 0 auto;
+      font-size: 16px;
+      font-family: $default-font-family;
+    }
   }
 }
 
 @media (min-width: 1200px) {
   .course-card-container {
-    row-gap: 50px;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 30px;
+    column-gap: 30px;
   }
   .course-card {
-    width: 160px;
-    height: 150px;
-  }
-
-  .course-card div {
-    width: 100%;
-    height: 75px;
-  }
-  .course-card div:nth-child(1) {
-    font-size: 40px;
-  }
-  .course-card div:nth-child(2) {
-    font-size: 18px;
+    width: 200px;
+    height: 200px;
+    div:nth-child(1) {
+      margin: 10px auto;
+      align-self: flex-end;
+      font-size: 50px;
+    }
+    div:nth-child(2) {
+      margin: 0 auto;
+      font-size: 20px;
+      font-family: $default-font-family;
+    }
   }
 }
