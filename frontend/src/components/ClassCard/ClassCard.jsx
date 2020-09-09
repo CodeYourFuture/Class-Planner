@@ -121,6 +121,16 @@ const ClassCard = ({
                     {pageData.title !== "New Booking" && (
                       <div>
                         {pageData.user === "admin" && (
+                          <button
+                            onClick={() => {
+                              set_CurrentClass(currentClass);
+                            }}
+                            className="classcard-cancel-bottom"
+                          >
+                            Cancel
+                          </button>
+                        )}
+                        {pageData.user === "admin" && (
                           <Link
                             onClick={() => {
                               set_CurrentClass(currentClass);
