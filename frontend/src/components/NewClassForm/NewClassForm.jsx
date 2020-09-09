@@ -49,18 +49,6 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
     allCourses = allCourses.data.data.filter(
       (course) => course.cityName === pageData.city
     );
-    if (edit) {
-      setValues({
-        date: "",
-        courseCalendar_Id: allCourses && allCourses[0]._id,
-        status: "Class",
-        className: "",
-        startTime: "",
-        endTime: "",
-        syllabusURL: "",
-        scheduleType: "Education Lead Class",
-      });
-    }
 
     setCourses(allCourses);
   }, [pageData]);
@@ -211,7 +199,9 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
           <select
             name="courseCalendar_Id"
             className={
-              errors.date ? "form-control error-animation" : "form-control"
+              errors.courseCalendar_Id
+                ? "form-control error-animation"
+                : "form-control"
             }
             value={values.courseCalendar_Id}
             onChange={handleChange}
