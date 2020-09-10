@@ -8,8 +8,10 @@ import { set_CurrentClass } from "../../redux/actions/ClassAction";
 import NewBookingForm from "../NewBookingForm/NewBookingForm.jsx";
 import ClassVolunteersList from "../ClassVolunteersList/ClassVolunteersList.jsx";
 import axios from "axios";
+import Alert from "../Alert/Alarm.jsx";
 import Loading from "../Loading/Loading.jsx";
 import "./ClassCard.scss";
+import CancelClass from "./CancelClass";
 
 const mapStateToProps = (state) => {
   return {
@@ -28,6 +30,20 @@ const ClassCard = ({
 }) => {
   const [currentClass, setCurrentClass] = useState(null);
   const [currentBooking, setCurrentBooking] = useState(null);
+  const [cancelStatus, setCancelStatus] = useState(false);
+  const [alertStatus, setAlertStatus] = useState(false);
+  const [alertType, setAlertType] = useState("");
+  const [alertMessage, setAlertMessage] = useState("message");
+
+  const closeConfirmationAlert = () => {
+    setCancelStatus(false);
+  };
+
+  const showAlert = (type, message) => {
+    setAlertStatus(true);
+    setAlertType(type);
+    setAlertMessage(message);
+  };
 
   const get_booking = useCallback(async () => {
     if (currentClass) {
@@ -45,6 +61,14 @@ const ClassCard = ({
 
   return (
     <React.Fragment>
+      {cancelStatus && (
+        <CancelClass
+          currentClass={CurrentClass}
+          closeHandler={closeConfirmationAlert}
+          showAlert={showAlert}
+        />
+      )}
+      {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
       {!currentClass ? (
         <Loading />
       ) : (
@@ -134,6 +158,17 @@ const ClassCard = ({
                       )}
                     {pageData.title !== "New Booking" && (
                       <div>
+                        {pageData.user === "admin" && (
+                          <button
+                            onClick={() => {
+                              set_CurrentClass(currentClass);
+                              setCancelStatus(true);
+                            }}
+                            className="classcard-cancel-bottom"
+                          >
+                            Cancel
+                          </button>
+                        )}
                         {pageData.user === "admin" && (
                           <Link
                             onClick={() => {
