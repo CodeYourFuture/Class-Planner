@@ -2,13 +2,13 @@
 @import "../../scss/buttons";
 
 .coursecalendar-class-size {
-  transform: scale(0.9);
+  // transform: scale(0.9);
 }
 .classcard-body {
   animation: FadeIn 500ms;
 }
 .classcard-main {
-  margin: 0 auto 0px auto;
+  margin: 0 auto 30px auto;
   display: flex;
   flex-wrap: wrap;
   font-family: $default-font-family;
@@ -23,26 +23,26 @@
 .classcard-border {
   margin-top: 0px;
   width: 100%;
-  border: 0px;
-  padding: 10px 40px 20px 40px;
+  margin: auto 5px;
 }
 .classcard-container {
   display: flex;
-  padding: 10px;
+  margin: 5px;
   flex-direction: column;
+  border: 1px solid $form-border-color;
 }
 
 .classcard-date {
   display: flex;
   flex-direction: column;
-  align-content: center;
   justify-content: center;
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 150px;
+  min-height: 150px;
+  width: 100%;
   background-color: #f8f8f8;
 
-  width: 300px;
-  margin: auto auto 50px auto;
+  margin: auto auto 30px 0;
+  //margin: auto auto 50px auto;
 
   border-bottom: 8px solid #d12f2f;
   color: #3f3f3f;
@@ -66,6 +66,7 @@
   justify-content: space-between;
   width: 100%;
   color: $text-dark-color;
+  padding: 10px;
 }
 
 .classcard-top,
@@ -179,7 +180,7 @@
   text-decoration: none;
 }
 .weeknumber-container {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-content: center;
   justify-content: center;
@@ -209,12 +210,35 @@
   background-color: $text-light-color;
 }
 
+.classcard-date-container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-self: flex-start;
+  width: 100%;
+}
+.weeknumber-container-sm {
+  display: flex;
+  background-color: $classcard-weeknumber-bg;
+  margin-bottom: 5px;
+  height: 60px;
+  text-align: center;
+  p {
+    align-self: center;
+    font-family: $default-font-family;
+    font-size: 26px;
+    font-weight: 500;
+    color: $text-color-light-pale;
+    margin: 0 auto;
+  }
+}
+
 @media (min-width: 576px) {
 }
 
 @media (min-width: 768px) {
   .classcard-container {
     flex-direction: row;
+    border: none;
   }
 
   .classcard-date {
@@ -233,19 +257,23 @@
     }
   }
 
+  .classcard-info {
+    padding: none;
+  }
+  .classcard-main {
+    margin: 0 5px 0px 5px;
+  }
+
   .classcard-border {
     border: 1px solid #f1f1f1;
     margin-top: 0px;
     width: 100%;
-    padding: 0;
-  }
-
-  .classcard-main {
-    margin: 0 10px 0px 10px;
+    margin: 20px auto;
   }
 
   .classcard-syllabus {
-    width: 180px;
+    width: 120px;
+    height: 50px;
     font-size: 1rem;
   }
 
@@ -264,13 +292,44 @@
 
   .classcard-edit-bottom,
   .classcard-attend-bottom {
-    width: 180px;
+    width: 120px;
+    height: 50px;
     font-size: 1rem;
   }
 
   .classcard-title {
     font-size: 1.25em;
     margin-bottom: 2px;
+  }
+
+  .classcard-date-container {
+    // flex-direction: column-reverse;
+    //align-self: flex-start;
+    width: 200px;
+  }
+  .weeknumber-container-sm {
+    display: none;
+  }
+
+  .weeknumber-container {
+    display: flex;
+
+    justify-content: center;
+    min-width: 40px;
+    min-height: 200px;
+
+    p:first-child {
+      font-size: 12px;
+      font-weight: 200;
+      margin: 0 auto;
+    }
+
+    p:nth-child(2) {
+      font-size: 1em;
+      font-weight: 500;
+      margin: 0 auto;
+      margin-top: 5px;
+    }
   }
 }
 
@@ -282,7 +341,35 @@
   .classcard-bottom p:first-child {
     font-size: 20px;
   }
+
+  .weeknumber-container-sm {
+    display: none;
+  }
+
+  .weeknumber-container {
+    display: flex;
+    min-width: 80px;
+    min-height: 200px;
+    margin: 0 0 0 10px;
+
+    p:first-child {
+      font-size: 0.7em;
+      font-weight: 300;
+      margin: 0 auto;
+    }
+
+    p:nth-child(2) {
+      font-size: 2em;
+      font-weight: 500;
+      margin: 0 auto;
+      margin-top: 10px;
+      margin-bottom: 35px;
+    }
+  }
 }
 
 @media (min-width: 1200px) {
+  .weeknumber-container-sm {
+    display: none;
+  }
 }

@@ -14,7 +14,7 @@ const Header = ({ pageData, Send_PageData }) => {
   };
   return (
     <div className="header">
-      <div className="header-firtchild">
+      <div className="header-logo-container">
         <Link className="home-link header-logo" to="/">
           <div>
             <p> &lt;</p>
@@ -26,7 +26,7 @@ const Header = ({ pageData, Send_PageData }) => {
           <p>FUTURE</p>
         </Link>
       </div>
-      <div className="header-secondchild">
+      <div className="header-down-container">
         <nav className="header-nav-container">
           {pageData ? (
             pageData.title === "Home" ? (
@@ -109,7 +109,7 @@ const Header = ({ pageData, Send_PageData }) => {
                   }
                   to={"/courses/"}
                   onClick={() => passData("Courses")}
-                >                  
+                >
                   <i className="far fa-list-alt"></i>
                   <p>Courses</p>
                 </Link>

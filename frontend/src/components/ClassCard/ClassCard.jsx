@@ -58,16 +58,30 @@ const ClassCard = ({
           <div className="classcard-main">
             <div className="classcard-border">
               <div className="classcard-container">
-                <div className="classcard-date">
-                  <p>{new Date(currentClass.date).getDate().toString()}</p>
-                  <p>
-                    {
-                      MonthNames[
-                        new Date(currentClass.date).getMonth().toString()
-                      ]
-                    }
-                  </p>
+                <div className="classcard-date-container">
+                  <div className="classcard-date">
+                    <p>{new Date(currentClass.date).getDate().toString()}</p>
+                    <p>
+                      {
+                        MonthNames[
+                          new Date(currentClass.date).getMonth().toString()
+                        ]
+                      }
+                    </p>
+                  </div>
+                  {isNaN(WeekNumber) === false ? (
+                    <div
+                      className={
+                        currentClass.status
+                          ? "weeknumber-container-sm"
+                          : "weeknumber-container-sm holiday-week"
+                      }
+                    >
+                      <p> Week {WeekNumber}</p>
+                    </div>
+                  ) : null}
                 </div>
+
                 <div className="classcard-info">
                   <div className="classcard-top">
                     <div>
