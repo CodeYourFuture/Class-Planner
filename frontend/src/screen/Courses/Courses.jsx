@@ -6,7 +6,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import "./Courses.scss";
 
-const NewCoursePage = () => {
+const NewCoursePage = ({ user, city, component }) => {
   const [courses, setCourses] = useState(null);
   const getCourses = useCallback(async () => {
     let allCourses = await axios.get(`/api/v1/courses`);
@@ -20,11 +20,11 @@ const NewCoursePage = () => {
   }, [getCourses]);
   return (
     <div>
-      <Header />
+      <Header user={user} city={city} component={component} />
       {courses ? (
         <div className="courses-container">
           <div className="upcoming-class-title">
-            <p>London</p> <i className="fas fa-chevron-right"></i>
+            <p>{city}</p> <i className="fas fa-chevron-right"></i>
             <p>Courses</p>
           </div>
           <table className="Course-table" cellSpacing="0" cellPadding="0">
