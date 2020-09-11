@@ -73,7 +73,6 @@ const CourseCalendar = ({ pageData }) => {
                 .map((course, index) => {
                   return (
                     <option value={course._id} key={index}>
-                      {" "}
                       {course.intakeName}
                     </option>
                   );
@@ -87,7 +86,6 @@ const CourseCalendar = ({ pageData }) => {
             {MonthNames.map((month, index) => {
               return (
                 <option value={index + 1} key={index}>
-                  {" "}
                   {month}
                 </option>
               );

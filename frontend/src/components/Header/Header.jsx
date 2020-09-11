@@ -30,7 +30,7 @@ const Header = ({ pageData, Send_PageData }) => {
         <nav className="header-nav-container">
           {pageData ? (
             pageData.title === "Home" ? (
-              <div className="home-titel">
+              <div className="home-app-title">
                 <img src="../files/calendar.svg" alt="Calendar"></img>
                 <p>Class Planner</p>
               </div>

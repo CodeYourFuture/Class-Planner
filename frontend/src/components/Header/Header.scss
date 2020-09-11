@@ -61,8 +61,8 @@
   font-size: 20px;
   color: $logo-light-color;
 }
-.header-nav,
-.home-titel {
+
+%menu-itme {
   color: #3f3f3f;
   display: flex;
   align-items: center;
@@ -73,21 +73,33 @@
   font-weight: 600;
   font-family: $default-font-family;
   font-size: 16px;
+  i {
+    font-size: 30px;
+    margin-right: 10px;
+    margin-top: -5px;
+  }
+  img {
+    margin: auto 10px;
+    width: 32px;
+    height: 32px;
+  }
+}
 
+.header-nav,
+.home-titel {
+  @extend %menu-itme;
   p {
     display: none;
   }
 }
-.home-titel i {
-  font-size: 30px;
-  margin-right: 10px;
-  margin-top: -5px;
+
+.home-app-title {
+  @extend %menu-itme;
+  p {
+    display: block;
+  }
 }
-.home-titel img {
-  margin: auto 10px;
-  width: 32px;
-  height: 32px;
-}
+
 .header-nav:hover {
   color: $header-nav-text-hover;
   cursor: pointer;
