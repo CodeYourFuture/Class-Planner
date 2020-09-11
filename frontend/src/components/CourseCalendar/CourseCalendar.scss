@@ -1,0 +1,81 @@
+@import "../../scss/variables";
+.coursecalendarform-container {
+  min-height: calc(100vh - 270px);
+  animation: FadeIn 500ms;
+  font-family: $default-font-family;
+  margin: 0 auto;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid $classcard-border;
+  margin: 15px 10px;
+}
+.control-container {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-dark-color;
+  width: 80%;
+  //width: 300px;
+  margin: 10px auto;
+
+  select,
+  input {
+    text-align: left;
+    font-family: $default-font-family;
+    font-weight: 500;
+    font-size: 0.85em;
+    width: 250px;
+    height: 40px;
+    border: 1px solid $form-border-color;
+    border-radius: 4px;
+    margin-left: 10px;
+    text-indent: 15px;
+    padding-right: 10px;
+    option {
+      text-indent: 15px;
+    }
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+  input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+}
+
+.classes-list-container {
+  overflow-y: overlay;
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  .coursecalendarform-container {
+    font-size: 25px;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .filter-container {
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid $classcard-border;
+    height: 100px;
+    margin: 15px auto;
+  }
+}
+@media (min-width: 1200px) {
+}

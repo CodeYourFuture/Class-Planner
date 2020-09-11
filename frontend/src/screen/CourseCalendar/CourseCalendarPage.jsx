@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../../components/Header/Header.jsx";
-import CourseCalendarForm from "../../components/CourseCalendarForm/CourseCalendarForm.jsx";
+import CourseCalendar from "../../components/CourseCalendar/CourseCalendar.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 
-const CourseCalendar = () => {
+const CourseCalendarPage = () => {
   return (
     <div>
       <Header />
-      <CourseCalendarForm />
+      <CourseCalendar />
       <Footer />
     </div>
   );
 };
 
-export default CourseCalendar;
+export default CourseCalendarPage;

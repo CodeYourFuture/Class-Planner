@@ -18,7 +18,7 @@ const Home = ({ Send_PageData }) => {
         <div>
           <img className="home-image" src="../files/Home.png" alt="CYF" />
         </div>
-        <div>
+        <div className="home-main-buttons-container">
           <Link
             onClick={() => Send_PageData("admin", "Cities", "None")}
             className="home-button"
@@ -28,6 +28,7 @@ const Home = ({ Send_PageData }) => {
               <i className="fas fa-user"></i>Admin
             </p>
           </Link>
+
           <Link
             className="home-button"
             to="/Cities/"
@@ -37,6 +38,7 @@ const Home = ({ Send_PageData }) => {
               <i className="fas fa-user"></i>Volunteer
             </p>
           </Link>
+
           <Link
             className="home-button"
             to="/Cities/"

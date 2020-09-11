@@ -1,8 +1,9 @@
+@import "../../scss/variables";
 
-@import "../../scss/variables";.upcoming-class-container {
+.upcoming-class-container {
   min-height: calc(100vh - 270px);
   margin: auto;
-  width: 66%;
+  width: 100%;
   animation: FadeIn 500ms;
 }
 .upcoming-class-title {
@@ -10,14 +11,46 @@
   align-content: center;
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
-  font-size: 25px;
+  font-size: 20px;
   letter-spacing: 1px;
   color: #79d582;
-  margin-bottom: 15px;
+
+  margin: 10px auto 30px 5px;
 }
-.upcoming-class-title i{
+.upcoming-class-title i {
   margin: 7px;
 }
-.upcoming-class-title p:nth-child(3){
+.upcoming-class-title p:nth-child(3) {
   color: $logo-dark-color;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .upcoming-class-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .upcoming-class-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .upcoming-class-title {
+    font-weight: 500;
+    font-size: 22px;
+  }
+}
+@media (min-width: 1200px) {
+  .upcoming-class-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .upcoming-class-title {
+    font-weight: 600;
+    font-size: 24px;
+  }
 }

@@ -14,7 +14,7 @@ const Header = ({ pageData, Send_PageData }) => {
   };
   return (
     <div className="header">
-      <div className="header-firtchild">
+      <div className="header-logo-container">
         <Link className="home-link header-logo" to="/">
           <div>
             <p> &lt;</p>
@@ -26,97 +26,125 @@ const Header = ({ pageData, Send_PageData }) => {
           <p>FUTURE</p>
         </Link>
       </div>
-      <div className="header-secondchild">
-        {pageData ? (
-          pageData.title === "Home" ? (
-            <div className="home-titel">
-              <img src="../files/calendar.svg" alt="Calendar"></img>
-              <p>Class Planner</p>
-            </div>
-          ) : ["Cities", "New Course Calendar"].includes(pageData.title) ? (
-            <React.Fragment>
-              <Link
-                className={
-                  pageData.title === "Cities"
-                    ? "header-nav header-selected"
-                    : "header-nav"
-                }
-                to={"/cities/"}
-                onClick={() => passData("Cities")}
-              >
-                <i className="fas fa-map-marked-alt"></i>
-                <p>Cities</p>
-              </Link>
-              {pageData.user === "admin" ? (
+      <div className="header-down-container">
+        <nav className="header-nav-container">
+          {pageData ? (
+            pageData.title === "Home" ? (
+              <div className="home-titel">
+                <img src="../files/calendar.svg" alt="Calendar"></img>
+                <p>Class Planner</p>
+              </div>
+            ) : ["Cities", "New Course Calendar"].includes(pageData.title) ? (
+              <React.Fragment>
                 <Link
                   className={
-                    pageData.title === "New Course Calendar"
+                    pageData.title === "Cities"
                       ? "header-nav header-selected"
                       : "header-nav"
                   }
-                  to={"/newcoursecalendar/"}
-                  onClick={() => passData("New Course Calendar")}
+                  to={"/cities/"}
+                  onClick={() => passData("Cities")}
+                >
+                  <i className="fas fa-map-marked-alt"></i>
+                  <p>Cities</p>
+                </Link>
+                {pageData.user === "admin" ? (
+                  <Link
+                    className={
+                      pageData.title === "New Course Calendar"
+                        ? "header-nav header-selected"
+                        : "header-nav"
+                    }
+                    to={"/newcoursecalendar/"}
+                    onClick={() => passData("New Course Calendar")}
+                  >
+                    <i className="far fa-calendar-alt"></i>
+                    <p>New Course</p>
+                  </Link>
+                ) : null}
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Link
+                  className={
+                    pageData.title === "Cities"
+                      ? "header-nav header-selected"
+                      : "header-nav"
+                  }
+                  to={"/cities/"}
+                  onClick={() => passData("Cities")}
+                >
+                  <i className="fas fa-map-marked-alt"></i>
+                  <p>Cities</p>
+                </Link>
+                <Link
+                  className={
+                    pageData.title === "Course Calendar"
+                      ? "header-nav header-selected"
+                      : "header-nav"
+                  }
+                  to={"/coursecalendar/"}
+                  onClick={() => passData("Course Calendar")}
                 >
                   <i className="far fa-calendar-alt"></i>
-                  <p>New Course Calendar</p>
+                  <p>Course Calendar</p>
                 </Link>
-              ) : null}
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Link
-                className={
-                  pageData.title === "Cities"
-                    ? "header-nav header-selected"
-                    : "header-nav"
-                }
-                to={"/cities/"}
-                onClick={() => passData("Cities")}
-              >
-                <i className="fas fa-map-marked-alt"></i>
-                <p>Cities</p>
-              </Link>
-              <Link
-                className={
-                  pageData.title === "Course Calendar"
-                    ? "header-nav header-selected"
-                    : "header-nav"
-                }
-                to={"/coursecalendar/"}
-                onClick={() => passData("Course Calendar")}
-              >
-                <i className="far fa-calendar-alt"></i>
-                <p>Course Calendar</p>
-              </Link>
-              <Link
-                className={
-                  pageData.title === "Upcoming Class"
-                    ? "header-nav header-selected"
-                    : "header-nav"
-                }
-                to={"/upcomingclass/"}
-                onClick={() => passData("Upcoming Class")}
-              >
-                <i className="far fa-calendar-check"></i>
-                <p>Upcoming Class</p>
-              </Link>
-              {pageData.user === "admin" ? (
                 <Link
                   className={
-                    pageData.title === "New Class"
+                    pageData.title === "Upcoming Class"
                       ? "header-nav header-selected"
                       : "header-nav"
                   }
-                  to={"/newclass/"}
-                  onClick={() => passData("New Class")}
+                  to={"/upcomingclass/"}
+                  onClick={() => passData("Upcoming Class")}
                 >
-                  <i className="far fa-calendar-plus"></i>
-                  <p>New Class</p>
+                  <i className="far fa-calendar-check"></i>
+                  <p>Upcoming Class</p>
                 </Link>
-              ) : null}
-            </React.Fragment>
-          )
-        ) : null}
+                <Link
+                  className={
+                    pageData.title === "Courses"
+                      ? "header-nav header-selected"
+                      : "header-nav"
+                  }
+                  to={"/courses/"}
+                  onClick={() => passData("Courses")}
+                >
+                  <i className="far fa-list-alt"></i>
+                  <p>Courses</p>
+                </Link>
+                {pageData.user === "admin" ? (
+                  <Link
+                    className={
+                      pageData.title === "New Course Calendar"
+                        ? "header-nav header-selected"
+                        : "header-nav"
+                    }
+                    to={"/newcoursecalendar/"}
+                    onClick={() => passData("New Course Calendar")}
+                  >
+                    <i className="far fa-calendar-plus"></i>
+                    <p>New Course</p>
+                  </Link>
+                ) : null}
+                {pageData.user === "admin" ? (
+                  <Link
+                    className={
+                      pageData.title === "New Class"
+                        ? "header-nav header-selected"
+                        : "header-nav"
+                    }
+                    to={"/newclass/"}
+                    onClick={() => passData("New Class")}
+                  >
+                    <i className="fas fa-chalkboard-teacher"></i>
+                    <p>New Class</p>
+                  </Link>
+                ) : null}
+              </React.Fragment>
+            )
+          ) : null}
+        </nav>
       </div>
     </div>
   );

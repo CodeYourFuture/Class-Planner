@@ -2,26 +2,43 @@
 
 .header {
   position: sticky;
-  height: 160px;
+  //height: 160px;
   width: 100%;
   background-color: #fff;
   margin-bottom: 30px;
 }
-.header-firtchild,
-.header-secondchild {
+.header-logo-container {
+  display: flex;
   height: 90px;
   width: 100%;
-  display: flex;
 }
-.header-secondchild {
-  height: 70px;
+.header-down-container {
+  display: flex;
+  width: 100%;
+  height: 90px;
   background-color: #efefef;
 }
+
+.header-nav-container {
+  display: flex;
+  width: 100%;
+  margin: 5px auto;
+  justify-content: flex-start;
+  align-content: flex-start;
+
+  a {
+    margin: auto 20px;
+    i {
+      font-size: 25px;
+    }
+  }
+}
+
 .header-logo {
   font-family: "Alfa Slab One", cursive;
   font-size: larger;
   margin-top: 27px;
-  margin-left: 15%;
+  margin-left: 10px;
   height: 60px;
   width: fit-content;
   text-align: right;
@@ -47,19 +64,19 @@
 .header-nav,
 .home-titel {
   color: #3f3f3f;
-  margin-top: 15px;
-  margin-left: 17%;
-  height: 40px;
   display: flex;
   align-items: center;
-  font-size: 30px;
   transition: 200ms;
   text-decoration: none;
-}
-.home-titel{
-  font-size: 16px;
+  margin-right: 25px;
+  padding: 0;
   font-weight: 600;
   font-family: $default-font-family;
+  font-size: 16px;
+
+  p {
+    display: none;
+  }
 }
 .home-titel i {
   font-size: 30px;
@@ -67,7 +84,7 @@
   margin-top: -5px;
 }
 .home-titel img {
-  margin-right: 10px;;
+  margin: auto 10px;
   width: 32px;
   height: 32px;
 }
@@ -83,10 +100,69 @@
 }
 .header-nav:nth-child(2),
 .header-nav:nth-child(3),
-.header-nav:nth-child(4) {
-  margin-left: 50px;
+.header-nav:nth-child(4),
+.header-nav:nth-child(5),
+.header-nav:nth-child(6) {
+  margin-left: 8px;
 }
 .header-selected {
   color: $header-nav-text-selected;
   cursor: default;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .header-nav,
+  .home-titel {
+    p {
+      display: block;
+    }
+  }
+  .header-logo-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .header-nav-container {
+    width: 100%;
+    margin: 0 auto;
+    a {
+      i {
+        font-size: 25px;
+      }
+      p {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .header-logo-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .header-nav-container {
+    width: 80%;
+    margin: 0 auto;
+    a {
+      i {
+        font-size: 25px;
+      }
+      p {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+}
+
+.nav-svg {
+  margin-right: 5px;
+  width: 26px;
+  height: 26px;
+  color: aqua;
 }

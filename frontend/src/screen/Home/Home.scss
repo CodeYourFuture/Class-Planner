@@ -1,27 +1,97 @@
 @import "../../scss/variables";
-.home_container{
-    animation: FadeIn 500ms;
+.home_container {
+  animation: FadeIn 500ms;
 }
-.home-main{
-    min-height: calc(100vh - 270px);
+.home-main {
+  min-height: calc(100vh - 270px);
 }
-.home-main div{
+.home-main div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  margin: 0px 20% 35px 20%;
+  height: fit-content;
+}
+
+.home-main-buttons-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-image {
+  width: 100%;
+  height: auto;
+  margin: 15px 0px 25px 0px;
+}
+
+.home-button {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 200px;
+  margin: 10px auto;
+  height: 50px;
+  transition: 200ms;
+  font-family: $default-font-family;
+  font-weight: 400;
+  font-size: 1rem;
+
+  border-radius: 4px;
+  border: 1px solid $btn-syllabus-border;
+  color: #3f3f3f;
+  text-decoration: none;
+
+  p {
     display: flex;
+    width: 100%;
     justify-content: center;
-    // min-width: 200px;  // for respnsive design
+    margin: auto 15px;
+
+    i {
+      margin-right: 10px;
+    }
+  }
+
+  &:hover {
+    background-color: $btn-syllabus-bg-hover;
+  }
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .home-image {
+    width: 80%;
+    height: auto;
+    margin: 15px 0px 25px 0px;
+  }
+}
+
+@media (min-width: 992px) {
+  .home-main-buttons-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-main div {
     width: 60%;
     margin: 0px 20% 35px 20%;
     height: fit-content;
-    select{
-        width: 40%;
-    }
-}
-.home-image{
-    width: 470px;
+  }
+
+  .home-image {
+    width: auto;
     height: 239px;
     margin: 15px 0px 25px 0px;
-}
-.home-button {
+  }
+
+  .home-button {
     display: flex;
     justify-content: center;
     transition: 200ms;
@@ -38,16 +108,12 @@
       display: inline;
       margin: auto 15px;
     }
-    p i{
-        margin-right: 10px;
+    p i {
+      margin-right: 10px;
     }
-  
-    // :nth-child(2) {
-    //   margin: auto 5px;
-    // }
-  
+
     &:hover {
       background-color: $btn-syllabus-bg-hover;
     }
   }
-
+}

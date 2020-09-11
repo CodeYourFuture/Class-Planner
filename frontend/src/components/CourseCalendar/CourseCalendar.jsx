@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
-import ClassCard from "../../components/ClassCard/ClassCard.jsx";
-import Loading from "../../components/Loading/Loading.jsx";
+import ClassCard from "../ClassCard/ClassCard.jsx";
+import Loading from "../Loading/Loading.jsx";
 import { connect } from "react-redux";
 import axios from "axios";
 import { MonthNames } from "../../utils/MonthNames";
 import dayjs from "dayjs";
-import "./CourseCalendarForm.scss";
+import "./CourseCalendar.scss";
 
 const mapStateToProps = (state) => {
   return {
     pageData: state.PageReducer.pageData,
   };
 };
-const CourseCalendarForm = ({ pageData }) => {
+const CourseCalendar = ({ pageData }) => {
   const [showHolidays, setShowHolidays] = useState(false);
   const [course, setCourse] = useState(null);
   const [month, setMonth] = useState("All-Months");
@@ -127,4 +127,4 @@ const CourseCalendarForm = ({ pageData }) => {
   );
 };
 
-export default connect(mapStateToProps)(CourseCalendarForm);
+export default connect(mapStateToProps)(CourseCalendar);
