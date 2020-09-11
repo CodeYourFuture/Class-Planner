@@ -1,34 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { MonthNames } from "../../utils/MonthNames";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { Get_BookingByClassId } from "../../redux/actions/BookingAction";
-import { Send_PageData } from "../../redux/actions/PageAction";
-import { set_CurrentClass } from "../../redux/actions/ClassAction";
 import NewBookingForm from "../NewBookingForm/NewBookingForm.jsx";
 import ClassVolunteersList from "../ClassVolunteersList/ClassVolunteersList.jsx";
 import axios from "axios";
 import Alert from "../Alert/Alarm.jsx";
 import Loading from "../Loading/Loading.jsx";
+import users from "../../data/users.json";
 import "./ClassCard.scss";
 import CancelClass from "./CancelClass";
 
-const mapStateToProps = (state) => {
-  return {
-    pageData: state.PageReducer.pageData,
-    CurrentClass: state.ClassReducer.currentClass,
-  };
-};
-
-const ClassCard = ({
-  Class,
-  CurrentClass,
-  set_CurrentClass,
-  WeekNumber,
-  pageData,
-  Send_PageData,
-}) => {
-  const [currentClass, setCurrentClass] = useState(null);
+const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
+  console.log(city);
   const [currentBooking, setCurrentBooking] = useState(null);
   const [cancelStatus, setCancelStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
@@ -46,35 +29,31 @@ const ClassCard = ({
   };
 
   const get_booking = useCallback(async () => {
-    if (currentClass) {
-      const bookings = await axios.get(
-        `/api/v1/class/bookings/${currentClass._id}`
-      );
-      setCurrentBooking(bookings.data.data);
-    }
-  }, [currentClass]);
+    await axios.get(`/api/v1/class/bookings/${Class._id}`).then((response) => {
+      setCurrentBooking(response.data.data);
+    });
+  }, [Class]);
 
   useEffect(() => {
-    setCurrentClass(Class || CurrentClass);
     get_booking();
-  }, [setCurrentClass, Class, CurrentClass, get_booking]);
+  }, [get_booking]);
 
   return (
     <React.Fragment>
       {cancelStatus && (
         <CancelClass
-          currentClass={CurrentClass}
+          currentClass={Class}
           closeHandler={closeConfirmationAlert}
           showAlert={showAlert}
         />
       )}
       {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
-      {!currentClass ? (
+      {!Class ? (
         <Loading />
       ) : (
         <div
           className={
-            pageData.title === "Course Calendar"
+            component === "coursecalendar"
               ? "classcard-body coursecalendar-class-size"
               : "classcard-body"
           }
@@ -84,19 +63,15 @@ const ClassCard = ({
               <div className="classcard-container">
                 <div className="classcard-date-container">
                   <div className="classcard-date">
-                    <p>{new Date(currentClass.date).getDate().toString()}</p>
+                    <p>{new Date(Class.date).getDate().toString()}</p>
                     <p>
-                      {
-                        MonthNames[
-                          new Date(currentClass.date).getMonth().toString()
-                        ]
-                      }
+                      {MonthNames[new Date(Class.date).getMonth().toString()]}
                     </p>
                   </div>
                   {isNaN(WeekNumber) === false ? (
                     <div
                       className={
-                        currentClass.status
+                        Class.status
                           ? "weeknumber-container-sm"
                           : "weeknumber-container-sm holiday-week"
                       }
@@ -105,126 +80,89 @@ const ClassCard = ({
                     </div>
                   ) : null}
                 </div>
-
                 <div className="classcard-info">
                   <div className="classcard-top">
                     <div>
-                      <p className="classcard-title">
-                        {currentClass.className}
-                      </p>
-                      <p>{currentClass.scheduleType}</p>
-                      <p>
-                        {currentClass.startTime + " - " + currentClass.endTime}
-                      </p>
+                      <p className="classcard-title">{Class.className}</p>
+                      <p>{Class.scheduleType}</p>
+                      <p>{Class.startTime + " - " + Class.endTime}</p>
                     </div>
-                    {["admin", "volunteer", "student"].includes(
-                      pageData.user
-                    ) &&
-                      currentClass.status && (
+                    {users.map((user) => user.id).includes(user) &&
+                      Class.status && (
                         <div>
                           <a
-                            href={currentClass.syllabusURL}
+                            href={Class.syllabusURL}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             <div className="classcard-syllabus">
-                              <p>Syllabus</p>
-                              <i className="fas fa-book-open"></i>
+                              <p className="classcard-text-ctl">Syllabus</p>
+                              <i className="fas fa-book-open "></i>
                             </div>
                           </a>
                         </div>
                       )}
                   </div>
                   <div className="classcard-bottom">
-                    {["admin", "volunteer"].includes(pageData.user) &&
-                      currentClass.status && (
-                        <Link
-                          onClick={() => {
-                            set_CurrentClass(currentClass);
-                            Send_PageData(
-                              pageData.user,
-                              "Atended Volunteers",
-                              pageData.city
-                            );
-                          }}
-                          className="classcard-edit-Link"
-                          to="/classvolunteers/"
-                        >
-                          <p>
-                            {currentBooking && currentBooking.length} volunteers
-                            signed up
-                          </p>
-                        </Link>
-                      )}
-                    {pageData.title !== "New Booking" && (
+                    {[users[0].id, users[1].id].includes(user) && Class.status && (
+                      <Link
+                        className="classcard-edit-Link"
+                        to={`/${user}/${city}/atendedvolunteers/${Class._id}`}
+                      >
+                        <p>
+                          {currentBooking && currentBooking.length} volunteers
+                          signed up
+                        </p>
+                      </Link>
+                    )}
+                    {component !== "newbooking" && (
                       <div>
-                        {pageData.user === "admin" && (
-                          <button
-                            onClick={() => {
-                              set_CurrentClass(currentClass);
-                              setCancelStatus(true);
-                            }}
-                            className="classcard-cancel-bottom"
-                          >
-                            Cancel
-                          </button>
-                        )}
-                        {pageData.user === "admin" && (
-                          <Link
-                            onClick={() => {
-                              set_CurrentClass(currentClass);
-                              Send_PageData(
-                                pageData.user,
-                                "Edit Class",
-                                pageData.city
-                              );
-                            }}
-                            className="classcard-edit-bottom"
-                            to="/editclass/"
-                          >
-                            Edit
-                          </Link>
-                        )}
-                        {["admin", "volunteer"].includes(pageData.user) &&
-                          currentClass.status && (
-                            <Link
+                        {user === users[0].id && (
+                          <React.Fragment>
+                            <button
                               onClick={() => {
-                                set_CurrentClass(currentClass);
-                                Send_PageData(
-                                  pageData.user,
-                                  "New Booking",
-                                  pageData.city
-                                );
+                                setCancelStatus(true);
                               }}
-                              className="classcard-attend-bottom"
-                              to="/newbooking/"
+                              className="classcard-cancel-bottom"
                             >
-                              Attend
+                              <span className="classcard-text-ctl">Cancel</span>
+                              <i className="fa fa-times classcard-icon-ctl"></i>
+                            </button>
+                            <Link
+                              className="classcard-edit-bottom"
+                              to={`/${user}/${city}/editclass/${Class._id}`}
+                            >
+                              <span className="classcard-text-ctl">Edit</span>
+                              <i className="fa fa-pencil classcard-icon-ctl"></i>
+                            </Link>
+                          </React.Fragment>
+                        )}
+                        {[users[0].id, users[1].id].includes(user) &&
+                          Class.status && (
+                            <Link
+                              className="classcard-attend-bottom"
+                              to={`/${user}/${city}/newbooking/${Class._id}`}
+                            >
+                              <span className="classcard-text-ctl">Attend</span>
+                              <i className="fa fa-check-square-o classcard-icon-ctl"></i>
                             </Link>
                           )}
                       </div>
                     )}
                   </div>
                 </div>
-                {WeekNumber && (
-                  <div
-                    className={
-                      currentClass.status
-                        ? "weeknumber-container"
-                        : "weeknumber-container holiday-week"
-                    }
-                  >
-                    <p>Week</p>
-                    <p>{WeekNumber}</p>
-                  </div>
-                )}
               </div>
-              {!["Upcoming Class", "Course Calendar"].includes(
-                pageData.title
-              ) && <hr className="classcard-separator"></hr>}
-              {pageData.title === "New Booking" && <NewBookingForm />}
-              {pageData.title === "Atended Volunteers" && (
-                <ClassVolunteersList bookings={currentBooking} />
+              {!["upcomingclass", "coursecalendar"].includes(component) && (
+                <hr className="classcard-separator"></hr>
+              )}
+              {component === "newbooking" && <NewBookingForm Class={Class} />}
+              {component === "atendedvolunteers" && (
+                <ClassVolunteersList
+                  user={user}
+                  city={city}
+                  component={component}
+                  bookings={currentBooking}
+                />
               )}
             </div>
           </div>
@@ -234,8 +172,4 @@ const ClassCard = ({
   );
 };
 
-export default connect(mapStateToProps, {
-  Get_BookingByClassId,
-  set_CurrentClass,
-  Send_PageData,
-})(ClassCard);
+export default ClassCard;

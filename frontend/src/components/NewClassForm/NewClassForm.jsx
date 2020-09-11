@@ -1,28 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { connect } from "react-redux";
-import dayjs from "dayjs";
+import React, { useState } from "react";
+// import dayjs from "dayjs";
 import { useHistory } from "react-router";
-import { set_CurrentClass } from "../../redux/actions/ClassAction";
-import { Send_PageData } from "../../redux/actions";
 import axios from "axios";
 
 import Alert from "../../components/Alert/Alarm.jsx";
 import "./NewClassForm.scss";
 
-const mapStateToProps = (state) => {
-  return {
-    pageData: state.PageReducer.pageData,
-    CurrentClass: state.ClassReducer.currentClass,
-  };
-};
-
-const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
+const NewClassForm = ({ user, city, component, courses }) => {
   const [weekState, setWeekState] = useState({ status: "Class" });
   const [submitted, setSubmitted] = useState(false);
-
-  const [edit, setEdit] = useState(false);
-  const [updated, setUpdated] = useState(false);
-  const [courses, setCourses] = useState(null);
+  // const [edit, setEdit] = useState(false);
+  // const [updated, setUpdated] = useState(false);
   const history = useHistory();
 
   const [values, setValues] = useState({
@@ -44,17 +32,6 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
     syllabusURL: "",
     message: "",
   });
-  const get_Courses = useCallback(async () => {
-    let allCourses = await axios.get(`/api/v1/courses/`);
-    allCourses = allCourses.data.data.filter(
-      (course) => course.cityName === pageData.city
-    );
-
-    setCourses(allCourses);
-  }, [pageData]);
-  useEffect(() => {
-    get_Courses();
-  }, [get_Courses]);
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -79,8 +56,7 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
             message: "",
           });
           setTimeout(() => {
-            Send_PageData(pageData.user, "Course Calendar", pageData.city);
-            history.push("/coursecalendar/");
+            history.push(`/${user}/${city}/coursecalendar/`);
           }, 2000);
         }
       })
@@ -97,88 +73,87 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
         }
       });
   };
-  const updateClass = (classId, updatedData) => {
-    axios
-      .put(`/api/v1/classes/${classId}`, {
-        ...updatedData,
-      })
-      .then((response) => {
-        if (response.data.success === true) {
-          setTimeout(() => {
-            Send_PageData(pageData.user, "Course Calendar", pageData.city);
-            history.push("/coursecalendar/");
-          }, 2000);
-          set_CurrentClass(values);
-          setEdit(false);
-        }
-      })
-      .catch((err) => {
-        if (err.response.data.success === false) {
-          setErrors({
-            date: err.response.data.data.date,
-            className: err.response.data.data.className,
-            startTime: err.response.data.data.startTime,
-            endTime: err.response.data.data.endTime,
-            courseCalendar_Id: err.response.data.data.courseCalendar_Id,
-            syllabusURL: err.response.data.data.syllabusURL,
-            message: err.response.data.data.message,
-          });
-        }
-      });
-  };
+  // const updateClass = (classId, updatedData) => {
+  //   axios
+  //     .put(`/api/v1/classes/${classId}`, {
+  //       ...updatedData,
+  //     })
+  //     .then((response) => {
+  //       if (response.data.success === true) {
+  //         setTimeout(() => {            
+  //           history.push(`/${user}/${city}/coursecalendar/`);
+  //         }, 2000);
+  //         set_CurrentClass(values);
+  //         setEdit(false);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       if (err.response.data.success === false) {
+  //         setErrors({
+  //           date: err.response.data.data.date,
+  //           className: err.response.data.data.className,
+  //           startTime: err.response.data.data.startTime,
+  //           endTime: err.response.data.data.endTime,
+  //           courseCalendar_Id: err.response.data.data.courseCalendar_Id,
+  //           syllabusURL: err.response.data.data.syllabusURL,
+  //           message: err.response.data.data.message,
+  //         });
+  //       }
+  //     });
+  // };
   const handleSubmit = (e) => {
     values.status = weekState.status === "Class" ? true : false;
-    if (edit) {
-      e.preventDefault();
-      if (!values.status) {
-        values.startTime = null;
-        values.scheduleType = null;
-        values.syllabusURL = null;
-        values.endTime = null;
-      }
-      updateClass(CurrentClass._id, values);
-      setUpdated(true);
-    } else {
+    // if (edit) {
+    //   e.preventDefault();
+    //   // if (!values.status) {
+    //   //   values.startTime = null;
+    //   //   values.scheduleType = null;
+    //   //   values.syllabusURL = null;
+    //   //   values.endTime = null;
+    //   // }
+    //   // updateClass(CurrentClass._id, values);
+    //   // setUpdated(true);
+    // } else {
       e.preventDefault();
       createClass(values);
       setSubmitted(true);
-    }
+    
     setWeekState({ status: "Class" });
   };
-  useEffect(() => {
-    if (pageData.title === "Edit Class") {
-      setValues({
-        status: CurrentClass ? CurrentClass.status : null,
-        date: CurrentClass
-          ? dayjs(CurrentClass.date).format("YYYY-MM-DD")
-          : null,
-        startTime: CurrentClass ? CurrentClass.startTime : null,
-        endTime: CurrentClass ? CurrentClass.endTime : null,
-        className: CurrentClass ? CurrentClass.className : null,
-        scheduleType: CurrentClass ? CurrentClass.scheduleType : null,
-        syllabusURL: CurrentClass ? CurrentClass.syllabusURL : null,
-        courseCalendar_Id: CurrentClass ? CurrentClass.courseCalendar_Id : null,
-      });
-      setEdit(true);
-    }
-  }, [pageData, CurrentClass]);
+  // useEffect(() => {
+  //   if (component === "editclass") {
+  //     setValues({
+  //       status: CurrentClass ? CurrentClass.status : null,
+  //       date: CurrentClass
+  //         ? dayjs(CurrentClass.date).format("YYYY-MM-DD")
+  //         : null,
+  //       startTime: CurrentClass ? CurrentClass.startTime : null,
+  //       endTime: CurrentClass ? CurrentClass.endTime : null,
+  //       className: CurrentClass ? CurrentClass.className : null,
+  //       scheduleType: CurrentClass ? CurrentClass.scheduleType : null,
+  //       syllabusURL: CurrentClass ? CurrentClass.syllabusURL : null,
+  //       courseCalendar_Id: CurrentClass ? CurrentClass.courseCalendar_Id : null,
+  //     });
+  //     setEdit(true);
+  //   }
+  // }, [component, CurrentClass]);
   return (
     <div className="new-class-container">
       <div className="upcoming-class-title">
-        <p>{pageData.city}</p> <i className="fas fa-chevron-right"></i>
-        <p>{pageData.title}</p>
+        <p>{city}</p> <i className="fas fa-chevron-right"></i>
+        <p>New Class</p>
       </div>
       <form className="new-class-form" onSubmit={handleSubmit}>
-        {submitted && Object.keys(errors).length !== 0 && (
+        {/* {submitted && Object.keys(errors).length !== 0 && (
           <Alert
             type={"danger"}
             children={"Please, correct the errors displayed, Thanks!"}
           />
-        )}
+        )} */}
         {submitted && Object.keys(errors).length === 0 && (
           <Alert type={"success"} children={"New class successfully added!"} />
         )}
-        {updated && Object.keys(errors).length !== 0 && (
+        {/* {Object.keys(errors).length !== 0 && (
           <Alert
             type={"danger"}
             children={
@@ -187,8 +162,8 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
                 : "Please, correct the errors displayed, Thanks!"
             }
           />
-        )}
-        {updated && Object.keys(errors).length === 0 && (
+        )} */}
+        {Object.keys(errors).length === 0 && (
           <Alert
             type={"success"}
             children={"New class successfully updated!"}
@@ -378,6 +353,4 @@ const NewClassForm = ({ CurrentClass, Send_PageData, pageData }) => {
   );
 };
 
-export default connect(mapStateToProps, {
-  Send_PageData,
-})(NewClassForm);
+export default NewClassForm;

@@ -1,51 +1,38 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
-import { connect } from "react-redux";
-import { Send_PageData } from "../../redux/actions";
-import { Get_Courses } from "../../redux/actions";
 import Loading from "../../components/Loading/Loading.jsx";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Cities.scss";
 
-const mapStateToProps = (state) => {
-  return {
-    pageData: state.PageReducer.pageData,
-    courses: state.CourseReducer.courses,
-  };
-};
-
-const Cities = ({ pageData, Send_PageData, courses, Get_Courses }) => {
-  const [allCities, setAllCities] = useState(null);
-  const showCities = useCallback(() => {
-    if (courses) {
-      let cityName = courses.map((course) => course.cityName);
-      cityName = cityName.filter((a, b) => cityName.indexOf(a) === b);
-      setAllCities(cityName);
-    }
-  }, [courses]);
+const Cities = ({ user, component }) => {
+  const [citiesName, setCitiesName] = useState(null);
+  const getCityName = useCallback(async () => {
+    await axios
+      .get(`/api/v1/courses`)
+      .then((response) => {        
+        let cities = response.data.data.map((course) => course.cityName);
+        cities = cities.filter((a, b) => cities.indexOf(a) === b);
+        setCitiesName(cities);
+      })
+  }, []);
   useEffect(() => {
-    Get_Courses();
-  }, [Get_Courses]);
-  useEffect(() => {
-    showCities();
-  }, [showCities]);
+    getCityName();
+  }, [getCityName]);
   return (
     <div>
-      <Header />
-      <div className="upcoming-class-container">
-        <p className="upcoming-class-title">{pageData.title}</p>
-        <div className="course-card-container">
-          {allCities ? (
-            allCities.map((city, index) => {
+      <Header user={user} component={component} />
+      {citiesName ? (
+        <div className="upcoming-class-container">
+          <p className="upcoming-class-title">Cities</p>
+          <div className="course-card-container">
+            {citiesName.map((city, index) => {
               return (
                 <Link
                   className="course-card"
                   key={index}
-                  to="/coursecalendar/"
-                  onClick={() => {
-                    Send_PageData(pageData.user, "Course Calendar", city);
-                  }}
+                  to={`/${user}/${city}/coursecalendar`}
                 >
                   <div>
                     <i className="fas fa-map-marked-alt"></i>
@@ -55,15 +42,15 @@ const Cities = ({ pageData, Send_PageData, courses, Get_Courses }) => {
                   </div>
                 </Link>
               );
-            })
-          ) : (
-            <Loading />
-          )}
+            })}
+          </div>
         </div>
-      </div>
+      ) : (
+        <Loading />
+      )}
       <Footer />
     </div>
   );
 };
 
-export default connect(mapStateToProps, { Send_PageData, Get_Courses })(Cities);
+export default Cities;

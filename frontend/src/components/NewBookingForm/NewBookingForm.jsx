@@ -1,34 +1,28 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { createBooking } from "../../redux/actions";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import "./NewBookingForm.scss";
 import rolesData from "./../../data/roles.json";
 import Alert from "../../components/Alert/Alarm.jsx";
 import dayjs from "dayjs";
 
-const mapStateToProps = (state) => {
-  return {
-    CurrentClass: state.ClassReducer.currentClass,
-    getErrors: state.getErrors,
-  };
-};
-
-const NewBookingForm = ({
-  bookings,
-  getErrors,
-  createBooking,
-  CurrentClass,
-}) => {
+const NewBookingForm = ({ Class }) => {
   const { register, handleSubmit, errors } = useForm();
   const [submitted, setSubmitted] = useState(false);
+  // const [backendErrors, setBackendError] = useState();
 
-  const onSubmit = (data, e) => {
-    data.classId = CurrentClass._id;
+  const onSubmit = async (data, e) => {
+    data.classId = Class._id;
     data.bookingDate = dayjs(new Date()).format("MM/DD/YYYY");
     data.bookingTime = dayjs(new Date()).format("h:mm");
+    await axios
+      .post(`/api/v1/bookings`, {
+        ...data,
+      })
+      // .catch((err) => {    
+      //   setBackendError(err.response.data)
+      // });
 
-    createBooking(data);
     setSubmitted(true);
 
     e.target.reset();
@@ -36,10 +30,11 @@ const NewBookingForm = ({
   return (
     <div className="newbooking-container">
       <form className="newbooking-form" onSubmit={handleSubmit(onSubmit)}>
-        {submitted && Object.keys(getErrors).length !== 0 && (
-          <Alert type={"danger"} children={getErrors.email} />
-        )}
-        {submitted && Object.keys(getErrors).length === 0 && (
+        {/* {submitted && Object.keys(backendErrors).length !== 0 && (
+          <Alert type={"danger"} children={backendErrors.email} />
+        )} */}
+        {/* && Object.keys(backendErrors).length */}
+        {submitted  === 0 && (
           <Alert
             type={"success"}
             children={" Thanks, You have been booked successfully!"}
@@ -89,7 +84,6 @@ const NewBookingForm = ({
             ))}
           </select>
         </div>
-        {/* {bookings.data ? <p>{bookings.data[0]._id} </p> : null} */}
         <div className="form-group">
           <input type="submit" onClick={handleSubmit}></input>
         </div>
@@ -98,4 +92,4 @@ const NewBookingForm = ({
   );
 };
 
-export default connect(mapStateToProps, { createBooking })(NewBookingForm);
+export default NewBookingForm;

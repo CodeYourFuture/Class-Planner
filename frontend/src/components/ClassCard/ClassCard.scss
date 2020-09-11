@@ -1,9 +1,6 @@
 @import "../../scss/variables";
 @import "../../scss/buttons";
 
-.coursecalendar-class-size {
-  // transform: scale(0.9);
-}
 .classcard-body {
   animation: FadeIn 500ms;
 }
@@ -39,6 +36,7 @@
   min-width: 150px;
   min-height: 150px;
   width: 100%;
+  height: 200px;
   background-color: #f8f8f8;
 
   margin: auto auto 30px 0;
@@ -80,6 +78,12 @@
 }
 .classcard-bottom {
   align-items: flex-end;
+  justify-content: flex-end;
+
+  div {
+    display: flex;
+    margin-top: 20px;
+  }
 }
 
 .classcard-title {
@@ -101,13 +105,12 @@
   transition: 200ms;
   font-family: $default-font-family;
   font-weight: 300;
-  width: 100px;
+  width: 80px;
   height: 50px;
   border-radius: 4px;
   border: 1px solid $btn-syllabus-border;
   font-size: 14px;
   p {
-    display: inline;
     margin: auto 5px;
   }
 
@@ -128,7 +131,6 @@
 
 .classcard-bottom p:first-child {
   letter-spacing: 0px;
-  font-size: 16px;
   font-weight: 300;
   color: $text-link-color;
 
@@ -137,16 +139,14 @@
     color: $text-link-hover-color;
   }
 }
-.classcard-bottom div {
-  display: flex;
-}
+
 .classcard-edit-bottom,
 .classcard-attend-bottom {
   @extend %btn-submit;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 80px;
   height: 50px;
   font-size: 16px;
   font-family: $default-font-family;
@@ -154,18 +154,22 @@
   color: white;
   border-radius: 4px;
   transition: 200ms;
+  outline: none;
   text-decoration: none;
   &:hover {
     cursor: pointer;
   }
 }
+
 .classcard-cancel-bottom {
   @extend %btn-outline-danger;
-  padding: 10px 40px;
   border-radius: 5px;
+  width: 80px;
+  height: 50px;
   cursor: pointer;
   margin-right: 10px;
-  font-size: large;
+  font-size: 1rem;
+  outline: none;
 }
 .classcard-edit-bottom {
   background-color: #ffffff;
@@ -186,6 +190,7 @@
 }
 .classcard-edit-Link {
   text-decoration: none;
+  width: 100%;
 }
 .weeknumber-container {
   display: none;
@@ -240,7 +245,26 @@
   }
 }
 
+.classcard-edit-Link {
+  width: 100%;
+  p {
+    font-size: 10px;
+  }
+}
+
+.classcard-text-ctl {
+  display: none;
+}
+.classcard-icon-ctl {
+  display: block;
+}
+
 @media (min-width: 576px) {
+  .classcard-edit-Link {
+    p {
+      font-size: 16px;
+    }
+  }
 }
 
 @media (min-width: 768px) {
@@ -294,26 +318,25 @@
     font-size: 20px;
   }
 
-  .classcard-bottom p:first-child {
-    font-size: 18px;
-  }
-
   .classcard-edit-bottom,
   .classcard-attend-bottom {
-    width: 120px;
+    width: 80px;
     height: 50px;
     font-size: 1rem;
   }
 
+  .classcard-cancel-bottom {
+    width: 80px;
+    height: 50px;
+    font-size: 1rem;
+  }
   .classcard-title {
     font-size: 1.25em;
     margin-bottom: 2px;
   }
 
   .classcard-date-container {
-    // flex-direction: column-reverse;
-    //align-self: flex-start;
-    width: 200px;
+    width: 300px;
   }
   .weeknumber-container-sm {
     display: none;
@@ -339,15 +362,18 @@
       margin-top: 5px;
     }
   }
+
+  .classcard-text-ctl {
+    display: block;
+  }
+  .classcard-icon-ctl {
+    display: none;
+  }
 }
 
 @media (min-width: 992px) {
   .classcard-main {
     margin: 0 auto 0px auto;
-  }
-
-  .classcard-bottom p:first-child {
-    font-size: 20px;
   }
 
   .weeknumber-container-sm {
@@ -374,10 +400,35 @@
       margin-bottom: 35px;
     }
   }
+
+  .classcard-edit-bottom,
+  .classcard-attend-bottom {
+    width: 120px;
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  .classcard-cancel-bottom {
+    width: 120px;
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  .classcard-edit-Link {
+    p {
+      font-size: 18px;
+    }
+  }
 }
 
 @media (min-width: 1200px) {
   .weeknumber-container-sm {
     display: none;
+  }
+
+  .classcard-edit-Link {
+    p {
+      font-size: 20px;
+    }
   }
 }

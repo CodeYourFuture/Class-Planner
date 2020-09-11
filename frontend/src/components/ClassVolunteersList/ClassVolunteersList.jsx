@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import Alert from "../Alert/Alarm.jsx";
 import CancelBookingAlert from "./CancelBookingAlert.jsx";
-import { connect } from "react-redux";
+import users from "../../data/users.json";
 import "./ClassVolunteersList.scss";
 
-const mapStateToProps = (state) => {
-  return {
-    pageData: state.PageReducer.pageData,
-  };
-};
-
-const ClassVolunteersList = ({ pageData, bookings }) => {
+const ClassVolunteersList = ({ user, bookings }) => {
   const [ConfirmationStatus, setConfirmationStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
   const [alertType, setAlertType] = useState("");
@@ -21,12 +15,7 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
   const [bookingId, setBookingId] = useState("");
 
   function cancelBookingHandler(fullName, email, bookingId) {
-    if (
-      pageData &&
-      (pageData.user === "admin" || pageData.user === "volunteer")
-    )
-      setConfirmationStatus(true);
-
+    if ([users[0].id, users[1].id].includes(user)) setConfirmationStatus(true);
     setFullName(fullName);
     setEmail(email);
     setBookingId(bookingId);
@@ -46,7 +35,7 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
     <div className="classvolunteerslist-container">
       {ConfirmationStatus && (
         <CancelBookingAlert
-          user={pageData && pageData.user}
+          user={user}
           fullName={fullName}
           email={email}
           _id={bookingId}
@@ -61,7 +50,7 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
           <tr>
             <th scope="col">FullName</th>
             <th scope="col">Role</th>
-            {pageData && pageData.user === "admin" && (
+            {user === users[0].id && (
               <th scope="col">Email</th>
             )}
             <th scope="col"></th>
@@ -73,7 +62,7 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
               <tr key={index}>
                 <td>{volunteer.fullName}</td>
                 <td>{volunteer.roleName}</td>
-                {pageData && pageData.user === "admin" && (
+                {user === users[0].id && (
                   <td>{volunteer.email}</td>
                 )}
 
@@ -81,7 +70,8 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
                   <button
                     className="btn-cancel-volunteer"
                     onClick={(e) => {
-                      setAlertStatus(false);
+                      setAlertStatus(true);
+                      setConfirmationStatus(true);
                       cancelBookingHandler(
                         volunteer.fullName,
                         volunteer.email,
@@ -100,4 +90,4 @@ const ClassVolunteersList = ({ pageData, bookings }) => {
   );
 };
 
-export default connect(mapStateToProps)(ClassVolunteersList);
+export default ClassVolunteersList;
