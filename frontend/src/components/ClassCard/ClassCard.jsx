@@ -128,8 +128,8 @@ const ClassCard = ({
                             rel="noopener noreferrer"
                           >
                             <div className="classcard-syllabus">
-                              <p>Syllabus</p>
-                              <i className="fas fa-book-open"></i>
+                              <p className="classcard-text-ctl">Syllabus</p>
+                              <i className="fas fa-book-open "></i>
                             </div>
                           </a>
                         </div>
@@ -166,7 +166,8 @@ const ClassCard = ({
                             }}
                             className="classcard-cancel-bottom"
                           >
-                            Cancel
+                            <span className="classcard-text-ctl">Cancel</span>
+                            <i className="fa fa-times classcard-icon-ctl"></i>
                           </button>
                         )}
                         {pageData.user === "admin" && (
@@ -182,7 +183,8 @@ const ClassCard = ({
                             className="classcard-edit-bottom"
                             to="/editclass/"
                           >
-                            Edit
+                            <span className="classcard-text-ctl">Edit</span>
+                            <i className="fa fa-pencil classcard-icon-ctl"></i>
                           </Link>
                         )}
                         {["admin", "volunteer"].includes(pageData.user) &&
@@ -199,7 +201,8 @@ const ClassCard = ({
                               className="classcard-attend-bottom"
                               to="/newbooking/"
                             >
-                              Attend
+                              <span className="classcard-text-ctl">Attend</span>
+                              <i className="fa fa-check-square-o classcard-icon-ctl"></i>
                             </Link>
                           )}
                       </div>
