@@ -1,49 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
-import { connect } from "react-redux";
-import { Send_PageData } from "../../redux/actions";
 import { Link } from "react-router-dom";
+import users from "../../data/users.json";
 import "./Home.scss";
 
-const Home = ({ Send_PageData }) => {
-  useEffect(() => {
-    Send_PageData("None", "Home", "None");
-  }, [Send_PageData]);
-
+const Home = () => {
   return (
     <div className="home_container">
-      <Header />
+      <Header component={"home"} />
       <div className="home-main">
         <div>
           <img className="home-image" src="../files/Home.png" alt="CYF" />
         </div>
         <div className="home-main-buttons-container">
-          <Link
-            onClick={() => Send_PageData("admin", "Cities", "None")}
-            className="home-button"
-            to="/Cities/"
-          >
+          <Link className="home-button" to={`/${users[0].id}/cities`}>
             <p>
               <i className="fas fa-user"></i>Admin
             </p>
           </Link>
 
-          <Link
-            className="home-button"
-            to="/Cities/"
-            onClick={() => Send_PageData("volunteer", "Cities", "None")}
-          >
+          <Link className="home-button" to={`/${users[1].id}/cities`}>
             <p>
               <i className="fas fa-user"></i>Volunteer
             </p>
           </Link>
 
-          <Link
-            className="home-button"
-            to="/Cities/"
-            onClick={() => Send_PageData("student", "Cities", "None")}
-          >
+          <Link className="home-button" to={`/${users[2].id}/cities`}>
             <p>
               <i className="fas fa-user"></i>Student
             </p>
@@ -55,4 +38,4 @@ const Home = ({ Send_PageData }) => {
   );
 };
 
-export default connect(null, { Send_PageData })(Home);
+export default Home;

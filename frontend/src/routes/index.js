@@ -1,4 +1,5 @@
 import React from "react";
+import users from "../data/users.json";
 import Home from "../screen/Home/Home.jsx";
 import UpcomingClass from "../screen/UpcomingClass/UpcomingClass.jsx";
 import NewClass from "../screen/NewClass/NewClass.jsx";
@@ -8,21 +9,107 @@ import ClassVolunteers from "../screen/ClassVolunteers/ClassVolunteers.jsx";
 import NewCoursePage from "../screen/NewCourse/NewCoursePage.jsx";
 import Courses from "../screen/Courses/Courses.jsx";
 import Cities from "../screen/Cities/Cities.jsx";
+import NotFound from "../screen/NotFound/NotFound.jsx";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 export default () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/coursecalendar/" component={CourseCalendarPage} />
-      <Route exact path="/newcoursecalendar/" component={NewCoursePage} />
-      <Route exact path="/classvolunteers/" component={ClassVolunteers} />
-      <Route exact path="/upcomingclass/" component={UpcomingClass} />
-      <Route exact path="/newclass/" component={NewClass} />
-      <Route exact path="/newbooking/" component={NewBooking} />
-      <Route exact path="/editclass/" component={NewClass} />
-      <Route exact path="/cities/" component={Cities} />
-      <Route exact path="/courses/" component={Courses} />
+      <Route exact path="/:nothing" component={NotFound} />
+      <Route
+        exact
+        path="/:user/:component/"
+        component={({ match }) => {
+          const { user, component } = match.params;
+          if (!user || !component) {
+            return <NotFound />;
+          }
+          if (!users.map((user) => user.id).includes(user)) {
+            return <NotFound />;
+          }
+          switch (component) {
+            case "cities":
+              return <Cities user={user} component={component} />;
+            case "newcourse":
+              return <NewCoursePage user={user} component={component} />;
+            default:
+              return <NotFound />;
+          }
+        }}
+      />
+
+      <Route
+        exact
+        path="/:user/:city/:component/:id?"
+        component={({ match }) => {
+          const { user, city, component, id } = match.params;
+          if (!user || !city || !component) {
+            return <NotFound />;
+          }
+          if (!users.map((user) => user.id).includes(user)) {
+            return <NotFound />;
+          }
+
+          if (id) {
+            switch (component) {
+              case "atendedvolunteers":
+                return (
+                  <ClassVolunteers
+                    user={user}
+                    city={city}
+                    component={component}
+                    id={id}
+                  />
+                );
+              case "newbooking":
+                return (
+                  <NewBooking
+                    user={user}
+                    city={city}
+                    component={component}
+                    id={id}
+                  />
+                );
+              case "editclass":
+                return (
+                  <NewClass
+                    user={user}
+                    city={city}
+                    component={component}
+                    id={id}
+                  />
+                );
+              default:
+                return <NotFound />;
+            }
+          }
+          switch (component) {
+            case "coursecalendar":
+              return (
+                <CourseCalendarPage
+                  user={user}
+                  city={city}
+                  component={component}
+                />
+              );
+            case "upcomingclass":
+              return (
+                <UpcomingClass user={user} city={city} component={component} />
+              );
+            case "newclass":
+              return <NewClass user={user} city={city} component={component} />;
+            case "courses":
+              return <Courses user={user} city={city} component={component} />;
+            case "newcourse":
+              return (
+                <NewCoursePage user={user} city={city} component={component} />
+              );
+            default:
+              return <NotFound />;
+          }
+        }}
+      />
     </Switch>
   );
 };

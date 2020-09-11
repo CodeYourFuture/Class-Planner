@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ClassCard from "../ClassCard/ClassCard.jsx";
 import Loading from "../Loading/Loading.jsx";
-import { connect } from "react-redux";
 import axios from "axios";
 import { MonthNames } from "../../utils/MonthNames";
 import dayjs from "dayjs";
 import "./CourseCalendar.scss";
 
-const mapStateToProps = (state) => {
-  return {
-    pageData: state.PageReducer.pageData,
-  };
-};
-const CourseCalendar = ({ pageData }) => {
+const CourseCalendar = ({ user, city, component }) => {
   const [showHolidays, setShowHolidays] = useState(false);
   const [course, setCourse] = useState(null);
   const [month, setMonth] = useState("All-Months");
@@ -21,10 +15,10 @@ const CourseCalendar = ({ pageData }) => {
   const get_Courses = useCallback(async () => {
     let allCourses = await axios.get(`/api/v1/courses/`);
     allCourses = allCourses.data.data.filter(
-      (course) => course.cityName === pageData.city
+      (course) => course.cityName === city
     );
     setCourses(allCourses);
-  }, [pageData]);
+  }, [city]);
   const get_Classes = useCallback(async (course) => {
     let allClasses = await axios.get(`/api/v1/classes/`);
     let counter = 0;
@@ -60,8 +54,8 @@ const CourseCalendar = ({ pageData }) => {
   return (
     <div className="coursecalendarform-container">
       <div className="upcoming-class-title">
-        <p>{pageData.city}</p> <i className="fas fa-chevron-right"></i>
-        <p>{pageData.title}</p>
+        <p>{city}</p> <i className="fas fa-chevron-right"></i>
+        <p>Course Calendar</p>
       </div>
       <div className="filter-container">
         <div className="control-container">
@@ -69,7 +63,7 @@ const CourseCalendar = ({ pageData }) => {
           <select onChange={(e) => setCourse(e.target.value)}>
             {courses &&
               courses
-                .filter((course) => course.cityName === pageData.city)
+                .filter((course) => course.cityName === city)
                 .map((course, index) => {
                   return (
                     <option value={course._id} key={index}>
@@ -114,7 +108,10 @@ const CourseCalendar = ({ pageData }) => {
               }
               return (
                 <ClassCard
+                  user={user}
+                  city={city}
                   Class={Class}
+                  component={component}
                   key={index}
                   WeekNumber={Class.weekNumber}
                 />
@@ -125,4 +122,4 @@ const CourseCalendar = ({ pageData }) => {
   );
 };
 
-export default connect(mapStateToProps)(CourseCalendar);
+export default CourseCalendar;
