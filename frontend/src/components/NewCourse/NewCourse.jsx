@@ -1,20 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { connect } from "react-redux";
-import { Get_Courses } from "../../redux/actions";
 import axios from "axios";
 import { useHistory } from "react-router";
-import { Send_PageData } from "../../redux/actions";
 import Alert from "../Alert/Alarm.jsx";
 import "./NewCourse.scss";
 
-const mapStateToProps = (state) => {
-  return {
-    pageData: state.PageReducer.pageData,
-    courses: state.CourseReducer.courses,
-  };
-};
-
-const NewCourse = ({ Send_PageData, pageData, courses }) => {
+const NewCourse = ({ user, city, component, courses }) => {
   const history = useHistory();
   const [allCities, setAllCities] = useState(null);
   const [cityNameVisible, setCityNameVisible] = useState(false);
@@ -45,16 +35,12 @@ const NewCourse = ({ Send_PageData, pageData, courses }) => {
     if (newCourse.data.success) {
       setAlertMessage("New Course Calendar added successfully !");
       setTimeout(() => {
-        Send_PageData(pageData.user, "Cities", "None");
-        history.push("/Cities/");
+        history.push(`/${user}/Cities/`);
       }, 2000);
     } else {
       console.log(newCourse);
     }
   };
-  useEffect(() => {
-    Get_Courses();
-  }, []);
   useEffect(() => {
     showCities();
   }, [showCities]);
@@ -70,7 +56,14 @@ const NewCourse = ({ Send_PageData, pageData, courses }) => {
   };
   return (
     <div className="new-course-calendar-container">
-      <p className="upcoming-class-title">{pageData.title}</p>
+      {city ? (
+        <div className="upcoming-class-title">
+          <p>{city}</p> <i className="fas fa-chevron-right"></i>
+          <p>New Course</p>
+        </div>
+      ) : (
+        <p className="upcoming-class-title">New Course</p>
+      )}
       <form className="new-course-calendar-form" onSubmit={handleSubmit}>
         {alertMessage !== "" ? (
           <Alert type={"success"} children={alertMessage} />
@@ -85,7 +78,7 @@ const NewCourse = ({ Send_PageData, pageData, courses }) => {
             placeholder="Intake Name . . ."
           ></input>
         </div>
-        {!cityNameVisible && (
+        {!cityNameVisible && !city && (
           <div className="form-group font-size test">
             <label>City Name:</label>
             <select
@@ -110,21 +103,23 @@ const NewCourse = ({ Send_PageData, pageData, courses }) => {
           </div>
         )}
 
-        {cityNameVisible && (
+        {(cityNameVisible || city) && (
           <div className="form-group font-size test">
             <label>New City Name: </label>
             <input
               type="text"
               name="cityName"
-              value={values.date}
+              value={city ? city : values.date}
               onChange={handleChange}
               className="form-control"
               placeholder="New City Name . . ."
             ></input>
-            <i
-              className="fas fa-minus minus-style"
-              onClick={() => setCityNameVisible(!cityNameVisible)}
-            ></i>
+            {!city ? (
+              <i
+                className="fas fa-minus minus-style"
+                onClick={() => setCityNameVisible(!cityNameVisible)}
+              ></i>
+            ) : null}
           </div>
         )}
         <div className="form-group font-size">
@@ -164,6 +159,4 @@ const NewCourse = ({ Send_PageData, pageData, courses }) => {
   );
 };
 
-export default connect(mapStateToProps, { Get_Courses, Send_PageData })(
-  NewCourse
-);
+export default NewCourse;
