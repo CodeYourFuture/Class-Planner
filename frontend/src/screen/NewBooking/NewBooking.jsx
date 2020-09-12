@@ -5,7 +5,7 @@ import Loading from "../../components/Loading/Loading.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import axios from "axios";
 
-const NewBooking = ({ user, city, component, id }) => {
+const NewBooking = ({ user, city, component, id, WeekNumber }) => {
   const [Class, setClass] = useState(null);
   const getClass = useCallback(async () => {
     await axios.get(`/api/v1/classes/`).then((response) => {
@@ -29,6 +29,7 @@ const NewBooking = ({ user, city, component, id }) => {
             city={city}
             component={component}
             Class={Class}
+            WeekNumber={WeekNumber}
           />
         ) : (
           <Loading />

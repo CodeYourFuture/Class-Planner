@@ -15,11 +15,13 @@ const UpcomingClass = ({ user, city, component }) => {
   const getUpcomingClass = useCallback(async () => {
     let filtredCourses = null;
     let courses = null;
+    let classes = null;
     let classFound = null;
     await axios.get(`/api/v1/courses/`).then(async (response) => {
       courses = response.data.data.filter((course) => course.cityName === city);
       filtredCourses = courses.map((course) => course._id);
       await axios.get(`/api/v1/classes`).then((res) => {
+        classes = res.data.data;
         classFound = res.data.data
           .sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
           .find(
@@ -28,8 +30,19 @@ const UpcomingClass = ({ user, city, component }) => {
               Class.status &&
               dayjs(Class.date) > dayjs(new Date())
           );
-        setClass(classFound);
-        console.log(classFound);
+        let counter = 0;
+        classes
+          .filter(
+            (_Class) =>
+              _Class.courseCalendar_Id === classFound.courseCalendar_Id
+          )
+          .sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
+          .map((Class) =>
+            Class.status
+              ? (Class.weekNumber = ++counter)
+              : (Class.weekNumber = "-")
+          );
+        setClass(classes.find((_Class) => _Class._id === classFound._id));        
         setIntakeName(
           courses.find((course) => course._id === classFound.courseCalendar_Id)
             .intakeName
@@ -49,7 +62,7 @@ const UpcomingClass = ({ user, city, component }) => {
           <p>{city}</p> <i className="fas fa-chevron-right"></i>
           <p>{intakeName}</p>
           <i className="fas fa-chevron-right"></i>
-          <p>Upcoming Class</p>          
+          <p>Upcoming Class</p>
         </div>
         {Class ? (
           <ClassCard
@@ -57,6 +70,7 @@ const UpcomingClass = ({ user, city, component }) => {
             city={city}
             component={component}
             Class={Class}
+            WeekNumber={Class.weekNumber}
           />
         ) : (
           <Loading />

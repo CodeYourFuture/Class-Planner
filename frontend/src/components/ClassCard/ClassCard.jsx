@@ -10,8 +10,7 @@ import users from "../../data/users.json";
 import "./ClassCard.scss";
 import CancelClass from "./CancelClass";
 
-const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
-  console.log(city);
+const ClassCard = ({ user, city, component, Class, WeekNumber }) => {  
   const [currentBooking, setCurrentBooking] = useState(null);
   const [cancelStatus, setCancelStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
@@ -107,7 +106,7 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                     {[users[0].id, users[1].id].includes(user) && Class.status && (
                       <Link
                         className="classcard-edit-Link"
-                        to={`/${user}/${city}/atendedvolunteers/${Class._id}`}
+                        to={`/${user}/${city}/atendedvolunteers/${Class._id}/${WeekNumber}`}
                       >
                         <p>
                           {currentBooking && currentBooking.length} volunteers
@@ -141,7 +140,7 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                           Class.status && (
                             <Link
                               className="classcard-attend-bottom"
-                              to={`/${user}/${city}/newbooking/${Class._id}`}
+                              to={`/${user}/${city}/newbooking/${Class._id}/${WeekNumber}`}
                             >
                               <span className="classcard-text-ctl">Attend</span>
                               <i className="fa fa-check-square-o classcard-icon-ctl"></i>
@@ -151,6 +150,18 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                     )}
                   </div>
                 </div>
+                {WeekNumber && (
+                  <div
+                    className={
+                      Class.status
+                        ? "weeknumber-container"
+                        : "weeknumber-container holiday-week"
+                    }
+                  >
+                    <p>Week</p>
+                    <p>{WeekNumber}</p>
+                  </div>
+                )}
               </div>
               {!["upcomingclass", "coursecalendar"].includes(component) && (
                 <hr className="classcard-separator"></hr>

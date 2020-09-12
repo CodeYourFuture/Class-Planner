@@ -41,17 +41,39 @@ export default () => {
 
       <Route
         exact
-        path="/:user/:city/:component/:id?"
+        path="/:user/:city/:component/:id?/:weeknumber?"
         component={({ match }) => {
-          const { user, city, component, id } = match.params;
+          const { user, city, component, id, weeknumber } = match.params;
           if (!user || !city || !component) {
             return <NotFound />;
           }
           if (!users.map((user) => user.id).includes(user)) {
             return <NotFound />;
           }
+          if (
+            [
+              "editclass",
+              "editcourse",
+              "atendedvolunteers",
+              "newbooking",
+            ].includes(component) &&
+            !id
+          ) {
+            return <NotFound />;
+          }
+          if (
+            ["atendedvolunteers", "newbooking"].includes(component) &&
+            (!id || !weeknumber)
+          ) {
+            return <NotFound />;
+          }
+          if (["editclass", "editcourse"].includes(component)) {
+            return (
+              <NewClass user={user} city={city} component={component} id={id} />
+            );
+          }
 
-          if (id) {
+          if (["atendedvolunteers", "newbooking"].includes(component)) {
             switch (component) {
               case "atendedvolunteers":
                 return (
@@ -60,6 +82,7 @@ export default () => {
                     city={city}
                     component={component}
                     id={id}
+                    WeekNumber={weeknumber}
                   />
                 );
               case "newbooking":
@@ -69,21 +92,14 @@ export default () => {
                     city={city}
                     component={component}
                     id={id}
-                  />
-                );
-              case "editclass":
-                return (
-                  <NewClass
-                    user={user}
-                    city={city}
-                    component={component}
-                    id={id}
+                    WeekNumber={weeknumber}
                   />
                 );
               default:
                 return <NotFound />;
             }
           }
+
           switch (component) {
             case "coursecalendar":
               return (
