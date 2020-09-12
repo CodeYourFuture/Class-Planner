@@ -3,14 +3,14 @@
 
 .courses-container {
   width: 100%;
-  
+
   min-height: calc(100vh - 320px);
   margin-bottom: 50px;
   animation: FadeIn 500ms;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
- 
+
 .btn-edit-course {
   @extend %btn-outline-warning;
   padding: 10px 40px;
@@ -19,17 +19,17 @@
   outline: none;
 }
 
-
-.hide-city-col{
- display:none ;
+.hide-city-col {
+  display: none;
 }
 
-
 @media (min-width: 992px) {
-
-.courses-container {
-  width: 80%;
-  margin: 0 auto;
+  .courses-container {
+    width: 80%;
+    margin: 0 auto;
   }
-  
+
+  .hide-city-col {
+    display: table-cell;
+  }
 }
