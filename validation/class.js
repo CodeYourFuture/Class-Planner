@@ -16,29 +16,29 @@ module.exports = function validateClassInput(data) {
 
     if (!isEmpty(data.syllabusURL)) {
       if (!Validator.isURL(data.syllabusURL)) {
-        errors.syllabusURL = "Not a valid URL";
+        errors.syllabusURL = "Not a valid URL!";
       }
     }
     if (Validator.isEmpty(data.syllabusURL)) {
-      errors.syllabusURL = "Syllabus field is required";
+      errors.syllabusURL = "* Syllabus field is required";
     }
     if (Validator.isEmpty(data.scheduleType)) {
-      errors.scheduleType = "Schedule field is required";
+      errors.scheduleType = "* Schedule field is required";
     }
     if (Validator.isEmpty(data.endTime)) {
-      errors.endTime = "End time field is required";
+      errors.endTime = "* End time field is required";
     }
     if (Validator.isEmpty(data.startTime)) {
-      errors.startTime = "Start time field is required";
+      errors.startTime = "* Start time field is required";
     }
     if (Validator.isEmpty(data.className)) {
-      errors.className = "Class name field is required";
+      errors.className = "* Class name field is required";
     }
     if (Validator.isEmpty(data.date)) {
-      errors.date = "Date field is required";
+      errors.date = "* Date field is required";
     }
     if (Validator.isEmpty(data.courseCalendar_Id)) {
-      errors.courseCalendar_Id = "Course Calendar field is required";
+      errors.courseCalendar_Id = "* Course Calendar field is required";
     }
   } else {
     data.scheduleType = !isEmpty(data.scheduleType) ? data.scheduleType : "";
@@ -52,10 +52,10 @@ module.exports = function validateClassInput(data) {
       : "";
 
     if (Validator.isEmpty(data.courseCalendar_Id)) {
-      errors.courseCalendar_Id = "Course Calendar field is required";
+      errors.courseCalendar_Id = "* Course Calendar field is required";
     }
     if (Validator.isEmpty(data.className)) {
-      errors.className = "Reason field is required";
+      errors.className = "* Reason field is required";
     }
   }
 
