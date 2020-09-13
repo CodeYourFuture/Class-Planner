@@ -70,8 +70,7 @@ const ClassVolunteersList = ({ user, bookings }) => {
                   <button
                     className="btn-cancel-volunteer"
                     onClick={(e) => {
-                      setAlertStatus(true);
-                      setConfirmationStatus(true);
+                      setAlertStatus(false);                     
                       cancelBookingHandler(
                         volunteer.fullName,
                         volunteer.email,

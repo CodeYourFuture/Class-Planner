@@ -21,7 +21,7 @@ const NewCourse = ({ user, city, component, courses }) => {
       citiesName = citiesName.filter((a, b) => citiesName.indexOf(a) === b);
       setValues({
         intakeName: "",
-        cityName: citiesName[0],
+        cityName: city ? city : citiesName[0],
         startDate: "",
         endDate: "",
       });
@@ -35,7 +35,7 @@ const NewCourse = ({ user, city, component, courses }) => {
     if (newCourse.data.success) {
       setAlertMessage("New Course Calendar added successfully !");
       setTimeout(() => {
-        history.push(`/${user}/Cities/`);
+        history.push(`/${user}/cities/`);
       }, 2000);
     } else {
       console.log(newCourse);
