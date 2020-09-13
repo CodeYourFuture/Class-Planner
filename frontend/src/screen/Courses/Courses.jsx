@@ -27,14 +27,15 @@ const NewCoursePage = ({ user, city, component }) => {
             <p>{city}</p> <i className="fas fa-chevron-right"></i>
             <p>Courses</p>
           </div>
-          <table className="Course-table" cellSpacing="0" cellPadding="0">
+          <div className="table-responsive">
+          <table className="table" cellSpacing="0" cellPadding="0">
             <thead>
               <tr className="header-tr">
-                <th>Course</th>
-                <th>City</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Edit</th>
+                <th scope="col">Course</th>
+                <th scope="col" className="hide-city-col">City</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Edit</th>
               </tr>
             </thead>
             <tbody className="table-body">
@@ -42,17 +43,19 @@ const NewCoursePage = ({ user, city, component }) => {
                 return (
                   <tr key={index}>
                     <td>{course.intakeName}</td>
-                    <td>{course.cityName}</td>
+                    <td className="hide-city-col">{course.cityName}</td>
                     <td>{dayjs(course.startDate).format("DD - MM - YYYY")}</td>
                     <td>{dayjs(course.endDate).format("DD - MM - YYYY")}</td>
                     <td>
-                      <i className="fas fa-pencil-alt"></i>
+                    <button className="btn-edit-course">
+                    <i className="fas fa-pencil-alt"></i></button>
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          </div>
         </div>
       ) : (
         <Loading />

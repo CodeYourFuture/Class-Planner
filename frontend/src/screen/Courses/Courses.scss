@@ -1,65 +1,35 @@
 @import "../../scss/variables";
+@import "../../scss/buttons";
+
 .courses-container {
-  width: 66%;
-  margin: auto;
+  width: 100%;
+
   min-height: calc(100vh - 320px);
   margin-bottom: 50px;
   animation: FadeIn 500ms;
-}
-.Course-table {
-  width: 100%;
   font-family: "Open Sans", sans-serif;
-}
-.header-tr {
-  height: 50px;
-  color: $logo-dark-color;
-  background-color: #f7f7f7;
-  font-family: $default-font-family;
   font-size: 16px;
-  font-weight: 600;
-  th:nth-child(1) {
-    padding-left: 30px;
-    width: 30%;
-  }
-  th:nth-child(2) {
-    width: 20%;
-  }
-  th:nth-child(3),
-  th:nth-child(4) {
-    width: 15%;
-  }
-  th:nth-child(5) {
-    text-align: center;
-    width: 10%;
-  }
 }
-.table-body {
-  tr {
-    height: 40px;
-    transition: 200ms;
+
+.btn-edit-course {
+  @extend %btn-outline-warning;
+  padding: 10px 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.hide-city-col {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .courses-container {
+    width: 80%;
+    margin: 0 auto;
   }
-  tr:hover {
-    background-color: #fafafa;
-  }
-  td:nth-child(1) {
-    padding-left: 30px;
-    width: 30%;
-  }
-  td:nth-child(2) {
-    width: 20%;
-  }
-  td:nth-child(3),
-  td:nth-child(4) {
-    width: 15%;
-  }
-  td:nth-child(5) {
-    text-align: center;
-    width: 10%;
-    transition: 200ms;
-  }
-  td:nth-child(5):hover {
-    color: white;
-    background-color: $btn-warning-bg;
-    cursor: pointer;
+
+  .hide-city-col {
+    display: table-cell;
   }
 }
