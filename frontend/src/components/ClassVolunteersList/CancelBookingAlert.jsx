@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import users from "../../data/users.json";
 import "./CancelBookingAlert.scss";
 
 const CancelBookingAlert = ({
@@ -40,7 +41,7 @@ const CancelBookingAlert = ({
 
   return (
     <React.Fragment>
-      {user === "admin" && (
+      {user === users[0].id && (
         <div className="cancelbooking-alert">
           <p>
             Are you sure to cancel the corresponding booking for {fullName} ?
@@ -62,7 +63,7 @@ const CancelBookingAlert = ({
         </div>
       )}
 
-      {user === "volunteer" && (
+      {user === users[1].id && (
         <div className="cancelbooking-alert">
           <p>
             Please confirm {fullName} email address to cancel the corresponding
