@@ -45,7 +45,6 @@ const NewClassForm = ({ user, city, component, courses }) => {
       })
       .then((response) => {
         if (response.data.success === true) {
-          history.push("/coursecalendar/");
           setErrors({
             date: "",
             className: "",
@@ -55,9 +54,9 @@ const NewClassForm = ({ user, city, component, courses }) => {
             courseCalendar_Id: "",
             message: "",
           });
-          setTimeout(() => {
+          // setTimeout(() => {
             history.push(`/${user}/${city}/coursecalendar/`);
-          }, 2000);
+          // }, 2000);
         }
       })
       .catch((err) => {
