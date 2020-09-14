@@ -1,6 +1,6 @@
 const Booking = require("../models/Booking");
 const validateBookingInput = require("../validation/booking");
-
+const { bookingConfirmationEmail } = require("../utils/notification");
 exports.getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();
@@ -39,7 +39,7 @@ exports.getBooking = async (req, res) => {
   }
 };
 
-exports.getBookingsByClassId = async (req, res) => {
+exports.getClassBookings = async (req, res) => {
   try {
     const classId = req.params.classId;
     const booking = await Booking.find({ classId });
@@ -58,6 +58,39 @@ exports.getBookingsByClassId = async (req, res) => {
     return res.status(400).json({
       success: false,
       error: "Could not get class bookings",
+    });
+  }
+};
+
+exports.cancelClassBookings = async (req, res) => {
+  try {
+    const classId = req.params.classId;
+    const bookings = await Booking.deleteMany(
+      { classId },
+      async (err, result) => {
+        if (result) {
+          //await bookingCancellationEmail(result);
+          return res.status(200).json({
+            success: true,
+            data: {},
+          });
+        } else if (err) {
+          return res.status(500).json({
+            success: false,
+            error: "Server Error",
+          });
+        } else {
+          return res.status(404).json({
+            success: false,
+            error: "No booking found",
+          });
+        }
+      }
+    );
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
     });
   }
 };
@@ -84,7 +117,7 @@ exports.addBooking = async (req, res) => {
           });
         } else {
           const newBooking = await Booking.create(req.body);
-
+          await bookingConfirmationEmail(newBooking);
           return res.status(201).json({
             success: true,
             data: newBooking,
