@@ -66,6 +66,9 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
             }
           />
         </div>
+        <div className="err-msg">
+          {error && error.fullName && <p> * {error.fullName}</p>}
+        </div>
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -85,7 +88,9 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
             }
           />
         </div>
-
+        <div className="err-msg">
+          {error && error.email && <p> * {error.email}</p>}
+        </div>
         <div className="form-group">
           <label htmlFor="role">Role:</label>
 
@@ -110,6 +115,9 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
               </option>
             ))}
           </select>
+        </div>
+        <div className="err-msg">
+          {error && error.roleName && <p> * {error.roleName}</p>}
         </div>
         <div className="form-group">
           <input type="submit" />
