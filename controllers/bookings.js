@@ -117,7 +117,7 @@ exports.addBooking = async (req, res) => {
           });
         } else {
           const newBooking = await Booking.create(req.body);
-          await bookingConfirmationEmail(newBooking);
+         // await bookingConfirmationEmail(newBooking);
           return res.status(201).json({
             success: true,
             data: newBooking,
