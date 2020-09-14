@@ -18,7 +18,7 @@ exports.getCoursesCalendar = async (req, res) => {
   }
 };
 
-exports.addCourseCalendar = async (req, res) => {
+exports.createCourseCalendar = async (req, res) => {
   try {
     const { errors, isValid } = validateCourseCalendarInput(req.body);
     if (!isValid) {

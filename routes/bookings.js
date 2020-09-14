@@ -3,17 +3,13 @@ const router = express.Router();
 const {
   getBookings,
   getBooking,
-  addBooking,
+  createBooking,
   deleteBooking,
   updateBooking,
 } = require("../controllers/bookings");
 
-router.route("/").get(getBookings).post(addBooking);
+router.route("/").get(getBookings).post(createBooking);
 
-router
-  .route("/:id")
-  .delete(deleteBooking)
-  .put(updateBooking)
-  .get(getBooking);
+router.route("/:id").delete(deleteBooking).put(updateBooking).get(getBooking);
 
 module.exports = router;

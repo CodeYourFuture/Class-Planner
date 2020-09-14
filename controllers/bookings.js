@@ -95,7 +95,7 @@ exports.cancelClassBookings = async (req, res) => {
   }
 };
 
-exports.addBooking = async (req, res) => {
+exports.createBooking = async (req, res) => {
   try {
     const { errors, isValid } = validateBookingInput(req.body);
     if (!isValid) {
