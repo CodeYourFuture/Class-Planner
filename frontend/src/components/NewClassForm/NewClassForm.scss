@@ -9,28 +9,48 @@
     border: 1px solid #eaeaea;
   }
 }
+
+@import "../../scss/typography";
+
 .new-class-container {
   min-height: calc(100vh - 270px);
   margin: 0px auto 50px auto;
-  width: 60%;
+  width: 100%;
+  padding: 5px;
   animation: FadeIn 500ms;
 }
-.new-class-title {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 600;
-  font-size: 25px;
-  letter-spacing: 1px;
-  color: #79d582;
-  margin-bottom: 15px;
-}
+
 .new-class-form {
   margin: 15px auto 30px auto;
   border: 1px solid #eaeaea;
   font-family: "Open Sans", sans-serif;
   transition: 500ms;
-  padding: 50px 20% 50px 10%;
+  padding: 20px 0 20px 0;
 }
 
-.font-size{
-  font-size: 1.6rem;
+@media (min-width: 576px) {
+  .new-class-form {
+    padding: 20px 10px 20px 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .new-class-form {
+    padding: 50px 50px 50px 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .new-class-container {
+    width: 80%;
+    padding: 0;
+  }
+
+  .new-class-form {
+    margin: 15px auto 30px auto;
+    padding: 50px 20% 50px 10%;
+  }
+}
+
+@media (min-width: 1200px) {
 }

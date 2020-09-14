@@ -55,7 +55,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
             message: "",
           });
           // setTimeout(() => {
-            history.push(`/${user}/${city}/coursecalendar/`);
+          history.push(`/${user}/${city}/coursecalendar/`);
           // }, 2000);
         }
       })
@@ -79,7 +79,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
   //     })
   //     .then((response) => {
   //       if (response.data.success === true) {
-  //         setTimeout(() => {            
+  //         setTimeout(() => {
   //           history.push(`/${user}/${city}/coursecalendar/`);
   //         }, 2000);
   //         set_CurrentClass(values);
@@ -113,10 +113,10 @@ const NewClassForm = ({ user, city, component, courses }) => {
     //   // updateClass(CurrentClass._id, values);
     //   // setUpdated(true);
     // } else {
-      e.preventDefault();
-      createClass(values);
-      setSubmitted(true);
-    
+    e.preventDefault();
+    createClass(values);
+    setSubmitted(true);
+
     setWeekState({ status: "Class" });
   };
   // useEffect(() => {
@@ -138,8 +138,9 @@ const NewClassForm = ({ user, city, component, courses }) => {
   // }, [component, CurrentClass]);
   return (
     <div className="new-class-container">
-      <div className="upcoming-class-title">
-        <p>{city}</p> <i className="fas fa-chevron-right"></i>
+      <div className="page-title">
+        <p>{city}</p>
+        <i className="fas fa-chevron-right"></i>
         <p>New Class</p>
       </div>
       <form className="new-class-form" onSubmit={handleSubmit}>
@@ -168,7 +169,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
             children={"New class successfully updated!"}
           />
         )}
-        <div className="form-group font-size">
+        <div className="form-group">
           <label>Intake: </label>
           <select
             name="courseCalendar_Id"
@@ -194,7 +195,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
         <div className="err-msg">
           {errors.courseCalendar_Id && <p> {errors.courseCalendar_Id}</p>}
         </div>
-        <div className="form-group font-size">
+        <div className="form-group">
           <label htmlFor="date">Date: </label>
           <input
             name="date"
@@ -208,7 +209,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
         </div>
         <div className="err-msg">{errors.date && <p> {errors.date}</p>}</div>
 
-        <div className="form-group  font-size">
+        <div className="form-group">
           <label>Status:</label>
           <div>
             <input
@@ -229,7 +230,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
         </div>
         {weekState.status === "Class" ? (
           <>
-            <div className="form-group font-size">
+            <div className="form-group">
               <label htmlFor="ClassName">Class Name:</label>
               <input
                 name="className"
@@ -248,7 +249,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
               {errors.className && <p>{errors.className}</p>}
             </div>
 
-            <div className="form-group font-size">
+            <div className="form-group">
               <label htmlFor="startTime">Start Time:</label>
               <input
                 name="startTime"
@@ -266,7 +267,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
               {errors.startTime && <p>{errors.startTime}</p>}
             </div>
 
-            <div className="form-group font-size">
+            <div className="form-group">
               <label htmlFor="endTime">End Time:</label>
               <input
                 name="endTime"
@@ -303,7 +304,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
               {errors.syllabusURL && <p>{errors.syllabusURL}</p>}
             </div>
 
-            <div className="form-group font-size">
+            <div className="form-group">
               <label htmlFor="role">Schedule:</label>
               <select
                 name="scheduleType"
@@ -323,7 +324,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
           </>
         ) : (
           <>
-            <div className="form-group font-size">
+            <div className="form-group">
               <label htmlFor="ClassName">Reason:</label>
               <input
                 name="className"
@@ -344,7 +345,7 @@ const NewClassForm = ({ user, city, component, courses }) => {
           </>
         )}
 
-        <div className="form-group font-size">
+        <div className="form-group">
           <input type="submit" />
         </div>
       </form>
