@@ -27,7 +27,7 @@ const CourseForm = ({
       ) : (
         <p className="upcoming-class-title">New Course</p>
       )}
-      <form className="new-course-calendar-form" onSubmit={_onSubmit}>
+      <form className="new-course-calendar-form" noValidate onSubmit={_onSubmit}>
         {alertMessage && alertMessage !== "" ? (
           <Alert type={alertMessage.type} children={alertMessage.message} />
         ) : null}
@@ -51,7 +51,7 @@ const CourseForm = ({
           ></input>
         </div>
         <div className="err-msg">
-          {error && error.intakeName && <p> {error.intakeName}</p>}
+          {error && error.intakeName && <p> *&nbsp;Intake Name is required!</p>}
         </div>
         {!cityNameVisible && citiesName && citiesName !== "Nothing" && (
           <div className="form-group font-size test">
@@ -116,7 +116,7 @@ const CourseForm = ({
               ) : null}
             </div>
             <div className="err-msg">
-              {error && error.intakeName && <p> {error.intakeName}</p>}
+              {error && error.cityName && <p> *&nbsp; City Name is required!</p>}
             </div>
           </React.Fragment>
         )}
@@ -139,7 +139,7 @@ const CourseForm = ({
           ></input>
         </div>
         <div className="err-msg">
-          {error && error.startDate && <p> {error.startDate}</p>}
+          {error && error.startDate && <p> *&nbsp;Start Date is required!</p>}
         </div>
         <div className="form-group font-size">
           <label>End Date: </label>
@@ -160,7 +160,7 @@ const CourseForm = ({
           ></input>
         </div>
         <div className="err-msg">
-          {error && error.endDate && <p> {error.endDate}</p>}
+          {error && error.endDate && <p> *&nbsp;End Date is required!</p>}
         </div>
         <div className="form-group font-size">
           <input type="submit" className="form-control"></input>

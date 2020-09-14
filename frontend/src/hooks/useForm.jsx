@@ -17,7 +17,7 @@ export const useForm = (callback) => {
           break;
         case "date":
           if (
-            !element.element.value === "" &&
+            element.element.value !== "" &&
             !new RegExp(
               /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i
             ).test(element.element.value)
@@ -32,7 +32,7 @@ export const useForm = (callback) => {
           break;
         case "time":
           if (
-            !element.element.value === "" &&
+            element.element.value !== "" &&
             !new RegExp(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]?$/g).test(
               element.element.value
             )
@@ -47,7 +47,7 @@ export const useForm = (callback) => {
           break;
         case "number":
           if (
-            !element.element.value === "" &&
+            element.element.value !== "" &&
             !new RegExp(/^[0-9]*$/g).test(element.element.value)
           ) {
             key = element.element.name;
@@ -60,7 +60,7 @@ export const useForm = (callback) => {
           break;
         case "email":
           if (
-            !element.element.value === "" &&
+            element.element.value !== "" &&
             !new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(
               element.element.value
             )
@@ -81,7 +81,7 @@ export const useForm = (callback) => {
           break;
         case "url":
           if (
-            !element.element.value === "" &&
+            element.element.value !== "" &&
             !new RegExp(/^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/g).test(
               element.element.value
             )
