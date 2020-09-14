@@ -23,14 +23,8 @@ module.exports = function validateClassInput(data) {
       parseInt(data.startTime.replace(/\D/g, "")) >=
       parseInt(data.endTime.replace(/\D/g, ""))
     ) {
-      errors.endTime = "* End time should be after Start time";
-    }
-    if (
-      parseInt(data.endTime.replace(/\D/g, "")) <
-      parseInt(data.startTime.replace(/\D/g, ""))
-    ) {
-      errors.startTime = "* Start time should be after End time";
-    }
+      errors.startTime = "* Start time should be before end time";
+    } 
     if (Validator.isEmpty(data.syllabusURL)) {
       errors.syllabusURL = "* Syllabus field is required";
     }
