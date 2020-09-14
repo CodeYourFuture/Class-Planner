@@ -4,7 +4,7 @@ import "./Loading.scss";
 const Loading = () => {
   return (
     <div className="loaading-container">
-      <i className="fas fa-spinner fa-spin"></i>
+      <p className="P_Loading_CSS">Loading . . .</p>
     </div>
   );
 };
