@@ -21,7 +21,7 @@ const Header = ({ user, city, component }) => {
       <div className="header-down-container">
         <nav className="header-nav-container">
           {component === "home" ? (
-            <div className="home-titel">
+            <div className="home-app-title">
               <img src="../files/calendar.svg" alt="Calendar"></img>
               <p>Class Planner</p>
             </div>
