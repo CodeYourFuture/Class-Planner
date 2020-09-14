@@ -10,7 +10,7 @@ module.exports = function validateBookingInput(data) {
   data.classId = !isEmpty(data.classId) ? data.classId : "";
 
   if (!Validator.isEmail(data.email)) {
-    errors.email = "Email is invalid!";
+    errors.email = "* Email is invalid!";
   }
   if (Validator.isEmpty(data.roleName)) {
     errors.roleName = " * Role field is required";
