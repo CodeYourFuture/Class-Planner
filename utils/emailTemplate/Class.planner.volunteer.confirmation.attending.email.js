@@ -45,7 +45,7 @@ exports.volunteerConfirmationEmail = (data) => {
                   Dear ${data.fullName},
                 </p>
                 <p style="margin-top: 0; font-size: 14px; line-height: 1.2rem">
-                  This is a notification that you have signed up for a class,
+                  This is a notification that you have signed up for a class as ${data.roleName}.
                 </p>
   
                 <p
@@ -56,7 +56,7 @@ exports.volunteerConfirmationEmail = (data) => {
                     line-height: 1.2rem;
                   "
                 >
-                  Please feel free to contact the coordinator, Neil if there is
+                  Please feel free to contact the coordinator,if there is
                   anything you wish to discuss before turning up for a class.
                 </p>
                 <p
