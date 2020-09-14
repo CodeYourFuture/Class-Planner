@@ -11,10 +11,10 @@ const NewCoursePage = ({ user, city, component }) => {
   const getCourses = useCallback(async () => {
     let allCourses = await axios.get(`/api/v1/courses`);
     allCourses = allCourses.data.data.filter(
-      (course) => course.cityName === "London"
+      (course) => course.cityName === city
     );
     setCourses(allCourses);
-  }, []);
+  }, [city]);
   useEffect(() => {
     getCourses();
   }, [getCourses]);
