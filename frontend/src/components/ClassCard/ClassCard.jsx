@@ -10,7 +10,7 @@ import users from "../../data/users.json";
 import "./ClassCard.scss";
 import CancelClass from "./CancelClass";
 
-const ClassCard = ({ user, city, component, Class, WeekNumber }) => {  
+const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
   const [currentBooking, setCurrentBooking] = useState(null);
   const [cancelStatus, setCancelStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
@@ -166,7 +166,9 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
               {!["upcomingclass", "coursecalendar"].includes(component) && (
                 <hr className="classcard-separator"></hr>
               )}
-              {component === "newbooking" && <NewBookingForm Class={Class} />}
+              {component === "newbooking" && (
+                <NewBookingForm Class={Class} user={user} city={city} WeekNumber={WeekNumber}/>
+              )}
               {component === "atendedvolunteers" && (
                 <ClassVolunteersList
                   user={user}
