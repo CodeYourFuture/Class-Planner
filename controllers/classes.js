@@ -18,7 +18,7 @@ exports.getClasses = async (req, res) => {
   }
 };
 
-exports.addClass = async (req, res) => {
+exports.createClass = async (req, res) => {
   try {
     const { errors, isValid } = validateClassInput(req.body);
     if (!isValid) {
