@@ -1,0 +1,46 @@
+@import "./../../scss/variables";
+@import "./../../scss/buttons";
+
+.cancel-alert {
+  animation: FadeIn 500ms;
+  border: 1px solid $alert-light-border-color;
+  margin: 40px auto;
+  padding: 20px;
+  p {
+    font-family: $default-font-family;
+    font-size: 0.85em;
+    font-weight: 300;
+    text-align: left;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 20px;
+    min-height: 40px;
+    width: 100%;
+
+    div {
+      width: 70%;
+    }
+  }
+}
+
+.cancel-yes {
+  @extend %btn-danger;
+  padding: 10px 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  margin: 30px auto auto;
+}
+
+.cancel-no {
+  @extend %btn-outline-success;
+  padding: 10px 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  margin: 30px auto auto;
+}

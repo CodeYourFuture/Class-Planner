@@ -10,6 +10,7 @@ import NewCoursePage from "../screen/NewCourse/NewCoursePage.jsx";
 import Courses from "../screen/Courses/Courses.jsx";
 import Cities from "../screen/Cities/Cities.jsx";
 import NotFound from "../screen/NotFound/NotFound.jsx";
+import EditCoursePage from "../screen/EditCourse/EditCoursePage.jsx";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 export default () => {
@@ -68,9 +69,28 @@ export default () => {
             return <NotFound />;
           }
           if (["editclass", "editcourse"].includes(component)) {
-            return (
-              <NewClass user={user} city={city} component={component} id={id} />
-            );
+            switch (component) {
+              case "editclass":
+                return (
+                  <NewClass
+                    user={user}
+                    city={city}
+                    component={component}
+                    id={id}
+                  />
+                );
+              case "editcourse":
+                return (
+                  <EditCoursePage
+                    user={user}
+                    city={city}
+                    component={component}
+                    id={id}
+                  />
+                );
+              default:
+                return <NotFound />;
+            }
           }
 
           if (["atendedvolunteers", "newbooking"].includes(component)) {
