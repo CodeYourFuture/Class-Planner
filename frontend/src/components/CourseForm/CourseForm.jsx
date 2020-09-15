@@ -27,7 +27,11 @@ const CourseForm = ({
       ) : (
         <p className="page-title">New Course</p>
       )}
-      <form className="new-course-calendar-form" noValidate onSubmit={_onSubmit}>
+      <form
+        className="new-course-calendar-form"
+        noValidate
+        onSubmit={_onSubmit}
+      >
         {alertMessage && alertMessage !== "" ? (
           <Alert type={alertMessage.type} children={alertMessage.message} />
         ) : null}
@@ -116,7 +120,9 @@ const CourseForm = ({
               ) : null}
             </div>
             <div className="err-msg">
-              {error && error.cityName && <p> *&nbsp; City Name is required!</p>}
+              {error && error.cityName && (
+                <p> *&nbsp; City Name is required!</p>
+              )}
             </div>
           </React.Fragment>
         )}
