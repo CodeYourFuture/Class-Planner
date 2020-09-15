@@ -9,13 +9,19 @@ import "./Cities.scss";
 const Cities = ({ user, component }) => {
   const [citiesName, setCitiesName] = useState(null);
   const getCityName = useCallback(async () => {
-    await axios
-      .get(`/api/v1/courses`)
-      .then((response) => {        
+    try {
+      await axios.get(`/api/v1/courses`).then((response) => {
         let cities = response.data.data.map((course) => course.cityName);
         cities = cities.filter((a, b) => cities.indexOf(a) === b);
-        setCitiesName(cities);
-      })
+        if (cities.length > 0) {
+          setCitiesName(cities);
+        } else {
+          setCitiesName(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
   useEffect(() => {
     getCityName();
@@ -25,7 +31,7 @@ const Cities = ({ user, component }) => {
       <Header user={user} component={component} />
       {citiesName ? (
         <div className="upcoming-class-container">
-          <p className="upcoming-class-title">Cities</p>
+          <p className="page-title">Cities</p>
           <div className="course-card-container">
             {citiesName.map((city, index) => {
               return (

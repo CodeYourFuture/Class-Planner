@@ -3,7 +3,6 @@
 
 .courses-container {
   width: 100%;
-
   min-height: calc(100vh - 320px);
   margin-bottom: 50px;
   animation: FadeIn 500ms;
@@ -13,6 +12,14 @@
 
 .btn-edit-course {
   @extend %btn-outline-warning;
+  padding: 10px 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn-delete-course {
+  @extend %btn-outline-danger;
   padding: 10px 40px;
   border-radius: 5px;
   cursor: pointer;
@@ -32,4 +39,8 @@
   .hide-city-col {
     display: table-cell;
   }
+}
+
+tr{
+  transition: 200ms;
 }

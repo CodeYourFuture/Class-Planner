@@ -19,7 +19,7 @@ const NewBooking = ({ user, city, component, id, WeekNumber }) => {
     <React.Fragment>
       <Header user={user} city={city} component={component} />
       <div className="upcoming-class-container">
-        <div className="upcoming-class-title">
+        <div className="page-title">
           <p>{city}</p> <i className="fas fa-chevron-right"></i>
           <p>New Booking</p>
         </div>

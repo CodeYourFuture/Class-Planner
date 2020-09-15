@@ -2,6 +2,7 @@
   background-color: $btn-danger-bg;
   border: 1px solid $btn-danger-border;
   color: white;
+  transition: 200ms;
   &:hover {
     background-color: $btn-danger-bg-hover;
   }
@@ -11,6 +12,7 @@
   background-color: white;
   color: $btn-danger-border;
   border: 1px solid $btn-danger-border;
+  transition: 200ms;
   &:hover {
     background-color: $btn-danger-bg-hover;
     color: white;
@@ -21,6 +23,7 @@
   background-color: $btn-warning-bg;
   border: 1px solid $btn-warning-border;
   color: white;
+  transition: 200ms;
   &:hover {
     background-color: $btn-warning-bg-hover;
   }
@@ -30,16 +33,19 @@
   background-color: white;
   color: $btn-warning-border;
   border: 1px solid $btn-warning-border;
+  transition: 200ms;
   &:hover {
     background-color: $btn-warning-bg-hover;
     color: white;
   }
 }
 
+
 %btn-light {
   background-color: $btn-light-bg;
   border: 1px solid $btn-light-border;
   color: white;
+  transition: 200ms;
   &:hover {
     background-color: $btn-light-bg-hover;
   }
@@ -49,6 +55,7 @@
   background-color: white;
   color: $btn-light-border;
   border: 1px solid $btn-light-border;
+  transition: 200ms;
   &:hover {
     background-color: $btn-light-bg-hover;
     color: white;
@@ -59,6 +66,7 @@
   background-color: $btn-success-bg;
   border: 1px solid $btn-success-border;
   color: white;
+  transition: 200ms;
   &:hover {
     background-color: $btn-success-bg-hover;
   }
@@ -68,6 +76,7 @@
   background-color: white;
   color: $btn-success-border;
   border: 1px solid $btn-success-border;
+  transition: 200ms;
   &:hover {
     background-color: $btn-success-bg-hover;
     color: white;
@@ -78,6 +87,7 @@
   background-color: $btn-submit-bg;
   border: 1px solid $btn-submit-border;
   color: white;
+  transition: 200ms;
   &:hover {
     background-color: $btn-submit-bg-hover;
   }

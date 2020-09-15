@@ -81,8 +81,8 @@ const NewCoursePage = ({ user, city, component }) => {
           .then((response) => {
             if (response.data.success) {
               setAlertMessage({
-                type: "seccess",
-                message: "New Course Calendar added successfully !",
+                type: "success",
+                message: "New Course added successfully !",
               });
               setTimeout(() => {
                 if (city) {
