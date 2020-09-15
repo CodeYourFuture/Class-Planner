@@ -79,7 +79,6 @@
 .classcard-bottom {
   align-items: flex-end;
   justify-content: flex-end;
-
   div {
     display: flex;
     margin-top: 20px;
@@ -133,7 +132,7 @@
   letter-spacing: 0px;
   font-weight: 300;
   color: $text-link-color;
-
+  transition: 200ms;
   &:hover {
     cursor: pointer;
     color: $text-link-hover-color;

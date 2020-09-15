@@ -4,14 +4,17 @@ import Loading from "../Loading/Loading.jsx";
 import axios from "axios";
 import { MonthNames } from "../../utils/MonthNames";
 import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 import "./CourseCalendar.scss";
 
 const CourseCalendar = ({ user, city, component }) => {
   const [showHolidays, setShowHolidays] = useState(false);
   const [course, setCourse] = useState(null);
-  const [month, setMonth] = useState("All-Months");
+  const [month, setMonth] = useState(`${dayjs(new Date()).format("M")}`);
   const [courses, setCourses] = useState(null);
   const [classes, setClasses] = useState(null);
+  const [defaultCousreId, setDefaultCourseId] = useState(null);
+  dayjs.extend(isBetween);
   const get_Courses = useCallback(async () => {
     let allCourses = await axios.get(`/api/v1/courses/`);
     allCourses = allCourses.data.data.filter(
@@ -36,7 +39,17 @@ const CourseCalendar = ({ user, city, component }) => {
   }, []);
   const get_Classes_OnLoading = useCallback(async () => {
     if (courses) {
-      get_Classes(courses[0]._id);
+      let currentCourse = courses.find((course) =>
+        dayjs(new Date()).isBetween(
+          dayjs(course.startDate),
+          dayjs(course.endDate),
+          "day"
+        )
+      );
+      if (currentCourse) {
+        setDefaultCourseId(currentCourse._id);
+      }
+      get_Classes(currentCourse._id || courses[0]._id);
     }
   }, [courses, get_Classes]);
   const get_Classes_OnLoaded = useCallback(async () => {
@@ -60,7 +73,10 @@ const CourseCalendar = ({ user, city, component }) => {
       <div className="filter-container">
         <div className="control-container">
           <label>Intake: </label>
-          <select onChange={(e) => setCourse(e.target.value)}>
+          <select
+            defaultValue={defaultCousreId}
+            onChange={(e) => setCourse(e.target.value)}
+          >
             {courses &&
               courses
                 .filter((course) => course.cityName === city)
@@ -75,7 +91,10 @@ const CourseCalendar = ({ user, city, component }) => {
         </div>
         <div className="control-container">
           <label>Month: </label>
-          <select onChange={(e) => setMonth(e.target.value)}>
+          <select
+            defaultValue={dayjs(new Date()).format("M")}
+            onChange={(e) => setMonth(e.target.value)}
+          >
             <option value="All-Months">All Months</option>
             {MonthNames.map((month, index) => {
               return (
@@ -95,7 +114,8 @@ const CourseCalendar = ({ user, city, component }) => {
         </div>
       </div>
       <div className="classes-list-container">
-        {(classes &&
+        {(month &&
+          classes &&
           classes
             .filter(
               (Class) =>

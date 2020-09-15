@@ -5,6 +5,6 @@ const {
   getClassBookings,
 } = require("../controllers/bookings");
 
-router.route("/:classId").get(getClassBookings).delete(cancelClassBookings);
+router.route("/:classId").get(getClassBookings);
 
 module.exports = router;

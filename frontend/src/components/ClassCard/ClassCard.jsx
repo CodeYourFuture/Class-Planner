@@ -106,6 +106,11 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                     {[users[0].id, users[1].id].includes(user) && Class.status && (
                       <Link
                         className="classcard-edit-Link"
+                        onClick={(e) => {
+                          if (currentBooking && currentBooking.length === 0) {
+                            e.preventDefault();
+                          }
+                        }}
                         to={`/${user}/${city}/atendedvolunteers/${Class._id}/${WeekNumber}`}
                       >
                         <p>
