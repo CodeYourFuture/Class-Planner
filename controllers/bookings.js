@@ -62,39 +62,6 @@ exports.getClassBookings = async (req, res) => {
   }
 };
 
-exports.cancelClassBookings = async (req, res) => {
-  try {
-    const classId = req.params.classId;
-    const bookings = await Booking.deleteMany(
-      { classId },
-      async (err, result) => {
-        if (result) {
-          //await bookingCancellationEmail(result);
-          return res.status(200).json({
-            success: true,
-            data: {},
-          });
-        } else if (err) {
-          return res.status(500).json({
-            success: false,
-            error: "Server Error",
-          });
-        } else {
-          return res.status(404).json({
-            success: false,
-            error: "No booking found",
-          });
-        }
-      }
-    );
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      error: "Server Error",
-    });
-  }
-};
-
 exports.createBooking = async (req, res) => {
   try {
     const { errors, isValid } = validateBookingInput(req.body);
@@ -102,7 +69,7 @@ exports.createBooking = async (req, res) => {
       return res.status(400).json(errors);
     }
 
-    const booking = Booking.findOne(
+    Booking.findOne(
       { email: req.body.email, classId: req.body.classId },
       async (err, result) => {
         if (result) {
@@ -117,7 +84,7 @@ exports.createBooking = async (req, res) => {
           });
         } else {
           const newBooking = await Booking.create(req.body);
-         // await bookingConfirmationEmail(newBooking);
+          // await bookingConfirmationEmail(newBooking);
           return res.status(201).json({
             success: true,
             data: newBooking,
