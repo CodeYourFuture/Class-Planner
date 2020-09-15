@@ -66,8 +66,10 @@
     font-size: 18px;
     font-weight: 300;
     color: #fff;
+    transition: 200ms;
     &:hover {
       background-color: $btn-submit-bg-hover;
+      cursor: pointer;
     }
   }
 

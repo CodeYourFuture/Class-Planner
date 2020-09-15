@@ -20,12 +20,12 @@ const CourseForm = ({
   return (
     <div className="new-course-calendar-container">
       {city ? (
-        <div className="upcoming-class-title">
+        <div className="page-title">
           <p>{city}</p> <i className="fas fa-chevron-right"></i>
           <p>{component === "newcourse" ? "New Course" : "Edit Course"}</p>
         </div>
       ) : (
-        <p className="upcoming-class-title">New Course</p>
+        <p className="page-title">New Course</p>
       )}
       <form className="new-course-calendar-form" noValidate onSubmit={_onSubmit}>
         {alertMessage && alertMessage !== "" ? (

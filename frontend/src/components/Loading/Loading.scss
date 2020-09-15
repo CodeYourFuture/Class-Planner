@@ -2,7 +2,7 @@
 .loaading-container {
   min-height: calc(100vh - 320px);
   animation: FadeIn 500ms;
-//   color: $text-link-hover-color;
+  //   color: $text-link-hover-color;
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -19,11 +19,19 @@
     color: #f5f9fc;
   }
 }
-.P_Loading_CSS {
+.loading{
   font-family: "Open Sans", sans-serif;
   letter-spacing: 2px;
   color: #79d582;
   font-weight: bold;
   border-radius: 50%;
   animation: Loading-Animation infinite 2s;
+}
+
+.nothing {
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: #e50303;
 }
