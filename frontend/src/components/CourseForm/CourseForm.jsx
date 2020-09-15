@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Alert from "../../components/Alert/Alarm.jsx";
+import dayjs from "dayjs";
 import "./CourseForm.scss";
 
 const CourseForm = ({
@@ -16,7 +17,7 @@ const CourseForm = ({
   startDate,
   endDate,
 }) => {
-  const [cityNameVisible, setCityNameVisible] = useState(false);
+  const [cityNameVisible, setCityNameVisible] = useState(false);  
   return (
     <div className="new-course-calendar-container">
       {city ? (
@@ -40,7 +41,7 @@ const CourseForm = ({
           <input
             name="intakeName"
             type="text"
-            defaultValue={intakeName ? intakeName : ""}
+            defaultValue={intakeName}
             onChange={(e) => _onChange(e)}
             placeholder="Intake Name . . ."
             className={
@@ -97,7 +98,6 @@ const CourseForm = ({
                 type="text"
                 name="cityName"
                 value={city}
-                defaultValue={cityName}
                 onChange={(e) => _onChange(e)}
                 className={
                   error && error.cityName
@@ -131,7 +131,7 @@ const CourseForm = ({
           <input
             type="date"
             name="startDate"
-            defaultValue={startDate}
+            defaultValue={dayjs(new Date(startDate)).format("YYYY-MM-DD")}
             onChange={(e) => _onChange(e)}
             className={
               error && error.startDate ? "form-control error" : "form-control"
@@ -152,7 +152,7 @@ const CourseForm = ({
           <input
             type="date"
             name="endDate"
-            defaultValue={endDate}
+            defaultValue={dayjs(new Date(endDate)).format("YYYY-MM-DD")}
             onChange={(e) => _onChange(e)}
             className={
               error && error.endDate ? "form-control error" : "form-control"
