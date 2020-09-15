@@ -1,6 +1,34 @@
-.NewCourseCalendar{
-    width: 60%;
-    margin: auto;
-    min-height: calc(100vh - 320px);    
-    margin-bottom: 50px;
+
+.newcourse-container {
+  width: 100%;
+  margin: auto;
+  min-height: calc(100vh - 320px);
 }
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  .newcourse-container {
+    width: 80%;
+    margin: auto;
+    min-height: calc(100vh - 320px);
+    // margin-bottom: 50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  footer {
+    font-size: 1.15rem;
+  }
+}
+
+.NewCourseCalendar{
+    width: 80%;
+    margin: auto;
+    min-height: calc(100vh - 340px);    
+}
+

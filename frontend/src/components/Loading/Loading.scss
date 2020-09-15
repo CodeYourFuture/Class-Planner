@@ -1,10 +1,37 @@
 @import "../../scss/variables";
-.loaading-container{
-    min-height: calc(100vh - 270px);
-    animation: FadeIn 500ms;
-    color: $text-link-hover-color;
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.loaading-container {
+  min-height: calc(100vh - 320px);
+  animation: FadeIn 500ms;
+  //   color: $text-link-hover-color;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes Loading-Animation {
+  0% {
+    color: #f5f9fc;
+  }
+  50% {
+    color: #79d582;
+  }
+  100% {
+    color: #f5f9fc;
+  }
+}
+.loading{
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 2px;
+  color: #79d582;
+  font-weight: bold;
+  border-radius: 50%;
+  animation: Loading-Animation infinite 2s;
+}
+
+.nothing {
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: #e50303;
 }

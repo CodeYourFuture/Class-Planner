@@ -16,9 +16,15 @@ module.exports = function validateClassInput(data) {
 
     if (!isEmpty(data.syllabusURL)) {
       if (!Validator.isURL(data.syllabusURL)) {
-        errors.syllabusURL = "Not a valid URL!";
+        errors.syllabusURL = "* Not a valid URL!";
       }
     }
+    if (
+      parseInt(data.startTime.replace(/\D/g, "")) >=
+      parseInt(data.endTime.replace(/\D/g, ""))
+    ) {
+      errors.startTime = "* Start time should be before end time";
+    } 
     if (Validator.isEmpty(data.syllabusURL)) {
       errors.syllabusURL = "* Syllabus field is required";
     }

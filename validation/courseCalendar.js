@@ -22,10 +22,8 @@ module.exports = function validateCourseCalendarInput(data) {
     errors.endDate = "* End Date field is required";
   }
   if (!Validator.isAfter(data.endDate, data.startDate)) {
-    errors.endDate = "* End Date must be after Start Date";
+    errors.startDate = "* Start Date must be before end Date";
   }
-  if (!Validator.isBefore(data.startDate, data.endDate)) {
-    errors.startDate = "* Start Date must be before End Date";
-  }
+
   return { errors, isValid: isEmpty(errors) };
 };

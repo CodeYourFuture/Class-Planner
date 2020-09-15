@@ -3,7 +3,7 @@
 .form-group {
   display: flex;
   flex-direction: row;
-  height: 50px;
+  //height: 50px;
   width: 100%;
   padding: 5px;
   flex-wrap: nowrap;
@@ -19,6 +19,7 @@
     justify-content: left;
     label {
       text-align: left;
+      margin: auto 5px auto 5px;
     }
     input[type="radio"] {
       text-align: left;
@@ -31,7 +32,7 @@
     width: 20%;
     margin: auto;
     font-family: $default-font-family;
-    font-size: 0.75em;
+    font-size: 15px;
     text-align: right;
     margin-right: 10px;
   }
@@ -47,7 +48,7 @@
     font-family: $default-font-family;
     font-weight: 300;
     color: $text-dark-color;
-    font-size: 0.75em;
+    font-size: 16px;
     width: 70%;
     height: 40px;
     padding: 0 10px;
@@ -62,18 +63,20 @@
     border: 1px solid $btn-submit-border;
     border-radius: 4px;
     font-family: $default-font-family;
-    font-size: 0.75em;
+    font-size: 18px;
     font-weight: 300;
     color: #fff;
+    transition: 200ms;
     &:hover {
       background-color: $btn-submit-bg-hover;
+      cursor: pointer;
     }
   }
 
   select {
     font-family: $default-font-family;
     font-weight: 300;
-    font-size: 0.75em;
+    font-size: 15px;
     width: 70%;
     height: 40px;
     color: $text-dark-color;
@@ -100,4 +103,64 @@
   text-align: left;
   margin-left: 33%;
   font-size: small;
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    //height: 50px;
+    width: 100%;
+    padding: 5px;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    color: $text-dark-color;
+    div {
+      width: 35%;
+      height: 40px;
+      display: flex;
+      margin-right: 35%;
+      align-items: center;
+      justify-content: left;
+      label {
+        text-align: left;
+        margin: auto 5px auto 5px;
+      }
+      input[type="radio"] {
+        text-align: left;
+        width: 25px;
+        height: 25px;
+        margin: 0px 0px 0px 15px;
+      }
+    }
+    label {
+      width: 20%;
+      margin: auto;
+      font-family: $default-font-family;
+      font-size: 15px;
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    input[type="month"],
+    input[type="week"] {
+      text-align: left;
+      font-family: $default-font-family;
+      font-weight: 300;
+      color: $text-dark-color;
+      font-size: 16px;
+      width: 70%;
+      height: 40px;
+      padding: 0 10px;
+    }
+  }
 }

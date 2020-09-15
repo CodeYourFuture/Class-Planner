@@ -1,0 +1,39 @@
+@import "variables";
+
+.page-title {
+  display: flex;
+  align-content: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #79d582;
+  margin: 10px auto 10px auto;
+
+  i {
+    margin: auto 5px auto 5px;
+  }
+  p:nth-child(3) {
+    color: $logo-dark-color;
+  }
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 18px;
+    margin: 10px auto 10px 5px;
+  }
+}
+
+@media (min-width: 992px) {
+  .page-title {
+    font-size: 20px;
+    margin: 50px auto 10px 5px;
+  }
+}
+
+@media (min-width: 1200px) {
+}

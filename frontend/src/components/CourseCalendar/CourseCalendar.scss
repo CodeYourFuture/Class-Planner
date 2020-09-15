@@ -1,9 +1,12 @@
 @import "../../scss/variables";
+@import "../../scss/typography";
+
 .coursecalendarform-container {
-  min-height: calc(100vh - 270px);
+  min-height: calc(100vh - 340px);
   animation: FadeIn 500ms;
   font-family: $default-font-family;
   margin: 0 auto;
+  padding: 5px;
 }
 
 .filter-container {
@@ -12,7 +15,7 @@
   flex-direction: column;
   justify-content: space-around;
   border: 1px solid $classcard-border;
-  margin: 15px 10px;
+  margin: 5px 0px;
 }
 .control-container {
   font-size: 18px;
@@ -21,7 +24,6 @@
   justify-content: center;
   color: $text-dark-color;
   width: 80%;
-  //width: 300px;
   margin: 10px auto;
 
   select,
@@ -68,6 +70,7 @@
     font-size: 25px;
     width: 80%;
     margin: 0 auto;
+    padding: 0;
   }
   .filter-container {
     flex-direction: row;

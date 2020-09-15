@@ -17,11 +17,11 @@
   border: 1px solid #eaeaea;
   font-family: "Open Sans", sans-serif;
   transition: 500ms;
-  padding: 50px 20% 50px 10%;
-  margin: 15px auto 30px auto;
+  padding: 5px 10px 10px 0;
+  margin: 15px 5px 30px 5px;
 }
 .test {
-  margin-left: 37.4px;
+  margin-left: 29px;
 }
 .plus-style,
 .minus-style {
@@ -37,4 +37,8 @@
 .minus-style:hover {
   transform: scale(1.1);
   cursor: pointer;
+}
+
+.error {
+  border: 1px solid #e50303;
 }

@@ -1,6 +1,6 @@
 const Booking = require("../models/Booking");
 const validateBookingInput = require("../validation/booking");
-
+const { bookingConfirmationEmail } = require("../utils/notification");
 exports.getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();
@@ -39,7 +39,7 @@ exports.getBooking = async (req, res) => {
   }
 };
 
-exports.getBookingsByClassId = async (req, res) => {
+exports.getClassBookings = async (req, res) => {
   try {
     const classId = req.params.classId;
     const booking = await Booking.find({ classId });
@@ -62,14 +62,14 @@ exports.getBookingsByClassId = async (req, res) => {
   }
 };
 
-exports.addBooking = async (req, res) => {
+exports.createBooking = async (req, res) => {
   try {
     const { errors, isValid } = validateBookingInput(req.body);
     if (!isValid) {
       return res.status(400).json(errors);
     }
 
-    const booking = Booking.findOne(
+    Booking.findOne(
       { email: req.body.email, classId: req.body.classId },
       async (err, result) => {
         if (result) {
@@ -84,7 +84,7 @@ exports.addBooking = async (req, res) => {
           });
         } else {
           const newBooking = await Booking.create(req.body);
-
+          // await bookingConfirmationEmail(newBooking);
           return res.status(201).json({
             success: true,
             data: newBooking,

@@ -1,81 +1,113 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm } from "../../hooks/useForm.jsx";
 import axios from "axios";
 import "./NewBookingForm.scss";
-import rolesData from "./../../data/roles.json";
 import Alert from "../../components/Alert/Alarm.jsx";
-import dayjs from "dayjs";
+import rolesData from "./../../data/roles.json";
+import { useHistory } from "react-router";
 
-const NewBookingForm = ({ Class }) => {
-  const { register, handleSubmit, errors } = useForm();
-  const [submitted, setSubmitted] = useState(false);
-  // const [backendErrors, setBackendError] = useState();
+const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
+  const history = useHistory();
+  const [alertMessage, setAlertMessage] = useState(null);
 
-  const onSubmit = async (data, e) => {
-    data.classId = Class._id;
-    data.bookingDate = dayjs(new Date()).format("MM/DD/YYYY");
-    data.bookingTime = dayjs(new Date()).format("h:mm");
+  const NewSignUp = async (values) => {
+    values.classId = Class._id;
     await axios
       .post(`/api/v1/bookings`, {
-        ...data,
+        ...values,
       })
-      // .catch((err) => {    
-      //   setBackendError(err.response.data)
-      // });
-
-    setSubmitted(true);
-
-    e.target.reset();
+      .then((response) => {
+        if (response.data.success) {
+          setAlertMessage({
+            type: "success",
+            message: "New class booking is created successfully !",
+          });
+          setTimeout(() => {
+            if (city) {
+              history.push(
+                `/${user}/${city}/atendedvolunteers/${Class._id}/${WeekNumber}`
+              );
+            } else {
+              history.push(`/${user}/cities/`);
+            }
+          }, 2000);
+        } else {
+          setAlertMessage({
+            type: "danger",
+            message: "New class booking is not created !",
+          });
+        }
+      });
   };
+
+  const { entryData, error, onChange, onSubmit } = useForm(NewSignUp);
+
   return (
     <div className="newbooking-container">
-      <form className="newbooking-form" onSubmit={handleSubmit(onSubmit)}>
-        {/* {submitted && Object.keys(backendErrors).length !== 0 && (
-          <Alert type={"danger"} children={backendErrors.email} />
-        )} */}
-        {/* && Object.keys(backendErrors).length */}
-        {submitted  === 0 && (
-          <Alert
-            type={"success"}
-            children={" Thanks, You have been booked successfully!"}
-          />
-        )}
+      <form className="newbooking-form" noValidate onSubmit={onSubmit}>
+        {alertMessage && alertMessage !== "" ? (
+          <Alert type={alertMessage.type} children={alertMessage.message} />
+        ) : null}
         <div className="form-group">
           <label htmlFor="fullName">Full Name:</label>
           <input
-            id="fullName"
             type="text"
             name="fullName"
+            onChange={(e) => onChange(e)}
             className={
-              errors.fullName ? "form-control error-animation" : "form-control"
+              error && error.fullName ? "form-control error" : "form-control"
             }
-            ref={register({ required: true })}
+            placeholder="Full Name . . ."
+            ref={(e) =>
+              (entryData.current[0] = {
+                element: e,
+                required: true,
+              })
+            }
           />
+        </div>
+        <div className="err-msg">
+          {error && error.fullName && <p> * {error.fullName}</p>}
         </div>
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
-            id="email"
             type="email"
             name="email"
+            onChange={(e) => onChange(e)}
             className={
-              errors.email ? "form-control error-animation" : "form-control"
+              error && error.email ? "form-control error" : "form-control"
             }
-            ref={register({
-              required: true,
-            })}
+            placeholder="Email . . ."
+            ref={(e) =>
+              (entryData.current[1] = {
+                element: e,
+                required: true,
+              })
+            }
           />
         </div>
-
+        <div className="err-msg">
+          {error && error.email && <p> * {error.email}</p>}
+        </div>
         <div className="form-group">
           <label htmlFor="role">Role:</label>
 
           <select
-            id="role"
+            type="text"
             name="roleName"
-            className="form-control"
-            ref={register({ required: true })}
+            onChange={(e) => onChange(e)}
+            className={
+              error && error.roleName ? "form-control error" : "form-control"
+            }
+            placeholder="Role Name . . ."
+            ref={(e) =>
+              (entryData.current[2] = {
+                element: e,
+                required: true,
+              })
+            }
           >
             {rolesData.map((role) => (
               <option key={role.id} value={role.roleName}>
@@ -84,8 +116,11 @@ const NewBookingForm = ({ Class }) => {
             ))}
           </select>
         </div>
+        <div className="err-msg">
+          {error && error.roleName && <p> * {error.roleName}</p>}
+        </div>
         <div className="form-group">
-          <input type="submit" onClick={handleSubmit}></input>
+          <input type="submit" />
         </div>
       </form>
     </div>

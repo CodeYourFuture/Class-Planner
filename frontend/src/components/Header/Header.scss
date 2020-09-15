@@ -62,7 +62,7 @@
   color: $logo-light-color;
 }
 
-%menu-itme {
+%menu-item {
   color: #3f3f3f;
   display: flex;
   align-items: center;
@@ -87,14 +87,14 @@
 
 .header-nav,
 .home-titel {
-  @extend %menu-itme;
+  @extend %menu-item;
   p {
     display: none;
   }
 }
 
 .home-app-title {
-  @extend %menu-itme;
+  @extend %menu-item;
   p {
     display: block;
   }
@@ -105,7 +105,6 @@
   cursor: pointer;
 }
 .header-nav p:nth-child(2) {
-  margin-left: 10px;
   font-size: 14px;
   font-family: $default-font-family;
   font-weight: 600;
@@ -117,6 +116,7 @@
 .header-nav:nth-child(6) {
   margin-left: 8px;
 }
+
 .header-selected {
   color: $header-nav-text-selected;
   cursor: default;

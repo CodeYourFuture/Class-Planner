@@ -1,4 +1,6 @@
 const Class = require("../models/Class");
+const Booking = require("../models/Booking");
+
 const validateClassInput = require("../validation/class");
 
 exports.getClasses = async (req, res) => {
@@ -18,7 +20,7 @@ exports.getClasses = async (req, res) => {
   }
 };
 
-exports.addClass = async (req, res) => {
+exports.createClass = async (req, res) => {
   try {
     const { errors, isValid } = validateClassInput(req.body);
     if (!isValid) {
@@ -54,13 +56,31 @@ exports.deleteClass = async (req, res) => {
       });
     }
 
-    await classToBeDeleted.remove();
+    await Booking.deleteMany({ classId }, async (err, result) => {
+      if (result) {
+        //await bookingCancellationEmail(result);
+        await classToBeDeleted.remove();
+        return res.status(200).json({
+          success: true,
+          data: {},
+        });
+      } else if (err) {
+        console.log(err);
 
-    return res.status(200).json({
-      success: true,
-      data: {},
+        return res.status(500).json({
+          success: false,
+          error: "Server Error",
+        });
+      } else {
+        await classToBeDeleted.remove();
+        return res.status(404).json({
+          success: false,
+          error: "No booking for class found",
+        });
+      }
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       success: false,
       error: "Server Error",
