@@ -53,7 +53,7 @@ const CourseCalendar = ({ user, city, component }) => {
   }, [get_Classes_OnLoading, get_Classes_OnLoaded]);
   return (
     <div className="coursecalendarform-container">
-      <div className="upcoming-class-title">
+      <div className="page-title">
         <p>{city}</p> <i className="fas fa-chevron-right"></i>
         <p>Course Calendar</p>
       </div>
