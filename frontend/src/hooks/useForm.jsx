@@ -19,7 +19,7 @@ export const useForm = (callback) => {
           if (
             element.element.value !== "" &&
             !new RegExp(
-              /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i
+              /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/i
             ).test(element.element.value)
           ) {
             key = element.element.name;
