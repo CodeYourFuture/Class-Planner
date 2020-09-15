@@ -111,7 +111,7 @@ const NewCoursePage = ({ user, city, component }) => {
   return (
     <div>
       <Header user={user} city={city} component={component} />
-      <div className="NewCourseCalendar">
+      <div className="newcourse-container">
         {city || citiesName ? (
           <CourseForm
             city={city}
