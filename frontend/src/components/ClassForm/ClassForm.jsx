@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import Alert from "../../components/Alert/Alarm.jsx";
+import dayjs from "dayjs";
 import "./ClassForm.scss";
-
-// date;
-// courseCalendar_Id;
-// status;
-// className;
-// startTime;
-// endTime;
-// syllabusURL;
-// scheduleType;
 
 const NewClassForm = ({
   entryData,
@@ -20,8 +12,18 @@ const NewClassForm = ({
   error,
   _onChange,
   _onSubmit,
+  date,
+  courseCalendar_Id,
+  status,
+  className,
+  startTime,
+  endTime,
+  syllabusURL,
+  scheduleType,
 }) => {
-  const [weekState, setWeekState] = useState(true);
+  const [weekState, setWeekState] = useState(() =>
+    status ? (status ? true : false) : false
+  );
 
   return (
     <div className="new-class-container">
@@ -39,6 +41,7 @@ const NewClassForm = ({
           <select
             name="courseCalendar_Id"
             className="form-control"
+            defaultValue={courseCalendar_Id}
             ref={(e) =>
               (entryData.current[0] = {
                 element: e,
@@ -61,6 +64,7 @@ const NewClassForm = ({
           <input
             name="date"
             type="date"
+            defaultValue={dayjs(new Date(date)).format("YYYY-MM-DD")}
             className={
               error && error.date ? "form-control error" : "form-control"
             }
@@ -82,7 +86,7 @@ const NewClassForm = ({
             <input
               type="radio"
               name="status"
-              defaultChecked
+              defaultChecked={status ? (status ? true : false) : true}
               onChange={() => setWeekState(true)}
               ref={(e) =>
                 (entryData.current[2] = {
@@ -95,6 +99,7 @@ const NewClassForm = ({
             <input
               type="radio"
               name="status"
+              defaultChecked={status ? false : true}
               onChange={() => setWeekState(false)}
             />
             <label htmlFor="Holiday">Holiday</label>
@@ -105,7 +110,9 @@ const NewClassForm = ({
             <div className="form-group">
               <label htmlFor="ClassName">Class Name:</label>
               <input
+                id="Reason"
                 name="className"
+                defaultValue={className}
                 className={
                   error && error.className
                     ? "form-control error"
@@ -135,6 +142,7 @@ const NewClassForm = ({
                     : "form-control"
                 }
                 type="time"
+                defaultValue={startTime}
                 onChange={(e) => _onChange(e)}
                 ref={(e) =>
                   (entryData.current[4] = {
@@ -151,6 +159,7 @@ const NewClassForm = ({
               <label htmlFor="endTime">End Time:</label>
               <input
                 name="endTime"
+                defaultValue={endTime}
                 className={
                   error && error.endTime ? "form-control error" : "form-control"
                 }
@@ -173,6 +182,7 @@ const NewClassForm = ({
               <input
                 name="syllabusURL"
                 type="url"
+                defaultValue={syllabusURL}
                 className={
                   error && error.syllabusURL
                     ? "form-control error"
@@ -198,6 +208,7 @@ const NewClassForm = ({
                 name="scheduleType"
                 className="form-control"
                 placeholder="Schedule"
+                defaultValue={scheduleType}
                 onChange={(e) => _onChange(e)}
                 ref={(e) =>
                   (entryData.current[7] = {
@@ -220,6 +231,7 @@ const NewClassForm = ({
             <div className="form-group">
               <label htmlFor="ClassName">Reason:</label>
               <input
+                id="Reason"
                 name="className"
                 className={
                   error && error.className
@@ -227,6 +239,7 @@ const NewClassForm = ({
                     : "form-control"
                 }
                 type="text"
+                defaultValue={status ? "" : className}
                 placeholder="Reason . . ."
                 onChange={(e) => _onChange(e)}
                 ref={(e) =>
