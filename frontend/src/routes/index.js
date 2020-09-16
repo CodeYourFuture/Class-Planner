@@ -3,6 +3,7 @@ import users from "../data/users.json";
 import Home from "../screen/Home/Home.jsx";
 import UpcomingClass from "../screen/UpcomingClass/UpcomingClass.jsx";
 import NewClassPage from "../screen/NewClass/NewClassPage.jsx";
+import EditClassPage from "../screen/EditClass/EditClassPage.jsx";
 import NewBooking from "../screen/NewBooking/NewBooking.jsx";
 import CourseCalendarPage from "../screen/CourseCalendar/CourseCalendarPage.jsx";
 import ClassVolunteers from "../screen/ClassVolunteers/ClassVolunteers.jsx";
@@ -72,7 +73,7 @@ export default () => {
             switch (component) {
               case "editclass":
                 return (
-                  <NewClassPage
+                  <EditClassPage
                     user={user}
                     city={city}
                     component={component}
