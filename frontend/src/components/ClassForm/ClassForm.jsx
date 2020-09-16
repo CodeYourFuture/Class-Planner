@@ -34,7 +34,6 @@ const NewClassForm = ({
       }
     }
   }, [status]);
-  console.log(status)
   return (
     <div className="new-class-container">
       <div className="page-title">
@@ -109,7 +108,7 @@ const NewClassForm = ({
             <input
               type="radio"
               name="status"
-              defaultChecked={weekState ? false :  true}
+              defaultChecked={weekState ? false : true}
               onChange={() => setWeekState(false)}
             />
             <label htmlFor="Holiday">Holiday</label>
