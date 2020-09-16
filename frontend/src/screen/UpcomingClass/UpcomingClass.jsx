@@ -13,7 +13,7 @@ const UpcomingClass = ({ user, city, component }) => {
   const [Class, setClass] = useState(null);
   const [intakeName, setIntakeName] = useState(null);
   const getUpcomingClass = useCallback(async () => {
-    let filtredCourses = null;
+    let filteredCourses = null;
     let courses = null;
     let classes = null;
     let classFound = null;
@@ -22,14 +22,14 @@ const UpcomingClass = ({ user, city, component }) => {
         courses = response.data.data.filter(
           (course) => course.cityName === city
         );
-        filtredCourses = courses.map((course) => course._id);
+        filteredCourses = courses.map((course) => course._id);
         await axios.get(`/api/v1/classes`).then((res) => {
           classes = res.data.data;
           classFound = res.data.data
             .sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
             .find(
               (Class) =>
-                filtredCourses.includes(Class.courseCalendar_Id) &&
+                filteredCourses.includes(Class.courseCalendar_Id) &&
                 Class.status &&
                 dayjs(Class.date) > dayjs(new Date())
             );
