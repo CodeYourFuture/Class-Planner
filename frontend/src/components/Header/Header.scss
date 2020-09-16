@@ -9,7 +9,7 @@
 }
 .header-logo-container {
   display: flex;
-  height: 90px;
+  height: 80px;
   width: 100%;
 }
 .header-down-container {
@@ -35,31 +35,15 @@
 }
 
 .header-logo {
-  font-family: "Alfa Slab One", cursive;
-  font-size: larger;
-  margin-top: 27px;
-  margin-left: 10px;
-  height: 60px;
-  width: fit-content;
+  margin: 5px auto 5px 5px;
+  height: 56px;
+  width: auto;
   text-align: right;
-  color: $logo-dark-color;
-  margin-right: 20px;
-  transition: 200ms;
   text-decoration: none;
 }
 .header-logo:hover {
   transform: scale(1.02);
   cursor: pointer;
-}
-
-.header-logo div {
-  height: 15px;
-  display: flex;
-  align-items: center;
-}
-.header-logo div P:nth-child(2) {
-  font-size: 20px;
-  color: $logo-light-color;
 }
 
 %menu-item {
