@@ -17,31 +17,9 @@ exports.getBookings = async (req, res) => {
   }
 };
 
-exports.getBooking = async (req, res) => {
-  try {
-    const { id } = req.params;
-    if (id) {
-      const booking = await Booking.findById({ _id: id });
-      if (booking) {
-        return res.status(200).json({
-          success: true,
-          count: booking.length,
-          data: booking,
-        });
-      }
-    }
-  } catch (err) {
-    console.log("Error", err);
-    return res.status(400).json({
-      success: false,
-      error: "Could not get a booking",
-    });
-  }
-};
-
 exports.getClassBookings = async (req, res) => {
   try {
-    const classId = req.params.classId;
+    const classId = req.params.id;
     const booking = await Booking.find({ classId });
     if (!booking) {
       return res.status(404).json({
