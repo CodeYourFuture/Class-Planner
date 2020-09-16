@@ -17,8 +17,7 @@ const CancelClass = ({ currentClass, closeHandler, showAlert }) => {
           showAlert("danger", err.response.data.error);
         }
       });
-  }
-  console.log(currentClass);
+  } 
   return (
     <div className="cancel-alert">
       <p>Are you sure to cancel the corresponding Class?</p>
