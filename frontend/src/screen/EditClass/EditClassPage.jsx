@@ -59,7 +59,8 @@ const EditClassPage = ({ user, city, component, id }) => {
         const conflictClass = allClasses.find(
           (Class) =>
             Date.parse(Class.date) === Date.parse(values.date) &&
-            Class.courseCalendar_Id === values.courseCalendar_Id
+            Class.courseCalendar_Id === values.courseCalendar_Id &&
+            Class._id !== currentClass._id
         );
         if (conflictClass) {
           setAlertMessage({
