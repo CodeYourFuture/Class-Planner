@@ -8,6 +8,12 @@ import "./Cities.scss";
 
 const Cities = ({ user, component }) => {
   const [citiesName, setCitiesName] = useState(null);
+  const [searchResault, setSearchResault] = useState([]);
+  const search = useCallback((e) => {
+    setSearchResault(
+      citiesName.filter((city) => city.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
+    );
+  }, [citiesName]);
   const getCityName = useCallback(async () => {
     try {
       await axios.get(`/api/v1/courses`).then((response) => {
@@ -15,8 +21,10 @@ const Cities = ({ user, component }) => {
         cities = cities.filter((a, b) => cities.indexOf(a) === b);
         if (cities.length > 0) {
           setCitiesName(cities);
+          setSearchResault(cities);
         } else {
           setCitiesName(null);
+          setSearchResault(null);
         }
       });
     } catch (err) {
@@ -26,14 +34,23 @@ const Cities = ({ user, component }) => {
   useEffect(() => {
     getCityName();
   }, [getCityName]);
+  console.log("000")
   return (
     <div>
       <Header user={user} component={component} />
-      {citiesName ? (
-        <div className="upcoming-class-container">
-          <p className="page-title">Cities</p>
-          <div className="course-card-container">
-            {citiesName.map((city, index) => {
+      <div className="upcoming-class-container">
+        <div className="city-searchbar">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="search . . ."
+            onChange={(e) => search(e)}
+          />
+          <i className="fas fa-search"></i>
+        </div>
+        <div className="course-card-container">
+          {searchResault.length > 0 ? (
+            searchResault.map((city, index) => {
               return (
                 <Link
                   className="course-card"
@@ -48,12 +65,12 @@ const Cities = ({ user, component }) => {
                   </div>
                 </Link>
               );
-            })}
-          </div>
+            })
+          ) : (
+            <Loading />
+          )}
         </div>
-      ) : (
-        <Loading />
-      )}
+      </div>
       <Footer />
     </div>
   );
