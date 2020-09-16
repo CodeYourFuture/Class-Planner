@@ -2,7 +2,7 @@ import React from "react";
 import users from "../data/users.json";
 import Home from "../screen/Home/Home.jsx";
 import UpcomingClass from "../screen/UpcomingClass/UpcomingClass.jsx";
-import NewClass from "../screen/NewClass/NewClass.jsx";
+import NewClassPage from "../screen/NewClass/NewClassPage.jsx";
 import NewBooking from "../screen/NewBooking/NewBooking.jsx";
 import CourseCalendarPage from "../screen/CourseCalendar/CourseCalendarPage.jsx";
 import ClassVolunteers from "../screen/ClassVolunteers/ClassVolunteers.jsx";
@@ -72,7 +72,7 @@ export default () => {
             switch (component) {
               case "editclass":
                 return (
-                  <NewClass
+                  <NewClassPage
                     user={user}
                     city={city}
                     component={component}
@@ -134,7 +134,7 @@ export default () => {
                 <UpcomingClass user={user} city={city} component={component} />
               );
             case "newclass":
-              return <NewClass user={user} city={city} component={component} />;
+              return <NewClassPage user={user} city={city} component={component} />;
             case "courses":
               return <Courses user={user} city={city} component={component} />;
             case "newcourse":
