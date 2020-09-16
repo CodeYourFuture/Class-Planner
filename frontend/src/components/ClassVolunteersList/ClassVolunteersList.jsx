@@ -50,9 +50,7 @@ const ClassVolunteersList = ({ user, bookings }) => {
           <tr>
             <th scope="col">FullName</th>
             <th scope="col">Role</th>
-            {user === users[0].id && (
-              <th scope="col">Email</th>
-            )}
+            {user === users[0].id && <th scope="col">Email</th>}
             <th scope="col"></th>
           </tr>
         </thead>
@@ -62,24 +60,24 @@ const ClassVolunteersList = ({ user, bookings }) => {
               <tr key={index}>
                 <td>{volunteer.fullName}</td>
                 <td>{volunteer.roleName}</td>
-                {user === users[0].id && (
-                  <td>{volunteer.email}</td>
-                )}
+                {user === users[0].id && <td>{volunteer.email}</td>}
 
                 <td>
-                  <button
-                    className="btn-cancel-volunteer"
-                    onClick={(e) => {
-                      setAlertStatus(false);                     
-                      cancelBookingHandler(
-                        volunteer.fullName,
-                        volunteer.email,
-                        volunteer._id
-                      );
-                    }}
-                  >
-                    Cancel
-                  </button>
+                  {(user === users[0].id || user === users[1].id) && (
+                    <button
+                      className="btn-cancel-volunteer"
+                      onClick={(e) => {
+                        setAlertStatus(false);
+                        cancelBookingHandler(
+                          volunteer.fullName,
+                          volunteer.email,
+                          volunteer._id
+                        );
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
