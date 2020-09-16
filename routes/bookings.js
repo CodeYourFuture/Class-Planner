@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getBookings,
-  getBooking,
+  getClassBookings,
   createBooking,
   deleteBooking,
   updateBooking,
@@ -10,6 +10,10 @@ const {
 
 router.route("/").get(getBookings).post(createBooking);
 
-router.route("/:id").delete(deleteBooking).put(updateBooking).get(getBooking);
+router
+  .route("/:id")
+  .delete(deleteBooking)
+  .put(updateBooking)
+  .get(getClassBookings);
 
 module.exports = router;
