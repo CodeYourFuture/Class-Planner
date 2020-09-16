@@ -13,7 +13,7 @@ const CancelBookingAlert = ({
 }) => {
   const [volunteerEmail, setVolunteerEmail] = useState("");
 
-  function validateVolunteerEmail(bookingFullName, bookingEmail, bookingId) {
+  function validateVolunteerEmail(bookingEmail) {
     if (bookingEmail === volunteerEmail && volunteerEmail !== "") {
       deleteBooking();
     } else {
@@ -69,7 +69,12 @@ const CancelBookingAlert = ({
             Please confirm {fullName} email address to cancel the corresponding
             booking for the current class.
           </p>
-          <div>
+
+          <form
+            onSubmit={() => {
+              validateVolunteerEmail(email);
+            }}
+          >
             <div>
               <input
                 id="email"
@@ -78,16 +83,11 @@ const CancelBookingAlert = ({
                 className="form-control volunteeremail-confirm"
                 onChange={(e) => setVolunteerEmail(e.target.value)}
               />
-              <button
-                className="cancelbooking-confirm"
-                onClick={(e) => {
-                  validateVolunteerEmail(fullName, email, _id);
-                }}
-              >
+              <button type="submit" className="cancelbooking-confirm">
                 Confirm
               </button>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </React.Fragment>
