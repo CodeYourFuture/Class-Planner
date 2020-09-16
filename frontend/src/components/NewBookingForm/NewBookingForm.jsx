@@ -25,7 +25,7 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
           setTimeout(() => {
             if (city) {
               history.push(
-                `/${user}/${city}/atendedvolunteers/${Class._id}/${WeekNumber}`
+                `/${user}/${city}/attendedvolunteers/${Class._id}/${WeekNumber}`
               );
             } else {
               history.push(`/${user}/cities/`);

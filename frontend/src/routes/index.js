@@ -56,7 +56,7 @@ export default () => {
             [
               "editclass",
               "editcourse",
-              "atendedvolunteers",
+              "attendedvolunteers",
               "newbooking",
             ].includes(component) &&
             !id
@@ -64,7 +64,7 @@ export default () => {
             return <NotFound />;
           }
           if (
-            ["atendedvolunteers", "newbooking"].includes(component) &&
+            ["attendedvolunteers", "newbooking"].includes(component) &&
             (!id || !weeknumber)
           ) {
             return <NotFound />;
@@ -94,9 +94,9 @@ export default () => {
             }
           }
 
-          if (["atendedvolunteers", "newbooking"].includes(component)) {
+          if (["attendedvolunteers", "newbooking"].includes(component)) {
             switch (component) {
-              case "atendedvolunteers":
+              case "attendedvolunteers":
                 return (
                   <ClassVolunteers
                     user={user}

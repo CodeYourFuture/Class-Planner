@@ -1,7 +1,7 @@
-const {SESConfig} = require("./email-config");
-const {ses} = require("./email-config");
+const { SESConfig } = require("./email-config");
+const { ses } = require("./email-config");
 
-exports.mailer = async (emailData) => { 
+exports.mailer = async (emailData) => {
   const to =
     SESConfig.env === "development"
       ? SESConfig.catchOnAllEmail

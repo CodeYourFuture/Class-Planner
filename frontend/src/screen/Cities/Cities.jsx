@@ -8,9 +8,9 @@ import "./Cities.scss";
 
 const Cities = ({ user, component }) => {
   const [citiesName, setCitiesName] = useState(null);
-  const [searchResault, setSearchResault] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const search = useCallback((e) => {
-    setSearchResault(
+    setSearchResult(
       citiesName.filter((city) => city.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
     );
   }, [citiesName]);
@@ -21,10 +21,10 @@ const Cities = ({ user, component }) => {
         cities = cities.filter((a, b) => cities.indexOf(a) === b);
         if (cities.length > 0) {
           setCitiesName(cities);
-          setSearchResault(cities);
+          setSearchResult(cities);
         } else {
           setCitiesName(null);
-          setSearchResault(null);
+          setSearchResult(null);
         }
       });
     } catch (err) {
@@ -33,8 +33,7 @@ const Cities = ({ user, component }) => {
   }, []);
   useEffect(() => {
     getCityName();
-  }, [getCityName]);
-  console.log("000")
+  }, [getCityName]); 
   return (
     <div>
       <Header user={user} component={component} />
@@ -49,8 +48,8 @@ const Cities = ({ user, component }) => {
           <i className="fas fa-search"></i>
         </div>
         <div className="course-card-container">
-          {searchResault.length > 0 ? (
-            searchResault.map((city, index) => {
+          {searchResult.length > 0 ? (
+            searchResult.map((city, index) => {
               return (
                 <Link
                   className="course-card"
