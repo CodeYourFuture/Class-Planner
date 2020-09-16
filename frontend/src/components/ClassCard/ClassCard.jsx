@@ -103,7 +103,7 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                       )}
                   </div>
                   <div className="classcard-bottom">
-                    {[users[0].id, users[1].id].includes(user) && Class.status && (
+                    {[users[0].id, users[1].id,users[2].id].includes(user) && Class.status && (
                       <Link
                         className="classcard-edit-Link"
                         onClick={(e) => {
