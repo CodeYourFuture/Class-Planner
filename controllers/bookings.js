@@ -19,7 +19,7 @@ exports.getBookings = async (req, res) => {
 
 exports.getClassBookings = async (req, res) => {
   try {
-    const classId = req.params.classId;
+    const classId = req.params.id;
     const booking = await Booking.find({ classId });
     if (!booking) {
       return res.status(404).json({
