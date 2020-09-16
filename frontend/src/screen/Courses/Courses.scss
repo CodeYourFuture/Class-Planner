@@ -6,7 +6,7 @@
   min-height: calc(100vh - 320px);
   margin-bottom: 50px;
   animation: FadeIn 500ms;
-  font-family: "Open Sans", sans-serif;
+  font-family: $default-font-family;
   font-size: 16px;
   padding: 5px 10px 10px 5px;
 }
