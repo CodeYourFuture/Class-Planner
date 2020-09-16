@@ -28,7 +28,7 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
   };
 
   const get_booking = useCallback(async () => {
-    await axios.get(`/api/v1/class/bookings/${Class._id}`).then((response) => {
+    await axios.get(`/api/v1/bookings/${Class._id}`).then((response) => {
       setCurrentBooking(response.data.data);
     });
   }, [Class]);
@@ -172,7 +172,12 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                 <hr className="classcard-separator"></hr>
               )}
               {component === "newbooking" && (
-                <NewBookingForm Class={Class} user={user} city={city} WeekNumber={WeekNumber}/>
+                <NewBookingForm
+                  Class={Class}
+                  user={user}
+                  city={city}
+                  WeekNumber={WeekNumber}
+                />
               )}
               {component === "atendedvolunteers" && (
                 <ClassVolunteersList
