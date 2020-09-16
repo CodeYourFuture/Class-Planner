@@ -3,7 +3,7 @@
 
 .classvolunteerslist-container {
   margin: auto;
-  width: 80%;
+  width: 100%;
   animation: FadeIn 500ms;
   font-family: $default-font-family;
   font-size: 0.75em;
@@ -29,4 +29,11 @@
   border-radius: 5px;
   cursor: pointer;
   outline: none;
+}
+
+@media (min-width: 768px) {
+  .classvolunteerslist-container {
+    margin: auto;
+    width: 100%;
+  }
 }

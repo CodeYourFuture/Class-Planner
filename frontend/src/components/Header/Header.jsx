@@ -2,20 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import users from "../../data/users.json";
 import "./Header.scss";
+import logo from "../../images/cyf_brand.png";
 
 const Header = ({ user, city, component }) => {
   return (
     <div className="header">
       <div className="header-logo-container">
         <Link className="home-link header-logo" to="/">
-          <div>
-            <p> &lt;</p>
-            <p>CODE</p>
-            <p>&gt;&nbsp;</p>
-            <br />
-            <p>YOUR</p>
-          </div>
-          <p>FUTURE</p>
+          <img
+            src={logo}
+            alt="Code Your Future Logo"
+            className="header-logo"
+          ></img>
         </Link>
       </div>
       <div className="header-down-container">
