@@ -57,7 +57,6 @@ const NewClassPage = ({ user, city, component }) => {
             message: "This Date is Already taken by another Class!",
           });
         } else {
-          console.log("++++");
           await axios
             .post(`/api/v1/classes`, {
               ...values,

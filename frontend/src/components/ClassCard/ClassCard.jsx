@@ -111,7 +111,7 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                             e.preventDefault();
                           }
                         }}
-                        to={`/${user}/${city}/atendedvolunteers/${Class._id}/${WeekNumber}`}
+                        to={`/${user}/${city}/attendedvolunteers/${Class._id}/${WeekNumber}`}
                       >
                         <p>
                           {currentBooking && currentBooking.length} volunteers
@@ -179,7 +179,7 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                   WeekNumber={WeekNumber}
                 />
               )}
-              {component === "atendedvolunteers" && (
+              {component === "attendedvolunteers" && (
                 <ClassVolunteersList
                   user={user}
                   city={city}

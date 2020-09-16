@@ -38,8 +38,7 @@ const EditClassPage = ({ user, city, component, id }) => {
       return allClasses.data.data;
     }
   }, []);
-  const editClass = async (values) => {
-    console.log(values)
+  const editClass = async (values) => { 
     if (
       Date.parse(`01/01/2020 ${values.startTime}:00`) >=
       Date.parse(`01/01/2020 ${values.endTime}`)
