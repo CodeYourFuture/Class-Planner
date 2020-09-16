@@ -17,7 +17,7 @@ const CourseForm = ({
   startDate,
   endDate,
 }) => {
-  const [cityNameVisible, setCityNameVisible] = useState(false);  
+  const [cityNameVisible, setCityNameVisible] = useState(false);
   return (
     <div className="new-course-calendar-container">
       {city ? (
@@ -59,7 +59,7 @@ const CourseForm = ({
           {error && error.intakeName && <p> *&nbsp;Intake Name is required!</p>}
         </div>
         {!cityNameVisible && citiesName && citiesName !== "Nothing" && (
-          <div className="form-group font-size test">
+          <div className="form-group test">
             <label>City Name:</label>
             <select
               name="cityName"
@@ -88,11 +88,7 @@ const CourseForm = ({
 
         {(cityNameVisible || city || citiesName === "Nothing") && (
           <React.Fragment>
-            <div
-              className={
-                city ? "form-group font-size" : "form-group font-size test"
-              }
-            >
+            <div className={city ? "form-group" : "form-group test"}>
               <label>{city ? "City Name: " : "New City Name: "} </label>
               <input
                 type="text"

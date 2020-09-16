@@ -17,8 +17,8 @@
   border: 1px solid #eaeaea;
   font-family: "Open Sans", sans-serif;
   transition: 500ms;
-  padding: 50px 20% 50px 10%;
   margin: 15px auto 30px auto;
+  padding: 5px 10px 10px 0;
 }
 .test {
   margin-left: 29px;
@@ -39,6 +39,18 @@
   cursor: pointer;
 }
 
-.error {
-  border: 1px solid #e50303;
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .new-course-calendar-form {
+    padding: 50px 20% 50px 10%;
+    margin: 15px auto 30px auto;
+  }
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
 }

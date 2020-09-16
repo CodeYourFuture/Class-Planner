@@ -8,6 +8,7 @@
   animation: FadeIn 500ms;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
+  padding: 5px 10px 10px 5px;
 }
 
 .btn-edit-course {
@@ -34,6 +35,7 @@
   .courses-container {
     width: 80%;
     margin: 0 auto;
+    padding: 0;
   }
 
   .hide-city-col {
@@ -41,6 +43,6 @@
   }
 }
 
-tr{
+tr {
   transition: 200ms;
 }

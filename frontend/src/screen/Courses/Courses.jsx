@@ -49,19 +49,22 @@ const NewCoursePage = ({ user, city, component }) => {
   return (
     <div>
       <Header user={user} city={city} component={component} />
-      {cancelStatus && (
-        <CancelCourse
-          currentCourse={currentCourse}
-          closeHandler={closeConfirmationAlert}
-          showAlert={showAlert}
-        />
-      )}
-      {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
+
       <div className="courses-container">
         <div className="page-title">
           <p>{city}</p> <i className="fas fa-chevron-right"></i>
           <p>Courses</p>
         </div>
+
+        {cancelStatus && (
+          <CancelCourse
+            currentCourse={currentCourse}
+            closeHandler={closeConfirmationAlert}
+            showAlert={showAlert}
+          />
+        )}
+        {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
+
         <div className="table-responsive">
           <table className="table" cellSpacing="0" cellPadding="0">
             <thead>
@@ -111,9 +114,8 @@ const NewCoursePage = ({ user, city, component }) => {
             </tbody>
           </table>
         </div>
-        </div>
-        <Footer />
-      
+      </div>
+      <Footer />
     </div>
   );
 };

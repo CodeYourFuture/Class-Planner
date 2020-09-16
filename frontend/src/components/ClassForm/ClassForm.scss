@@ -12,7 +12,7 @@
   border: 1px solid #eaeaea;
   font-family: "Open Sans", sans-serif;
   transition: 500ms;
-  padding: 50px 20% 50px 10%;
+  padding: 5px 10px 10px 0;
   margin: 15px auto 30px auto;
 }
 
@@ -20,6 +20,9 @@
 }
 
 @media (min-width: 768px) {
+  .new-class-form {
+    padding: 50px 20% 50px 10%;
+  }
 }
 
 @media (min-width: 992px) {
@@ -31,6 +34,6 @@
 
 @media (min-width: 1200px) {
 }
-.error{
-    border: 1px solid #e50303;
+.error {
+  border: 1px solid #e50303;
 }
