@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Alert from "../../components/Alert/Alarm.jsx";
 import dayjs from "dayjs";
 import "./ClassForm.scss";
+import { useEffect } from "react";
 
 const NewClassForm = ({
   entryData,
@@ -21,10 +22,19 @@ const NewClassForm = ({
   syllabusURL,
   scheduleType,
 }) => {
-  const [weekState, setWeekState] = useState(() =>
-    status ? (status ? true : false) : false
-  );
-
+  const [weekState, setWeekState] = useState(null);
+  useEffect(() => {
+    if (typeof status === "undefined") {
+      setWeekState(true);
+    } else {
+      if (status) {
+        setWeekState(true);
+      } else {
+        setWeekState(false);
+      }
+    }
+  }, [status]);
+  console.log(status)
   return (
     <div className="new-class-container">
       <div className="page-title">
@@ -86,7 +96,7 @@ const NewClassForm = ({
             <input
               type="radio"
               name="status"
-              defaultChecked={status ? (status ? true : false) : true}
+              defaultChecked={weekState}
               onChange={() => setWeekState(true)}
               ref={(e) =>
                 (entryData.current[2] = {
@@ -99,7 +109,7 @@ const NewClassForm = ({
             <input
               type="radio"
               name="status"
-              defaultChecked={status ? false : true}
+              defaultChecked={weekState ? false :  true}
               onChange={() => setWeekState(false)}
             />
             <label htmlFor="Holiday">Holiday</label>
