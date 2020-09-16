@@ -1,4 +1,5 @@
 @import "../../scss/typography";
+@import "./../../scss/variables";
 
 .new-class-container {
   min-height: calc(100vh - 270px);
@@ -10,7 +11,7 @@
 
 .new-class-form {
   border: 1px solid #eaeaea;
-  font-family: "Open Sans", sans-serif;
+  font-family: $default-font-family;
   transition: 500ms;
   padding: 5px 10px 10px 0;
   margin: 15px auto 30px auto;

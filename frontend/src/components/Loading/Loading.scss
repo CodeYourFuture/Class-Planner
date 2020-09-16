@@ -19,8 +19,8 @@
     color: #f5f9fc;
   }
 }
-.loading{
-  font-family: "Open Sans", sans-serif;
+.loading {
+  font-family: $default-font-family;
   letter-spacing: 2px;
   color: #79d582;
   font-weight: bold;
@@ -29,7 +29,7 @@
 }
 
 .nothing {
-  font-family: "Open Sans", sans-serif;
+  font-family: $default-font-family;
   letter-spacing: 2px;
   font-weight: bold;
   border-radius: 50%;
