@@ -1,69 +1,20 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import ClassCard from "../ClassCard/ClassCard.jsx";
 import Loading from "../Loading/Loading.jsx";
-import axios from "axios";
 import { MonthNames } from "../../utils/MonthNames";
+import { useFilter } from "../../hooks/useFilter.jsx";
 import dayjs from "dayjs";
-import isBetween from "dayjs/plugin/isBetween";
 import "./CourseCalendar.scss";
 
 const CourseCalendar = ({ user, city, component }) => {
   const [showHolidays, setShowHolidays] = useState(false);
-  const [course, setCourse] = useState(null);
-  const [month, setMonth] = useState(`${dayjs(new Date()).format("M")}`);
-  const [courses, setCourses] = useState(null);
-  const [classes, setClasses] = useState(null);
-  const [defaultCousreId, setDefaultCourseId] = useState(null);
-  dayjs.extend(isBetween);
-  const get_Courses = useCallback(async () => {
-    let allCourses = await axios.get(`/api/v1/courses/`);
-    allCourses = allCourses.data.data.filter(
-      (course) => course.cityName === city
-    );
-    setCourses(allCourses);
-  }, [city]);
-  const get_Classes = useCallback(async (course) => {
-    let allClasses = await axios.get(`/api/v1/classes/`);
-    let counter = 0;
-    allClasses = allClasses.data.data.filter(
-      (Class) => course && Class.courseCalendar_Id === course
-    );
-    allClasses
-      .sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
-      .map((Class) =>
-        Class.status ? (Class.weekNumber = ++counter) : (Class.weekNumber = "-")
-      );
-    allClasses = JSON.parse(JSON.stringify(allClasses));
-    setClasses(allClasses);
-    allClasses = [];
-  }, []);
-  const get_Classes_OnLoading = useCallback(async () => {
-    if (courses) {
-      let currentCourse = courses.find((course) =>
-        dayjs(new Date()).isBetween(
-          dayjs(course.startDate),
-          dayjs(course.endDate),
-          "day"
-        )
-      );
-      if (currentCourse) {
-        setDefaultCourseId(currentCourse._id);
-      }
-      get_Classes(currentCourse._id || courses[0]._id);
-    }
-  }, [courses, get_Classes]);
-  const get_Classes_OnLoaded = useCallback(async () => {
-    if (course) {
-      get_Classes(course);
-    }
-  }, [course, get_Classes]);
+  const { entryData, getData, filter, data } = useFilter();
+
   useEffect(() => {
-    get_Courses();
-  }, [get_Courses]);
-  useEffect(() => {
-    get_Classes_OnLoading();
-    get_Classes_OnLoaded();
-  }, [get_Classes_OnLoading, get_Classes_OnLoaded]);
+    if (data === null) {
+      getData(city);
+    }
+  }, [city, getData, data]);
   return (
     <div className="coursecalendarform-container">
       <div className="page-title">
@@ -72,28 +23,38 @@ const CourseCalendar = ({ user, city, component }) => {
       </div>
       <div className="filter-container">
         <div className="control-container">
+          <label>Search:</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search . . ."
+            onChange={() => filter()}
+            ref={(e) => (entryData.current[1] = e)}
+          />
+        </div>
+        <div className="control-container">
           <label>Intake: </label>
           <select
-            defaultValue={defaultCousreId}
-            onChange={(e) => setCourse(e.target.value)}
+            defaultValue={data && data.courseId}
+            onChange={() => filter()}
+            ref={(e) => (entryData.current[2] = e)}
           >
-            {courses &&
-              courses
-                .filter((course) => course.cityName === city)
-                .map((course, index) => {
-                  return (
-                    <option value={course._id} key={index}>
-                      {course.intakeName}
-                    </option>
-                  );
-                })}
+            {data &&
+              data.courses.map((course, index) => {
+                return (
+                  <option value={course._id} key={index}>
+                    {course.intakeName}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="control-container">
           <label>Month: </label>
           <select
             defaultValue={dayjs(new Date()).format("M")}
-            onChange={(e) => setMonth(e.target.value)}
+            onChange={() => filter()}
+            ref={(e) => (entryData.current[3] = e)}
           >
             <option value="All-Months">All Months</option>
             {MonthNames.map((month, index) => {
@@ -114,29 +75,23 @@ const CourseCalendar = ({ user, city, component }) => {
         </div>
       </div>
       <div className="classes-list-container">
-        {(month &&
-          classes &&
-          classes
-            .filter(
-              (Class) =>
-                month === "All-Months" ||
-                dayjs(Class.date).format("M") === month
-            )
-            .map((Class, index) => {
-              if (!showHolidays && !Class.status) {
-                return null;
-              }
-              return (
-                <ClassCard
-                  user={user}
-                  city={city}
-                  Class={Class}
-                  component={component}
-                  key={index}
-                  WeekNumber={Class.weekNumber}
-                />
-              );
-            })) || <Loading />}
+        {(data &&
+          data.classes.length > 0 &&
+          data.classes.map((Class, index) => {
+            if (!showHolidays && !Class.status) {
+              return null;
+            }
+            return (
+              <ClassCard
+                user={user}
+                city={city}
+                Class={Class}
+                component={component}
+                key={index}
+                WeekNumber={Class.weekNumber}
+              />
+            );
+          })) || <Loading />}
       </div>
     </div>
   );
