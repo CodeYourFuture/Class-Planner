@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 
 export const useForm = (callback) => {
   const [error, setError] = useState(null);
+  const [submite, setSubmit] = useState(true);
   const entryData = useRef([]);
 
   const validateForm = () => {
@@ -117,27 +118,31 @@ export const useForm = (callback) => {
     }
   };
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (JSON.stringify(validateForm()) !== "{}") {
-      setError(validateForm());
-    } else {
-      let _Values = {};
-      let key = "";
-      entryData.current.forEach((element) => {
-        if (element.element) {
-          key = element.element.name;
-          _Values[key] =
-            element.element.type === "radio"
-              ? element.element.checked
-                ? true
-                : false
-              : `${element.element.value}`;
-        }
-      });
 
-      callback(_Values);
-      setError(null);
+  const onSubmit = (event) => {
+    if (submite) {
+      setSubmit(false);
+      event.preventDefault();
+      console.log(event);
+      if (JSON.stringify(validateForm()) !== "{}") {
+        setError(validateForm());
+      } else {
+        let _Values = {};
+        let key = "";
+        entryData.current.forEach((element) => {
+          if (element.element) {
+            key = element.element.name;
+            _Values[key] =
+              element.element.type === "radio"
+                ? element.element.checked
+                  ? true
+                  : false
+                : `${element.element.value}`;
+          }
+        });
+        callback(_Values);
+        setError(null);
+      }
     }
   };
 
