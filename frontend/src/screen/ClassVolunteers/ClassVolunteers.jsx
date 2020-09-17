@@ -26,6 +26,7 @@ const ClassVolunteers = ({ user, city, component, id, WeekNumber }) => {
         {Class ? (
           <ClassCard
             user={user}
+            id={id}
             city={city}
             component={component}
             Class={Class}
