@@ -42,13 +42,14 @@ exports.getClassBookings = async (req, res) => {
 
 exports.createBooking = async (req, res) => {
   try {
+    const volunteerEmail = req.body.email.toLowerCase(); 
     const { errors, isValid } = validateBookingInput(req.body);
     if (!isValid) {
       return res.status(400).json(errors);
     }
 
     Booking.findOne(
-      { email: req.body.email, classId: req.body.classId },
+      { email: volunteerEmail, classId: req.body.classId },
       async (err, result) => {
         if (result) {
           const multipleBooking = {};
