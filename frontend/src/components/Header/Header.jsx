@@ -2,20 +2,33 @@ import React from "react";
 import { Link } from "react-router-dom";
 import users from "../../data/users.json";
 import "./Header.scss";
+import "./BurgerMenu.scss";
+
+import BurgerMenu from "../../components/Header/BurgerMenu";
+
 import logo from "../../images/cyf_brand.png";
 
 const Header = ({ user, city, component }) => {
   return (
     <div className="header">
-      <div className="header-logo-container">
-        <Link className="home-link header-logo" to="/">
-          <img
-            src={logo}
-            alt="Code Your Future Logo"
-            className="header-logo"
-          ></img>
-        </Link>
+      <div className="header-top-container">
+        <div className="header-logo-container">
+          <Link className="home-link header-logo" to="/">
+            <img
+              src={logo}
+              alt="Code Your Future Logo"
+              className="header-logo"
+            ></img>
+          </Link>
+        </div>
+        <div className="header-burger-container">
+          {component !== "home" && (
+            // <div className="home-app-title" asan menu ro neshoon nade>
+            <BurgerMenu user={user} city={city} component={component} />
+          )}
+        </div>
       </div>
+
       <div className="header-down-container">
         <nav className="header-nav-container">
           {component === "home" ? (

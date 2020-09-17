@@ -96,7 +96,7 @@ const NewClassForm = ({
               type="radio"
               name="status"
               defaultChecked={weekState}
-              onChange={() => setWeekState(true)}
+              onClick={() => setWeekState(true)}
               ref={(e) =>
                 (entryData.current[2] = {
                   element: e,
@@ -109,7 +109,7 @@ const NewClassForm = ({
               type="radio"
               name="status"
               defaultChecked={weekState ? false : true}
-              onChange={() => setWeekState(false)}
+              onClick={() => setWeekState(false)}
             />
             <label htmlFor="Holiday">Holiday</label>
           </div>

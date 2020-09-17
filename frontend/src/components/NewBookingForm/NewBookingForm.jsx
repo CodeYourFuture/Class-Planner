@@ -13,6 +13,7 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
   const NewSignUp = async (values) => {
     values.classId = Class._id;
     values.email = values.email.toLowerCase();
+
     await axios
       .post(`/api/v1/bookings`, {
         ...values,
@@ -36,6 +37,14 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
           setAlertMessage({
             type: "danger",
             message: "New class booking is not created !",
+          });
+        }
+      })
+      .catch((err) => {
+        if (!err.response.data.success) {
+          setAlertMessage({
+            type: "danger",
+            message: err.response.data.message,
           });
         }
       });

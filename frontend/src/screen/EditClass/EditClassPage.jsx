@@ -25,7 +25,7 @@ const EditClassPage = ({ user, city, component, id }) => {
       if (response.data.data.length > 0) {
         let classFound = response.data.data.find((Class) => Class._id === id);
         if (classFound) {
-          setCurrentClass(response.data.data.find((Class) => Class._id === id));
+          setCurrentClass(classFound);
         } else {
           history.push(`/nothing`);
         }
@@ -59,15 +59,49 @@ const EditClassPage = ({ user, city, component, id }) => {
     }
   };
   const editClass = async (values) => {
-    if (
+    let dublicate = false;
+    if (values.status === currentClass.status) {
+      if (values.status) {
+        if (
+          values.courseCalendar_Id === currentClass.courseCalendar_Id &&
+          dayjs(currentClass.date).format("MM-DD-YYYY") ===
+            dayjs(values.date).format("MM-DD-YYYY") &&
+          values.cityName === currentClass.cityName &&
+          values.startTime === currentClass.startTime &&
+          values.endTime === currentClass.endTime &&
+          values.syllabusURL === currentClass.syllabusURL &&
+          values.scheduleType === currentClass.scheduleType
+        ) {
+          dublicate = true;
+        }
+      } else {
+        if (
+          values.courseCalendar_Id === currentClass.courseCalendar_Id &&
+          dayjs(currentClass.date).format("MM-DD-YYYY") ===
+            dayjs(values.date).format("MM-DD-YYYY") &&
+          values.cityName === currentClass.cityName
+        ) {
+          dublicate = true;
+        }
+      }
+    }
+    if (dublicate) {
+      setSubmit_F(true);
+      setAlertMessage({
+        type: "danger",
+        message: "Ther is no change to update !",
+      });
+    } else if (
       Date.parse(`01/01/2020 ${values.startTime}:00`) >=
       Date.parse(`01/01/2020 ${values.endTime}`)
     ) {
+      setSubmit_F(true);
       setAlertMessage({
         type: "danger",
         message: "End Time must be after Start Time!",
       });
     } else if (dayjs(values.date) <= dayjs(new Date())) {
+      setSubmit_F(true);
       setAlertMessage({
         type: "danger",
         message: "Date is not valid!",
@@ -83,18 +117,20 @@ const EditClassPage = ({ user, city, component, id }) => {
         );
         const outOfDate = courses.find(
           (course) =>
-          dayjs(values.date).isBetween(
-            dayjs(course.startDate),
-            dayjs(course.endDate),
-            "day"
-          ) && course._id === values.courseCalendar_Id
+            dayjs(values.date).isBetween(
+              dayjs(course.startDate),
+              dayjs(course.endDate),
+              "day"
+            ) && course._id === values.courseCalendar_Id
         );
         if (conflictClass) {
+          setSubmit_F(true);
           setAlertMessage({
             type: "danger",
             message: "This Date is Already taken by another Class!",
           });
         } else if (!outOfDate) {
+          setSubmit_F(true);
           setAlertMessage({
             type: "danger",
             message: "This Date is out of the course period!",
@@ -114,6 +150,7 @@ const EditClassPage = ({ user, city, component, id }) => {
                   history.push(`/${user}/${city}/coursecalendar/`);
                 }, 2000);
               } else {
+                setSubmit_F(true);
                 setAlertMessage({
                   type: "danger",
                   message: "Class is not updated !",
@@ -124,7 +161,9 @@ const EditClassPage = ({ user, city, component, id }) => {
       }
     }
   };
-  const { entryData, error, onChange, onSubmit } = useForm(editClass);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
+    editClass
+  );
   useEffect(() => {
     if (currentClass) {
       getCourses();
@@ -133,7 +172,6 @@ const EditClassPage = ({ user, city, component, id }) => {
   useEffect(() => {
     getClass();
   }, [getClass]);
-
   return (
     <div>
       <Header user={user} city={city} component={component} />

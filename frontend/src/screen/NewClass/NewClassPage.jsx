@@ -47,11 +47,13 @@ const NewClassPage = ({ user, city, component }) => {
       Date.parse(`01/01/2020 ${values.startTime}:00`) >=
       Date.parse(`01/01/2020 ${values.endTime}`)
     ) {
+      setSubmit_F(true);
       setAlertMessage({
         type: "danger",
         message: "End Time must be after Start Time!",
       });
     } else if (dayjs(values.date) <= dayjs(new Date())) {
+      setSubmit_F(true);
       setAlertMessage({
         type: "danger",
         message: "Date is not valid!",
@@ -75,11 +77,13 @@ const NewClassPage = ({ user, city, component }) => {
           ) && course._id === values.courseCalendar_Id
       );
       if (conflictClass) {
+        setSubmit_F(true);
         setAlertMessage({
           type: "danger",
           message: "This Date is Already taken by another Class!",
         });
       } else if (!outOfDate) {
+        setSubmit_F(true);
         setAlertMessage({
           type: "danger",
           message: "This Date is out of the course period!",
@@ -99,16 +103,25 @@ const NewClassPage = ({ user, city, component }) => {
                 history.push(`/${user}/${city}/coursecalendar/`);
               }, 2000);
             } else {
+              setSubmit_F(true);
               setAlertMessage({
                 type: "danger",
                 message: "New Course Calendar is not added !",
+              });
+            }
+          })
+          .catch((err) => {
+            if (!err.response.data.success) {
+              setAlertMessage({
+                type: "danger",
+                message: err.response.data.message,
               });
             }
           });
       }
     }
   };
-  const { entryData, error, onChange, onSubmit } = useForm(newClass);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(newClass);
   useEffect(() => {
     getCourses();
   }, [getCourses]);
