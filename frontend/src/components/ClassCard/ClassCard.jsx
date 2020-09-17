@@ -68,6 +68,9 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                     <p>
                       {MonthNames[new Date(Class.date).getMonth().toString()]}
                     </p>
+                    <p>
+                      {new Date(Class.date).getFullYear().toString()}
+                    </p>
                   </div>
                   {isNaN(WeekNumber) === false ? (
                     <div
