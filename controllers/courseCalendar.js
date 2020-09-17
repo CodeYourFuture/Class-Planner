@@ -26,13 +26,34 @@ exports.createCourseCalendar = async (req, res) => {
     if (!isValid) {
       return res.status(400).json(errors);
     }
+    CourseCalendar.findOne(
+      {
+        intakeName: req.body.intakeName,
+        cityName: req.body.cityName,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+      },
+      async (err, result) => {
+        if (result) {
+          return res.status(400).json({
+            success: false,
+            message: "Sorry, the course already exists!",
+          });
+        } else if (err) {
+          return res.status(500).json({
+            success: false,
+            error: "Server Error",
+          });
+        } else {
+          const newCourseCalendar = await CourseCalendar.create(req.body);
 
-    const newCourseCalendar = await CourseCalendar.create(req.body);
-
-    return res.status(201).json({
-      success: true,
-      data: newCourseCalendar,
-    });
+          return res.status(201).json({
+            success: true,
+            data: newCourseCalendar,
+          });
+        }
+      }
+    );
   } catch (err) {
     console.log(err);
     return res.status(500).json({
