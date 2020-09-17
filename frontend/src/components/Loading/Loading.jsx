@@ -5,7 +5,7 @@ const Loading = () => {
   const [message, setMessage] = useState(false);
   setTimeout(() => {
     setMessage(true);
-  }, 2000);
+  }, 1500);
   return (
     <div className="loaading-container">
       {message ? (
