@@ -48,6 +48,7 @@ const NewCoursePage = ({ user, city, component }) => {
   }, []);
   const newCourse = async (values) => {
     if (dayjs(values.startDate).isAfter(dayjs(values.endDate))) {
+      setSubmit_F(true);
       setAlertMessage({
         type: "danger",
         message:
@@ -74,6 +75,7 @@ const NewCoursePage = ({ user, city, component }) => {
       }
 
       if (_Courses) {
+        setSubmit_F(true);
         setAlertMessage({
           type: "danger",
           message: "Your Data has conflict with other courses!",
@@ -98,6 +100,7 @@ const NewCoursePage = ({ user, city, component }) => {
                   }
                 }, 2000);
               } else {
+                setSubmit_F(true);
                 setAlertMessage({
                   type: "danger",
                   message: "New Course not added !",
@@ -105,6 +108,7 @@ const NewCoursePage = ({ user, city, component }) => {
               }
             });
         } catch (err) {
+          setSubmit_F(true);
           setAlertMessage({
             type: "danger",
             message: "New Course not added !",
@@ -113,7 +117,7 @@ const NewCoursePage = ({ user, city, component }) => {
       }
     }
   };
-  const { entryData, error, onChange, onSubmit } = useForm(newCourse);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(newCourse);
   useEffect(() => {
     if (!city) {
       getCitiesName();
