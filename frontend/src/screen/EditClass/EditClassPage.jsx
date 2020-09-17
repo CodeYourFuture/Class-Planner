@@ -10,6 +10,7 @@ import Footer from "../../components/Footer/Footer.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 import axios from "axios";
 import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 import "./EditClassPage.scss";
 
 const EditClassPage = ({ user, city, component, id }) => {
@@ -17,28 +18,47 @@ const EditClassPage = ({ user, city, component, id }) => {
   const [alertMessage, setAlertMessage] = useState(null);
   const [currentClass, setCurrentClass] = useState(null);
   const history = useHistory();
+  dayjs.extend(isBetween);
 
   const getClass = useCallback(async () => {
     await axios.get(`/api/v1/classes/`).then((response) => {
-      if (response.data.data) {
-        setCurrentClass(response.data.data.find((Class) => Class._id === id));
+      if (response.data.data.length > 0) {
+        let classFound = response.data.data.find((Class) => Class._id === id);
+        if (classFound) {
+          setCurrentClass(response.data.data.find((Class) => Class._id === id));
+        } else {
+          history.push(`/nothing`);
+        }
+      } else {
+        history.push(`/nothing`);
       }
     });
-  }, [id]);
+  }, [id, history]);
   const getCourses = useCallback(async () => {
     await axios.get(`/api/v1/courses/`).then((response) => {
-      setCourses(
-        response.data.data.filter((course) => course.cityName === city)
-      );
+      if (response.data.data.length > 0) {
+        let courseFound = response.data.data.filter(
+          (course) => course.cityName === city
+        );
+        if (courseFound) {
+          setCourses(courseFound);
+        } else {
+          history.push(`/nothing`);
+        }
+      } else {
+        history.push(`/nothing`);
+      }
     });
-  }, [city]);
-  const getClasses = useCallback(async () => {
+  }, [city, history]);
+  const getClasses = async () => {
     const allClasses = await axios.get(`/api/v1/classes/`);
-    if (allClasses.data.data) {
+    if (allClasses.data.data.length > 0) {
       return allClasses.data.data;
+    } else {
+      return [];
     }
-  }, []);
-  const editClass = async (values) => { 
+  };
+  const editClass = async (values) => {
     if (
       Date.parse(`01/01/2020 ${values.startTime}:00`) >=
       Date.parse(`01/01/2020 ${values.endTime}`)
@@ -54,17 +74,30 @@ const EditClassPage = ({ user, city, component, id }) => {
       });
     } else {
       let allClasses = await getClasses();
-      if (allClasses) {
+      if (allClasses.length > 0) {
         const conflictClass = allClasses.find(
           (Class) =>
             Date.parse(Class.date) === Date.parse(values.date) &&
             Class.courseCalendar_Id === values.courseCalendar_Id &&
             Class._id !== currentClass._id
         );
+        const outOfDate = courses.find(
+          (course) =>
+          dayjs(values.date).isBetween(
+            dayjs(course.startDate),
+            dayjs(course.endDate),
+            "day"
+          ) && course._id === values.courseCalendar_Id
+        );
         if (conflictClass) {
           setAlertMessage({
             type: "danger",
             message: "This Date is Already taken by another Class!",
+          });
+        } else if (!outOfDate) {
+          setAlertMessage({
+            type: "danger",
+            message: "This Date is out of the course period!",
           });
         } else {
           await axios

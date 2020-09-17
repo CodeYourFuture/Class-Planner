@@ -41,6 +41,9 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
     <React.Fragment>
       {cancelStatus && (
         <CancelClass
+          user={user}
+          city={city}
+          component={component}
           currentClass={Class}
           closeHandler={closeConfirmationAlert}
           showAlert={showAlert}
@@ -103,22 +106,23 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                       )}
                   </div>
                   <div className="classcard-bottom">
-                    {[users[0].id, users[1].id,users[2].id].includes(user) && Class.status && (
-                      <Link
-                        className="classcard-edit-Link"
-                        onClick={(e) => {
-                          if (currentBooking && currentBooking.length === 0) {
-                            e.preventDefault();
-                          }
-                        }}
-                        to={`/${user}/${city}/attendedvolunteers/${Class._id}/${WeekNumber}`}
-                      >
-                        <p>
-                          {currentBooking && currentBooking.length} volunteers
-                          signed up
-                        </p>
-                      </Link>
-                    )}
+                    {[users[0].id, users[1].id, users[2].id].includes(user) &&
+                      Class.status && (
+                        <Link
+                          className="classcard-edit-Link"
+                          onClick={(e) => {
+                            if (currentBooking && currentBooking.length === 0) {
+                              e.preventDefault();
+                            }
+                          }}
+                          to={`/${user}/${city}/attendedvolunteers/${Class._id}/${WeekNumber}`}
+                        >
+                          <p>
+                            {currentBooking && currentBooking.length} volunteers
+                            signed up
+                          </p>
+                        </Link>
+                      )}
                     {component !== "newbooking" && (
                       <div>
                         {user === users[0].id && (

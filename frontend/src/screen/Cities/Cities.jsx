@@ -7,33 +7,48 @@ import { Link } from "react-router-dom";
 import "./Cities.scss";
 
 const Cities = ({ user, component }) => {
-  const [citiesName, setCitiesName] = useState(null);
-  const [searchResult, setSearchResult] = useState([]);
-  const search = useCallback((e) => {
-    setSearchResult(
-      citiesName.filter((city) => city.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
-    );
-  }, [citiesName]);
+  const [citiesName, setCitiesName] = useState({
+    citiesName: [],
+    searchResult: [],
+  });
+  const search = (e) => {
+    try {
+      setCitiesName({
+        citiesName: citiesName.citiesName,
+        searchResult: citiesName.citiesName.filter(
+          (city) =>
+            city.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0
+        ),
+      });
+    } catch (err) {
+      setCitiesName({
+        citiesName: [],
+        searchResult: [],
+      });
+    }
+  };
   const getCityName = useCallback(async () => {
     try {
       await axios.get(`/api/v1/courses`).then((response) => {
         let cities = response.data.data.map((course) => course.cityName);
         cities = cities.filter((a, b) => cities.indexOf(a) === b);
         if (cities.length > 0) {
-          setCitiesName(cities);
-          setSearchResult(cities);
-        } else {
-          setCitiesName(null);
-          setSearchResult(null);
+          setCitiesName({
+            citiesName: cities,
+            searchResult: cities,
+          });
         }
       });
     } catch (err) {
-      console.log(err);
+      setCitiesName({
+        citiesName: [],
+        searchResult: [],
+      });
     }
   }, []);
   useEffect(() => {
     getCityName();
-  }, [getCityName]); 
+  }, [getCityName]);
   return (
     <div>
       <Header user={user} component={component} />
@@ -48,8 +63,8 @@ const Cities = ({ user, component }) => {
           <i className="fas fa-search"></i>
         </div>
         <div className="course-card-container">
-          {searchResult.length > 0 ? (
-            searchResult.map((city, index) => {
+          {citiesName.searchResult && citiesName.searchResult.length > 0 ? (
+            citiesName.searchResult.map((city, index) => {
               return (
                 <Link
                   className="course-card"
