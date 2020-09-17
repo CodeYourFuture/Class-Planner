@@ -1,5 +1,9 @@
 ## Class Planner
 
+![Sample Preview For Class Planner Project](./frontend/src/images/github-image.jpg)
+
+
+
 This project's aim is to streamline and automate the process that we use to sign up  volunteers to attend class.
 
 
