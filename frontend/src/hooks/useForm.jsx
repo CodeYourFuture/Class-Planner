@@ -140,10 +140,14 @@ export const useForm = (callback) => {
     }
   };
 
+  const setSubmit_F = (param) => {
+    setSubmit(param);
+  };
   return {
     entryData,
     onChange,
     onSubmit,
+    setSubmit_F,
     error,
   };
 };

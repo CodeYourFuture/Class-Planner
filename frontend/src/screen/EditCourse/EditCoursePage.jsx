@@ -36,8 +36,32 @@ const EditCoursePage = ({ user, city, component, id }) => {
       console.log(err);
     }
   }, [id, history]);
+  const getClasses = async () => {
+    let allClasses = await axios.get(`/api/v1/classes/`);
+    if (allClasses.data.data.length > 0) {
+      allClasses = allClasses.data.data.filter(
+        (Class) => Class.courseCalendar_Id === id
+      );
+      return allClasses;
+    } else {
+      return [];
+    }
+  };
   const EditCourse = async (values) => {
-    if (dayjs(values.startDate).isAfter(dayjs(values.endDate))) {
+    if (
+      values.intakeName === currentCourse.intakeName &&
+      dayjs(currentCourse.startDate).format("MM-DD-YYYY") ===
+        dayjs(values.startDate).format("MM-DD-YYYY") &&
+      dayjs(currentCourse.endDate).format("MM-DD-YYYY") ===
+        dayjs(values.endDate).format("MM-DD-YYYY")
+    ) {
+      setSubmit_F(true);
+      setAlertMessage({
+        type: "danger",
+        message: "Ther is no change to update !",
+      });
+    } else if (dayjs(values.startDate).isAfter(dayjs(values.endDate))) {
+      setSubmit_F(true);
       setAlertMessage({
         type: "danger",
         message:
@@ -45,6 +69,7 @@ const EditCoursePage = ({ user, city, component, id }) => {
       });
     } else {
       let _Courses = await getCourses();
+      let _Classes = await getClasses();
       if (_Courses.length > 0) {
         _Courses = _Courses.find(
           (course) =>
@@ -63,10 +88,28 @@ const EditCoursePage = ({ user, city, component, id }) => {
             course._id !== id
         );
       }
+      if (_Classes.length > 0) {
+        _Classes = _Classes.filter(
+          (Class) =>
+            !dayjs(Class.date).isBetween(
+              dayjs(values.startDate),
+              dayjs(values.endDate),
+              "day"
+            )
+        );
+      }
       if (_Courses) {
+        setSubmit_F(true);
         setAlertMessage({
           type: "danger",
-          message: "Your Data has conflict with other courses!",
+          message: "Your Date has conflict with other courses!",
+        });
+      } else if (_Classes.length > 0) {
+        setSubmit_F(true);
+        setAlertMessage({
+          type: "danger",
+          message:
+            "This course has some classes which is out of this date range !",
         });
       } else {
         try {
@@ -84,6 +127,7 @@ const EditCoursePage = ({ user, city, component, id }) => {
                   history.push(`/${user}/${city}/courses/`);
                 }, 2000);
               } else {
+                setSubmit_F(true);
                 setAlertMessage({
                   type: "danger",
                   message: "Course not updated !",
@@ -96,7 +140,9 @@ const EditCoursePage = ({ user, city, component, id }) => {
       }
     }
   };
-  const { entryData, error, onChange, onSubmit } = useForm(EditCourse);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
+    EditCourse
+  );
   useEffect(() => {
     getCourses();
   }, [getCourses]);
