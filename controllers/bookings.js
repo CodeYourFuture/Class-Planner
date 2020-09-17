@@ -42,7 +42,7 @@ exports.getClassBookings = async (req, res) => {
 
 exports.createBooking = async (req, res) => {
   try {
-    const volunteerEmail = req.body.email.toLowerCase(); 
+    const volunteerEmail = req.body.email.toLowerCase();
     const { errors, isValid } = validateBookingInput(req.body);
     if (!isValid) {
       return res.status(400).json(errors);
@@ -52,10 +52,11 @@ exports.createBooking = async (req, res) => {
       { email: volunteerEmail, classId: req.body.classId },
       async (err, result) => {
         if (result) {
-          const multipleBooking = {};
-          multipleBooking.email =
-            "Email already exists, You have already booked for this class and thanks.";
-          return res.status(400).json(multipleBooking);
+          return res.status(400).json({
+            success: false,
+            message:
+              "Email already exists, You have already booked for this class and thanks.",
+          });
         } else if (err) {
           return res.status(500).json({
             success: false,
