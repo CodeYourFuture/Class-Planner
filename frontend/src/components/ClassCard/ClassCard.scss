@@ -46,12 +46,17 @@
   color: #3f3f3f;
 
   p:first-child {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 300;
     margin: 0 auto;
   }
 
   p:nth-child(2) {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0 auto;
+  }
+  p:nth-child(3) {
     font-size: 1em;
     font-weight: 500;
     margin: 0 auto;
