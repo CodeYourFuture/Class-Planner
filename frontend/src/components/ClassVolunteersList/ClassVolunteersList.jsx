@@ -4,7 +4,7 @@ import CancelBookingAlert from "./CancelBookingAlert.jsx";
 import users from "../../data/users.json";
 import "./ClassVolunteersList.scss";
 
-const ClassVolunteersList = ({ user, bookings }) => {
+const ClassVolunteersList = ({ user, city, id, WeekNumber, bookings }) => {
   const [ConfirmationStatus, setConfirmationStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
   const [alertType, setAlertType] = useState("");
@@ -30,17 +30,19 @@ const ClassVolunteersList = ({ user, bookings }) => {
     setAlertType(type);
     setAlertMessage(message);
   }
-
   return (
     <div className="classvolunteerslist-container">
       {ConfirmationStatus && (
         <CancelBookingAlert
           user={user}
+          city={city}
+          id={id}
           fullName={fullName}
           email={email}
           _id={bookingId}
           closeHandler={closeConfirmationAlert}
           showAlert={showAlert}
+          WeekNumber={WeekNumber}
         />
       )}
       {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}

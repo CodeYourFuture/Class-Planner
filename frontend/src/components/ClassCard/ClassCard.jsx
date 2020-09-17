@@ -10,7 +10,7 @@ import users from "../../data/users.json";
 import "./ClassCard.scss";
 import CancelClass from "./CancelClass";
 
-const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
+const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
   const [currentBooking, setCurrentBooking] = useState(null);
   const [cancelStatus, setCancelStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
@@ -36,7 +36,6 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
   useEffect(() => {
     get_booking();
   }, [get_booking]);
-
   return (
     <React.Fragment>
       {cancelStatus && (
@@ -187,8 +186,10 @@ const ClassCard = ({ user, city, component, Class, WeekNumber }) => {
                 <ClassVolunteersList
                   user={user}
                   city={city}
+                  id={id}
                   component={component}
                   bookings={currentBooking}
+                  WeekNumber={WeekNumber}
                 />
               )}
             </div>
