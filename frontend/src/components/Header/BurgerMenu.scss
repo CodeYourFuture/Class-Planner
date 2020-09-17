@@ -1,0 +1,116 @@
+@import "./../../scss/variables";
+
+#burgerToggle {
+  display: block;
+  position: relative;
+  right: 15px;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+
+  a {
+    text-decoration: none;
+    color: $header-nav-text;
+    transition: color 0.3s ease;
+    a:hover {
+      color: $header-nav-text-hover;
+    }
+  }
+
+  input {
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    cursor: pointer;
+    opacity: 0; /* hide this */
+    z-index: 2; /* to place it over the hamburger */
+    -webkit-touch-callout: none;
+  }
+
+  span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #3c3c3c;
+    border-radius: 3px;
+    opacity: 1;
+    z-index: 1;
+    transform-origin: 0px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+
+    &:nth-child(2) {
+      transform-origin: 0% -100%;
+    }
+
+    &:nth-child(4) {
+      transform-origin: 0% 100%;
+    }
+  }
+
+  input:checked ~ ul {
+    transform: none;
+  }
+
+  //Transform all the slices of hamburger into a crossmark.
+
+  input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-1px, -2px);
+    background: $header-nav-text-selected;
+  }
+
+  //Hide the middle one
+  input:checked ~ span:nth-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+
+  input:checked ~ span:nth-child(2) {
+    transform: rotate(45deg) translate(-1px, -5px);
+  }
+
+  input:checked ~ span:nth-child(4) {
+    transform: rotate(-45deg) translate(2px, -1px);
+  }
+}
+
+#menu {
+  position: fixed;
+  width: 150vw;
+  height: 150vh;
+  margin: 15px 0 0 -90vw;
+  padding: 50px 0 0 50px;
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  //   /* to stop flickering of text in safari */
+  transform-origin: 0% 0%;
+  transform: translate(200%, 0%);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+
+  li {
+    padding: 20px 0 20px 0;
+    font-size: 30px;
+    display: flex;
+    width: 100%;
+    word-wrap: none;
+    cursor: pointer;
+    p {
+      display: inline;
+      padding-left: 20px;
+      font-family: $default-font-family;
+    }
+  }
+}
+
+.menu-item-selected {
+  li {
+    color: $header-nav-text-selected;
+  }
+}
