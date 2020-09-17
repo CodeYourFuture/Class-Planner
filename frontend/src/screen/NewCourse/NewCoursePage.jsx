@@ -19,30 +19,35 @@ const NewCoursePage = ({ user, city, component }) => {
   const history = useHistory();
   dayjs.extend(isBetween);
   const getCourses = async () => {
-    const _Courses = await axios.get(`/api/v1/courses/`);
-    if (_Courses.data.data) {
-      return _Courses.data.data;
-    } else {
-      return false;
+    try {
+      const _Courses = await axios.get(`/api/v1/courses/`);
+      if (_Courses.data.data && _Courses.data.data.length > 0) {
+        return _Courses.data.data;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
   const getCitiesName = useCallback(async () => {
-    let _Courses = await getCourses();
-    if (_Courses) {
-      let _citiesName = _Courses.map((course) => course.cityName);
-      _citiesName = _citiesName.filter((a, b) => _citiesName.indexOf(a) === b);
-      setCitiesName(_citiesName);
-    } else {
-      setCitiesName("Nothing");
+    try {
+      let _Courses = await getCourses();
+      if (_Courses && _Courses.length > 0) {
+        let _citiesName = _Courses.map((course) => course.cityName);
+        _citiesName = _citiesName.filter(
+          (a, b) => _citiesName.indexOf(a) === b
+        );
+        setCitiesName(_citiesName);
+      } else {
+        setCitiesName("Nothing");
+      }
+    } catch (err) {
+      console.log(err);
     }
   }, []);
-  const newCourseCalendar = async (values) => {
-    if (
-      dayjs(values.startDate).isAfter(dayjs(values.endDate)) ||
-      dayjs(values.startDate) === dayjs(values.endDate) ||
-      dayjs(values.startDate).diff(dayjs(values.endDate), "month", true) * -1 <
-        1
-    ) {
+  const newCourse = async (values) => {
+    if (dayjs(values.startDate).isAfter(dayjs(values.endDate))) {
       setAlertMessage({
         type: "danger",
         message:
@@ -74,34 +79,41 @@ const NewCoursePage = ({ user, city, component }) => {
           message: "Your Data has conflict with other courses!",
         });
       } else {
-        await axios
-          .post(`/api/v1/courses`, {
-            ...values,
-          })
-          .then((response) => {
-            if (response.data.success) {
-              setAlertMessage({
-                type: "success",
-                message: "New Course added successfully !",
-              });
-              setTimeout(() => {
-                if (city) {
-                  history.push(`/${user}/${city}/courses/`);
-                } else {
-                  history.push(`/${user}/cities/`);
-                }
-              }, 2000);
-            } else {
-              setAlertMessage({
-                type: "danger",
-                message: "New Course Calendar was not added !",
-              });
-            }
+        try {
+          await axios
+            .post(`/api/v1/courses`, {
+              ...values,
+            })
+            .then((response) => {
+              if (response.data.success) {
+                setAlertMessage({
+                  type: "success",
+                  message: "New Course added successfully !",
+                });
+                setTimeout(() => {
+                  if (city) {
+                    history.push(`/${user}/${city}/courses/`);
+                  } else {
+                    history.push(`/${user}/cities/`);
+                  }
+                }, 2000);
+              } else {
+                setAlertMessage({
+                  type: "danger",
+                  message: "New Course not added !",
+                });
+              }
+            });
+        } catch (err) {
+          setAlertMessage({
+            type: "danger",
+            message: "New Course not added !",
           });
+        }
       }
     }
   };
-  const { entryData, error, onChange, onSubmit } = useForm(newCourseCalendar);
+  const { entryData, error, onChange, onSubmit } = useForm(newCourse);
   useEffect(() => {
     if (!city) {
       getCitiesName();
