@@ -29,23 +29,30 @@ const CourseCalendar = ({ user, city, component }) => {
             className="form-control"
             placeholder="Search . . ."
             onChange={() => filter()}
-            ref={(e) => (entryData.current[1] = e)}
+            ref={(e) => (entryData.current[0] = e)}
           />
         </div>
         <div className="control-container">
           <label>Intake: </label>
           <select
-            defaultValue={data && data.courseId}
             onChange={() => filter()}
-            ref={(e) => (entryData.current[2] = e)}
+            ref={(e) => (entryData.current[1] = e)}
           >
             {data &&
               data.courses.map((course, index) => {
-                return (
-                  <option value={course._id} key={index}>
-                    {course.intakeName}
-                  </option>
-                );
+                if (course._id === data.courseId) {
+                  return (
+                    <option selected value={course._id} key={index}>
+                      {course.intakeName}
+                    </option>
+                  );
+                } else {
+                  return (
+                    <option value={course._id} key={index}>
+                      {course.intakeName}
+                    </option>
+                  );
+                }
               })}
           </select>
         </div>
@@ -54,7 +61,7 @@ const CourseCalendar = ({ user, city, component }) => {
           <select
             defaultValue={dayjs(new Date()).format("M")}
             onChange={() => filter()}
-            ref={(e) => (entryData.current[3] = e)}
+            ref={(e) => (entryData.current[2] = e)}
           >
             <option value="All-Months">All Months</option>
             {MonthNames.map((month, index) => {
