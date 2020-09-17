@@ -109,6 +109,14 @@ const NewClassPage = ({ user, city, component }) => {
                 message: "New Course Calendar is not added !",
               });
             }
+          })
+          .catch((err) => {
+            if (!err.response.data.success) {
+              setAlertMessage({
+                type: "danger",
+                message: err.response.data.message,
+              });
+            }
           });
       }
     }
