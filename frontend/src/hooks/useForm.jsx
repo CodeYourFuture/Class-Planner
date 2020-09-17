@@ -104,6 +104,7 @@ export const useForm = (callback) => {
     return _error;
   };
   const onChange = (event) => {
+    setSubmit(true);
     if (
       event.target.value !== "" &&
       error &&
@@ -117,13 +118,11 @@ export const useForm = (callback) => {
       }
     }
   };
-
-
+  
   const onSubmit = (event) => {
+    event.preventDefault();
     if (submite) {
       setSubmit(false);
-      event.preventDefault();
-      console.log(event);
       if (JSON.stringify(validateForm()) !== "{}") {
         setError(validateForm());
       } else {
