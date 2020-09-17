@@ -106,6 +106,14 @@ const NewCoursePage = ({ user, city, component }) => {
                   message: "New Course not added !",
                 });
               }
+            })
+            .catch((err) => {
+              if (!err.response.data.success) {
+                setAlertMessage({
+                  type: "danger",
+                  message: err.response.data.message,
+                });
+              }
             });
         } catch (err) {
           setSubmit_F(true);
