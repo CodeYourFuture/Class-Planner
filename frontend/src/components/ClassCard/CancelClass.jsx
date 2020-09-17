@@ -1,7 +1,14 @@
 import React from "react";
 import axios from "axios";
 import "./CancelClass.scss";
-const CancelClass = ({ currentClass, closeHandler, showAlert }) => {
+const CancelClass = ({
+  user,
+  city,
+  component,
+  currentClass,
+  closeHandler,
+  showAlert,
+}) => {
   function deleteClass() {
     axios
       .delete(`/api/v1/classes/${currentClass._id}`)
@@ -9,6 +16,9 @@ const CancelClass = ({ currentClass, closeHandler, showAlert }) => {
         if (response.data.success === true) {
           closeHandler();
           showAlert("success", "The class has been deleted successfully.");
+          setTimeout(() => {
+            window.location.replace(`/${user}/${city}/${component}/`);
+          }, 2000);
         }
       })
       .catch(function (err) {
@@ -17,7 +27,7 @@ const CancelClass = ({ currentClass, closeHandler, showAlert }) => {
           showAlert("danger", err.response.data.error);
         }
       });
-  } 
+  }
   return (
     <div className="cancel-alert">
       <p>Are you sure to cancel the corresponding Class?</p>

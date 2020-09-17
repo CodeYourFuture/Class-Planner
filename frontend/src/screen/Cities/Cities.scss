@@ -1,5 +1,6 @@
 @import "../../scss/variables";
 .course-card-container {  
+  min-height: calc(100vh - 395px);
   display: grid;
   grid-template-columns: auto auto;
   row-gap: 30px;

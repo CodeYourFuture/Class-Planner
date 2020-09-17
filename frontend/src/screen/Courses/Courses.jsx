@@ -8,6 +8,7 @@ import { useHistory } from "react-router";
 import axios from "axios";
 import dayjs from "dayjs";
 import "./Courses.scss";
+import Loading from "../../components/Loading/Loading.jsx";
 
 const NewCoursePage = ({ user, city, component }) => {
   const [courses, setCourses] = useState(null);
@@ -31,13 +32,17 @@ const NewCoursePage = ({ user, city, component }) => {
   const getCourses = useCallback(async () => {
     try {
       let allCourses = await axios.get(`/api/v1/courses`);
-      allCourses = allCourses.data.data.filter(
-        (course) => course.cityName === city
-      );
-      if (allCourses.length > 0) {
-        setCourses(allCourses);
+      if (allCourses.data.data.length > 0) {
+        allCourses = allCourses.data.data.filter(
+          (course) => course.cityName === city
+        );
+        if (allCourses.length > 0) {
+          setCourses(allCourses);
+        } else {
+          history.push("/nothing");
+        }
       } else {
-        history.push("/nothing");
+        history.push("/");
       }
     } catch (err) {
       console.log(err);
@@ -58,6 +63,9 @@ const NewCoursePage = ({ user, city, component }) => {
 
         {cancelStatus && (
           <CancelCourse
+            user={user}
+            city={city}
+            component={component}
             currentCourse={currentCourse}
             closeHandler={closeConfirmationAlert}
             showAlert={showAlert}
@@ -80,7 +88,7 @@ const NewCoursePage = ({ user, city, component }) => {
               </tr>
             </thead>
             <tbody className="table-body">
-              {courses &&
+              {courses && courses.length > 0 ? (
                 courses.map((course, index) => {
                   return (
                     <tr key={index}>
@@ -110,7 +118,10 @@ const NewCoursePage = ({ user, city, component }) => {
                       </td>
                     </tr>
                   );
-                })}
+                })
+              ) : (
+                <Loading />
+              )}
             </tbody>
           </table>
         </div>
