@@ -6,7 +6,6 @@ import CourseForm from "../../components/CourseForm/CourseForm.jsx";
 import axios from "axios";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import Loading from "../../components/Loading/Loading.jsx";
 import "./EditCoursePage.scss";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -18,21 +17,27 @@ const EditCoursePage = ({ user, city, component, id }) => {
   const history = useHistory();
   dayjs.extend(isBetween);
   const getCourses = useCallback(async () => {
-    const _Courses = await axios.get(`/api/v1/courses/`);
-    if (_Courses.data.data) {
-      setCurrentCourse(_Courses.data.data.find((Course) => Course._id === id));
-      return _Courses.data.data;
-    } else {
-      return false;
+    try {
+      const _Courses = await axios.get(`/api/v1/courses/`);
+      if (_Courses.data.data.length > 0) {
+        let courseFound = _Courses.data.data.find(
+          (Course) => Course._id === id
+        );
+        if (courseFound) {
+          setCurrentCourse(courseFound);
+        } else {
+          history.push(`/nothing`);
+        }
+        return _Courses.data.data;
+      } else {
+        history.push(`/nothing`);
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }, [id]);
+  }, [id, history]);
   const EditCourse = async (values) => {
-    if (
-      dayjs(values.startDate).isAfter(dayjs(values.endDate)) ||
-      dayjs(values.startDate) === dayjs(values.endDate) ||
-      dayjs(values.startDate).diff(dayjs(values.endDate), "month", true) * -1 <
-        1
-    ) {
+    if (dayjs(values.startDate).isAfter(dayjs(values.endDate))) {
       setAlertMessage({
         type: "danger",
         message:
@@ -40,7 +45,7 @@ const EditCoursePage = ({ user, city, component, id }) => {
       });
     } else {
       let _Courses = await getCourses();
-      if (_Courses) {
+      if (_Courses.length > 0) {
         _Courses = _Courses.find(
           (course) =>
             (dayjs(values.startDate).isBetween(
@@ -54,35 +59,40 @@ const EditCoursePage = ({ user, city, component, id }) => {
                 "day"
               ) ||
               course.intakeName === values.intakeName) &&
-            course.cityName === values.cityName && course._id !== id
+            course.cityName === values.cityName &&
+            course._id !== id
         );
-      }      
+      }
       if (_Courses) {
         setAlertMessage({
           type: "danger",
           message: "Your Data has conflict with other courses!",
         });
       } else {
-        await axios
-          .put(`/api/v1/courses/${id}`, {
-            ...values,
-          })
-          .then((response) => {
-            if (response.data.success) {
-              setAlertMessage({
-                type: "success",
-                message: "Course updated successfully !",
-              });
-              setTimeout(() => {
-                history.push(`/${user}/${city}/courses/`);
-              }, 2000);
-            } else {
-              setAlertMessage({
-                type: "danger",
-                message: "New Course Calendar was not added !",
-              });
-            }
-          });
+        try {
+          await axios
+            .put(`/api/v1/courses/${id}`, {
+              ...values,
+            })
+            .then((response) => {
+              if (response.data.success) {
+                setAlertMessage({
+                  type: "success",
+                  message: "Course updated successfully !",
+                });
+                setTimeout(() => {
+                  history.push(`/${user}/${city}/courses/`);
+                }, 2000);
+              } else {
+                setAlertMessage({
+                  type: "danger",
+                  message: "Course not updated !",
+                });
+              }
+            });
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
   };
@@ -94,7 +104,7 @@ const EditCoursePage = ({ user, city, component, id }) => {
     <div>
       <Header user={user} city={city} component={component} />
       <div className="NewCourseCalendar">
-        {currentCourse ? (
+        {currentCourse && (
           <CourseForm
             city={city}
             component={component}
@@ -108,8 +118,6 @@ const EditCoursePage = ({ user, city, component, id }) => {
             startDate={currentCourse.startDate}
             endDate={currentCourse.endDate}
           />
-        ) : (
-          <Loading />
         )}
       </div>
       <Footer />
