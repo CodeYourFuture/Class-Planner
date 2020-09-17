@@ -5,7 +5,10 @@ import "./CancelBookingAlert.scss";
 
 const CancelBookingAlert = ({
   user,
+  city,
+  id,
   fullName,
+  WeekNumber,
   email,
   _id,
   closeHandler,
@@ -29,6 +32,11 @@ const CancelBookingAlert = ({
         if (response.data.success === true) {
           closeHandler();
           showAlert("success", "The booking has been deleted successfully.");
+          setTimeout(() => {
+            window.location.replace(
+              `/${user}/${city}/attendedvolunteers/${id}/${WeekNumber}/`
+            );
+          }, 2000);
         }
       })
       .catch(function (err) {
@@ -38,7 +46,6 @@ const CancelBookingAlert = ({
         }
       });
   }
-
   return (
     <React.Fragment>
       {user === users[0].id && (
