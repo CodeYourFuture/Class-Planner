@@ -7,11 +7,13 @@ import "./UpcomingClass.scss";
 import { useCallback } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useHistory } from "react-router";
 import { useState } from "react";
 
 const UpcomingClass = ({ user, city, component }) => {
   const [Class, setClass] = useState(null);
   const [intakeName, setIntakeName] = useState(null);
+  const history = useHistory();
   const getUpcomingClass = useCallback(async () => {
     let filteredCourses = null;
     let courses = null;
@@ -19,44 +21,61 @@ const UpcomingClass = ({ user, city, component }) => {
     let classFound = null;
     try {
       await axios.get(`/api/v1/courses/`).then(async (response) => {
-        courses = response.data.data.filter(
-          (course) => course.cityName === city
-        );
-        filteredCourses = courses.map((course) => course._id);
-        await axios.get(`/api/v1/classes`).then((res) => {
-          classes = res.data.data;
-          classFound = res.data.data
-            .sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
-            .find(
-              (Class) =>
-                filteredCourses.includes(Class.courseCalendar_Id) &&
-                Class.status &&
-                dayjs(Class.date) > dayjs(new Date())
-            );
-          let counter = 0;
-          classes
-            .filter(
-              (_Class) =>
-                _Class.courseCalendar_Id === classFound.courseCalendar_Id
-            )
-            .sort((a, b) => (dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1))
-            .map((Class) =>
-              Class.status
-                ? (Class.weekNumber = ++counter)
-                : (Class.weekNumber = "-")
-            );
-          setClass(classes.find((_Class) => _Class._id === classFound._id));
-          setIntakeName(
-            courses.find(
-              (course) => course._id === classFound.courseCalendar_Id
-            ).intakeName
+        if (response.data.data.length > 0) {
+          courses = response.data.data.filter(
+            (course) => course.cityName === city
           );
-        });
+          if (courses.length > 0) {
+            filteredCourses = courses.map((course) => course._id);
+            await axios.get(`/api/v1/classes`).then((res) => {
+              if (res.data.data.length > 0) {
+                classes = res.data.data;
+                classFound = res.data.data
+                  .sort((a, b) =>
+                    dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1
+                  )
+                  .find(
+                    (Class) =>
+                      filteredCourses.includes(Class.courseCalendar_Id) &&
+                      Class.status &&
+                      dayjs(Class.date) > dayjs(new Date())
+                  );
+                let counter = 0;
+                if (classFound) {
+                  classes
+                    .filter(
+                      (_Class) =>
+                        _Class.courseCalendar_Id ===
+                        classFound.courseCalendar_Id
+                    )
+                    .sort((a, b) =>
+                      dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1
+                    )
+                    .map((Class) =>
+                      Class.status
+                        ? (Class.weekNumber = ++counter)
+                        : (Class.weekNumber = "-")
+                    );
+                  setClass(
+                    classes.find((_Class) => _Class._id === classFound._id)
+                  );
+                  setIntakeName(
+                    courses.find(
+                      (course) => course._id === classFound.courseCalendar_Id
+                    ).intakeName
+                  );
+                }
+              }
+            });
+          } else {
+            history.push("/nothing");
+          }
+        }
       });
     } catch (err) {
       console.log(err);
     }
-  }, [city]);
+  }, [city, history]);
   useEffect(() => {
     getUpcomingClass();
   }, [getUpcomingClass]);

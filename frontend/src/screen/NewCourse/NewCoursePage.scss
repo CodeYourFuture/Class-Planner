@@ -2,7 +2,6 @@
 .newcourse-container {
   width: 100%;
   margin: auto;
-  min-height: calc(100vh - 320px);
 }
 
 @media (min-width: 576px) {
@@ -15,7 +14,7 @@
   .newcourse-container {
     width: 80%;
     margin: auto;
-    min-height: calc(100vh - 320px);
+    min-height: calc(100vh - 330px);
     // margin-bottom: 50px;
   }
 }
@@ -25,10 +24,3 @@
     font-size: 1.15rem;
   }
 }
-
-// .NewCourseCalendar{
-//     width: 80%;
-//     margin: auto;
-//     min-height: calc(100vh - 340px);    
-// }
-
