@@ -29,14 +29,34 @@ exports.createClass = async (req, res) => {
         data: errors,
       });
     }
+    Class.findOne(
+      {
+        courseCalendar_Id: req.body.courseCalendar_Id,
+        date: req.body.date,
+      },
+      async (err, result) => {
+        if (result) {
+          return res.status(400).json({
+            success: false,
+            message: "Sorry, the class already exists!",
+          });
+        } else if (err) {
+          return res.status(500).json({
+            success: false,
+            error: "Server Error",
+          });
+        } else {
+          const newClass = await Class.create(req.body);
 
-    const newClass = await Class.create(req.body);
-
-    return res.status(201).json({
-      success: true,
-      data: newClass,
-    });
+          return res.status(201).json({
+            success: true,
+            data: newClass,
+          });
+        }
+      }
+    );
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       success: false,
       error: "Server Error",
