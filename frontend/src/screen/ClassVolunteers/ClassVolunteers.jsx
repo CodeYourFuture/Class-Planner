@@ -21,7 +21,7 @@ const ClassVolunteers = ({ user, city, component, id, WeekNumber }) => {
       <div className="upcoming-class-container">
         <div className="page-title">
           <p>{city}</p> <i className="fas fa-chevron-right"></i>
-          <p>Attended Volunteers</p>
+          <p>Attending Volunteers</p>
         </div>
         {Class ? (
           <ClassCard

@@ -125,7 +125,7 @@ const EditCoursePage = ({ user, city, component, id }) => {
                 });
                 setTimeout(() => {
                   history.push(`/${user}/${city}/courses/`);
-                }, 2000);
+                }, 1000);
               } else {
                 setSubmit_F(true);
                 setAlertMessage({
