@@ -81,7 +81,7 @@ const CourseCalendar = ({ user, city, component }) => {
           <label>Show Holiday </label>
         </div>
       </div>
-      <div className="classes-list-container">
+      <div className="classes-list-container ">
         {(data &&
           data.classes.length > 0 &&
           data.classes.map((Class, index) => {

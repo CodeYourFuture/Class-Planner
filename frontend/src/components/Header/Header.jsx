@@ -17,7 +17,7 @@ const Header = ({ user, city, component }) => {
         </Link>
       </div>
       <div className="header-down-container">
-        <nav className="header-nav-container">
+        <nav className="header-nav-container animate__animated animate__fadeIn">
           {component === "home" ? (
             <div className="home-app-title">
               <img src="../files/calendar.svg" alt="Calendar"></img>

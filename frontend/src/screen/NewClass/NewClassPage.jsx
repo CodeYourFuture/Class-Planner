@@ -113,7 +113,9 @@ const NewClassPage = ({ user, city, component }) => {
       }
     }
   };
-  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(newClass);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
+    newClass
+  );
   useEffect(() => {
     getCourses();
   }, [getCourses]);
@@ -121,7 +123,7 @@ const NewClassPage = ({ user, city, component }) => {
     <div>
       <Header user={user} city={city} component={component} />
       <div className="newclass-container">
-        {courses ? (
+        {courses && (
           <ClassForm
             city={city}
             component={component}
@@ -132,7 +134,7 @@ const NewClassPage = ({ user, city, component }) => {
             _onChange={onChange}
             _onSubmit={onSubmit}
           />
-        ) : null}
+        )}
       </div>
       <Footer />
     </div>

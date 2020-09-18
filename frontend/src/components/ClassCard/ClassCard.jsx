@@ -9,6 +9,7 @@ import Loading from "../Loading/Loading.jsx";
 import users from "../../data/users.json";
 import "./ClassCard.scss";
 import CancelClass from "./CancelClass";
+import dayjs from "dayjs";
 
 const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
   const [currentBooking, setCurrentBooking] = useState(null);
@@ -59,7 +60,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
               : "classcard-body"
           }
         >
-          <div className="classcard-main">
+          <div className="classcard-main animate__animated animate__fadeIn">
             <div className="classcard-border">
               <div className="classcard-container">
                 <div className="classcard-date-container">
@@ -68,9 +69,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                     <p>
                       {MonthNames[new Date(Class.date).getMonth().toString()]}
                     </p>
-                    <p>
-                      {new Date(Class.date).getFullYear().toString()}
-                    </p>
+                    <p>{new Date(Class.date).getFullYear().toString()}</p>
                   </div>
                   {isNaN(WeekNumber) === false ? (
                     <div
@@ -91,23 +90,28 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       <p>{Class.scheduleType}</p>
                       <p>{Class.startTime + " - " + Class.endTime}</p>
                     </div>
-                    {users.map((user) => user.id).includes(user) &&
-                      Class.status && (
-                        <div>
-                          <a
-                            href={Class.syllabusURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <div className="classcard-syllabus">
-                              <p className="classcard-text-ctl">Syllabus</p>
-                              <i className="fas fa-book-open "></i>
-                            </div>
-                          </a>
-                        </div>
-                      )}
+                    {Class.status && (
+                      <div>
+                        <a
+                          href={Class.syllabusURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <div className="classcard-syllabus">
+                            <p className="classcard-text-ctl">Syllabus</p>
+                            <i className="fas fa-book-open "></i>
+                          </div>
+                        </a>
+                      </div>
+                    )}
                   </div>
-                  <div className="classcard-bottom">
+                  <div
+                    className={
+                      currentBooking && currentBooking.length === 0
+                        ? "classcard-disable-bottom"
+                        : "classcard-bottom"
+                    }
+                  >
                     {[users[0].id, users[1].id, users[2].id].includes(user) &&
                       Class.status && (
                         <Link
@@ -150,7 +154,16 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                         {[users[0].id, users[1].id].includes(user) &&
                           Class.status && (
                             <Link
-                              className="classcard-attend-bottom"
+                              onClick={(e) => {
+                                if (dayjs(Class.date) <= dayjs(new Date())) {
+                                  e.preventDefault();
+                                }
+                              }}
+                              className={
+                                dayjs(Class.date) <= dayjs(new Date())
+                                  ? "class-card-disable-attend-bottom"
+                                  : "classcard-attend-bottom"
+                              }
                               to={`/${user}/${city}/newbooking/${Class._id}/${WeekNumber}`}
                             >
                               <span className="classcard-text-ctl">Attend</span>
