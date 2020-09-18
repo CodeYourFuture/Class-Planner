@@ -52,7 +52,7 @@ const NewCoursePage = ({ user, city, component }) => {
       setAlertMessage({
         type: "danger",
         message:
-          "End Date must be after Start Date and the Course must be more than 1 month!",
+          "End Date must be after Start Date!",
       });
     } else if (dayjs(values.endDate) <= dayjs(new Date())) {
       setSubmit_F(true);
