@@ -13,7 +13,6 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
   const NewSignUp = async (values) => {
     values.classId = Class._id;
     values.email = values.email.toLowerCase();
-
     await axios
       .post(`/api/v1/bookings`, {
         ...values,
@@ -25,13 +24,9 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
             message: "New class booking is created successfully !",
           });
           setTimeout(() => {
-            if (city) {
-              history.push(
-                `/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`
-              );
-            } else {
-              history.push(`/${user}/cities/`);
-            }
+            history.push(
+              `/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`
+            );
           }, 1000);
         } else {
           setSubmit_F(true);

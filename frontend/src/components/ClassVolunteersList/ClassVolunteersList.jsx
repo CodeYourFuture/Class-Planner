@@ -3,13 +3,13 @@ import Alert from "../Alert/Alarm.jsx";
 import CancelBookingAlert from "./CancelBookingAlert.jsx";
 import users from "../../data/users.json";
 import "./ClassVolunteersList.scss";
+import Loading from "../Loading/Loading.jsx";
 
 const ClassVolunteersList = ({ user, city, id, WeekNumber, bookings }) => {
   const [ConfirmationStatus, setConfirmationStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("message");
-
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [bookingId, setBookingId] = useState("");
@@ -46,23 +46,22 @@ const ClassVolunteersList = ({ user, city, id, WeekNumber, bookings }) => {
         />
       )}
       {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Role</th>
-            {user === users[0].id && <th scope="col">Email</th>}
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings &&
-            bookings.map((volunteer, index) => (
+      {(bookings && bookings.length > 0 && (
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Role</th>
+              {user === users[0].id && <th scope="col">Email</th>}
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((volunteer, index) => (
               <tr key={index}>
                 <td>{volunteer.fullName}</td>
                 <td>{volunteer.roleName}</td>
                 {user === users[0].id && <td>{volunteer.email}</td>}
-
                 <td>
                   {(user === users[0].id || user === users[1].id) && (
                     <button
@@ -82,8 +81,9 @@ const ClassVolunteersList = ({ user, city, id, WeekNumber, bookings }) => {
                 </td>
               </tr>
             ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      )) || <Loading />}
     </div>
   );
 };

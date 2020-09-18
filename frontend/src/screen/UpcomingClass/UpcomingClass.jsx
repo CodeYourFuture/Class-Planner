@@ -68,7 +68,7 @@ const UpcomingClass = ({ user, city, component }) => {
               }
             });
           } else {
-            history.push("/nothing");
+            history.push("/");
           }
         }
       });
