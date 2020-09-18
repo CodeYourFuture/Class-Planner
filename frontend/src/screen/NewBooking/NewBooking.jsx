@@ -3,15 +3,26 @@ import Header from "../../components/Header/Header.jsx";
 import ClassCard from "../../components/ClassCard/ClassCard.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
+import { useHistory } from "react-router";
 import axios from "axios";
 
 const NewBooking = ({ user, city, component, id, WeekNumber }) => {
   const [Class, setClass] = useState(null);
+  const history = useHistory();
   const getClass = useCallback(async () => {
     await axios.get(`/api/v1/classes/`).then((response) => {
-      setClass(response.data.data.find((_Class) => _Class._id === id));
+      if (response.data.data.length > 0) {
+        let classes = response.data.data.find((_Class) => _Class._id === id);
+        if (classes) {
+          setClass(classes);
+        }else{
+          history.push(`/`);
+        }
+      } else {
+        history.push(`/`);
+      }
     });
-  }, [id]);
+  }, [id, history]);
   useEffect(() => {
     getClass();
   }, [getClass]);

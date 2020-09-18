@@ -27,10 +27,10 @@ const EditClassPage = ({ user, city, component, id }) => {
         if (classFound) {
           setCurrentClass(classFound);
         } else {
-          history.push(`/nothing`);
+          history.push(`/`);
         }
       } else {
-        history.push(`/nothing`);
+        history.push(`/`);
       }
     });
   }, [id, history]);
@@ -43,10 +43,10 @@ const EditClassPage = ({ user, city, component, id }) => {
         if (courseFound) {
           setCourses(courseFound);
         } else {
-          history.push(`/nothing`);
+          history.push(`/`);
         }
       } else {
-        history.push(`/nothing`);
+        history.push(`/`);
       }
     });
   }, [city, history]);

@@ -23,7 +23,6 @@ const Header = ({ user, city, component }) => {
         </div>
         <div className="header-burger-container">
           {component !== "home" && (
-            // <div className="home-app-title" asan menu ro neshoon nade>
             <BurgerMenu user={user} city={city} component={component} />
           )}
         </div>

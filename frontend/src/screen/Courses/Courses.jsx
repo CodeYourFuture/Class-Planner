@@ -39,7 +39,7 @@ const NewCoursePage = ({ user, city, component }) => {
         if (allCourses.length > 0) {
           setCourses(allCourses);
         } else {
-          history.push("/nothing");
+          history.push("/");
         }
       } else {
         history.push("/");
