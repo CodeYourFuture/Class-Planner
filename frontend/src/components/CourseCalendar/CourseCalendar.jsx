@@ -9,7 +9,6 @@ import "./CourseCalendar.scss";
 const CourseCalendar = ({ user, city, component }) => {
   const [showHolidays, setShowHolidays] = useState(false);
   const { entryData, getData, filter, data } = useFilter();
-
   useEffect(() => {
     if (data === null) {
       getData(city);
