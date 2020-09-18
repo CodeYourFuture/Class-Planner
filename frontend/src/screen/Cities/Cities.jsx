@@ -67,7 +67,7 @@ const Cities = ({ user, component }) => {
             citiesName.searchResult.map((city, index) => {
               return (
                 <Link
-                  className="course-card"
+                  className="course-card animate__animated animate__fadeIn"
                   key={index}
                   to={`/${user}/${city}/coursecalendar`}
                 >

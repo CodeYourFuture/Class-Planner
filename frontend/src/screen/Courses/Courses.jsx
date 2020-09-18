@@ -73,7 +73,7 @@ const NewCoursePage = ({ user, city, component }) => {
         )}
         {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
 
-        <div className="table-responsive">
+        <div className="table-responsive animate__animated animate__fadeIn">
           <table className="table" cellSpacing="0" cellPadding="0">
             <thead>
               <tr className="header-tr">
