@@ -143,7 +143,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                             {currentBooking && currentBooking.length === 0
                               ? "no volunteer signed up"
                               : currentBooking && currentBooking.length
-                              ? currentBooking.length + "volunteer(s) signed up"
+                              ? `${currentBooking.length} volunteer(s) signed up`
                               : null}
                           </p>
                         </Link>

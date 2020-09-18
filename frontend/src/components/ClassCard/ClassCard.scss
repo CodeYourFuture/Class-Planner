@@ -155,8 +155,6 @@
 
 .classcard-bottom p:first-child {
   letter-spacing: 0px;
-  font-weight: 300;
-  color: $text-link-color;
   transition: 200ms;
   &:hover {
     cursor: pointer;
@@ -372,6 +370,14 @@
 
   .classcard-top div:nth-child(1) p:nth-child(3) {
     font-size: 20px;
+  }
+
+  .classcard-edit-Link {
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      color: $text-link-color;
+    }
   }
 
   .classcard-bottom {
