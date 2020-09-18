@@ -46,11 +46,10 @@ const ClassVolunteersList = ({ user, city, id, WeekNumber, bookings }) => {
         />
       )}
       {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
-      <p className="volunteerslist-title">Volunteers list</p>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">FullName</th>
+            <th scope="col">Name</th>
             <th scope="col">Role</th>
             {user === users[0].id && <th scope="col">Email</th>}
             <th scope="col"></th>
