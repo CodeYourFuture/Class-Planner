@@ -34,7 +34,7 @@ const CancelBookingAlert = ({
           showAlert("success", "The booking has been deleted successfully.");
           setTimeout(() => {
             window.location.replace(
-              `/${user}/${city}/attendedvolunteers/${id}/${WeekNumber}/`
+              `/${user}/${city}/attendingvolunteers/${id}/${WeekNumber}/`
             );
           }, 1000);
         }
