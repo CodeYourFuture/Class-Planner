@@ -85,7 +85,8 @@
 .classcard-bottom,
 .classcard-disable-bottom {
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: space-evenly;
+
   div {
     display: flex;
     margin-top: 20px;
@@ -135,6 +136,23 @@
   color: #3f3f3f;
 }
 
+.classcard-volunteers-count-mobile {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  margin-top: 20px;
+
+  a {
+    font-family: $default-font-family;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    margin: auto 0;
+    color: $btn-success-bg-hover;
+  }
+}
+
 .classcard-bottom p:first-child {
   letter-spacing: 0px;
   font-weight: 300;
@@ -153,7 +171,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
+  width: 60px;
   height: 50px;
   font-size: 16px;
   font-family: $default-font-family;
@@ -167,9 +185,9 @@
     cursor: pointer;
   }
 }
-.class-card-disable-attend-bottom{
+.class-card-disable-attend-bottom {
   background-color: $btn-disable-submit;
-  color:white;
+  color: white;
   transition: 200ms;
   &:hover {
     background-color: $btn-disable-submit;
@@ -179,7 +197,7 @@
 .classcard-cancel-bottom {
   @extend %btn-outline-danger;
   border-radius: 5px;
-  width: 80px;
+  width: 60px;
   height: 50px;
   cursor: pointer;
   margin-right: 10px;
@@ -204,6 +222,7 @@
   margin: 40px auto 40px auto;
 }
 .classcard-edit-Link {
+  display: none;
   text-decoration: none;
   width: 100%;
 }
@@ -274,11 +293,33 @@
   display: block;
 }
 
+@media (min-width: 360px) {
+  .classcard-cancel-bottom {
+    width: 90px;
+  }
+  .classcard-attend-bottom,
+  .classcard-edit-bottom {
+    width: 90px;
+  }
+
+  .classcard-volunteers-count-mobile {
+    a {
+      font-size: 18px;
+    }
+  }
+}
+
 @media (min-width: 576px) {
   .classcard-edit-Link {
     p {
       font-size: 16px;
     }
+  }
+
+  .classcard-cancel-bottom,
+  .classcard-edit-bottom,
+  .classcard-attend-bottom {
+    width: 150px;
   }
 }
 
@@ -333,6 +374,9 @@
     font-size: 20px;
   }
 
+  .classcard-bottom {
+    align-items: flex-end;
+  }
   .classcard-edit-bottom,
   .classcard-attend-bottom,
   .class-card-disable-attend-bottom {
@@ -384,6 +428,16 @@
   }
   .classcard-icon-ctl {
     display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .classcard-volunteers-count-mobile {
+    display: none;
+  }
+
+  .classcard-edit-Link {
+    display: flex;
   }
 }
 

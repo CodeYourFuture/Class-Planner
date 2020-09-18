@@ -105,6 +105,22 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       </div>
                     )}
                   </div>
+                  <div className="classcard-volunteers-count-mobile">
+                    <Link
+                      onClick={(e) => {
+                        if (currentBooking && currentBooking.length === 0) {
+                          e.preventDefault();
+                        }
+                      }}
+                      to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
+                    >
+                      {currentBooking && currentBooking.length === 0
+                        ? "no volunteer signed up"
+                        : currentBooking && currentBooking.length
+                        ? `${currentBooking.length} volunteer(s) signed up`
+                        : null}
+                    </Link>
+                  </div>
                   <div
                     className={
                       currentBooking && currentBooking.length === 0
@@ -124,8 +140,11 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                           to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
                         >
                           <p>
-                            {currentBooking && currentBooking.length} volunteers
-                            signed up
+                            {currentBooking && currentBooking.length === 0
+                              ? "no volunteer signed up"
+                              : currentBooking && currentBooking.length
+                              ? currentBooking.length + "volunteer(s) signed up"
+                              : null}
                           </p>
                         </Link>
                       )}
