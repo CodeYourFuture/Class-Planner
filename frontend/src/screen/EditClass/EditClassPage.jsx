@@ -59,8 +59,6 @@ const EditClassPage = ({ user, city, component, id }) => {
     }
   };
   const editClass = async (values) => {
-    console.log(values)
-    console.log(currentClass)
     let duplicate = false;
     if (values.status === currentClass.status) {
       if (values.status) {
