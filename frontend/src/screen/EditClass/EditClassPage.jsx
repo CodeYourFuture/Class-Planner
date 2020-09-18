@@ -89,7 +89,7 @@ const EditClassPage = ({ user, city, component, id }) => {
       setSubmit_F(true);
       setAlertMessage({
         type: "danger",
-        message: "Ther is no change to update !",
+        message: "There is no change to update !",
       });
     } else if (
       Date.parse(`01/01/2020 ${values.startTime}:00`) >=
@@ -100,7 +100,8 @@ const EditClassPage = ({ user, city, component, id }) => {
         type: "danger",
         message: "End Time must be after Start Time!",
       });
-    } else if (dayjs(values.date) <= dayjs(new Date())) {
+    } else if (dayjs(values.date) <= dayjs(new Date()) && dayjs(currentClass.date).format("MM-DD-YYYY") !==
+    dayjs(values.date).format("MM-DD-YYYY")) {
       setSubmit_F(true);
       setAlertMessage({
         type: "danger",
