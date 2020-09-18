@@ -18,7 +18,7 @@ const CancelClass = ({
           showAlert("success", "The class has been deleted successfully.");
           setTimeout(() => {
             window.location.replace(`/${user}/${city}/${component}/`);
-          }, 2000);
+          }, 1000);
         }
       })
       .catch(function (err) {

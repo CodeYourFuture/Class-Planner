@@ -98,7 +98,7 @@ const NewCoursePage = ({ user, city, component }) => {
                   } else {
                     history.push(`/${user}/cities/`);
                   }
-                }, 2000);
+                }, 1000);
               } else {
                 setSubmit_F(true);
                 setAlertMessage({
@@ -125,7 +125,9 @@ const NewCoursePage = ({ user, city, component }) => {
       }
     }
   };
-  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(newCourse);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
+    newCourse
+  );
   useEffect(() => {
     if (!city) {
       getCitiesName();

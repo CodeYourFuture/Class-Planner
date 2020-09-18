@@ -32,8 +32,9 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
             } else {
               history.push(`/${user}/cities/`);
             }
-          }, 2000);
+          }, 1000);
         } else {
+          setSubmit_F(true);
           setAlertMessage({
             type: "danger",
             message: "New class booking is not created !",
@@ -42,6 +43,7 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
       })
       .catch((err) => {
         if (!err.response.data.success) {
+          setSubmit_F(true);
           setAlertMessage({
             type: "danger",
             message: err.response.data.message,
@@ -50,7 +52,9 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
       });
   };
 
-  const { entryData, error, onChange, onSubmit } = useForm(NewSignUp);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
+    NewSignUp
+  );
 
   return (
     <div className="newbooking-container">
