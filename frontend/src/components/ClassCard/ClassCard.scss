@@ -73,7 +73,8 @@
 }
 
 .classcard-top,
-.classcard-bottom {
+.classcard-bottom,
+.classcard-disable-bottom {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -81,7 +82,8 @@
 .classcard-top {
   align-items: flex-start;
 }
-.classcard-bottom {
+.classcard-bottom,
+.classcard-disable-bottom {
   align-items: flex-end;
   justify-content: flex-end;
   div {
@@ -145,7 +147,8 @@
 }
 
 .classcard-edit-bottom,
-.classcard-attend-bottom {
+.classcard-attend-bottom,
+.class-card-disable-attend-bottom {
   @extend %btn-submit;
   display: flex;
   justify-content: center;
@@ -164,7 +167,15 @@
     cursor: pointer;
   }
 }
-
+.class-card-disable-attend-bottom{
+  background-color: $btn-disable-submit;
+  color:white;
+  transition: 200ms;
+  &:hover {
+    background-color: $btn-disable-submit;
+    cursor: default;
+  }
+}
 .classcard-cancel-bottom {
   @extend %btn-outline-danger;
   border-radius: 5px;
@@ -323,7 +334,8 @@
   }
 
   .classcard-edit-bottom,
-  .classcard-attend-bottom {
+  .classcard-attend-bottom,
+  .class-card-disable-attend-bottom {
     width: 80px;
     height: 50px;
     font-size: 1rem;
@@ -406,7 +418,8 @@
   }
 
   .classcard-edit-bottom,
-  .classcard-attend-bottom {
+  .classcard-attend-bottom,
+  .class-card-disable-attend-bottom {
     width: 120px;
     height: 50px;
     font-size: 1rem;
@@ -434,5 +447,16 @@
     p {
       font-size: 20px;
     }
+  }
+}
+
+.classcard-disable-bottom p:first-child {
+  letter-spacing: 0px;
+  font-weight: 300;
+  color: #aeaeae;
+  transition: 200ms;
+  &:hover {
+    cursor: default;
+    color: #aeaeae;
   }
 }
