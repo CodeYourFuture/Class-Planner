@@ -125,7 +125,9 @@ const NewCoursePage = ({ user, city, component }) => {
       }
     }
   };
-  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(newCourse);
+  const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
+    newCourse
+  );
   useEffect(() => {
     if (!city) {
       getCitiesName();
