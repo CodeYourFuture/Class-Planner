@@ -26,11 +26,11 @@ const EditCoursePage = ({ user, city, component, id }) => {
         if (courseFound) {
           setCurrentCourse(courseFound);
         } else {
-          history.push(`/nothing`);
+          history.push(`/`);
         }
         return _Courses.data.data;
       } else {
-        history.push(`/nothing`);
+        history.push(`/`);
       }
     } catch (err) {
       console.log(err);
