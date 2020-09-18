@@ -59,33 +59,33 @@ const EditClassPage = ({ user, city, component, id }) => {
     }
   };
   const editClass = async (values) => {
-    let dublicate = false;
+    let duplicate = false;
     if (values.status === currentClass.status) {
       if (values.status) {
         if (
           values.courseCalendar_Id === currentClass.courseCalendar_Id &&
           dayjs(currentClass.date).format("MM-DD-YYYY") ===
             dayjs(values.date).format("MM-DD-YYYY") &&
-          values.cityName === currentClass.cityName &&
+          values.className === currentClass.className &&
           values.startTime === currentClass.startTime &&
           values.endTime === currentClass.endTime &&
           values.syllabusURL === currentClass.syllabusURL &&
           values.scheduleType === currentClass.scheduleType
         ) {
-          dublicate = true;
+          duplicate = true;
         }
       } else {
         if (
           values.courseCalendar_Id === currentClass.courseCalendar_Id &&
           dayjs(currentClass.date).format("MM-DD-YYYY") ===
             dayjs(values.date).format("MM-DD-YYYY") &&
-          values.cityName === currentClass.cityName
+          values.className === currentClass.className
         ) {
-          dublicate = true;
+          duplicate = true;
         }
       }
     }
-    if (dublicate) {
+    if (duplicate) {
       setSubmit_F(true);
       setAlertMessage({
         type: "danger",
