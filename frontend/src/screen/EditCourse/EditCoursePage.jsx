@@ -58,14 +58,20 @@ const EditCoursePage = ({ user, city, component, id }) => {
       setSubmit_F(true);
       setAlertMessage({
         type: "danger",
-        message: "Ther is no change to update !",
+        message: "There is no change to update !",
       });
     } else if (dayjs(values.startDate).isAfter(dayjs(values.endDate))) {
       setSubmit_F(true);
       setAlertMessage({
         type: "danger",
         message:
-          "End Date must be after Start Date and the Course must be more than 1 month!",
+          "End Date must be after Start Date!",
+      });
+    } else if (dayjs(values.endDate) <= dayjs(new Date())) {
+      setSubmit_F(true);
+      setAlertMessage({
+        type: "danger",
+        message: "End Date must be in future!",
       });
     } else {
       let _Courses = await getCourses();
@@ -81,6 +87,16 @@ const EditCoursePage = ({ user, city, component, id }) => {
               dayjs(values.endDate).isBetween(
                 dayjs(course.startDate),
                 dayjs(course.endDate),
+                "day"
+              ) ||
+              dayjs(course.startDate).isBetween(
+                dayjs(values.startDate),
+                dayjs(values.endDate),
+                "day"
+              ) ||
+              dayjs(course.endDate).isBetween(
+                dayjs(values.startDate),
+                dayjs(values.endDate),
                 "day"
               ) ||
               course.intakeName === values.intakeName) &&

@@ -88,7 +88,7 @@ const NewClassPage = ({ user, city, component }) => {
           type: "danger",
           message: "This Date is out of the course period!",
         });
-      } else {
+      } else {        
         await axios
           .post(`/api/v1/classes`, {
             ...values,
