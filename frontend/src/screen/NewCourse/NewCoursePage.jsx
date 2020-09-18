@@ -98,7 +98,7 @@ const NewCoursePage = ({ user, city, component }) => {
                   } else {
                     history.push(`/${user}/cities/`);
                   }
-                }, 2000);
+                }, 1000);
               } else {
                 setSubmit_F(true);
                 setAlertMessage({

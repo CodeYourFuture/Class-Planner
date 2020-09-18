@@ -32,7 +32,7 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
             } else {
               history.push(`/${user}/cities/`);
             }
-          }, 2000);
+          }, 1000);
         } else {
           setAlertMessage({
             type: "danger",

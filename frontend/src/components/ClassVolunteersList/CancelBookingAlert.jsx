@@ -36,7 +36,7 @@ const CancelBookingAlert = ({
             window.location.replace(
               `/${user}/${city}/attendedvolunteers/${id}/${WeekNumber}/`
             );
-          }, 2000);
+          }, 1000);
         }
       })
       .catch(function (err) {

@@ -148,7 +148,7 @@ const EditClassPage = ({ user, city, component, id }) => {
                 });
                 setTimeout(() => {
                   history.push(`/${user}/${city}/coursecalendar/`);
-                }, 2000);
+                }, 1000);
               } else {
                 setSubmit_F(true);
                 setAlertMessage({
