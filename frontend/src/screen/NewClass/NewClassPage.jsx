@@ -27,10 +27,10 @@ const NewClassPage = ({ user, city, component }) => {
         if (courseFound.length > 0) {
           setCourses(courseFound);
         } else {
-          history.push(`/nothing`);
+          history.push(`/`);
         }
       } else {
-        history.push(`/nothing`);
+        history.push(`/`);
       }
     });
   }, [city, history]);
