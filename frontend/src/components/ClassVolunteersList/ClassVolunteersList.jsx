@@ -46,7 +46,7 @@ const ClassVolunteersList = ({ user, city, id, WeekNumber, bookings }) => {
         />
       )}
       {alertStatus && <Alert type={alertType}> {alertMessage} </Alert>}
-      <table className="table">
+      <table className="table table-responsive">
         <thead>
           <tr>
             <th scope="col">Name</th>
