@@ -6,7 +6,6 @@
   border: 1px solid $alert-light-border-color;
   margin: 40px auto;
   padding: 20px;
-
   p {
     font-family: $default-font-family;
     font-size: 0.85em;
@@ -28,31 +27,20 @@
   }
 }
 
-.cancelclass-yes {
+.cancel-yes {
   @extend %btn-danger;
   padding: 10px 60px;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
   margin: 30px auto auto;
-  padding: 40px;
 }
 
-.cancelclass-no {
+.cancel-no {
   @extend %btn-outline-success;
+  padding: 10px 60px;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
   margin: 30px auto auto;
-  padding: 40px;
-}
-
-@media (min-width: 576px) {
-  .cancelclass-no {
-    padding: 10px 60px;
-  }
-
-  .cancelclass-yes {
-    padding: 10px 60px;
-  }
 }

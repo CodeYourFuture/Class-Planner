@@ -3,35 +3,22 @@
 .page-title {
   display: flex;
   align-content: center;
-  justify-content: baseline;
   font-family: $default-font-family;
   font-weight: 600;
-  font-size: 10px;
+  font-size: 16px;
   letter-spacing: 1px;
   color: #79d582;
-  margin: 10px auto 30px 5px;
+  margin: 10px auto 10px auto;
 
   i {
     margin: auto 5px auto 5px;
-    word-wrap: none;
   }
   p:nth-child(3) {
     color: $logo-dark-color;
   }
+}
 
-  p {
-    word-break: keep-all;
-  }
-}
-@media (min-width: 360px) {
-  .page-title {
-    font-size: 14px;
-  }
-}
 @media (min-width: 576px) {
-  .page-title {
-    font-size: 16px;
-  }
 }
 
 @media (min-width: 768px) {

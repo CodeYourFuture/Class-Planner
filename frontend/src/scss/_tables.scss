@@ -13,7 +13,7 @@
 
   td,
   th {
-    padding: 0.75rem;
+    padding: .75rem;
     border-top: 1px solid $form-border-color;
   }
 
@@ -27,19 +27,20 @@
       font-size: 15px;
       font-weight: 600;
       color: $logo-dark-color;
+     
     }
   }
 
   tr {
-    text-align: left;
-
+    text-align:left;
+    
     td {
       font-size: 14px;
       height: 60px;
       white-space: nowrap;
     }
 
-    th {
+    th{
       line-height: 3rem;
     }
   }
@@ -49,31 +50,49 @@ tbody tr:hover {
   background-color: $table-hover-color;
 }
 
-.table-responsive {
+
+.table-responsive{
   display: block;
   width: 100%;
-  overflow-x: auto;
+ overflow-x: auto;
 }
 
+
+ 
 @media (min-width: 576px) {
+  
 }
+
 
 @media (min-width: 768px) {
-  .table {
-    thead {
-      th {
-        font-size: 16px;
-      }
-    }
 
-    tr td {
+.table {
+   thead {
+    th {
       font-size: 16px;
     }
   }
+
+  tr td{
+    font-size:16px;
+  }
 }
+
+
+}
+
 
 @media (min-width: 992px) {
+
+
+
 }
 
+
+
 @media (min-width: 1200px) {
+  
 }
+
+
+
