@@ -32,10 +32,10 @@ const CancelClass = ({
     <div className="cancel-alert">
       <p>Are you sure to cancel the corresponding Class?</p>
       <div>
-        <button className="cancel-no" onClick={() => closeHandler(true)}>
+        <button className="cancelclass-no" onClick={() => closeHandler(true)}>
           NO
         </button>
-        <button className="cancel-yes" onClick={deleteClass}>
+        <button className="cancelclass-yes" onClick={deleteClass}>
           YES
         </button>
       </div>
