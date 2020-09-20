@@ -117,11 +117,13 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       }}
                       to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
                     >
-                      {currentBooking && currentBooking.length === 0
-                        ? "no volunteer signed up"
-                        : currentBooking && currentBooking.length
-                        ? `${currentBooking.length} volunteer(s) signed up`
-                        : null}
+                      {Class.status
+                        ? currentBooking && currentBooking.length === 0
+                          ? "no volunteer signed up"
+                          : currentBooking && currentBooking.length
+                          ? `${currentBooking.length} volunteer(s) signed up`
+                          : null
+                        : ""}
                     </Link>
                   </div>
                   <div
