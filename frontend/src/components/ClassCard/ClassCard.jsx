@@ -108,7 +108,13 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       </div>
                     )}
                   </div>
-                  <div className="classcard-volunteers-count-mobile">
+                  <div
+                    className={
+                      currentBooking && currentBooking.length === 0
+                        ? "classcard-volunteers-count-mobile-Disable"
+                        : "classcard-volunteers-count-mobile"
+                    }
+                  >
                     <Link
                       onClick={(e) => {
                         if (currentBooking && currentBooking.length === 0) {

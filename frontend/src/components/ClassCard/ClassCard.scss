@@ -152,6 +152,22 @@
     color: $btn-success-bg-hover;
   }
 }
+.classcard-volunteers-count-mobile-Disable {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  margin-top: 20px;
+
+  a {
+    font-family: $default-font-family;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    margin: auto 0;
+    color: #aeaeae;
+  }
+}
 
 .classcard-bottom p:first-child {
   letter-spacing: 0px;
@@ -440,7 +456,8 @@
 }
 
 @media (min-width: 768px) {
-  .classcard-volunteers-count-mobile {
+  .classcard-volunteers-count-mobile,
+  .classcard-volunteers-count-mobile-Disable {
     display: none;
   }
 
