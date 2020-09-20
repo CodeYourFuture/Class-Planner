@@ -88,7 +88,10 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                     <div>
                       <p className="classcard-title">{Class.className}</p>
                       <p>{Class.scheduleType}</p>
-                      <p>{Class.status && Class.startTime + " - " + Class.endTime}</p>
+                      <p>
+                        {Class.status &&
+                          Class.startTime + " - " + Class.endTime}
+                      </p>
                     </div>
                     {Class.status && (
                       <div>
@@ -128,28 +131,27 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                         : "classcard-bottom"
                     }
                   >
-                    {[users[0].id, users[1].id, users[2].id].includes(user) &&
-                      (
-                        <Link
-                          className="classcard-edit-Link"
-                          onClick={(e) => {
-                            if (currentBooking && currentBooking.length === 0) {
-                              e.preventDefault();
-                            }
-                          }}
-                          to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
-                        >
-                          <p>
-                            {
-                              Class.status ? (currentBooking && currentBooking.length === 0
-                                ? "no volunteer signed up"
-                                : currentBooking && currentBooking.length
-                                ? `${currentBooking.length} volunteer(s) signed up`
-                                : null) : ("")
-                            }
-                          </p>
-                        </Link>
-                      )}
+                    {[users[0].id, users[1].id, users[2].id].includes(user) && (
+                      <Link
+                        className="classcard-edit-Link"
+                        onClick={(e) => {
+                          if (currentBooking && currentBooking.length === 0) {
+                            e.preventDefault();
+                          }
+                        }}
+                        to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
+                      >
+                        <p>
+                          {Class.status
+                            ? currentBooking && currentBooking.length === 0
+                              ? "no volunteer signed up"
+                              : currentBooking && currentBooking.length
+                              ? `${currentBooking.length} volunteer(s) signed up`
+                              : null
+                            : ""}
+                        </p>
+                      </Link>
+                    )}
                     {component !== "newbooking" && (
                       <div>
                         {user === users[0].id && (
