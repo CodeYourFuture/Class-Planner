@@ -30,8 +30,9 @@ const ClassVolunteersList = ({ user, city, id, WeekNumber, bookings }) => {
     setAlertType(type);
     setAlertMessage(message);
   }
+  // return statement
   return (
-    <div className="classvolunteerslist-container">
+    <div className="classvolunteerslist-container table-responsive">
       {ConfirmationStatus && (
         <CancelBookingAlert
           user={user}
