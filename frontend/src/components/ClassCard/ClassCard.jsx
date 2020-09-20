@@ -88,7 +88,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                     <div>
                       <p className="classcard-title">{Class.className}</p>
                       <p>{Class.scheduleType}</p>
-                      <p>{Class.startTime + " - " + Class.endTime}</p>
+                      <p>{Class.status && Class.startTime + " - " + Class.endTime}</p>
                     </div>
                     {Class.status && (
                       <div>
@@ -129,7 +129,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                     }
                   >
                     {[users[0].id, users[1].id, users[2].id].includes(user) &&
-                      Class.status && (
+                      (
                         <Link
                           className="classcard-edit-Link"
                           onClick={(e) => {
@@ -140,11 +140,13 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                           to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
                         >
                           <p>
-                            {currentBooking && currentBooking.length === 0
-                              ? "no volunteer signed up"
-                              : currentBooking && currentBooking.length
-                              ? `${currentBooking.length} volunteer(s) signed up`
-                              : null}
+                            {
+                              Class.status ? (currentBooking && currentBooking.length === 0
+                                ? "no volunteer signed up"
+                                : currentBooking && currentBooking.length
+                                ? `${currentBooking.length} volunteer(s) signed up`
+                                : null) : ("")
+                            }
                           </p>
                         </Link>
                       )}

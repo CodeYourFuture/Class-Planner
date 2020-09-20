@@ -21,7 +21,7 @@ const BurgerMenu = ({ user, city, component }) => {
             (component === "newcourse" && user === users[0].id && !city) ? (
             <React.Fragment>
               <Link
-                className={component === "cities" && "menu-item-selected"}
+                className={component === "cities" ? "menu-item-selected" : ""}
                 to={`/${user}/cities/`}
               >
                 <li>
@@ -31,7 +31,9 @@ const BurgerMenu = ({ user, city, component }) => {
               </Link>
               {user === users[0].id ? (
                 <Link
-                  className={component === "newcourse" && " menu-item-selected"}
+                  className={
+                    component === "newcourse" ? " menu-item-selected" : ""
+                  }
                   to={`/${user}/newcourse/`}
                 >
                   <li>
@@ -44,7 +46,7 @@ const BurgerMenu = ({ user, city, component }) => {
           ) : (
             <React.Fragment>
               <Link
-                className={component === "cities" && "menu-item-selected"}
+                className={component === "cities" ? "menu-item-selected" : ""}
                 to={`/${user}/cities`}
               >
                 <li>
@@ -54,7 +56,7 @@ const BurgerMenu = ({ user, city, component }) => {
               </Link>
               <Link
                 className={
-                  component === "coursecalendar" && "menu-item-selected"
+                  component === "coursecalendar" ? "menu-item-selected" : ""
                 }
                 to={`/${user}/${city}/coursecalendar/`}
               >
@@ -65,7 +67,7 @@ const BurgerMenu = ({ user, city, component }) => {
               </Link>
               <Link
                 className={
-                  component === "upcomingclass" && "menu-item-selected"
+                  component === "upcomingclass" ? "menu-item-selected" : ""
                 }
                 to={`/${user}/${city}/upcomingclass/`}
               >
@@ -77,7 +79,7 @@ const BurgerMenu = ({ user, city, component }) => {
               {user === users[0].id ? (
                 <React.Fragment>
                   <Link
-                    className={component === "courses" && "menu-item-selected"}
+                    className={component === "courses" ? "menu-item-selected" : ""}
                     to={`/${user}/${city}/courses/`}
                   >
                     <li>
@@ -87,7 +89,7 @@ const BurgerMenu = ({ user, city, component }) => {
                   </Link>
                   <Link
                     className={
-                      component === "newcourse" && "menu-item-selectedd"
+                      component === "newcourse" ? "menu-item-selectedd" : ""
                     }
                     to={`/${user}/${city}/newcourse/`}
                   >
@@ -97,7 +99,7 @@ const BurgerMenu = ({ user, city, component }) => {
                     </li>
                   </Link>
                   <Link
-                    className={component === "newclass" && "menu-item-selected"}
+                    className={component === "newclass" ? "menu-item-selected" : ""}
                     to={`/${user}/${city}/newclass/`}
                   >
                     <li>

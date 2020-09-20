@@ -296,7 +296,8 @@
     width: 90px;
   }
   .classcard-attend-bottom,
-  .classcard-edit-bottom {
+  .classcard-edit-bottom,
+  .class-card-disable-attend-bottom {
     width: 90px;
   }
 
@@ -380,7 +381,8 @@
     }
   }
 
-  .classcard-bottom {
+  .classcard-bottom,
+  .classcard-disable-bottom {
     align-items: flex-end;
   }
   .classcard-edit-bottom,
