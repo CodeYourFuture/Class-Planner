@@ -7,6 +7,7 @@ const ClassSchema = new mongoose.Schema(
     },
     className: {
       type: String,
+      trim: true,
     },
     date: {
       type: Date,
@@ -22,6 +23,7 @@ const ClassSchema = new mongoose.Schema(
     },
     syllabusURL: {
       type: String,
+      trim: true,
     },
     scheduleType: {
       type: String,
