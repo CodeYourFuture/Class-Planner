@@ -7,12 +7,15 @@ const BookingSchema = new mongoose.Schema(
     },
     roleName: {
       type: String,
+      trim: true,
     },
     fullName: {
       type: String,
+      trim: true,
     },
     email: {
       type: String,
+      trim: true,
     },
   },
   { timestamps: true }
