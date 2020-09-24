@@ -1,8 +1,6 @@
 @import "../../scss/variables";
 .loaading-container {
-  min-height: calc(100vh - 320px);
-  animation: FadeIn 500ms;
-  //   color: $text-link-hover-color;
+  animation: FadeIn 500ms;    
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -21,6 +19,7 @@
 }
 .loading{
   font-family: "Open Sans", sans-serif;
+  padding: 25px;
   letter-spacing: 2px;
   color: #79d582;
   font-weight: bold;
@@ -34,4 +33,5 @@
   font-weight: bold;
   border-radius: 50%;
   color: #e50303;
+  padding: 25px;
 }
