@@ -55,7 +55,7 @@ exports.createBooking = async (req, res) => {
           return res.status(400).json({
             success: false,
             message:
-              "Email already exists, You have already booked for this class and thanks.",
+              "Email already exists, You have already booked for this class, thanks!",
           });
         } else if (err) {
           return res.status(500).json({

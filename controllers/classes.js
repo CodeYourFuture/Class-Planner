@@ -72,13 +72,12 @@ exports.deleteClass = async (req, res) => {
     if (!classToBeDeleted) {
       return res.status(404).json({
         success: false,
-        error: "No classToBeDeleted found",
+        error: "No class found",
       });
     }
 
     await Booking.deleteMany({ classId }, async (err, result) => {
-      if (result) {
-        //await bookingCancellationEmail(result);
+      if (result) { 
         await classToBeDeleted.remove();
         return res.status(200).json({
           success: true,
