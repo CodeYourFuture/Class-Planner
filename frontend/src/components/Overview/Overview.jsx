@@ -4,7 +4,7 @@ import Loading from "../Loading/Loading.jsx";
 import { useFilter } from "../../hooks/overview/useFilter.jsx";
 import "./Overview.scss";
 
-const CourseCalendar = ({ user, city, component }) => {
+const CourseCalendar = ({ user, component }) => {
   const { entryData, getData, filter, search, data } = useFilter();
   useEffect(() => {
     if (data === null) {
@@ -52,7 +52,7 @@ const CourseCalendar = ({ user, city, component }) => {
               return (
                 <ClassCard
                   user={user}
-                  city={city}
+                  city={entryData.current[1].value}
                   Class={Class}
                   component={component}
                   key={index}

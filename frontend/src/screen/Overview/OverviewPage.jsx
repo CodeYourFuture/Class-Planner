@@ -7,7 +7,6 @@ const OverviewPage = () => {
     <div className="coursecalendar-container">
       <Overview
         user={"4ujktF3cwUWMFITqex-IiA"}
-        city={"London"}
         component={"overview"}
       />
     </div>
