@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ClassCard from "../ClassCard/ClassCard.jsx";
 import Loading from "../Loading/Loading.jsx";
 import { MonthNames } from "../../utils/MonthNames";
-import { useFilter } from "../../hooks/useFilter.jsx";
+import { useFilter } from "../../hooks/courseCalendar/useFilter.jsx";
 import dayjs from "dayjs";
 import "./CourseCalendar.scss";
 
