@@ -100,8 +100,11 @@ const EditClassPage = ({ user, city, component, id }) => {
         type: "danger",
         message: "End Time must be after Start Time!",
       });
-    } else if (dayjs(values.date) <= dayjs(new Date()) && dayjs(currentClass.date).format("MM-DD-YYYY") !==
-    dayjs(values.date).format("MM-DD-YYYY")) {
+    } else if (
+      dayjs(values.date) <= dayjs(new Date()) &&
+      dayjs(currentClass.date).format("MM-DD-YYYY") !==
+        dayjs(values.date).format("MM-DD-YYYY")
+    ) {
       setSubmit_F(true);
       setAlertMessage({
         type: "danger",
@@ -121,7 +124,8 @@ const EditClassPage = ({ user, city, component, id }) => {
             dayjs(values.date).isBetween(
               dayjs(course.startDate),
               dayjs(course.endDate),
-              "day"
+              "day",
+              "[]"
             ) && course._id === values.courseCalendar_Id
         );
         if (conflictClass) {

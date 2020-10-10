@@ -123,7 +123,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       }}
                       to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
                     >
-                      {Class.status
+                      {component !== "overview" && Class.status
                         ? currentBooking && currentBooking.length === 0
                           ? "no volunteer signed up"
                           : currentBooking && currentBooking.length
@@ -150,7 +150,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                         to={`/${user}/${city}/attendingvolunteers/${Class._id}/${WeekNumber}`}
                       >
                         <p>
-                          {Class.status
+                          {component !== "overview" && Class.status
                             ? currentBooking && currentBooking.length === 0
                               ? "no volunteer signed up"
                               : currentBooking && currentBooking.length
@@ -218,7 +218,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                   </div>
                 )}
               </div>
-              {!["upcomingclass", "coursecalendar"].includes(component) && (
+              {!["upcomingclass", "coursecalendar", "overview"].includes(component) && (
                 <hr className="classcard-separator"></hr>
               )}
               {component === "newbooking" && (
