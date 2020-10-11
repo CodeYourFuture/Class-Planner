@@ -12,13 +12,24 @@ import Courses from "../screen/Courses/Courses.jsx";
 import Cities from "../screen/Cities/Cities.jsx";
 import NotFound from "../screen/NotFound/NotFound.jsx";
 import EditCoursePage from "../screen/EditCourse/EditCoursePage.jsx";
+import OverviewPage from "../screen/Overview/OverviewPage.jsx";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 export default () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/:nothing" component={NotFound} />
+      <Route
+        exact
+        path="/:overview"
+        component={({ match }) => {
+          const { overview } = match.params;
+          if (overview === "overview") {
+            return <OverviewPage />;
+          }
+          return <NotFound />;
+        }}
+      />
       <Route
         exact
         path="/:user/:component/"
@@ -135,7 +146,9 @@ export default () => {
                 <UpcomingClass user={user} city={city} component={component} />
               );
             case "newclass":
-              return <NewClassPage user={user} city={city} component={component} />;
+              return (
+                <NewClassPage user={user} city={city} component={component} />
+              );
             case "courses":
               return <Courses user={user} city={city} component={component} />;
             case "newcourse":

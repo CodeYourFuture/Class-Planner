@@ -73,7 +73,8 @@ const NewClassPage = ({ user, city, component }) => {
           dayjs(values.date).isBetween(
             dayjs(course.startDate),
             dayjs(course.endDate),
-            "day"
+            "day",
+            "[]"
           ) && course._id === values.courseCalendar_Id
       );
       if (conflictClass) {
@@ -88,7 +89,7 @@ const NewClassPage = ({ user, city, component }) => {
           type: "danger",
           message: "This Date is out of the course period!",
         });
-      } else {        
+      } else {
         await axios
           .post(`/api/v1/classes`, {
             ...values,
