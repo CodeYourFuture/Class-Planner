@@ -6,7 +6,7 @@ const CancelBookingAlert = ({ closeHandler, showAlert }) => {
   const [adminPassword, setAdminPassword] = useState("");
 
   const validateAdminPasswordInput = () => {
-    if (adminPassword === process.env.REACT_APP_Password) {
+    if (adminPassword.trim() === process.env.REACT_APP_Password) {
       closeHandler();
       showAlert("success", "The security code has been verified successfully.");
       setTimeout(() => {
