@@ -13,7 +13,7 @@ const Home = () => {
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("message");
 
-  function cancelBookingHandler() { 
+  function loginHandler() { 
     setConfirmationStatus(true);
   }
 
@@ -45,7 +45,7 @@ const Home = () => {
             className="home-button"
             onClick={(e) => {
               setAlertStatus(false);
-              cancelBookingHandler();
+              loginHandler();
             }}
           >
             <p>
