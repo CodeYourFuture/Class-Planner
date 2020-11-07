@@ -1,0 +1,44 @@
+@import "./../../scss/variables";
+@import "./../../scss/buttons";
+
+.password-alert {
+  animation: FadeIn 500ms;
+  border: 1px solid $alert-light-border-color;
+  margin: 40px auto;
+  padding: 20px;
+  p {
+    font-family: $default-font-family;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 20px;
+    min-height: 40px;
+    width: 100%;
+
+    div {
+      width: 70%;
+    }
+  }
+}
+
+.password-confirm {
+  @extend %btn-submit;
+  padding: 10px 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  margin-left: 20px;
+}
+
+.password-input-confirm {
+  font-size: 1em;
+  padding: 5px;
+  margin: 0;
+}
