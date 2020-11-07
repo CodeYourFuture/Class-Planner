@@ -45,7 +45,7 @@ exports.volunteerConfirmationEmail = (data) => {
                   Dear ${data.fullName},
                 </p>
                 <p style="margin-top: 0; font-size: 14px; line-height: 1.2rem">
-                  This is a notification that you have signed up for a class as ${data.roleName}.
+                  This is a notification that you have signed up for a class as a <strong>${data.roleName}</strong>.
                 </p>
   
                 <p
