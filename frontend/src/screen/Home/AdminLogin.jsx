@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import users from "../../data/users.json";
+import dotenv from "dotenv";
+
 import "./AdminLogin.scss";
 
-const CancelBookingAlert = ({ closeHandler, showAlert }) => {
+const AdminLogin = ({ closeHandler, showAlert }) => {
   const [adminPassword, setAdminPassword] = useState("");
-
+  dotenv.config();
   const validateAdminPasswordInput = () => {
+    console.log(process.env.REACT_APP_Password);
     if (adminPassword.trim() === process.env.REACT_APP_Password) {
       closeHandler();
       showAlert("success", "The security code has been verified successfully.");
@@ -44,4 +47,4 @@ const CancelBookingAlert = ({ closeHandler, showAlert }) => {
   );
 };
 
-export default CancelBookingAlert;
+export default AdminLogin;
