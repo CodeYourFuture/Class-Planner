@@ -15,16 +15,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.751.0",
+    "aws-sdk": "^2.786.0",
     "cors": "^2.8.5",
-    "dayjs": "^1.8.34",
+    "dayjs": "^1.9.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.10.0",
-    "validator": "^13.1.1"
+    "mongoose": "^5.10.13",
+    "validator": "^13.1.17"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   }
 }
