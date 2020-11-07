@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 import "./AdminLogin.scss";
 
-const CancelBookingAlert = ({ closeHandler, showAlert }) => {
+const AdminLogin = ({ closeHandler, showAlert }) => {
   const [adminPassword, setAdminPassword] = useState("");
   dotenv.config();
   const validateAdminPasswordInput = () => {
@@ -47,4 +47,4 @@ const CancelBookingAlert = ({ closeHandler, showAlert }) => {
   );
 };
 
-export default CancelBookingAlert;
+export default AdminLogin;
