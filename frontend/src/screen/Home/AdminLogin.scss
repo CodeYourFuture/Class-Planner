@@ -2,6 +2,7 @@
 @import "./../../scss/buttons";
 
 .password-alert {
+  display: flex;
   animation: FadeIn 500ms;
   border: 1px solid $alert-light-border-color;
   margin: 40px auto;
@@ -16,7 +17,6 @@
 
   div {
     display: flex;
-    flex-direction: row;
     padding: 5px;
     margin-top: 20px;
     min-height: 40px;
@@ -30,7 +30,7 @@
 
 .password-confirm {
   @extend %btn-submit;
-  padding: 10px 40px;
+  padding: 5px 20px;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
@@ -39,6 +39,44 @@
 
 .password-input-confirm {
   font-size: 1em;
-  padding: 5px;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .password-alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      font-size: 0.8rem;
+      justify-content: center;
+    }
+
+    div {
+      padding: 5px;
+      margin-top: 20px;
+      min-height: 40px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      div {
+        width: 70%;
+      }
+    }
+  }
+  .password-input-confirm {
+    font-size: 1em;
+    margin: 10px auto;
+    width: 80%;
+    padding: 8px;
+    height: fit-content;
+  }
+  .password-confirm {
+    padding: 10px;
+    margin: 10px 0 0 0;
+  }
 }
