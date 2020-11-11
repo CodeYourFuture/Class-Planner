@@ -8,7 +8,6 @@ const AdminLogin = ({ closeHandler, showAlert }) => {
   const [adminPassword, setAdminPassword] = useState("");
   dotenv.config();
   const validateAdminPasswordInput = () => {
-    console.log(process.env.REACT_APP_Password);
     if (adminPassword.trim() === process.env.REACT_APP_Password) {
       closeHandler();
       showAlert("success", "The security code has been verified successfully.");
