@@ -3,7 +3,7 @@ import { useForm } from "../../hooks/useForm.jsx";
 import axios from "axios";
 import "./NewBookingForm.scss";
 import Alert from "../../components/Alert/Alarm.jsx";
-import rolesData from "./../../data/roles.json";
+import { classRoles, eventRoles } from "../../data/roles";
 import { useHistory } from "react-router";
 
 const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
@@ -46,6 +46,7 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
         }
       });
   };
+  console.log(city);
 
   const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
     NewSignUp
@@ -118,11 +119,18 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
               })
             }
           >
-            {rolesData.map((role) => (
-              <option key={role.id} value={role.roleName}>
-                {role.roleName}
-              </option>
-            ))}
+            {city === "Remote Volunteers Event" ||
+            city === "Remote Intro to Coding"
+              ? eventRoles.map((role) => (
+                  <option key={role.id} value={role.roleName}>
+                    {role.roleName}
+                  </option>
+                ))
+              : classRoles.map((role) => (
+                  <option key={role.id} value={role.roleName}>
+                    {role.roleName}
+                  </option>
+                ))}
           </select>
         </div>
         <div className="err-msg">
