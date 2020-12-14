@@ -46,7 +46,6 @@ const NewBookingForm = ({ Class, user, city, WeekNumber }) => {
         }
       });
   };
-  console.log(city);
 
   const { entryData, error, onChange, onSubmit, setSubmit_F } = useForm(
     NewSignUp
