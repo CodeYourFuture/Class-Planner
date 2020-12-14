@@ -9,7 +9,9 @@ footer {
   color: $footer-text-color;
   font-weight: 300;
   font-size: 0.85rem;
-  height: 80px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
   width: 100%;
   margin-top: 30px;
   text-align: left;

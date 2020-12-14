@@ -232,6 +232,9 @@ const NewClassForm = ({
                 <option value="Personal Development Team Lead Class">
                   Personal Development Team Lead Class
                 </option>
+                <option value="Ambassador Lead Class">
+                  Ambassador Lead Class
+                </option>
               </select>
             </div>
           </React.Fragment>
