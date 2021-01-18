@@ -69,6 +69,7 @@ const EditClassPage = ({ user, city, component, id }) => {
           values.className === currentClass.className &&
           values.startTime === currentClass.startTime &&
           values.endTime === currentClass.endTime &&
+          values.agendaURL === currentClass.agendaURL &&
           values.syllabusURL === currentClass.syllabusURL &&
           values.scheduleType === currentClass.scheduleType
         ) {
@@ -197,6 +198,7 @@ const EditClassPage = ({ user, city, component, id }) => {
             className={currentClass.className}
             startTime={currentClass.startTime}
             endTime={currentClass.endTime}
+            agendaURL={currentClass.agendaURL}
             syllabusURL={currentClass.syllabusURL}
             scheduleType={currentClass.scheduleType}
           />

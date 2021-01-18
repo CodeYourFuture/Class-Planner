@@ -19,6 +19,7 @@ const NewClassForm = ({
   className,
   startTime,
   endTime,
+  agendaURL,
   syllabusURL,
   scheduleType,
 }) => {
@@ -185,7 +186,30 @@ const NewClassForm = ({
             <div className="err-msg">
               {error && error.endTime && <p>* End Time is required!</p>}
             </div>
-
+            <div className="form-group font-size">
+              <label htmlFor="agendaURL">Agenda URL:</label>
+              <input
+                name="agendaURL"
+                type="url"
+                defaultValue={agendaURL}
+                className={
+                  error && error.agendaURL
+                    ? "form-control error"
+                    : "form-control"
+                }
+                placeholder="Agenda URL"
+                onChange={(e) => _onChange(e)}
+                ref={(e) =>
+                  (entryData.current[6] = {
+                    element: e,
+                    required: false,
+                  })
+                }
+              />
+            </div>
+            <div className="err-msg">
+              {error && error.agendaURL && <p>* {error.agendaURL}</p>}
+            </div>
             <div className="form-group font-size">
               <label htmlFor="syllabusURL">Syllabus URL:</label>
               <input
@@ -200,7 +224,7 @@ const NewClassForm = ({
                 placeholder="Syllabus URL"
                 onChange={(e) => _onChange(e)}
                 ref={(e) =>
-                  (entryData.current[6] = {
+                  (entryData.current[7] = {
                     element: e,
                     required: true,
                   })
@@ -208,7 +232,7 @@ const NewClassForm = ({
               />
             </div>
             <div className="err-msg">
-              {error && error.syllabusURL && <p>* SyllabusURL is required!</p>}
+              {error && error.syllabusURL && <p>* {error.syllabusURL}</p>}
             </div>
 
             <div className="form-group">
@@ -220,7 +244,7 @@ const NewClassForm = ({
                 defaultValue={scheduleType}
                 onChange={(e) => _onChange(e)}
                 ref={(e) =>
-                  (entryData.current[7] = {
+                  (entryData.current[8] = {
                     element: e,
                     required: true,
                   })
