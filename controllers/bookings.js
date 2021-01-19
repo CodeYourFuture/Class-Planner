@@ -63,6 +63,15 @@ exports.createBooking = async (req, res) => {
             error: "Server Error",
           });
         } else {
+          const allBooking = await Booking.find({ classId: req.body.classId });
+          if (allBooking && allBooking.length > 13) {
+            return res.status(400).json({
+              success: false,
+              message:
+                'Sorry, there are enough TAs for this class, could you please sign up for a separate class, thanks!',
+            });
+          }
+
           const newBooking = await Booking.create(req.body);
           await bookingConfirmationEmail(newBooking);
           return res.status(201).json({
