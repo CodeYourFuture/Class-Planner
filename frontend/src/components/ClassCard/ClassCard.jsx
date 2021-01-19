@@ -94,17 +94,33 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       </p>
                     </div>
                     {Class.status && (
-                      <div>
-                        <a
-                          href={Class.syllabusURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <div className="classcard-syllabus">
-                            <p className="classcard-text-ctl">Syllabus</p>
-                            <i className="fas fa-book-open "></i>
+                      <div className="URLs-container">
+                        {Class.agendaURL && Class.agendaURL.length > 0 && (
+                          <div>
+                            <a
+                              href={Class.agendaURL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <div className="classcard-syllabus">
+                                <p className="classcard-text-ctl">Agenda</p>
+                                <i className="fas fa-calendar-alt"></i>
+                              </div>
+                            </a>
                           </div>
-                        </a>
+                        )}
+                        <div>
+                          <a
+                            href={Class.syllabusURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <div className="classcard-syllabus">
+                              <p className="classcard-text-ctl">Syllabus</p>
+                              <i className="fas fa-book-open "></i>
+                            </div>
+                          </a>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -218,9 +234,9 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                   </div>
                 )}
               </div>
-              {!["upcomingclass", "coursecalendar", "overview"].includes(component) && (
-                <hr className="classcard-separator"></hr>
-              )}
+              {!["upcomingclass", "coursecalendar", "overview"].includes(
+                component
+              ) && <hr className="classcard-separator"></hr>}
               {component === "newbooking" && (
                 <NewBookingForm
                   Class={Class}
