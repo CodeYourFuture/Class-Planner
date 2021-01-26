@@ -1,0 +1,77 @@
+@import "../../scss/mixins";
+@import "../../scss/buttons";
+.email-container {
+  position: absolute;
+  z-index: 1000;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  background-color: #00000080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: FadeIn 500ms;
+}
+
+.email-body {
+  width: 60%;
+  height: 500px;
+  background-color: white;
+  border-radius: 10px;
+}
+.close-bt {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  i {
+    margin: 15px 15px 0px 0px;
+    font-size: 25px;
+    color: rgb(61, 61, 61);
+    transition: 200ms;
+  }
+  i:hover {
+    color: #dc3545;
+    transition: 200ms;
+    cursor: pointer;
+  }
+}
+.subject-email {
+  margin: 15px;
+  overflow-y: scroll;
+  width: calc(100% - 30px);
+  p {
+    margin-bottom: 10px;
+    font-family: "Open Sans", sans-serif;
+  }
+}
+.subject {
+  text-indent: 17px;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 0px;
+  border-left: 1px solid #cccccc;
+  outline: none;
+}
+.app .ql-editor {
+  height: 220px;
+}
+.ql-editor {
+  overflow-y: auto;
+}
+
+.send{
+    @extend %btn-send ;
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-family: "Open Sans", sans-serif;
+    margin-left: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: none;
+  }

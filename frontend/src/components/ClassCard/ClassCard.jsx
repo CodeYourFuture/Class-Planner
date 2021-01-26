@@ -7,6 +7,7 @@ import axios from "axios";
 import Alert from "../Alert/Alarm.jsx";
 import Loading from "../Loading/Loading.jsx";
 import users from "../../data/users.json";
+import Email from "../Email/Email.jsx";
 import "./ClassCard.scss";
 import CancelClass from "./CancelClass";
 import dayjs from "dayjs";
@@ -17,6 +18,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
   const [alertStatus, setAlertStatus] = useState(false);
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("message");
+  const [sendEmail, SetSendEmail] = useState(false);
 
   const closeConfirmationAlert = () => {
     setCancelStatus(false);
@@ -33,6 +35,10 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
       setCurrentBooking(response.data.data);
     });
   }, [Class]);
+
+  function emailClose(){
+    SetSendEmail(false);
+  }
 
   useEffect(() => {
     get_booking();
@@ -61,6 +67,7 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
           }
         >
           <div className="classcard-main animate__animated animate__fadeIn">
+            {sendEmail && <Email Class={Class} emailClose={emailClose} />}
             <div className="classcard-border">
               <div className="classcard-container">
                 <div className="classcard-date-container">
@@ -180,6 +187,20 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       <div>
                         {user === users[0].id && (
                           <React.Fragment>
+                            {(currentBooking && currentBooking.length > 0) &&
+                            (
+                              <button
+                                onClick={() => {
+                                  SetSendEmail(!sendEmail);
+                                }}
+                                className="classcard-email-bottom"
+                              >
+                                <span className="classcard-text-ctl">
+                                  Email
+                                </span>
+                                <i className="fa fa-times classcard-icon-ctl"></i>
+                              </button>
+                            )}
                             <button
                               onClick={() => {
                                 setCancelStatus(true);

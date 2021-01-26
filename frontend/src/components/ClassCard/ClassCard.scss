@@ -235,6 +235,16 @@
     cursor: pointer;
   }
 }
+.classcard-email-bottom {
+  @extend %btn-Email ;
+  border-radius: 5px;
+  width: 60px;
+  height: 50px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1rem;
+  outline: none;
+}
 .classcard-separator {
   border-top: 1px solid $classcard-border;
   width: 80%;
@@ -338,7 +348,8 @@
 
   .classcard-cancel-bottom,
   .classcard-edit-bottom,
-  .classcard-attend-bottom {
+  .classcard-attend-bottom ,
+  .classcard-email-bottom {
     width: 150px;
   }
 }
@@ -408,7 +419,8 @@
   }
   .classcard-edit-bottom,
   .classcard-attend-bottom,
-  .class-card-disable-attend-bottom {
+  .class-card-disable-attend-bottom,
+  .classcard-email-bottom {
     width: 80px;
     height: 50px;
     font-size: 1rem;
@@ -503,7 +515,8 @@
 
   .classcard-edit-bottom,
   .classcard-attend-bottom,
-  .class-card-disable-attend-bottom {
+  .class-card-disable-attend-bottom,
+  .classcard-email-bottom {
     width: 120px;
     height: 50px;
     font-size: 1rem;
