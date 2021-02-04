@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/class-planner/static/css/main.2ae6c096.chunk.css",
-    "main.js": "/class-planner/static/js/main.ee1003bb.chunk.js",
-    "main.js.map": "/class-planner/static/js/main.ee1003bb.chunk.js.map",
-    "runtime-main.js": "/class-planner/static/js/runtime-main.9d4f7f31.js",
-    "runtime-main.js.map": "/class-planner/static/js/runtime-main.9d4f7f31.js.map",
-    "static/js/2.3b77bf97.chunk.js": "/class-planner/static/js/2.3b77bf97.chunk.js",
-    "static/js/2.3b77bf97.chunk.js.map": "/class-planner/static/js/2.3b77bf97.chunk.js.map",
-    "index.html": "/class-planner/index.html",
-    "precache-manifest.2256cfcc033835de93ec9a19b690f82f.js": "/class-planner/precache-manifest.2256cfcc033835de93ec9a19b690f82f.js",
-    "service-worker.js": "/class-planner/service-worker.js",
-    "static/css/main.2ae6c096.chunk.css.map": "/class-planner/static/css/main.2ae6c096.chunk.css.map",
-    "static/js/2.3b77bf97.chunk.js.LICENSE.txt": "/class-planner/static/js/2.3b77bf97.chunk.js.LICENSE.txt",
-    "static/media/cyf_brand.png": "/class-planner/static/media/cyf_brand.e88841fe.png"
+    "main.css": "/Class-Planner/static/css/main.2ae6c096.chunk.css",
+    "main.js": "/Class-Planner/static/js/main.5494b65c.chunk.js",
+    "main.js.map": "/Class-Planner/static/js/main.5494b65c.chunk.js.map",
+    "runtime-main.js": "/Class-Planner/static/js/runtime-main.fd63ba7a.js",
+    "runtime-main.js.map": "/Class-Planner/static/js/runtime-main.fd63ba7a.js.map",
+    "static/js/2.6b1c6d97.chunk.js": "/Class-Planner/static/js/2.6b1c6d97.chunk.js",
+    "static/js/2.6b1c6d97.chunk.js.map": "/Class-Planner/static/js/2.6b1c6d97.chunk.js.map",
+    "index.html": "/Class-Planner/index.html",
+    "precache-manifest.2c48ba845a05669bc1909b71ab0ac87a.js": "/Class-Planner/precache-manifest.2c48ba845a05669bc1909b71ab0ac87a.js",
+    "service-worker.js": "/Class-Planner/service-worker.js",
+    "static/css/main.2ae6c096.chunk.css.map": "/Class-Planner/static/css/main.2ae6c096.chunk.css.map",
+    "static/js/2.6b1c6d97.chunk.js.LICENSE.txt": "/Class-Planner/static/js/2.6b1c6d97.chunk.js.LICENSE.txt",
+    "static/media/cyf_brand.png": "/Class-Planner/static/media/cyf_brand.e88841fe.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.9d4f7f31.js",
-    "static/js/2.3b77bf97.chunk.js",
+    "static/js/runtime-main.fd63ba7a.js",
+    "static/js/2.6b1c6d97.chunk.js",
     "static/css/main.2ae6c096.chunk.css",
-    "static/js/main.ee1003bb.chunk.js"
+    "static/js/main.5494b65c.chunk.js"
   ]
 }
