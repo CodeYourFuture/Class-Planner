@@ -15,6 +15,7 @@ const EmailToAll = ({ Class, emailClose }) => {
       emailText.current[1].state.value === "<p><br></p>"
     ) {
       alert("Please add your text to email!");
+<<<<<<< HEAD
     } else { 
 
       await axios.post("/api/v1/bookings/email/send", {
@@ -23,6 +24,14 @@ const EmailToAll = ({ Class, emailClose }) => {
         emailText: emailText.current[1].state.value,
       });
       emailClose(false);
+=======
+    } else {
+      await axios.post("/email/send", {
+        classId: Class._id,
+        subject: emailText.current[0].value,
+        email: emailText.current[1].state.value,
+      });
+>>>>>>> bed17e785966bdbf73c63629e69cc32ec8197c00
     }
   };
   return (
