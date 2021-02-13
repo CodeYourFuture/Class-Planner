@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const {
   getBookings,
@@ -6,12 +6,14 @@ const {
   createBooking,
   deleteBooking,
   updateBooking,
-} = require("../controllers/bookings");
+  sendEmailToAllVolunteers,
+} = require('../controllers/bookings');
 
-router.route("/").get(getBookings).post(createBooking);
+router.route('/').get(getBookings).post(createBooking);
+router.route('/email/send').post(sendEmailToAllVolunteers);
 
 router
-  .route("/:id")
+  .route('/:id')
   .delete(deleteBooking)
   .put(updateBooking)
   .get(getClassBookings);

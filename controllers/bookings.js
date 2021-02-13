@@ -1,6 +1,11 @@
-const Booking = require("../models/Booking");
-const validateBookingInput = require("../validation/booking");
-const { bookingConfirmationEmail } = require("../utils/notification");
+const Booking = require('../models/Booking');
+const validateBookingInput = require('../validation/booking');
+const {
+  bookingConfirmationEmail,
+  adminSendEmailToClassVolunteers,
+} = require('../utils/notification');
+const Class = require('../models/Class');
+const dayjs = require('dayjs');
 exports.getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();
@@ -12,7 +17,7 @@ exports.getBookings = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: "Server Error",
+      error: 'Server Error',
     });
   }
 };
@@ -24,7 +29,7 @@ exports.getClassBookings = async (req, res) => {
     if (!booking) {
       return res.status(404).json({
         success: false,
-        error: "No booking found",
+        error: 'No booking found',
       });
     }
     return res.status(200).json({
@@ -35,7 +40,7 @@ exports.getClassBookings = async (req, res) => {
   } catch (err) {
     return res.status(400).json({
       success: false,
-      error: "Could not get class bookings",
+      error: 'Could not get class bookings',
     });
   }
 };
@@ -55,12 +60,12 @@ exports.createBooking = async (req, res) => {
           return res.status(400).json({
             success: false,
             message:
-              "Email already exists, You have already booked for this class, thanks!",
+              'Email already exists, You have already booked for this class, thanks!',
           });
         } else if (err) {
           return res.status(500).json({
             success: false,
-            error: "Server Error",
+            error: 'Server Error',
           });
         } else {
           const allBooking = await Booking.find({ classId: req.body.classId });
@@ -73,6 +78,10 @@ exports.createBooking = async (req, res) => {
           }
 
           const newBooking = await Booking.create(req.body);
+          const classInfo = await Class.findById(req.body.classId);
+          newBooking.classDate = dayjs(classInfo.date).format('DD/MM/YYYY');
+          newBooking.classStartTime = classInfo.startTime;
+          newBooking.classEndTime = classInfo.endTime;
           await bookingConfirmationEmail(newBooking);
           return res.status(201).json({
             success: true,
@@ -84,7 +93,7 @@ exports.createBooking = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: "Server Error",
+      error: 'Server Error',
     });
   }
 };
@@ -98,7 +107,7 @@ exports.deleteBooking = async (req, res) => {
     if (!booking) {
       return res.status(404).json({
         success: false,
-        error: "No booking found",
+        error: 'No booking found',
       });
     }
 
@@ -111,7 +120,7 @@ exports.deleteBooking = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: "Server Error, could not delete booking",
+      error: 'Server Error, could not delete booking',
     });
   }
 };
@@ -129,7 +138,7 @@ exports.updateBooking = async (req, res) => {
     if (!booking) {
       return res.status(400).json({
         success: false,
-        error: "booking not found!",
+        error: 'booking not found!',
       });
     }
     return res.status(200).json({
@@ -139,7 +148,38 @@ exports.updateBooking = async (req, res) => {
   } catch (err) {
     return res.status(400).json({
       success: false,
-      error: "Could not update booking",
+      error: 'Could not update booking',
+    });
+  }
+};
+
+exports.sendEmailToAllVolunteers = async (req, res) => {
+  try {
+    const emailData = req.body;
+    if (emailData.subject === '' || emailData.emailText === '') {
+      return res.status(400).json("'Subject or email can not be empty.'");
+    }
+    const classId = emailData.classId;
+    const classBookings = await Booking.find({ classId });
+    if (classBookings && !classBookings.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message:
+          'Sorry, there are no volunteers signed up for this class, thanks!',
+      });
+    }
+    const emails = [];
+    classBookings.forEach((booking) => emails.push(booking.email));
+    emailData.emails = emails;
+    await adminSendEmailToClassVolunteers(emailData);
+    return res.status(200).json({
+      success: true,
+      message: 'An email notification is sent to all volunteers, thanks!',
+    });
+  } catch (err) {
+    return res.status(400).json({
+      success: false,
+      error: 'Could not Send Emails',
     });
   }
 };
