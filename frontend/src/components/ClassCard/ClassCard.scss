@@ -3,6 +3,7 @@
 
 .classcard-body {
   animation: FadeIn 500ms;
+  transition: 200ms;
 }
 .classcard-main {
   margin: 0 auto 30px auto;
@@ -106,7 +107,7 @@
   font-size: 15px;
 }
 
-.URLs-container{
+.URLs-container {
   display: flex;
   flex-wrap: nowrap;
 }
@@ -213,6 +214,16 @@
     cursor: default;
   }
 }
+.classcard-email-bottom {
+  @extend %btn-outline-success;
+  border-radius: 5px;
+  width: 60px;
+  height: 50px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1rem;
+  outline: none;
+}
 .classcard-cancel-bottom {
   @extend %btn-outline-danger;
   border-radius: 5px;
@@ -313,7 +324,8 @@
 }
 
 @media (min-width: 360px) {
-  .classcard-cancel-bottom {
+  .classcard-cancel-bottom,
+  .classcard-email-bottom {
     width: 90px;
   }
   .classcard-attend-bottom,
@@ -338,7 +350,8 @@
 
   .classcard-cancel-bottom,
   .classcard-edit-bottom,
-  .classcard-attend-bottom {
+  .classcard-attend-bottom,
+  .classcard-email-bottom {
     width: 150px;
   }
 }
@@ -408,13 +421,15 @@
   }
   .classcard-edit-bottom,
   .classcard-attend-bottom,
+  .classcard-email-bottom,
   .class-card-disable-attend-bottom {
     width: 80px;
     height: 50px;
     font-size: 1rem;
   }
 
-  .classcard-cancel-bottom {
+  .classcard-cancel-bottom,
+  .classcard-email-bottom {
     width: 80px;
     height: 50px;
     font-size: 1rem;
@@ -509,7 +524,8 @@
     font-size: 1rem;
   }
 
-  .classcard-cancel-bottom {
+  .classcard-cancel-bottom,
+  .classcard-email-bottom {
     width: 120px;
     height: 50px;
     font-size: 1rem;
