@@ -3,6 +3,7 @@ import { MonthNames } from "../../utils/MonthNames";
 import { Link } from "react-router-dom";
 import NewBookingForm from "../NewBookingForm/NewBookingForm.jsx";
 import ClassVolunteersList from "../ClassVolunteersList/ClassVolunteersList.jsx";
+import EmailToAll from "./EmailToAll.jsx";
 import axios from "axios";
 import Alert from "../Alert/Alarm.jsx";
 import Loading from "../Loading/Loading.jsx";
@@ -17,9 +18,14 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
   const [alertStatus, setAlertStatus] = useState(false);
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("message");
+  const [sendEmail, setSendEmail] = useState(false);
 
   const closeConfirmationAlert = () => {
     setCancelStatus(false);
+  };
+
+  const emailClose = () => {
+    setSendEmail(false);
   };
 
   const showAlert = (type, message) => {
@@ -180,6 +186,19 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                       <div>
                         {user === users[0].id && (
                           <React.Fragment>
+                            {component === "attendingvolunteers" && (
+                              <button
+                                onClick={() => {
+                                  setSendEmail(true);
+                                }}
+                                className="classcard-email-bottom"
+                              >
+                                <span className="classcard-text-ctl">
+                                  Send Email
+                                </span>
+                                <i className="far fa-paper-plane classcard-icon-ctl"></i>
+                              </button>
+                            )}
                             <button
                               onClick={() => {
                                 setCancelStatus(true);
@@ -234,6 +253,9 @@ const ClassCard = ({ user, city, component, id, Class, WeekNumber }) => {
                   </div>
                 )}
               </div>
+              {sendEmail && (
+                <EmailToAll Class={Class} emailClose={emailClose} />
+              )}
               {!["upcomingclass", "coursecalendar", "overview"].includes(
                 component
               ) && <hr className="classcard-separator"></hr>}
