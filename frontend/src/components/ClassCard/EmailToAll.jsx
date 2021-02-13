@@ -5,17 +5,25 @@ import "react-quill/dist/quill.snow.css";
 import "./EmailToAll.scss";
 
 const EmailToAll = ({ Class, emailClose }) => {
-  const emailText = useRef(null);
+  const emailText = useRef([]);
   const sendEmail = async (e) => {
-    let emailContent = emailText.current;
+    e.preventDefault();
     if (
-      emailContent.state.value === undefined ||
-      emailContent.state.value === "<p><br></p>"
+      emailText.current[0].value === undefined ||
+      emailText.current[1].state.value === undefined ||
+      emailText.current[0].value === "" ||
+      emailText.current[1].state.value === "<p><br></p>"
     ) {
       alert("Please add your text to email!");
+    } else { 
+
+      await axios.post("/api/v1/bookings/email/send", {
+        classId: Class._id,
+        subject: emailText.current[0].value,
+        emailText: emailText.current[1].state.value,
+      });
+      emailClose(false);
     }
-    await axios.post("/email/send", { email: emailContent.state.value });
-    e.preventDefault();
   };
   return (
     <form className="email-body">
@@ -26,11 +34,12 @@ const EmailToAll = ({ Class, emailClose }) => {
           type="text"
           className="subject"
           placeholder="Subject"
+          ref={(el) => (emailText.current[0] = el)}
           required
         ></input>
         <ReactQuill
           theme="snow"
-          ref={(el) => (emailText.current = el)}
+          ref={(el) => (emailText.current[1] = el)}
           required
         />
       </div>
