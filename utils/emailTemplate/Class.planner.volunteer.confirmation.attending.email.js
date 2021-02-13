@@ -57,7 +57,12 @@ exports.volunteerConfirmationEmail = (data) => {
                   Dear ${data.fullName},
                 </p>
                 <p style="margin-top: 0; font-size: 14px; line-height: 1.2rem">
-                  This is a notification that you have signed up for a class as a <strong>${data.roleName}</strong>.
+                  This is a notification that you have signed up for a class as a <strong>${data.roleName}</strong> on ${data.classDate} between ${data.classStartTime} and ${data.classEndTime} ,
+                  <a href="event.ics" class="gmail-hide yahoo-hide owa-hide">add to calendar</a>
+                  <a class="class-calendar-calender-gmail"
+                      href="http://www.google.com/calendar/event?action=TEMPLATE&text=Volunteering%20AT%20CYF%20AS%20${data.roleName}&&dates=${data.classDate}">
+                      add to calendar
+                  </a>
                 </p>
   
                 <p
