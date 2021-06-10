@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import users from "../../data/users.json";
-import dotenv from "dotenv";
+import axios from "axios";
 
 import "./AdminLogin.scss";
 
 const AdminLogin = ({ closeHandler, showAlert }) => {
   const [adminPassword, setAdminPassword] = useState("");
-  dotenv.config();
-  const validateAdminPasswordInput = () => {
-    if (adminPassword.trim() === process.env.REACT_APP_Password) {
+
+  const validateAdminPasswordInput = async () => {
+    const {
+      data: { success },
+    } = await axios.post("/api/v1/authentication/login", {
+      password: adminPassword.trim(),
+    });
+
+    if (success) {
       closeHandler();
       showAlert("success", "The security code has been verified successfully.");
       setTimeout(() => {
