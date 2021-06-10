@@ -12,7 +12,8 @@ app.use(express.json());
 
 app.use("/api/v1/classes", require("./routes/classes"));
 app.use("/api/v1/bookings", require("./routes/bookings"));
-app.use("/api/v1/courses", require("./routes/courseCalendar")); 
+app.use("/api/v1/courses", require("./routes/courseCalendar"));
+app.use("/api/v1/authentication", require("./routes/authentication"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));
